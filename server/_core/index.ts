@@ -32,8 +32,11 @@ app.use(
   })
 );
 
-app.listen(env.PORT, () => {
-  console.log(`🚀 Serveur Mazen GovTech démarré sur http://localhost:${env.PORT}`);
-});
+// Démarrage local uniquement — sur Vercel la fonction est exportée sans listen
+if (!process.env.VERCEL) {
+  app.listen(env.PORT, () => {
+    console.log(`🚀 Serveur Mazen GovTech démarré sur http://localhost:${env.PORT}`);
+  });
+}
 
 export default app;

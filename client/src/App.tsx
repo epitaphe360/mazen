@@ -14,6 +14,9 @@ const Reporting = lazy(() => import("./pages/Reporting"));
 const SectorManagement = lazy(() => import("./pages/SectorManagement"));
 const Alerts = lazy(() => import("./pages/Alerts"));
 const AdminNews = lazy(() => import("./pages/AdminNews"));
+const AdminMessages = lazy(() => import("./pages/AdminMessages"));
+const AdminUsers = lazy(() => import("./pages/AdminUsers"));
+const Transactions = lazy(() => import("./pages/Transactions"));
 const News = lazy(() => import("./pages/News"));
 const NewsDetail = lazy(() => import("./pages/NewsDetail"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -86,6 +89,27 @@ export default function App() {
                 {() => (
                   <ProtectedRoute adminOnly>
                     <AdminNews />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route path="/dashboard/transactions">
+                {() => (
+                  <ProtectedRoute>
+                    <Transactions />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route path="/dashboard/messages">
+                {() => (
+                  <ProtectedRoute adminOnly>
+                    <AdminMessages />
+                  </ProtectedRoute>
+                )}
+              </Route>
+              <Route path="/dashboard/users">
+                {() => (
+                  <ProtectedRoute adminOnly>
+                    <AdminUsers />
                   </ProtectedRoute>
                 )}
               </Route>

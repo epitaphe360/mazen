@@ -5,11 +5,14 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const NAV_ITEMS = [
   { href: "/dashboard", icon: "📊", label: "Dashboard", adminOnly: false },
   { href: "/dashboard/reporting", icon: "📈", label: "Reporting", adminOnly: false },
+  { href: "/dashboard/transactions", icon: "💳", label: "Transactions", adminOnly: false },
   { href: "/dashboard/sectors", icon: "🏭", label: "Secteurs", adminOnly: false },
   { href: "/dashboard/alerts", icon: "🔔", label: "Alertes", adminOnly: false },
   { href: "/dashboard/news", icon: "✍️", label: "Actualités admin", adminOnly: true },
+  { href: "/dashboard/messages", icon: "✉️", label: "Messages", adminOnly: true },
+  { href: "/dashboard/users", icon: "👥", label: "Utilisateurs", adminOnly: true },
   { href: "/news", icon: "📰", label: "Actualités", adminOnly: false },
-  { href: "/contact", icon: "✉️", label: "Contact", adminOnly: false },
+  { href: "/contact", icon: "📞", label: "Contact", adminOnly: false },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {

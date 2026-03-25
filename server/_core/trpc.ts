@@ -20,13 +20,34 @@ export async function createContext({ req, res }: { req: Request; res: Response 
           .eq("id", sbUser.id)
           .single();
 
-        user = {
-          id: sbUser.id,
-          email: sbUser.email ?? "",
-          name: profile?.name ?? sbUser.user_metadata?.name ?? "",
-          role: profile?.role ?? "user",
-          created_at: sbUser.created_at,
-        };
+        if (!profile) {
+          // Auto-création du profil au premier accès
+          const { count } = await supabaseAdmin
+            .from("profiles")
+            .select("*", { count: "exact", head: true });
+          const newRole = (count === null || count === 0) ? "admin" : "user";
+          await supabaseAdmin.from("profiles").upsert({
+            id: sbUser.id,
+            email: sbUser.email ?? "",
+            name: sbUser.user_metadata?.name ?? sbUser.email ?? "",
+            role: newRole,
+          }, { onConflict: "id" });
+          user = {
+            id: sbUser.id,
+            email: sbUser.email ?? "",
+            name: sbUser.user_metadata?.name ?? sbUser.email ?? "",
+            role: newRole,
+            created_at: sbUser.created_at,
+          };
+        } else {
+          user = {
+            id: sbUser.id,
+            email: sbUser.email ?? "",
+            name: profile.name ?? sbUser.user_metadata?.name ?? "",
+            role: profile.role ?? "user",
+            created_at: sbUser.created_at,
+          };
+        }
       }
     } catch {
       // token invalide, user reste null

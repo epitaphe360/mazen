@@ -68,4 +68,20 @@ export const authRouter = router({
       if (error) throw new Error(error.message);
       return { success: true };
     }),
+
+  // Lister tous les utilisateurs (admin only)
+  listUsers: adminProcedure
+    .input(z.object({ page: z.number().default(1), limit: z.number().default(20) }))
+    .query(async ({ input }) => {
+      const { page, limit } = input;
+      const from = (page - 1) * limit;
+      const { data, count, error } = await supabaseAdmin
+        .from("profiles")
+        .select("id,email,name,role,created_at", { count: "exact" })
+        .order("created_at", { ascending: false })
+        .range(from, from + limit - 1);
+
+      if (error) throw new Error(error.message);
+      return { data: data ?? [], total: count ?? 0, page };
+    }),
 });

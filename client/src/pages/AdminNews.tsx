@@ -34,7 +34,7 @@ export default function AdminNews() {
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; title: string } | null>(null);
   const [errors, setErrors] = useState<Partial<Record<keyof NewsForm, string>>>({});
 
-  const { data, isLoading, refetch } = trpc.news.list.useQuery({ page, limit: 15 });
+  const { data, isLoading, refetch } = trpc.news.adminList.useQuery({ page, limit: 15 });
 
   const createMut = trpc.news.create.useMutation({ onSuccess: () => { refetch(); closeForm(); } });
   const updateMut = trpc.news.update.useMutation({ onSuccess: () => { refetch(); closeForm(); } });
@@ -56,13 +56,13 @@ export default function AdminNews() {
 
   function openEdit(article: NonNullable<typeof data>["data"][number]) {
     setForm({
-      title: article.title,
-      slug: article.slug,
-      content: "",
+      title: article.title as string,
+      slug: article.slug as string,
+      content: (article.content ?? "") as string,
       category: (article.category as CategoryValue) ?? "innovation",
-      author: article.author ?? "",
-      featured_image_url: article.featured_image_url ?? "",
-      published_at: article.published_at ?? "",
+      author: (article.author ?? "") as string,
+      featured_image_url: (article.featured_image_url ?? "") as string,
+      published_at: (article.published_at ?? "") as string,
     });
     setEditId(article.id as number);
     setErrors({});

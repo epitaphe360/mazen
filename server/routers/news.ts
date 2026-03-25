@@ -106,4 +106,20 @@ export const newsRouter = router({
       if (error) throw new Error(error.message);
       return { success: true };
     }),
+
+  // Liste admin (inclut le contenu complet)
+  adminList: adminProcedure
+    .input(z.object({ page: z.number().default(1), limit: z.number().default(15) }))
+    .query(async ({ input }) => {
+      const { page, limit } = input;
+      const offset = (page - 1) * limit;
+      const { data, count, error } = await supabaseAdmin
+        .from("news")
+        .select("*", { count: "exact" })
+        .order("created_at", { ascending: false })
+        .range(offset, offset + limit - 1);
+
+      if (error) throw new Error(error.message);
+      return { data: data ?? [], total: count ?? 0, page };
+    }),
 });
