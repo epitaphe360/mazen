@@ -161,7 +161,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3">
-              <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
+              <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
               <div className="hidden md:block">
                 <div className="text-base font-extrabold text-gray-900 leading-tight">Mazen GovTech <span className="text-blue-700">Groupe</span></div>
                 <div className="text-xs text-gray-400 font-medium">Sovereign Strategic Infrastructure Company</div>
@@ -209,7 +209,7 @@ export default function Home() {
         </div>
         {/* Éléments décoratifs depuis la présentation */}
         <div className="absolute right-0 top-0 h-full w-1/2 opacity-5 pointer-events-none">
-          <img src="/mazen-logo-icon.png" alt="" className="w-full h-full object-contain" />
+          <img src="/mazen-logo.svg" alt="" className="w-full h-full object-contain" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 pt-24 pb-16 grid md:grid-cols-2 gap-12 items-center">
@@ -691,7 +691,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-start gap-4 mb-4">
-                <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-16 w-auto object-contain" />
+                <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-16 w-auto object-contain" />
               </div>
               <div className="font-extrabold text-white text-lg mb-1">Mazen GovTech Groupe</div>
               <div className="text-xs text-blue-400 font-medium mb-3">Sovereign Strategic Infrastructure Company</div>

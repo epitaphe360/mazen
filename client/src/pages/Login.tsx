@@ -49,7 +49,7 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link href="/">
             <a className="inline-flex items-center gap-2 text-white">
-              <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-14 w-auto object-contain" />
+              <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-14 w-auto object-contain" />
               <span className="text-2xl font-bold">Mazen GovTech Groupe</span>
             </a>
           </Link>

@@ -107,7 +107,7 @@ export default function CaseStudies() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3">
-              <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
+              <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
               <div className="hidden md:block">
                 <div className="text-base font-extrabold text-gray-900 leading-tight">Mazen GovTech <span className="text-blue-700">Groupe</span></div>
                 <div className="text-xs text-gray-400 font-medium">Sovereign Strategic Infrastructure Company</div>
@@ -257,7 +257,7 @@ export default function CaseStudies() {
       <footer className="bg-gray-950 text-gray-400 py-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
+            <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
             <div>
               <div className="text-white font-bold text-sm">Mazen GovTech Groupe</div>
               <div className="text-gray-500 text-xs">© 2026 — Sovereign Strategic Infrastructure Company</div>

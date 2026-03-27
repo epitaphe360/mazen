@@ -29,7 +29,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3">
-              <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
+              <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
               <div className="hidden md:block">
                 <div className="text-base font-extrabold text-gray-900 leading-tight">Mazen GovTech <span className="text-blue-700">Groupe</span></div>
                 <div className="text-xs text-gray-400 font-medium">Sovereign Strategic Infrastructure Company</div>
@@ -158,7 +158,7 @@ export default function About() {
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-6">
-                <img src="/mazen-logo-icon.png" alt="Plateforme Mazen Gov" className="w-32 h-32 object-contain mx-auto mb-4" />
+                <img src="/mazen-logo.svg" alt="Plateforme Mazen Gov" className="w-32 h-32 object-contain mx-auto mb-4" />
                 <h3 className="text-center font-bold text-gray-900 mb-2">Plateforme Mazen Gov</h3>
                 <p className="text-center text-gray-500 text-sm">Solution de gouvernance certifiée ETL-Certification®</p>
               </div>
@@ -190,7 +190,7 @@ export default function About() {
       <footer className="bg-gray-950 text-gray-400 py-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
+            <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
             <div>
               <div className="text-white font-bold text-sm">Mazen GovTech Groupe</div>
               <div className="text-gray-500 text-xs">© 2026 — Sovereign Strategic Infrastructure Company</div>
