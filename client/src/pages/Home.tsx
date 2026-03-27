@@ -161,13 +161,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3">
-              <img src="/mazen-logo.png" alt="Mazen GovTech" className="h-9 w-auto object-contain" onError={(e) => {
-                const t = e.target as HTMLImageElement;
-                t.style.display = 'none';
-                t.nextElementSibling!.classList.remove('hidden');
-              }} />
-              <div className="hidden w-9 h-9 rounded-lg bg-blue-700 items-center justify-center text-white font-black text-lg flex">M</div>
-              <span className="text-xl font-bold text-gray-900">Mazen <span className="text-blue-700">GovTech</span></span>
+              <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
+              <div className="hidden md:block">
+                <div className="text-base font-extrabold text-gray-900 leading-tight">Mazen GovTech <span className="text-blue-700">Groupe</span></div>
+                <div className="text-xs text-gray-400 font-medium">Sovereign Strategic Infrastructure Company</div>
+              </div>
             </a>
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
@@ -692,10 +690,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/mazen-logo.png" alt="Mazen GovTech" className="h-8 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                <span className="text-white font-bold text-xl">Mazen GovTech</span>
+              <div className="flex items-start gap-4 mb-4">
+                <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-16 w-auto object-contain" />
               </div>
+              <div className="font-extrabold text-white text-lg mb-1">Mazen GovTech Groupe</div>
+              <div className="text-xs text-blue-400 font-medium mb-3">Sovereign Strategic Infrastructure Company</div>
               <p className="text-sm leading-relaxed mb-4">
                 Fournisseur mondial de solutions de mobilisation des revenus publics. Certifié ISO 9001 & ISO 27001. Depuis 1986.
               </p>
@@ -734,4 +733,4 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+}

@@ -26,8 +26,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className={`${collapsed ? "w-16" : "w-64"} bg-blue-950 text-white flex flex-col transition-all duration-300 flex-shrink-0`}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-black flex-shrink-0">M</div>
-          {!collapsed && <span className="font-bold text-sm">Mazen GovTech</span>}
+          <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain flex-shrink-0 brightness-200" />
+          {!collapsed && (
+            <div>
+              <div className="font-extrabold text-sm text-white leading-tight">Mazen GovTech Groupe</div>
+              <div className="text-blue-300 text-xs">Sovereign Strategic</div>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
