@@ -46,9 +46,9 @@ export default function News() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Actualités Mazen GovTech</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Actualités Mazen GovTech Groupe</h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Restez informé des dernières actualités de Mazen GovTech et de l'évolution de la technologie de gouvernance à travers le monde.
+            Restez informé des dernières actualités de Mazen GovTech Groupe et de l'évolution de la technologie de gouvernance à travers le monde.
           </p>
         </div>
 

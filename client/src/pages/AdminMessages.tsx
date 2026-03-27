@@ -111,7 +111,7 @@ export default function AdminMessages() {
                           </button>
                         )}
                         <a
-                          href={`mailto:${msg.email as string}?subject=Re: ${REQUEST_TYPE_LABELS[msg.request_type as string] ?? "Votre demande"} — Mazen GovTech`}
+                          href={`mailto:${msg.email as string}?subject=Re: ${REQUEST_TYPE_LABELS[msg.request_type as string] ?? "Votre demande"} — Mazen GovTech Groupe`}
                           className="text-xs text-gray-500 hover:text-govblue"
                         >
                           ✉️ Répondre

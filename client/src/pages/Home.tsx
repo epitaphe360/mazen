@@ -107,7 +107,7 @@ const WHY_US_PILLARS = [
     icon: "🏆",
     title: "Certifications internationales",
     description:
-      "Mazen GovTech est certifiée ISO 9001 et ISO 27001, garantissant qualité et sécurité pour nos clients gouvernementaux. Engagement envers l'excellence opérationnelle.",
+      "Mazen GovTech Groupe est certifiée ISO 9001 et ISO 27001, garantissant qualité et sécurité pour nos clients gouvernementaux. Engagement envers l'excellence opérationnelle.",
   },
   {
     icon: "🔍",
@@ -230,7 +230,7 @@ export default function Home() {
               Faites de la transparence votre moteur de croissance fiscale
             </p>
             <p className="text-blue-200 leading-relaxed mb-8">
-              Depuis 1986, Mazen GovTech utilise ses solutions de gouvernance innovantes — basées sur des analyses avancées de données et l'ETL-Certification® — pour suivre avec une précision inégalée des milliards de transactions dans de multiples secteurs clés.
+              Depuis 1986, Mazen GovTech Groupe utilise ses solutions de gouvernance innovantes — basées sur des analyses avancées de données et l'ETL-Certification® — pour suivre avec une précision inégalée des milliards de transactions dans de multiples secteurs clés.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/contact">
@@ -401,7 +401,7 @@ export default function Home() {
               Technologie ETL-Certification®
             </h2>
             <p className="text-blue-200 max-w-2xl mx-auto">
-              Certifiez vos données avec la technologie propriétaire développée par Mazen GovTech — la seule solution certifiée pour la vérification fiscale des données numériques.
+              Certifiez vos données avec la technologie propriétaire développée par Mazen GovTech Groupe — la seule solution certifiée pour la vérification fiscale des données numériques.
             </p>
           </motion.div>
 
@@ -460,7 +460,7 @@ export default function Home() {
           >
             <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">Références terrain</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-              Cas d'utilisation de la technologie de gouvernance Mazen GovTech
+              Cas d'utilisation de la technologie de gouvernance Mazen GovTech Groupe
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto">
               Quatre déploiements réels démontrant l'impact mesurable de nos solutions sur les recettes publiques africaines.
@@ -722,7 +722,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm">© 2026 Mazen GovTech. Tous droits réservés.</p>
+            <p className="text-sm">© 2026 Mazen GovTech Groupe. Tous droits réservés.</p>
             <div className="flex gap-4 text-xs">
               <span className="bg-gray-800 px-3 py-1 rounded-full">ISO 9001</span>
               <span className="bg-gray-800 px-3 py-1 rounded-full">ISO 27001</span>

@@ -131,7 +131,7 @@ export default function CaseStudies() {
             <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">Références terrain</span>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Cas d'utilisation de la technologie de gouvernance</h1>
             <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-              Quatre déploiements réels en Afrique, démontrant l'impact mesurable de Mazen GovTech sur les recettes publiques nationales.
+              Quatre déploiements réels en Afrique, démontrant l'impact mesurable de Mazen GovTech Groupe sur les recettes publiques nationales.
             </p>
           </motion.div>
 
@@ -160,7 +160,7 @@ export default function CaseStudies() {
       <section className="py-12 bg-gray-50 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-            <img src="/case-studies-map.png" alt="Carte des déploiements Mazen GovTech" className="w-full rounded-2xl shadow-lg max-h-80 object-contain" />
+            <img src="/case-studies-map.png" alt="Carte des déploiements Mazen GovTech Groupe" className="w-full rounded-2xl shadow-lg max-h-80 object-contain" />
           </motion.div>
         </div>
       </section>

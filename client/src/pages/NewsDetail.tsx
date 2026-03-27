@@ -46,10 +46,8 @@ export default function NewsDetail() {
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-30">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-govblue rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">M</span>
-            </div>
-            <span className="font-bold text-govblue hidden sm:block">Mazen GovTech</span>
+            <img src="/mazen-logo.png" alt="Mazen GovTech Groupe" className="h-9 w-auto object-contain" />
+            <span className="font-bold text-govblue hidden sm:block">Mazen GovTech Groupe</span>
           </Link>
           <Link href="/news" className="text-sm text-govblue hover:underline font-medium flex items-center gap-1">
             ← Toutes les actualités
@@ -76,7 +74,7 @@ export default function NewsDetail() {
             <span className="w-7 h-7 rounded-full bg-govblue flex items-center justify-center text-white text-xs font-bold">
               {article.author?.charAt(0).toUpperCase() ?? "M"}
             </span>
-            {article.author ?? "Mazen GovTech"}
+            {article.author ?? "Mazen GovTech Groupe"}
           </span>
           <span>·</span>
           <time dateTime={article.published_at}>{publishedDate}</time>
@@ -116,7 +114,7 @@ export default function NewsDetail() {
         <div className="mt-12 p-8 bg-gradient-to-br from-govblue to-blue-800 rounded-2xl text-white text-center">
           <h3 className="text-xl font-bold mb-2">Ne manquez plus aucune actualité</h3>
           <p className="text-blue-200 mb-5 text-sm">
-            Recevez chaque semaine les dernières analyses et rapports de Mazen GovTech directement dans votre boîte mail.
+            Recevez chaque semaine les dernières analyses et rapports de Mazen GovTech Groupe directement dans votre boîte mail.
           </p>
           <form className="flex gap-2 max-w-md mx-auto" onSubmit={e => e.preventDefault()}>
             <input
@@ -163,7 +161,7 @@ export default function NewsDetail() {
 
       {/* Footer simple */}
       <footer className="mt-16 border-t border-gray-200 bg-white py-6 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Mazen GovTech — Tous droits réservés
+        © {new Date().getFullYear()} Mazen GovTech Groupe — Tous droits réservés
       </footer>
     </div>
   );

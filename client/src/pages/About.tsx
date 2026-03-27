@@ -174,7 +174,7 @@ export default function About() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl font-extrabold mb-4">Travaillons ensemble</h2>
             <p className="text-blue-200 mb-8 text-lg">
-              Découvrez comment Mazen GovTech peut transformer les recettes publiques de votre pays.
+              Découvrez comment Mazen GovTech Groupe peut transformer les recettes publiques de votre pays.
             </p>
             <Link href="/contact">
               <a className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg">
