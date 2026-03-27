@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const AuthCallback = lazy(() => import("./pages/AuthCallback"));
+const About = lazy(() => import("./pages/About"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Reporting = lazy(() => import("./pages/Reporting"));
 const SectorManagement = lazy(() => import("./pages/SectorManagement"));
@@ -52,6 +54,8 @@ export default function App() {
               <Route path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/auth/callback" component={AuthCallback} />
+              <Route path="/about" component={About} />
+              <Route path="/case-studies" component={CaseStudies} />
               <Route path="/news" component={News} />
               <Route path="/news/:slug" component={NewsDetail} />
               <Route path="/contact" component={Contact} />

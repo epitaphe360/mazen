@@ -105,12 +105,12 @@ export interface SectorChartData {
   compliance: number;
 }
 
-// Statistiques clés de la page d'accueil
+// Statistiques clés de la page d'accueil (source: présentation corporate MAZEN)
 export const KEY_STATS = [
-  { value: "552%", label: "Augmentation max des recettes", description: "Hausse maximale constatée chez nos clients" },
-  { value: "10+", label: "Années d'expertise", description: "Collaboration avec des États émergents et établis" },
-  { value: "9", label: "Secteurs couverts", description: "Intervention dans neuf grands domaines" },
-  { value: "100%", label: "Visibilité des transactions", description: "Sans aucun travail manuel" },
+  { value: "$15Mrd", label: "Supervisés sur les réseaux opérateurs", description: "De 2009 à ce jour" },
+  { value: "13Mrd", label: "Transactions analysées / jour", description: "Traitement quotidien en temps réel" },
+  { value: "1986", label: "Fondée en", description: "Plus de 35 ans d'expertise GovTech" },
+  { value: "+60%", label: "Hausse des recettes fiscales en RDC", description: "Accises & TVA après 1 an de fonctionnement" },
 ] as const;
 
 // Les 9 secteurs couverts
