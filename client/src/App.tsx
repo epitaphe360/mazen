@@ -22,6 +22,8 @@ const Transactions = lazy(() => import("./pages/Transactions"));
 const News = lazy(() => import("./pages/News"));
 const NewsDetail = lazy(() => import("./pages/NewsDetail"));
 const Contact = lazy(() => import("./pages/Contact"));
+const MaritimeSurveillance = lazy(() => import("./pages/MaritimeSurveillance"));
+const RevenueSupervision = lazy(() => import("./pages/RevenueSupervision"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient({
@@ -59,6 +61,8 @@ export default function App() {
               <Route path="/news" component={News} />
               <Route path="/news/:slug" component={NewsDetail} />
               <Route path="/contact" component={Contact} />
+              <Route path="/solutions/maritime" component={MaritimeSurveillance} />
+              <Route path="/solutions/revenues" component={RevenueSupervision} />
 
               {/* Dashboard — protégé */}
               <Route path="/dashboard">

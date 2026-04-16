@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { Coins, Receipt, BarChart3, Download } from "lucide-react";
 
 const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2"];
 
@@ -51,19 +52,33 @@ export default function Reporting() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Reporting Multi-Sectoriel</h1>
-            <p className="text-gray-500">Analysez les revenus filtrés par secteur, période et opérateur</p>
+            <h1 className="text-2xl font-bold text-gray-900">Rapport multi-sectoriel</h1>
+            <p className="text-gray-600">Lecture consolidée des recettes, volumes transactionnels et prélèvements par secteur et par période</p>
           </div>
-          <button onClick={handleExportCSV} className="btn-primary text-sm py-2">
-            ⬇ Exporter CSV
-          </button>
+          <div className="flex items-center gap-3">
+            <div className="hidden md:grid grid-cols-3 gap-3">
+              {[
+                { label: "Lecture", value: "Consolidée" },
+                { label: "Périmètre", value: selectedSectors.length ? `${selectedSectors.length} secteurs` : "Tous secteurs" },
+                { label: "Export", value: "CSV" },
+              ].map((item) => (
+                <div key={item.label} className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm min-w-28">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400">{item.label}</p>
+                  <p className="text-sm font-semibold text-gray-900 mt-1">{item.value}</p>
+                </div>
+              ))}
+            </div>
+            <button onClick={handleExportCSV} className="btn-primary text-sm py-2">
+              <Download className="w-4 h-4" aria-hidden="true" /> Exporter CSV
+            </button>
+          </div>
         </div>
 
         {/* Filtres */}
-        <div className="card">
-          <h2 className="font-semibold text-gray-800 mb-4">Filtres</h2>
+        <div className="data-card">
+          <h2 className="font-semibold text-gray-800 mb-4">Paramètres d'analyse</h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm text-gray-600 mb-1">Date de début</label>
@@ -78,13 +93,12 @@ export default function Reporting() {
             <div className="flex items-end">
               <button onClick={() => { setFrom(""); setTo(""); setSelectedSectors([]); setPage(1); }}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-                Réinitialiser
+                Réinitialiser les filtres
               </button>
             </div>
           </div>
-          {/* Secteurs */}
           <div className="mt-4">
-            <p className="text-sm text-gray-600 mb-2">Secteurs</p>
+            <p className="text-sm text-gray-600 mb-2">Périmètre sectoriel</p>
             <div className="flex flex-wrap gap-2">
               {(sectors ?? []).map(s => (
                 <button
@@ -105,26 +119,28 @@ export default function Reporting() {
 
         {/* Résumé */}
         {report?.summary && (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { label: "Revenus totaux", value: formatCurrency(report.summary.total_revenue), icon: "💰" },
-              { label: "Transactions", value: report.summary.total_transactions.toLocaleString("fr-FR"), icon: "📊" },
-              { label: "Taxe totale", value: formatCurrency(report.summary.total_tax), icon: "🧾" },
+              { label: "Recettes consolidées", value: formatCurrency(report.summary.total_revenue), icon: Coins },
+              { label: "Volume transactionnel", value: report.summary.total_transactions.toLocaleString("fr-FR"), icon: BarChart3 },
+              { label: "Prélèvements calculés", value: formatCurrency(report.summary.total_tax), icon: Receipt },
             ].map(s => (
               <div key={s.label} className="stat-card text-center">
-                <div className="text-3xl mb-2">{s.icon}</div>
+                <span className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-700 mb-2">
+                  <s.icon className="w-5 h-5" aria-hidden="true" />
+                </span>
                 <div className="text-2xl font-extrabold text-gray-900">{s.value}</div>
-                <div className="text-sm text-gray-500">{s.label}</div>
+                <div className="text-sm text-gray-600">{s.label}</div>
               </div>
             ))}
           </div>
         )}
 
         {/* Tableau */}
-        <div className="card">
+        <div className="data-card">
           <h2 className="font-semibold text-gray-800 mb-4">
-            Transactions{" "}
-            <span className="text-gray-400 text-sm font-normal">({report?.total ?? 0} résultats)</span>
+            Détail des transactions{" "}
+            <span className="text-gray-400 text-sm font-normal">({report?.total ?? 0} enregistrements)</span>
           </h2>
           {isLoading ? (
             <div className="flex justify-center py-12">
@@ -132,7 +148,27 @@ export default function Reporting() {
             </div>
           ) : (
             <>
-              <div className="overflow-x-auto">
+              <div className="space-y-3 md:hidden">
+                {(report?.data ?? []).map(tx => (
+                  <article key={tx.id} className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+                    <div className="flex items-center justify-between gap-3 mb-2">
+                      <p className="text-sm font-semibold text-gray-900 truncate">{tx.operator_name}</p>
+                      <span className={`badge ${
+                        tx.compliance_status === "compliant" ? "badge-green" :
+                        tx.compliance_status === "anomaly" ? "badge-red" : "badge-yellow"
+                      }`}>
+                        {tx.compliance_status}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("fr-FR")}</p>
+                    <p className="text-sm text-gray-700 mt-1">{(tx.sectors as { name?: string } | null)?.name ?? "-"}</p>
+                    <p className="mt-1 text-base font-bold text-gray-900">{formatCurrency(tx.transaction_amount)}</p>
+                    <p className="text-xs text-gray-600 mt-1">Prélèvement: {formatCurrency(tx.tax_amount)} · Volume: {tx.transaction_count.toLocaleString("fr-FR")}</p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-xs text-gray-500 border-b pb-2">

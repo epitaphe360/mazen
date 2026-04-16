@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg-burundi" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3f0f12"/>
+      <stop offset="1" stop-color="#7f1d1d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg-burundi)"/>
+  <circle cx="1370" cy="120" r="220" fill="#fca5a5" fill-opacity="0.16"/>
+  <circle cx="220" cy="760" r="250" fill="#ef4444" fill-opacity="0.12"/>
+  <rect x="160" y="130" width="1280" height="640" rx="34" fill="#ffffff" fill-opacity="0.08" stroke="#fecaca" stroke-opacity="0.4"/>
+  <rect x="250" y="230" width="360" height="220" rx="18" fill="#ffffff" fill-opacity="0.1" stroke="#fee2e2" stroke-opacity="0.35"/>
+  <path d="M250 230 L610 450" stroke="#ffffff" stroke-width="36"/>
+  <path d="M610 230 L250 450" stroke="#ffffff" stroke-width="36"/>
+  <circle cx="430" cy="340" r="54" fill="#ecfdf5"/>
+  <text x="250" y="500" fill="#fff1f2" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">BURUNDI</text>
+  <text x="740" y="295" fill="#fecaca" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">JEUX &amp; PARIS EN LIGNE</text>
+  <text x="740" y="360" fill="#fff1f2" font-family="Segoe UI, Arial, sans-serif" font-size="86" font-weight="800">8</text>
+  <text x="740" y="410" fill="#fee2e2" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="600">opérateurs certifiés</text>
+  <text x="740" y="560" fill="#fff1f2" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">• Régulation des opérateurs de jeux numériques</text>
+  <text x="740" y="610" fill="#fff1f2" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">• Redevances et conformité en continu</text>
+  <text x="740" y="660" fill="#fff1f2" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600">• Contrôle ministériel centralisé</text>
+  <text x="160" y="850" fill="#fca5a5" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">MAZEN GOVTECH GROUPE</text>
+</svg>

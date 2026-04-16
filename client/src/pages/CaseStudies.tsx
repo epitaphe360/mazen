@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import PublicNavbar from "../components/PublicNavbar";
+import PublicFooter from "../components/PublicFooter";
 
 const CASES = [
   {
@@ -10,7 +12,7 @@ const CASES = [
     shortName: "RDC",
     flag: "🇨🇩",
     title: "Taxes sur les Télécommunications",
-    img: "/case-rdc.png",
+    img: "/case-rdc.svg",
     partner: "Direction Générale des Douanes et Accises (DGDA)",
     ministry: "DGDA",
     result: "+60%",
@@ -31,7 +33,7 @@ const CASES = [
     shortName: "Mali",
     flag: "🇲🇱",
     title: "Mobile Money",
-    img: null,
+    img: "/case-mali.svg",
     partner: "Ministère des Finances",
     ministry: "Ministère des Finances",
     result: "100%",
@@ -52,7 +54,7 @@ const CASES = [
     shortName: "Burundi",
     flag: "🇧🇮",
     title: "Redevances sur les Jeux de Hasard et les Paris",
-    img: "/case-burundi.png",
+    img: "/case-burundi.svg",
     partner: "Ministère des Finances & Ministère du Commerce, des Transports, de l'Industrie et du Tourisme",
     ministry: "Min. Finances + Min. Commerce",
     result: "8",
@@ -74,7 +76,7 @@ const CASES = [
     shortName: "Sierra Leone",
     flag: "🇸🇱",
     title: "Taxes sur les Télécommunications",
-    img: "/case-sierra-leone.jpg",
+    img: "/case-sierra-leone.svg",
     partner: "NRA — Autorité Nationale des Recettes (Accord BOT)",
     ministry: "NRA & Ministère des Finances",
     result: "552%",
@@ -101,37 +103,17 @@ export default function CaseStudies() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
-      {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-3">
-              <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-12 w-auto object-contain" />
-              <div className="hidden md:block">
-                <div className="text-base font-extrabold text-gray-900 leading-tight">Mazen GovTech <span className="text-blue-700">Groupe</span></div>
-                <div className="text-xs text-gray-400 font-medium">Sovereign Strategic Infrastructure Company</div>
-              </div>
-            </a>
-          </Link>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
-            <Link href="/"><a className="hover:text-blue-700">Accueil</a></Link>
-            <Link href="/about"><a className="hover:text-blue-700">À propos</a></Link>
-            <Link href="/news"><a className="hover:text-blue-700">Actualités</a></Link>
-            <Link href="/contact"><a className="hover:text-blue-700">Contact</a></Link>
-            <Link href="/login"><a className="bg-blue-700 hover:bg-blue-800 text-white py-2 px-5 rounded-lg font-semibold transition-colors">Connexion</a></Link>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen page-atmosphere font-sans">
+      <PublicNavbar />
 
       {/* Hero */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-blue-950 to-indigo-900 text-white">
+      <section className="pt-16 pb-16 bg-gradient-to-br from-blue-950 to-indigo-900 text-white">
         <div className="max-w-7xl mx-auto px-6 pt-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">Références terrain</span>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Cas d'utilisation de la technologie de gouvernance</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Références institutionnelles et déploiements opérationnels</h1>
             <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-              Quatre déploiements réels en Afrique, démontrant l'impact mesurable de Mazen GovTech Groupe sur les recettes publiques nationales.
+              Quatre déploiements réels illustrant l'impact mesurable de Mazen GovTech Groupe sur les recettes publiques nationales.
             </p>
           </motion.div>
 
@@ -202,7 +184,7 @@ export default function CaseStudies() {
                         <div className="text-gray-600 text-sm font-medium">{c.resultLabel}</div>
                       </div>
 
-                      <p className="text-sm font-semibold text-gray-500 mb-1">🤝 Partenaire officiel</p>
+                      <p className="text-sm font-semibold text-gray-500 mb-1">Institution partenaire</p>
                       <p className="text-gray-800 font-medium mb-6">{c.partner}</p>
 
                       <ul className="space-y-3">
@@ -239,13 +221,13 @@ export default function CaseStudies() {
       <section className="py-20 bg-gradient-to-br from-blue-950 to-indigo-900 text-white text-center">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl font-extrabold mb-4">Votre pays, le prochain succès ?</h2>
+            <h2 className="text-3xl font-extrabold mb-4">Étudier un déploiement adapté à votre contexte national</h2>
             <p className="text-blue-200 mb-8 text-lg">
-              Rejoignez nos partenaires gouvernementaux et transformez vos recettes publiques grâce à la technologie ETL-Certification®.
+              Échangez avec nos équipes pour évaluer un dispositif de supervision, de certification et d'optimisation des recettes publiques.
             </p>
             <Link href="/contact">
               <a className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg">
-                Demander une démonstration
+                Demander une présentation
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </Link>
@@ -254,23 +236,7 @@ export default function CaseStudies() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-950 text-gray-400 py-8">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
-            <div>
-              <div className="text-white font-bold text-sm">Mazen GovTech Groupe</div>
-              <div className="text-gray-500 text-xs">© 2026 — Sovereign Strategic Infrastructure Company</div>
-            </div>
-          </div>
-          <div className="flex gap-4 text-sm">
-            <Link href="/"><a className="hover:text-white">Accueil</a></Link>
-            <Link href="/about"><a className="hover:text-white">À propos</a></Link>
-            <Link href="/news"><a className="hover:text-white">Actualités</a></Link>
-            <Link href="/contact"><a className="hover:text-white">Contact</a></Link>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

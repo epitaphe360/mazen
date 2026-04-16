@@ -121,8 +121,53 @@ export default function SectorManagement() {
           </div>
         )}
 
-        {/* Liste des secteurs */}
-        <div className="card p-0 overflow-hidden">
+        {/* Liste des secteurs — Vue mobile */}
+        <div className="md:hidden space-y-4">
+          {(sectors ?? []).map(sector => (
+            <div key={sector.id} className="card p-4">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{sector.icon}</span>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">{sector.name}</p>
+                    <p className="text-xs text-gray-400 line-clamp-1">{sector.description}</p>
+                  </div>
+                </div>
+                <span className={`badge flex-shrink-0 ${sector.is_active ? "badge-green" : "badge-gray"}`}>
+                  {sector.is_active ? "Actif" : "Inactif"}
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-2 text-xs text-gray-600 mb-3">
+                <div><span className="text-gray-400 block">Transactions</span>{sector.alert_threshold_transactions.toLocaleString("fr-FR")}</div>
+                <div><span className="text-gray-400 block">Revenus</span>{Number(sector.alert_threshold_revenue).toLocaleString("fr-FR")} €</div>
+                <div><span className="text-gray-400 block">Conformité</span>{sector.alert_threshold_compliance}%</div>
+              </div>
+              {isAdmin && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => toggleMutation.mutate({ id: sector.id, is_active: !sector.is_active })}
+                    className="flex-1 text-xs py-1.5 border rounded hover:bg-gray-50 transition-colors"
+                  >
+                    {sector.is_active ? "Désactiver" : "Activer"}
+                  </button>
+                  <button onClick={() => handleEdit(sector)}
+                    className="flex-1 text-xs py-1.5 border border-blue-300 text-blue-700 rounded hover:bg-blue-50 transition-colors">
+                    Modifier
+                  </button>
+                  <button
+                    onClick={() => { if (confirm(`Supprimer "${sector.name}" ?`)) deleteMutation.mutate({ id: sector.id }); }}
+                    className="flex-1 text-xs py-1.5 border border-red-300 text-red-600 rounded hover:bg-red-50 transition-colors"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Liste des secteurs — Vue desktop */}
+        <div className="hidden md:block card p-0 overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b">
               <tr>

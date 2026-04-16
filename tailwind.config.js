@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import typography from "@tailwindcss/typography";
+
 export default {
   content: ["./client/index.html", "./client/src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -18,18 +20,18 @@ export default {
           950: "#172554",
         },
         govblue: {
-          DEFAULT: "#0d2d6e",
-          light: "#1a4b9e",
-          dark: "#081b47",
+          DEFAULT: "#0f2a5f",
+          light: "#1f4d9c",
+          dark: "#0a1c3d",
         },
         govgold: {
-          DEFAULT: "#f5a623",
-          light: "#f7bc5a",
-          dark: "#c7870e",
+          DEFAULT: "#c8a55a",
+          light: "#d8b977",
+          dark: "#9f7f3f",
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Manrope", "Inter", "system-ui", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
@@ -45,8 +47,12 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        countUp: {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };

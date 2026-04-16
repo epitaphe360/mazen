@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "wouter";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { ShieldOff } from "lucide-react";
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +29,9 @@ export default function ProtectedRoute({ children, adminOnly = false }: Props) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-5xl mb-4">🔒</p>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4">
+            <ShieldOff className="w-8 h-8" />
+          </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Accès refusé</h1>
           <p className="text-gray-500">Vous n'avez pas les droits administrateur pour accéder à cette page.</p>
         </div>

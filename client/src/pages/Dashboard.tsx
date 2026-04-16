@@ -3,16 +3,42 @@ import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
+import { AlertTriangle, BadgeCheck, Coins, BarChart2 } from "lucide-react";
 
 const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2", "#65a30d", "#dc2626", "#9333ea"];
 
-function StatCard({ label, value, change, icon }: { label: string; value: string; change?: number; icon: string }) {
+const SEVERITY_LABELS: Record<string, string> = {
+  critical: "Critique",
+  high: "Élevée",
+  medium: "Modérée",
+  low: "Faible",
+};
+
+const COMPLIANCE_LABELS: Record<string, string> = {
+  compliant: "Conforme",
+  anomaly: "Anomalie",
+  pending: "En attente",
+};
+
+function StatCard({
+  label,
+  value,
+  change,
+  icon: Icon,
+}: {
+  label: string;
+  value: string;
+  change?: number;
+  icon: React.ComponentType<{ className?: string }>;
+}) {
   return (
     <div className="stat-card">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-2xl">{icon}</span>
+        <span className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-700">
+          <Icon className="w-5 h-5" />
+        </span>
         {change !== undefined && (
           <span className={`text-sm font-semibold ${change >= 0 ? "text-green-600" : "text-red-600"}`}>
             {change >= 0 ? "+" : ""}{change}%
@@ -53,34 +79,48 @@ export default function Dashboard() {
     <DashboardLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-500">Vue d'ensemble des transactions et revenus en temps réel</p>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Tableau de bord exécutif</h1>
+            <p className="text-gray-600">Vue consolidée des transactions, recettes et alertes en temps réel</p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+            {[
+              { label: "Périmètre", value: "National" },
+              { label: "Mise à jour", value: "Temps réel" },
+              { label: "Lecture", value: "Consolidée" },
+            ].map((item) => (
+              <div key={item.label} className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400">{item.label}</p>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{item.value}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <StatCard
-            label="Revenus mobilisés"
+            label="Recettes mobilisées"
             value={formatCurrency(stats?.total_revenue ?? 0)}
             change={stats?.revenue_change_percent}
-            icon="💰"
+            icon={Coins}
           />
           <StatCard
-            label="Transactions"
+            label="Flux transactionnels"
             value={(stats?.total_transactions ?? 0).toLocaleString("fr-FR")}
             change={stats?.transactions_change_percent}
-            icon="📊"
+            icon={BarChart2}
           />
           <StatCard
             label="Taux de conformité"
             value={`${stats?.compliance_rate ?? 0}%`}
-            icon="✅"
+            icon={BadgeCheck}
           />
           <StatCard
-            label="Alertes actives"
+            label="Alertes en cours"
             value={String(stats?.active_alerts ?? 0)}
-            icon="⚠️"
+            icon={AlertTriangle}
           />
         </div>
 
@@ -88,7 +128,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Évolution revenus */}
           <div className="card">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Évolution des revenus (30j)</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Évolution des recettes sur 30 jours</h2>
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={revenueChart ?? []}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -102,7 +142,7 @@ export default function Dashboard() {
 
           {/* Répartition sectorielle */}
           <div className="card">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Répartition sectorielle</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Répartition sectorielle des recettes</h2>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
@@ -127,7 +167,7 @@ export default function Dashboard() {
 
         {/* Comparaison secteurs */}
         <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Revenus par secteur</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recettes par secteur</h2>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={sectorChart ?? []} margin={{ top: 5, right: 20, bottom: 60, left: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -152,7 +192,7 @@ export default function Dashboard() {
               <span className="badge badge-red">{alerts?.total ?? 0} actives</span>
             </div>
             {(alerts?.data ?? []).length === 0 ? (
-              <p className="text-gray-400 text-sm text-center py-6">Aucune alerte active ✅</p>
+              <p className="text-gray-500 text-sm text-center py-6">Aucune alerte active</p>
             ) : (
               <div className="space-y-3">
                 {(alerts?.data ?? []).map(alert => (
@@ -162,7 +202,7 @@ export default function Dashboard() {
                       alert.severity === "high" ? "badge-red" :
                       alert.severity === "medium" ? "badge-yellow" : "badge-blue"
                     }`}>
-                      {alert.severity}
+                      {SEVERITY_LABELS[alert.severity] ?? alert.severity}
                     </span>
                     <div>
                       <p className="text-sm font-medium text-gray-900">{alert.description}</p>
@@ -180,35 +220,55 @@ export default function Dashboard() {
             {(transactions?.data ?? []).length === 0 ? (
               <p className="text-gray-400 text-sm text-center py-6">Aucune transaction</p>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-left text-xs text-gray-500 border-b">
-                      <th className="pb-2">Date</th>
-                      <th className="pb-2">Opérateur</th>
-                      <th className="pb-2">Montant</th>
-                      <th className="pb-2">Statut</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {(transactions?.data ?? []).map(tx => (
-                      <tr key={tx.id} className="hover:bg-gray-50">
-                        <td className="py-2 text-gray-500">{new Date(tx.date).toLocaleDateString("fr-FR")}</td>
-                        <td className="py-2 font-medium text-gray-900">{tx.operator_name}</td>
-                        <td className="py-2">{formatCurrency(tx.transaction_amount)}</td>
-                        <td className="py-2">
-                          <span className={`badge ${
-                            tx.compliance_status === "compliant" ? "badge-green" :
-                            tx.compliance_status === "anomaly" ? "badge-red" : "badge-yellow"
-                          }`}>
-                            {tx.compliance_status}
-                          </span>
-                        </td>
+              <>
+                <div className="space-y-3 md:hidden">
+                  {(transactions?.data ?? []).map(tx => (
+                    <article key={tx.id} className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+                      <div className="flex items-center justify-between gap-3 mb-2">
+                        <p className="text-sm font-semibold text-gray-900 truncate">{tx.operator_name}</p>
+                        <span className={`badge ${
+                          tx.compliance_status === "compliant" ? "badge-green" :
+                          tx.compliance_status === "anomaly" ? "badge-red" : "badge-yellow"
+                        }`}>
+                          {COMPLIANCE_LABELS[tx.compliance_status] ?? tx.compliance_status}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("fr-FR")}</p>
+                      <p className="mt-1 text-base font-bold text-gray-900">{formatCurrency(tx.transaction_amount)}</p>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="hidden md:block overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-xs text-gray-500 border-b">
+                        <th className="pb-2">Date</th>
+                        <th className="pb-2">Opérateur</th>
+                        <th className="pb-2">Montant</th>
+                        <th className="pb-2">Statut</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {(transactions?.data ?? []).map(tx => (
+                        <tr key={tx.id} className="hover:bg-gray-50">
+                          <td className="py-2 text-gray-500">{new Date(tx.date).toLocaleDateString("fr-FR")}</td>
+                          <td className="py-2 font-medium text-gray-900">{tx.operator_name}</td>
+                          <td className="py-2">{formatCurrency(tx.transaction_amount)}</td>
+                          <td className="py-2">
+                            <span className={`badge ${
+                              tx.compliance_status === "compliant" ? "badge-green" :
+                              tx.compliance_status === "anomaly" ? "badge-red" : "badge-yellow"
+                            }`}>
+                              {COMPLIANCE_LABELS[tx.compliance_status] ?? tx.compliance_status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </div>
         </div>

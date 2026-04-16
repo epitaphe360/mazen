@@ -4,8 +4,11 @@
 
 @layer base {
   :root {
-    --gov-blue: #0d2d6e;
-    --gov-gold: #f5a623;
+    --gov-blue: #0f2a5f;
+    --gov-gold: #c8a55a;
+    --luxury-navy: #0a1c3d;
+    --luxury-ink: #102a57;
+    --luxury-mist: #eef3fb;
   }
 
   * {
@@ -13,33 +16,112 @@
   }
 
   body {
-    @apply bg-white text-gray-900 font-sans antialiased;
+    @apply text-slate-900 font-sans antialiased;
+    background: linear-gradient(180deg, #f5f8ff 0%, #f3f7ff 35%, #f8faff 100%);
+  }
+
+  a, button, input, select, textarea {
+    @apply outline-none;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply ring-2 ring-blue-700 ring-offset-2 ring-offset-white rounded-md;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 }
 
 @layer components {
-  .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition-colors duration-200 shadow-md hover:shadow-lg;
+  .page-atmosphere {
+    background:
+      radial-gradient(88rem 34rem at 8% -8%, rgba(25, 78, 170, 0.16), transparent 62%),
+      radial-gradient(70rem 30rem at 95% -4%, rgba(200, 165, 90, 0.15), transparent 58%),
+      linear-gradient(180deg, #eef3fb 0%, #f4f8ff 52%, #fbfdff 100%);
   }
 
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-md border border-blue-100/70 rounded-2xl shadow-lg;
+  }
+
+  .executive-shell {
+    background:
+      linear-gradient(135deg, rgba(8, 24, 56, 0.97) 0%, rgba(15, 42, 95, 0.95) 52%, rgba(19, 58, 125, 0.93) 100%),
+      radial-gradient(circle at top left, rgba(200, 165, 90, 0.2), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(147, 197, 253, 0.15), transparent 28%);
+  }
+
+  .executive-panel {
+    @apply rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl;
+    background-color: rgb(255 255 255 / 0.08);
+  }
+
+  .executive-metric {
+    @apply rounded-2xl border border-blue-200/20 bg-slate-950/25 p-5;
+  }
+
+  .institution-card {
+    @apply rounded-3xl border border-slate-200/90 bg-white/95 p-8 shadow-sm transition-all duration-300;
+  }
+
+  .institution-card:hover {
+    @apply shadow-xl border-blue-300 -translate-y-1;
+  }
+
+  .data-card {
+    @apply rounded-2xl border border-slate-200 bg-white/95 p-6 shadow-sm;
+  }
+
+  .editorial-card {
+    @apply rounded-2xl border border-slate-200/80 bg-white/95 p-5 shadow-sm transition-all duration-300;
+  }
+
+  .editorial-card:hover {
+    @apply shadow-xl border-blue-300 -translate-y-1;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    background: linear-gradient(120deg, #123a7b 0%, #1f56a8 56%, #2d6ed1 100%);
+  }
+
+  .btn-primary:hover { background: linear-gradient(120deg, #0f3168 0%, #19498e 56%, #245eb4 100%); }
+
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-700 text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-6 py-3 border-2 border-blue-800 text-blue-900 font-semibold rounded-lg hover:bg-blue-50 transition-colors duration-200;
   }
 
   .btn-gold {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-amber-500 text-white font-semibold rounded-lg hover:bg-amber-600 transition-colors duration-200 shadow-md;
+    @apply inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-lg transition-colors duration-200 shadow-md;
+    background: linear-gradient(120deg, #b7924a 0%, #caa763 100%);
   }
 
+  .btn-gold:hover { background: linear-gradient(120deg, #a6823f 0%, #b89552 100%); }
+
   .card {
-    @apply bg-white rounded-xl shadow-md border border-gray-100 p-6 hover:shadow-lg transition-shadow duration-200;
+    @apply bg-white/95 rounded-xl shadow-md border border-slate-200 p-6 hover:shadow-lg transition-shadow duration-200;
   }
 
   .stat-card {
-    @apply bg-white rounded-xl p-6 shadow-sm border border-gray-100;
+    @apply bg-white/95 rounded-xl p-6 shadow-sm border border-slate-200;
   }
 
   .section-title {
@@ -47,7 +129,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg text-gray-600 max-w-3xl;
+    @apply text-lg text-gray-700 max-w-3xl;
   }
 
   .badge {
@@ -55,14 +137,18 @@
   }
 
   .badge-green  { @apply badge bg-green-100 text-green-800; }
-  .badge-red    { @apply badge bg-red-100 text-red-800; }
+  .badge-red    { @apply badge bg-red-100 text-red-800 border border-red-200; }
   .badge-yellow { @apply badge bg-yellow-100 text-yellow-800; }
   .badge-blue   { @apply badge bg-blue-100 text-blue-800; }
   .badge-gray   { @apply badge bg-gray-100 text-gray-700; }
+
+  .input-field {
+    @apply w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm bg-white focus:ring-2 focus:ring-blue-700 focus:border-blue-700 outline-none transition-colors;
+  }
 }
 
 /* Scrollbar personnalisée */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { @apply bg-gray-100; }
-::-webkit-scrollbar-thumb { @apply bg-gray-400 rounded-full; }
-::-webkit-scrollbar-thumb:hover { @apply bg-gray-500; }
+::-webkit-scrollbar-track { @apply bg-slate-100; }
+::-webkit-scrollbar-thumb { @apply bg-blue-300 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-blue-400; }

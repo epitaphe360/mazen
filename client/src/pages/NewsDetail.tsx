@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "wouter";
 import { trpc } from "../lib/trpc";
+import PublicNavbar from "../components/PublicNavbar";
+import PublicFooter from "../components/PublicFooter";
 
 const CATEGORY_CONFIG: Record<string, { label: string; color: string }> = {
   innovation: { label: "Innovation", color: "bg-purple-100 text-purple-800" },
@@ -12,6 +14,8 @@ const CATEGORY_CONFIG: Record<string, { label: string; color: string }> = {
 
 export default function NewsDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSent, setNewsletterSent] = useState(false);
 
   const { data: article, isLoading, isError } = trpc.news.getBySlug.useQuery({ slug: slug ?? "" }, { enabled: !!slug });
 
@@ -41,19 +45,8 @@ export default function NewsDetail() {
   const publishedDate = new Date(article.published_at).toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar simple */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/mazen-logo.svg" alt="Mazen GovTech Groupe" className="h-9 w-auto object-contain" />
-            <span className="font-bold text-govblue hidden sm:block">Mazen GovTech Groupe</span>
-          </Link>
-          <Link href="/news" className="text-sm text-govblue hover:underline font-medium flex items-center gap-1">
-            ← Toutes les actualités
-          </Link>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <PublicNavbar ctaLabel="Connexion" ctaHref="/login" />
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         {/* Catégorie */}
@@ -98,7 +91,7 @@ export default function NewsDetail() {
         )}
 
         {/* Contenu */}
-        <article className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <article className="prose prose-lg prose-blue max-w-none text-gray-800 leading-relaxed">
           {((article.content ?? "") as string).split("\n").map((paragraph: string, i: number) =>
             paragraph.trim() ? (
               <p key={i} className="mb-4 text-gray-700 text-base sm:text-lg leading-7">
@@ -111,21 +104,39 @@ export default function NewsDetail() {
         </article>
 
         {/* CTA Newsletter */}
-        <div className="mt-12 p-8 bg-gradient-to-br from-govblue to-blue-800 rounded-2xl text-white text-center">
+        <div className="mt-12 p-8 bg-gradient-to-br from-blue-950 to-blue-800 rounded-2xl text-white text-center">
           <h3 className="text-xl font-bold mb-2">Ne manquez plus aucune actualité</h3>
           <p className="text-blue-200 mb-5 text-sm">
             Recevez chaque semaine les dernières analyses et rapports de Mazen GovTech Groupe directement dans votre boîte mail.
           </p>
-          <form className="flex gap-2 max-w-md mx-auto" onSubmit={e => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="votre@email.com"
-              className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-govgold"
-            />
-            <button type="submit" className="px-5 py-2 bg-govgold text-white font-semibold rounded-lg text-sm hover:bg-yellow-500 transition-colors whitespace-nowrap">
-              S'abonner
-            </button>
-          </form>
+          {newsletterSent ? (
+            <p className="inline-flex items-center gap-2 bg-green-500/20 border border-green-400/30 text-green-300 px-5 py-2.5 rounded-lg text-sm font-medium">
+              ✅ Inscription enregistrée, merci !
+            </p>
+          ) : (
+            <form
+              className="flex gap-2 max-w-md mx-auto"
+              onSubmit={e => {
+                e.preventDefault();
+                if (newsletterEmail) setNewsletterSent(true);
+              }}
+            >
+              <input
+                type="email"
+                placeholder="votre@email.com"
+                value={newsletterEmail}
+                onChange={e => setNewsletterEmail(e.target.value)}
+                required
+                className="flex-1 px-4 py-2 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-amber-400"
+              />
+              <button
+                type="submit"
+                className="px-5 py-2 bg-amber-500 text-white font-semibold rounded-lg text-sm hover:bg-amber-600 transition-colors whitespace-nowrap"
+              >
+                S'abonner
+              </button>
+            </form>
+          )}
         </div>
 
         {/* Articles connexes */}
@@ -159,10 +170,7 @@ export default function NewsDetail() {
         )}
       </main>
 
-      {/* Footer simple */}
-      <footer className="mt-16 border-t border-gray-200 bg-white py-6 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Mazen GovTech Groupe — Tous droits réservés
-      </footer>
+      <PublicFooter />
     </div>
   );
 }

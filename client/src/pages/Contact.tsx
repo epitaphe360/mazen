@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import { trpc } from "../lib/trpc";
 import { SECTORS_DATA } from "@shared/types";
+import PublicNavbar from "../components/PublicNavbar";
+import PublicFooter from "../components/PublicFooter";
+import { CalendarClock, Globe, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 
 const COUNTRIES = [
   "France", "Maroc", "Sénégal", "Côte d'Ivoire", "Tunisie", "Algérie", "Mali", "Cameroun",
@@ -33,8 +36,8 @@ export default function Contact() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-6">
+      <div className="min-h-screen page-atmosphere flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-6 glass-panel py-10">
           <div className="text-6xl mb-4">✅</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-3">Message envoyé !</h1>
           <p className="text-gray-600 mb-6">Votre demande a bien été reçue. Notre équipe vous répondra sous 48h.</p>
@@ -45,45 +48,63 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/"><a className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-700 text-white flex items-center justify-center font-black">M</div>
-            <span className="font-bold text-gray-900">Mazen <span className="text-blue-700">GovTech</span></span>
-          </a></Link>
-        </div>
-      </nav>
+    <div className="min-h-screen page-atmosphere">
+      <PublicNavbar ctaLabel="Connexion" ctaHref="/login" />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
+        <section className="glass-panel p-8 md:p-10 mb-10 relative overflow-hidden">
+          <div className="absolute right-0 top-0 w-56 h-56 rounded-full bg-blue-200/30 blur-3xl" aria-hidden="true" />
+          <div className="absolute left-0 bottom-0 w-48 h-48 rounded-full bg-amber-200/35 blur-3xl" aria-hidden="true" />
+          <div className="relative">
+            <p className="text-xs uppercase tracking-[0.2em] text-blue-700 font-bold mb-3">Échange institutionnel</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">Donnez de l'élan à votre stratégie de revenus publics</h1>
+            <p className="text-gray-700 max-w-3xl">
+              Échangez avec nos experts pour cadrer un projet concret, avec un plan de déploiement adapté à votre contexte national.
+            </p>
+          </div>
+        </section>
+
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Côté gauche — Info */}
           <div>
-            <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Prêt à transformer vos recettes publiques ?</h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Prêt à transformer vos recettes publiques ?</h2>
+            <p className="text-lg text-gray-700 mb-8">
               Contactez-nous. Notre équipe est à votre disposition pour vous accompagner dans votre transformation numérique et l'optimisation de vos recettes publiques.
             </p>
             <div className="space-y-4">
               {[
-                { icon: "📧", title: "Envoyez-nous un courriel", desc: "Adressez-nous vos questions ou demandes d'information. Notre équipe s'engage à vous répondre rapidement.", action: "contact@mazen-govtech.com" },
-                { icon: "📅", title: "Planifiez une démonstration", desc: "Découvrez nos solutions en action. Réservez une session personnalisée avec nos experts." },
-                { icon: "🌐", title: "Explorez nos solutions", desc: "Nos certifications ISO 9001 et ISO 27001 garantissent la plus haute qualité de service." },
+                { icon: Mail, title: "Envoyez-nous un courriel", desc: "Adressez-nous vos questions ou demandes d'information. Notre équipe s'engage à vous répondre rapidement.", action: "contact@mazen-govtech.com" },
+                { icon: CalendarClock, title: "Planifiez une présentation", desc: "Découvrez nos solutions en action. Réservez une session personnalisée avec nos experts." },
+                { icon: Globe, title: "Explorez nos solutions", desc: "Nos certifications ISO 9001 et ISO 27001 garantissent la plus haute qualité de service." },
               ].map(item => (
-                <div key={item.title} className="card flex gap-4">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                <div key={item.title} className="editorial-card flex gap-4">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-blue-700 flex-shrink-0">
+                    <item.icon className="w-5 h-5" aria-hidden="true" />
+                  </span>
                   <div>
                     <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-500 text-sm">{item.desc}</p>
+                    <p className="text-gray-600 text-sm">{item.desc}</p>
                     {item.action && <a href={`mailto:${item.action}`} className="text-blue-600 text-sm font-medium hover:underline">{item.action}</a>}
                   </div>
                 </div>
               ))}
             </div>
+
+            <div className="mt-6 editorial-card bg-blue-950 text-white border-blue-900">
+              <div className="flex items-start gap-3">
+                <ShieldCheck className="w-5 h-5 text-amber-300 mt-0.5" aria-hidden="true" />
+                <div>
+                  <p className="font-semibold">Confidentialité et sécurité</p>
+                  <p className="text-sm text-blue-100 mt-1">
+                    Données traitées selon des standards de sécurité alignés sur ISO 27001.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Formulaire */}
-          <div className="card shadow-lg">
+          <div className="glass-panel p-6 md:p-8">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Formulaire de contact</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
@@ -162,12 +183,13 @@ export default function Contact() {
                 disabled={submitMutation.isPending}
                 className="w-full btn-primary justify-center py-3 text-base disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {submitMutation.isPending ? "Envoi en cours..." : "Envoyer ma demande"}
+                {submitMutation.isPending ? "Envoi en cours..." : "Envoyer ma demande"} <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </button>
             </form>
           </div>
         </div>
       </div>
+      <PublicFooter />
     </div>
   );
 }
