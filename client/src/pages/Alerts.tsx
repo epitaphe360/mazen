@@ -4,10 +4,10 @@ import { trpc } from "../lib/trpc";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const SEVERITY_CONFIG = {
-  critical: { label: "Critique", badgeClass: "bg-red-100 text-red-800 border border-red-200", icon: "🚨" },
-  high: { label: "Haute", badgeClass: "bg-orange-100 text-orange-800 border border-orange-200", icon: "⚠️" },
-  medium: { label: "Moyenne", badgeClass: "bg-yellow-100 text-yellow-800 border border-yellow-200", icon: "⚡" },
-  low: { label: "Faible", badgeClass: "bg-blue-100 text-blue-800 border border-blue-200", icon: "ℹ️" },
+  critical: { label: "Critical", badgeClass: "bg-red-100 text-red-800 border border-red-200", icon: "🚨" },
+  high: { label: "High", badgeClass: "bg-orange-100 text-orange-800 border border-orange-200", icon: "⚠️" },
+  medium: { label: "Medium", badgeClass: "bg-yellow-100 text-yellow-800 border border-yellow-200", icon: "⚡" },
+  low: { label: "Low", badgeClass: "bg-blue-100 text-blue-800 border border-blue-200", icon: "ℹ️" },
 } as const;
 
 type SeverityKey = keyof typeof SEVERITY_CONFIG;
@@ -53,8 +53,8 @@ export default function Alerts() {
           {/* Toggle résolu / actif */}
           <div className="flex rounded-lg bg-gray-100 p-1">
             {[
-              { value: false, label: "Actives" },
-              { value: true, label: "Résolues" },
+              { value: false, label: "Active" },
+              { value: true, label: "Resolved" },
             ].map((opt) => (
               <button
                 key={String(opt.value)}
@@ -76,7 +76,7 @@ export default function Alerts() {
                 !filter.severity ? "bg-gray-800 text-white border-gray-800" : "bg-white text-gray-600 border-gray-300 hover:border-gray-500"
               }`}
             >
-              Toutes sévérités
+              All severities
             </button>
             {(Object.entries(SEVERITY_CONFIG) as [SeverityKey, typeof SEVERITY_CONFIG[SeverityKey]][]).map(([key, cfg]) => (
               <button
@@ -92,7 +92,7 @@ export default function Alerts() {
           </div>
         </div>
 
-        {/* Résumé par sévérité (alertes actives seulement) */}
+        {/* Summary by severity (active alerts only) */}
         {!filter.resolved && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {(Object.entries(SEVERITY_CONFIG) as [SeverityKey, typeof SEVERITY_CONFIG[SeverityKey]][]).map(([key, cfg]) => {
@@ -124,7 +124,7 @@ export default function Alerts() {
             <div className="text-center py-16">
               <p className="text-5xl mb-3">✅</p>
               <p className="text-gray-500 font-medium">
-                {filter.resolved ? "Aucune alerte résolue" : "Aucune alerte active — tout est en ordre !"}
+                {filter.resolved ? "No resolved alerts" : "No active alerts — everything is clear!"}
               </p>
             </div>
           ) : (
@@ -148,14 +148,14 @@ export default function Alerts() {
                           </span>
                         )}
                         {alert.is_resolved && (
-                          <span className="badge badge-green text-xs">Résolue</span>
+                          <span className="badge badge-green text-xs">Resolved</span>
                         )}
                       </div>
                       <p className="text-gray-900 font-medium">{alert.description}</p>
                       <div className="flex items-center gap-3 mt-1.5 text-xs text-gray-400">
-                        <span>Détectée le {new Date(alert.created_at).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" })}</span>
+                        <span>Detected on {new Date(alert.created_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}</span>
                         {alert.resolved_at && (
-                          <span>· Résolue le {new Date(alert.resolved_at).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" })}</span>
+                          <span>· Resolved on {new Date(alert.resolved_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}</span>
                         )}
                       </div>
                     </div>
@@ -167,7 +167,7 @@ export default function Alerts() {
                         disabled={resolveMutation.isPending}
                         className="flex-shrink-0 px-3 py-1.5 text-xs font-medium text-green-700 border border-green-300 rounded-lg hover:bg-green-50 transition-colors disabled:opacity-50"
                       >
-                        ✓ Résoudre
+                        ✓ Resolve
                       </button>
                     )}
                   </div>
@@ -180,16 +180,16 @@ export default function Alerts() {
           {(data?.total ?? 0) > 20 && (
             <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 bg-gray-50">
               <p className="text-sm text-gray-500">
-                {(page - 1) * 20 + 1}–{Math.min(page * 20, data?.total ?? 0)} sur {data?.total}
+                {(page - 1) * 20 + 1}–{Math.min(page * 20, data?.total ?? 0)} of {data?.total}
               </p>
               <div className="flex gap-2">
                 <button disabled={page <= 1} onClick={() => setPage(p => p - 1)}
                   className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-white transition-colors">
-                  Précédent
+                  Previous
                 </button>
                 <button disabled={page * 20 >= (data?.total ?? 0)} onClick={() => setPage(p => p + 1)}
                   className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-white transition-colors">
-                  Suivant
+                  Next
                 </button>
               </div>
             </div>
