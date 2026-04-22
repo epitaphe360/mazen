@@ -46,4 +46,44 @@
       "subtitle": "ETL-Certification® certified governance solution"
     }
   }
+  ,
+  "contact": {
+    "hero": {
+      "kicker": "Institutional exchange",
+      "title": "Advance your public revenue strategy",
+      "subtitle": "Talk to our experts to scope a tailored deployment plan for your national context."
+    },
+    "success": {
+      "title": "Message sent!",
+      "subtitle": "Your request has been received. Our team will reply within 48 hours.",
+      "backToHome": "Back to home"
+    },
+    "info": {
+      "title": "Ready to transform public revenue?",
+      "subtitle": "Contact us — our team supports digital transformation and revenue optimization for governments."
+    },
+    "channels": {
+      "email": { "title": "Email us", "desc": "Send questions or information requests — our team will respond promptly." },
+      "demo": { "title": "Schedule a demo", "desc": "See our solutions in action with a personalized session." },
+      "solutions": { "title": "Explore solutions", "desc": "ISO 9001 and ISO 27001 certifications ensure highest service quality." }
+    },
+    "security": { "title": "Privacy & Security", "desc": "Data processed according to ISO 27001-aligned security standards." },
+    "form": {
+      "title": "Contact form",
+      "fullName": "Full name *",
+      "fullNamePlaceholder": "First Last",
+      "email": "Email *",
+      "emailPlaceholder": "you@government.gov",
+      "country": "Country *",
+      "selectCountry": "Select your country",
+      "sector": "Sector of interest *",
+      "selectSector": "Select a sector",
+      "allSectors": "All sectors",
+      "types": { "demo": "Demo", "information": "Information", "partnership": "Partnership" },
+      "acceptTerms": "I accept that my data will be processed to answer this request.",
+      "submit": "Send request",
+      "sending": "Sending..."
+    },
+    "errors": { "mustAccept": "You must accept the terms to continue." }
+  }
 }
