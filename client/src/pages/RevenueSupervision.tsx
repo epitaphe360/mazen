@@ -40,161 +40,161 @@ const fadeUp = {
 /* ─── DONNÉES ─────────────────────────────────────────────────── */
 
 const CHALLENGES = [
-  "Évasion fiscale et fraude organisée transfrontalière",
-  "Économie informelle non capturée dans les assiettes fiscales",
-  "Sous-déclaration systématique des revenus et des flux customs",
-  "Fragmentation des bases de données fiscales entre administrations",
-  "Absence de visibilité en temps réel sur les flux de recettes",
-  "Faible taux de conformité volontaire des contribuables",
+  "Cross-border organized tax evasion and fraud",
+  "Informal economy not captured in tax bases",
+  "Systematic under-declaration of revenues and customs flows",
+  "Fragmented tax databases across administrations",
+  "Lack of real-time visibility on revenue flows",
+  "Low voluntary tax compliance rates",
 ];
 
 const IMPERATIVES = [
-  { text: "Augmentation durable du", bold: "taux de pression fiscale" },
-  { text: "Lutte contre la", bold: "fraude et l'évasion fiscale" },
-  { text: "Supervision en temps réel des", bold: "recettes publiques" },
-  { text: "Modernisation de la", bold: "collecte et du contrôle fiscal" },
-  { text: "Intégration des données", bold: "douanes, impôts, trésor" },
-  { text: "Renforcement de la", bold: "souveraineté financière de l'État" },
+  { text: "Sustainably increase the", bold: "tax burden rate" },
+  { text: "Fight against", bold: "fraud and tax evasion" },
+  { text: "Real-time supervision of", bold: "public revenues" },
+  { text: "Modernization of", bold: "tax collection and control" },
+  { text: "Integration of", bold: "customs, tax and treasury data" },
+  { text: "Strengthen", bold: "the state's financial sovereignty" },
 ];
 
 const PILLARS = [
   {
     id: 1,
     icon: Database,
-    title: "Infrastructure de Collecte",
-    subtitle: "Numérique & Intégrée",
+    title: "Collection Infrastructure",
+    subtitle: "Digital & Integrated",
     color: "from-emerald-900 to-emerald-700",
     border: "border-emerald-500/30",
     features: [
       {
-        label: "Déclaration électronique unifiée",
+        label: "Unified e-filing",
         value:
-          "Portail contribuable centralisé pour les déclarations IS, TVA, IRPP, patente et droits de douane avec pré-remplissage automatique depuis les sources tierces.",
+          "Centralized taxpayer portal for corporate tax, VAT, personal income, business licenses and customs duties with automatic pre-filling from third-party sources.",
       },
       {
-        label: "Paiement numérique souverain",
+        label: "Sovereign digital payments",
         value:
-          "Intégration multi-canal : virement bancaire, mobile money, paiement carte, mandats électroniques — avec réconciliation automatique et tracabilité complète.",
+          "Multi-channel integration: bank transfer, mobile money, card payments, electronic mandates — with automatic reconciliation and full traceability.",
       },
       {
-        label: "Identification contribuable unique",
+        label: "Unique taxpayer identifier",
         value:
-          "Identifiant fiscal unique (IFU) lié aux registres de commerce, d'état civil et des opérateurs économiques pour éliminer les doublons et les fantômes.",
+          "Single fiscal identifier linked to commercial, civil and operator registries to eliminate duplicates and ghost entities.",
       },
       {
-        label: "Onboarding fiscal automatisé",
+        label: "Automated fiscal onboarding",
         value:
-          "Enregistrement et immatriculation des nouveaux contribuables en ligne avec vérification d'identité et activation immédiate du compte fiscal.",
+          "Online registration of new taxpayers with identity verification and immediate activation of the fiscal account.",
       },
     ],
   },
   {
     id: 2,
     icon: Activity,
-    title: "Supervision & Analytique",
-    subtitle: "Tableau de bord temps réel",
+    title: "Supervision & Analytics",
+    subtitle: "Real-time dashboard",
     color: "from-blue-900 to-blue-700",
     border: "border-blue-500/30",
     features: [
       {
-        label: "Tableau de bord exécutif",
+        label: "Executive dashboard",
         value:
-          "Vue consolidée en temps réel des recettes collectées, des écarts versus objectifs, des retards de paiement et des tendances par secteur, région et type d'impôt.",
+          "Consolidated real-time view of collected revenues, variances vs targets, payment delays and trends by sector, region and tax type.",
       },
       {
-        label: "Suivi des flux inter-administrations",
+        label: "Inter-administration flow tracking",
         value:
-          "Agrégation automatique des flux Impôts–Douanes–Trésor avec rapprochement comptable et traçabilité complète depuis le fait générateur jusqu'au compte d'État.",
+          "Automatic aggregation of Tax–Customs–Treasury flows with accounting reconciliation and complete traceability from the triggering event to the state's account.",
       },
       {
-        label: "Scorecards de conformité",
+        label: "Compliance scorecards",
         value:
-          "Indice de compliance par contribuable, secteur et région mis à jour en continu — permettant la priorisation intelligente des actions de contrôle et d'audit.",
+          "Continuous compliance index per taxpayer, sector and region — enabling smart prioritization of audit and enforcement actions.",
       },
       {
-        label: "Prévisions et simulation budgétaire",
+        label: "Forecasting and budget simulation",
         value:
-          "Moteurs prédictifs pour l'anticipation des recettes mensuelles, la simulation d'impact de mesures fiscales et la détection précoce des dérives par rapport aux objectifs.",
+          "Predictive engines for monthly revenue forecasting, simulation of fiscal measures and early detection of deviations from targets.",
       },
     ],
   },
   {
     id: 3,
     icon: Search,
-    title: "Détection de Fraude",
+    title: "Fraud Detection",
     subtitle: "Intelligence & Audit",
     color: "from-red-900 to-red-700",
     border: "border-red-500/30",
     features: [
       {
-        label: "Moteur de détection des anomalies",
+        label: "Anomaly detection engine",
         value:
-          "Algorithmes d'analyse comportementale et de scoring de risque sur l'ensemble des déclarations — ciblant les schémas de fraude TVA carousel, la facturation fictive et le blanchiment.",
+          "Behavioral analysis algorithms and risk scoring across filings — targeting VAT carousel schemes, fictitious invoicing and money laundering.",
       },
       {
-        label: "Croisement multi-sources",
+        label: "Multi-source cross-checks",
         value:
-          "Recoupement automatique entre les déclarations fiscales, les relevés bancaires, les manifestes douaniers, les bilans comptables et les données de registre de commerce.",
+          "Automatic reconciliation between tax filings, bank statements, customs manifests, financial statements and commercial registry data.",
       },
       {
-        label: "Gestion intelligente du contrôle fiscal",
+        label: "Intelligent audit management",
         value:
-          "Sélection algorithmique des dossiers à contrôler, planification des missions de vérification, suivi des procédures et calcul automatique des redressements et pénalités.",
+          "Algorithmic selection of cases for audit, verification mission planning, procedure tracking and automatic computation of adjustments and penalties.",
       },
       {
-        label: "Traçabilité et piste d'audit",
+        label: "Traceability and audit trail",
         value:
-          "Journal d'audit inaltérable de toutes les opérations fiscales, modifications de données et actions des agents avec horodatage cryptographique garantissant l'intégrité.",
+          "Immutable audit log of all fiscal operations, data changes and agent actions with cryptographic timestamps ensuring integrity.",
       },
     ],
   },
 ];
 
 const INTEGRATIONS = [
-  { icon: Landmark, label: "Système bancaire national", desc: "Réconciliation temps réel des flux de paiement" },
-  { icon: Globe, label: "Douanes & Commerce", desc: "Croisement manifestes, valeurs déclarées, droits perçus" },
-  { icon: FileText, label: "Registre du Commerce", desc: "Vérification existence légale des entreprises contribuables" },
-  { icon: Users, label: "État civil & Biométrie", desc: "Vérification d'identité des contribuables personnes physiques" },
+  { icon: Landmark, label: "National banking system", desc: "Real-time reconciliation of payment flows" },
+  { icon: Globe, label: "Customs & Trade", desc: "Cross-check manifests, declared values and duties collected" },
+  { icon: FileText, label: "Commercial registry", desc: "Verify legal existence of taxpayer entities" },
+  { icon: Users, label: "Civil registry & biometrics", desc: "Identity verification for individual taxpayers" },
 ];
 
 const SECURITY = [
-  { icon: Lock, label: "Chiffrement souverain", desc: "PKI nationale, chiffrement bout-en-bout des données fiscales" },
-  { icon: ShieldCheck, label: "Cloisonnement des rôles", desc: "RBAC granulaire — agents, superviseurs, auditeurs internes" },
-  { icon: Eye, label: "Supervision des accès", desc: "SIEM dédié, détection des comportements internes malveillants" },
-  { icon: RefreshCw, label: "Continuité & résilience", desc: "Architecture redondante, RPO < 1h, RTO < 4h" },
+  { icon: Lock, label: "Sovereign encryption", desc: "National PKI, end-to-end encryption of fiscal data" },
+  { icon: ShieldCheck, label: "Role-based isolation", desc: "Granular RBAC — agents, supervisors, internal auditors" },
+  { icon: Eye, label: "Access monitoring", desc: "Dedicated SIEM, detection of insider malicious behavior" },
+  { icon: RefreshCw, label: "Continuity & resilience", desc: "Redundant architecture, RPO < 1h, RTO < 4h" },
 ];
 
 const CAPABILITIES = [
-  { icon: DollarSign, label: "Mobilisation des recettes fiscales", desc: "Maximisation de l'assiette fiscale effective par l'identification de tous les contribuables actifs et la collecte automatisée multi-canal." },
-  { icon: Search, label: "Contrôle et audit intelligent", desc: "Ciblage algorithmique des dossiers à risque pour concentrer les ressources de vérification là où le potentiel de redressement est maximal." },
-  { icon: BarChart2, label: "Reporting budgétaire en temps réel", desc: "Tableau de bord exécutif avec consolidation instantanée des recettes par nature, direction, région et période pour le pilotage stratégique." },
-  { icon: Link2, label: "Interopérabilité inter-administrations", desc: "Échanges automatisés sécurisés entre DGI, DGD, Trésor Public et Banque Centrale via API souveraines chiffrées." },
-  { icon: TrendingUp, label: "Prévision et simulation fiscale", desc: "Modèles prédictifs pour anticiper les recettes, simuler l'impact de réformes fiscales et détecter les dérives en temps utile." },
-  { icon: Cpu, label: "Intelligence artificielle anti-fraude", desc: "Modèles de machine learning entraînés sur les historiques fiscaux nationaux pour automatiser la détection des schémas frauduleux complexes." },
+  { icon: DollarSign, label: "Revenue mobilization", desc: "Maximize the effective tax base by identifying all active taxpayers and enabling automated multi-channel collection." },
+  { icon: Search, label: "Intelligent audit & control", desc: "Algorithmic targeting of high-risk cases to concentrate audit resources where recovery potential is highest." },
+  { icon: BarChart2, label: "Real-time budget reporting", desc: "Executive dashboard with instant consolidation of revenues by type, department, region and period for strategic steering." },
+  { icon: Link2, label: "Inter-agency interoperability", desc: "Secure automated exchanges between tax, customs, treasury and central bank via sovereign encrypted APIs." },
+  { icon: TrendingUp, label: "Fiscal forecasting & simulation", desc: "Predictive models to anticipate revenues, simulate reforms impact and detect drifts early." },
+  { icon: Cpu, label: "AI anti-fraud", desc: "Machine learning models trained on national fiscal histories to automate detection of complex fraud schemes." },
 ];
 
 const COMPARISON = [
-  { criteria: "Visibility en temps réel", before: "Reporting mensuel décalé", after: "Dashboard live toutes recettes", good: true },
-  { criteria: "Détection de la fraude", before: "Contrôles aléatoires manuels", after: "Scoring risque automatique 100% des dossiers", good: true },
-  { criteria: "Taux de couverture fiscal", before: "Partiel — économie informelle exclue", after: "Élargi — identification systématique", good: true },
-  { criteria: "Interopérabilité DGI/DGD/Trésor", before: "Échanges manuels, délais > 30 jours", after: "API temps réel, réconciliation auto", good: true },
-  { criteria: "Expérience contribuable", before: "Démarches physiques, files d'attente", after: "Portail numérique 24h/24", good: true },
-  { criteria: "Pilotage budgétaire", before: "Données T-1, lacunaires", after: "Prévisions dynamiques temps réel", good: true },
+  { criteria: "Real-time visibility", before: "Lagging monthly reports", after: "Live dashboard of all revenues", good: true },
+  { criteria: "Fraud detection", before: "Random manual checks", after: "Automatic risk scoring across 100% of cases", good: true },
+  { criteria: "Fiscal coverage", before: "Partial — informal economy excluded", after: "Expanded — systematic identification", good: true },
+  { criteria: "Interoperability (Tax/Customs/Treasury)", before: "Manual exchanges, >30 days delays", after: "Real-time APIs, auto reconciliation", good: true },
+  { criteria: "Taxpayer experience", before: "Physical procedures, long queues", after: "24/7 digital portal", good: true },
+  { criteria: "Budget steering", before: "T-1, incomplete data", after: "Dynamic real-time forecasts", good: true },
 ];
 
 const EVOLUTIONS = [
-  { icon: Cpu, label: "IA de Détection Avancée", desc: "Modèles deep learning pour identifier les montages fiscaux complexes, les prix de transfert abusifs et les schémas d'optimisation agressive transfrontalière." },
-  { icon: Globe, label: "Échange International de Données", desc: "Conformité OCDE BEPS, Norme Commune de Déclaration (NCD/CRS) et échanges automatiques de renseignements fiscaux avec les administrations partenaires." },
-  { icon: Link2, label: "Registre des Bénéficiaires Effectifs", desc: "Identification automatique des bénéficiaires économiques réels des structures juridiques pour lutter contre l'optimisation et le blanchiment." },
-  { icon: BarChart2, label: "Jumeaux Numériques Fiscaux", desc: "Simulation macroéconomique des impacts de réformes fiscales avant promulgation — modélisation de l'élasticité des recettes à la politique fiscale." },
+  { icon: Cpu, label: "Advanced detection AI", desc: "Deep learning models to identify complex tax schemes, abusive transfer pricing and aggressive cross-border optimization." },
+  { icon: Globe, label: "International data exchange", desc: "OECD BEPS compliance, Common Reporting Standard and automated tax information exchange with partner administrations." },
+  { icon: Link2, label: "Beneficial ownership registry", desc: "Automatic identification of true economic beneficiaries of legal structures to combat evasion and money laundering." },
+  { icon: BarChart2, label: "Fiscal digital twins", desc: "Macroeconomic simulation of reform impacts before enactment — modeling revenue elasticity to fiscal policy." },
 ];
 
 const GOV_APPS = [
-  { icon: Landmark, label: "Direction Générale des Impôts", desc: "Gestion complète du cycle fiscal : immatriculation, déclaration, paiement, contrôle et contentieux — avec pilotage des objectifs de recettes par bureau." },
-  { icon: Globe, label: "Direction Générale des Douanes", desc: "Surveillance des valeurs en douane, détection des sous-facturations, suivi des régimes suspensifs et optimisation de la collecte des droits à l'importation." },
-  { icon: DollarSign, label: "Ministère des Finances", desc: "Tableau de bord consolidé des recettes publiques, publication des statistiques fiscales officielles, reporting FMI/Banque Mondiale et pilotage stratégique." },
-  { icon: TrendingUp, label: "Trésor Public", desc: "Suivi des flux de trésorerie de l'État en temps réel, gestion de la dette fiscale, recouvrement forcé et réconciliation des comptes avec le système bancaire." },
-  { icon: ShieldCheck, label: "Inspection Générale des Finances", desc: "Outils d'audit interne et de contrôle de l'action des agents fiscaux — détection des comportements déviants et traçabilité complète pour la lutte anti-corruption." },
+  { icon: Landmark, label: "Directorate General of Taxes", desc: "Full tax cycle management: registration, filing, payment, enforcement and litigation — with revenue target management per office." },
+  { icon: Globe, label: "Directorate General of Customs", desc: "Monitoring declared values, detecting under-declaration, supervision of suspended regimes and optimizing import duty collection." },
+  { icon: DollarSign, label: "Ministry of Finance", desc: "Consolidated public revenue dashboard, official fiscal statistics publication, IMF/World Bank reporting and strategic steering." },
+  { icon: TrendingUp, label: "Treasury", desc: "Real-time monitoring of state cash flows, fiscal debt management, forced collection and reconciliation with the banking system." },
+  { icon: ShieldCheck, label: "General Inspectorate of Finance", desc: "Internal audit and oversight tools — detection of deviant behavior and full traceability to fight corruption." },
 ];
 
 /* ─── COMPOSANTS INTERNES ─────────────────────────────────────── */
@@ -216,7 +216,7 @@ export default function RevenueSupervision() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
-      <PublicNavbar ctaLabel="Demander une présentation" ctaHref="/contact" />
+      <PublicNavbar ctaLabel="Request a presentation" ctaHref="/contact" />
 
       {/* ══ HERO ══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden min-h-[92vh] flex items-center">
@@ -242,25 +242,25 @@ export default function RevenueSupervision() {
               Revenue Intelligence Platform · RIP
             </span>
             <h1 className="text-5xl md:text-6xl font-black leading-[1.05] mb-6">
-              Souveraineté{" "}
+              Fiscal{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Fiscale
+                Sovereignty
               </span>
             </h1>
             <p className="text-lg text-emerald-100/80 mb-8 leading-relaxed max-w-xl">
-              Plateforme intégrée de supervision et de mobilisation des recettes publiques — collecte numérique, tableau de bord exécutif en temps réel et détection intelligente de la fraude fiscale.
+              Integrated platform for supervision and mobilization of public revenues — digital collection, executive real-time dashboard and intelligent tax fraud detection.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/contact">
                 <a className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20">
-                  Demander une présentation <ArrowRight className="w-4 h-4" />
+                  Request a presentation <ArrowRight className="w-4 h-4" />
                 </a>
               </Link>
               <a
                 href="#contexte"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all"
               >
-                Découvrir le système
+                Explore the system
               </a>
             </div>
           </motion.div>
@@ -274,10 +274,10 @@ export default function RevenueSupervision() {
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { value: "+35 %", label: "Hausse moyenne du taux de recouvrement", icon: TrendingUp },
-              { value: "100 %", label: "Couverture dossiers par scoring risque", icon: Search },
-              { value: "Temps réel", label: "Supervision des recettes publiques", icon: Activity },
-              { value: "3 piliers", label: "Collecte · Supervision · Audit", icon: ShieldCheck },
+              { value: "+35 %", label: "Average recovery rate increase", icon: TrendingUp },
+              { value: "100 %", label: "Case coverage by risk scoring", icon: Search },
+              { value: "Real-time", label: "Public revenue supervision", icon: Activity },
+              { value: "3 pillars", label: "Collection · Supervision · Audit", icon: ShieldCheck },
             ].map((m) => (
               <div
                 key={m.label}
@@ -301,9 +301,9 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="01 — Contexte stratégique"
-              title="Un impératif de souveraineté financière"
-              subtitle="Pour de nombreux États, l'augmentation des recettes fiscales intérieures représente le levier le plus puissant pour financer le développement sans dépendance extérieure. Or les administrations fiscales font face à des défis structurels qui limitent leur capacité de mobilisation."
+              tag="01 — Strategic context"
+              title="An imperative for financial sovereignty"
+              subtitle="For many countries, increasing domestic tax revenues is the most powerful lever to finance development without external dependence. Tax administrations face structural challenges that limit their mobilization capacity."
             />
           </motion.div>
 
@@ -316,11 +316,11 @@ export default function RevenueSupervision() {
               custom={1}
               className="rounded-2xl border border-red-500/20 bg-red-950/20 p-7"
             >
-              <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-5">
                 <span className="w-9 h-9 rounded-lg bg-red-500/20 flex items-center justify-center">
                   <AlertTriangle className="w-5 h-5 text-red-400" />
                 </span>
-                <h3 className="font-bold text-white text-lg">Défis structurels</h3>
+                <h3 className="font-bold text-white text-lg">Structural challenges</h3>
               </div>
               <ul className="space-y-3">
                 {CHALLENGES.map((c) => (
@@ -340,11 +340,11 @@ export default function RevenueSupervision() {
               custom={2}
               className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-7"
             >
-              <div className="flex items-center gap-3 mb-5">
+                <div className="flex items-center gap-3 mb-5">
                 <span className="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                   <CheckCircle className="w-5 h-5 text-emerald-400" />
                 </span>
-                <h3 className="font-bold text-white text-lg">Impératifs stratégiques</h3>
+                <h3 className="font-bold text-white text-lg">Strategic imperatives</h3>
               </div>
               <ul className="space-y-3">
                 {IMPERATIVES.map((n) => (
@@ -357,7 +357,7 @@ export default function RevenueSupervision() {
             </motion.div>
           </div>
 
-          <motion.p
+            <motion.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -365,8 +365,8 @@ export default function RevenueSupervision() {
             custom={3}
             className="mt-10 text-center text-emerald-200/70 max-w-3xl mx-auto text-sm leading-relaxed border border-white/10 rounded-2xl bg-white/5 p-6"
           >
-            La réponse est une <strong className="text-white">plateforme souveraine intégrée</strong> couvrant l'intégralité du cycle fiscal — de l'identification du contribuable au recouvrement effectif — avec une intelligence analytique en temps réel :{" "}
-            <strong className="text-emerald-400">la Revenue Intelligence Platform</strong>.
+            The answer is an <strong className="text-white">integrated sovereign platform</strong> covering the full tax cycle — from taxpayer identification to effective collection — with real-time analytical intelligence:{" "}
+            <strong className="text-emerald-400">the Revenue Intelligence Platform</strong>.
           </motion.p>
         </div>
       </section>
@@ -376,9 +376,9 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="02 — Concept opérationnel"
-              title="Architecture en 3 piliers souverains"
-              subtitle="La Revenue Intelligence Platform repose sur trois piliers complémentaires qui couvrent l'intégralité du cycle fiscal — de la collecte initiale au contrôle final — avec une vision consolidée en temps réel pour les décideurs."
+              tag="02 — Operational concept"
+              title="Three-pillar sovereign architecture"
+              subtitle="The Revenue Intelligence Platform rests on three complementary pillars covering the full tax cycle — from initial collection to final control — with a consolidated real-time view for decision-makers."
             />
           </motion.div>
 
@@ -394,7 +394,7 @@ export default function RevenueSupervision() {
                 }`}
               >
                 <p.icon className="w-4 h-4" />
-                <span>Pilier {p.id} — {p.title}</span>
+                <span>Pillar {p.id} — {p.title}</span>
               </button>
             ))}
           </div>
@@ -436,15 +436,15 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="03 — Architecture technique"
-              title="Interopérable, sécurisée, souveraine"
-              subtitle="La plateforme a été conçue pour s'intégrer aux systèmes existants des administrations nationales tout en garantissant la protection maximale des données fiscales des contribuables et la confidentialité des informations stratégiques de l'État."
+              tag="03 — Technical architecture"
+              title="Interoperable, secure, sovereign"
+              subtitle="The platform is designed to integrate with existing national administration systems while ensuring maximal protection of taxpayers' fiscal data and confidentiality of the state's strategic information."
             />
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-4">Intégrations systèmes</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-4">System integrations</h3>
               <div className="space-y-3">
                 {INTEGRATIONS.map((s) => (
                   <div key={s.label} className="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
@@ -461,7 +461,7 @@ export default function RevenueSupervision() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-4">Sécurité &amp; Gouvernance des données</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-4">Security &amp; Data Governance</h3>
               <div className="space-y-3">
                 {SECURITY.map((s) => (
                   <div key={s.label} className="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
@@ -488,9 +488,9 @@ export default function RevenueSupervision() {
           >
             <Lock className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-bold text-white mb-1">Hébergement souverain</p>
+              <p className="font-bold text-white mb-1">Sovereign hosting</p>
               <p className="text-emerald-200/70 text-sm leading-relaxed">
-                L'ensemble des données fiscales est hébergé sur infrastructure gouvernementale nationale ou dans un cloud souverain homologué. Aucune donnée contribuable ne transite par des serveurs étrangers. L'architecture est conçue pour opérer en mode air-gap en cas de coupure de connectivité internationale, garantissant la <strong className="text-white">continuité du service fiscal même en situation de crise</strong>.
+                All fiscal data is hosted on national government infrastructure or an approved sovereign cloud. No taxpayer data transits through foreign servers. The architecture can operate in air-gap mode in case of international connectivity loss, ensuring <strong className="text-white">continuity of fiscal services even during crises</strong>.
               </p>
             </div>
           </motion.div>
@@ -502,9 +502,9 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="04 — Capacités opérationnelles"
-              title="6 capacités clés pour l'État"
-              subtitle="La Revenue Intelligence Platform délivre un ensemble intégré de capacités couvrant toutes les dimensions de la mobilisation fiscale — de la collecte initiale au contrôle fiscal en passant par le reporting stratégique."
+              tag="04 — Operational capabilities"
+              title="6 key capabilities for the State"
+              subtitle="The Revenue Intelligence Platform delivers an integrated set of capabilities covering all dimensions of fiscal mobilization — from initial collection to audit and strategic reporting."
             />
           </motion.div>
 
@@ -535,9 +535,9 @@ export default function RevenueSupervision() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="05 — Avantages stratégiques"
-              title="Avant vs Après déploiement RIP"
-              subtitle="La transformation digitale de l'administration fiscale génère des gains mesurables sur l'ensemble des indicateurs de performance — recettes, conformité, efficience et gouvernance."
+              tag="05 — Strategic benefits"
+              title="Before vs After RIP deployment"
+              subtitle="Digital transformation of the tax administration delivers measurable gains across performance indicators — revenues, compliance, efficiency and governance."
             />
           </motion.div>
 
@@ -576,9 +576,9 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="06 — Évolutivité"
-              title="La plateforme grandit avec vos ambitions"
-              subtitle="L'architecture modulaire de la Revenue Intelligence Platform permet d'intégrer progressivement de nouvelles fonctionnalités avancées en fonction des priorités et du niveau de maturité digitale de chaque administration."
+              tag="06 — Scalability"
+              title="The platform grows with your ambitions"
+              subtitle="The modular architecture of the Revenue Intelligence Platform allows progressive integration of advanced features according to priorities and the digital maturity of each administration."
             />
           </motion.div>
 
@@ -609,9 +609,9 @@ export default function RevenueSupervision() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="07 — Applications gouvernementales"
-              title="Une solution pour chaque institution"
-              subtitle="La Revenue Intelligence Platform s'adapte aux besoins spécifiques de chaque administration impliquée dans la mobilisation, la gestion et le contrôle des recettes publiques."
+              tag="07 — Government applications"
+              title="A solution for every institution"
+              subtitle="The Revenue Intelligence Platform adapts to the specific needs of each administration involved in revenue mobilization, management and control."
             />
           </motion.div>
 
@@ -649,28 +649,28 @@ export default function RevenueSupervision() {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <span className="inline-block text-xs font-bold uppercase tracking-[0.22em] text-emerald-400 mb-4">
-              Conclusion &amp; Proposition
+              Conclusion &amp; Proposal
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
-              Un premier déploiement{" "}
+              A first operational deployment{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                opérationnel en 90 jours
+                in 90 days
               </span>
             </h2>
             <p className="text-emerald-100/80 text-base leading-relaxed mb-4 max-w-3xl mx-auto">
-              La Revenue Intelligence Platform peut être déployée de manière progressive, en démarrant par un pilote opérationnel couvrant un périmètre ciblé — un type d'impôt, une direction régionale ou un secteur économique prioritaire — afin de démontrer les gains concrets avant l'extension nationale.
+              The Revenue Intelligence Platform can be rolled out progressively, starting with an operational pilot covering a targeted scope — a tax type, a regional office or a priority economic sector — to demonstrate concrete gains before national scale-up.
             </p>
             <p className="text-emerald-200/60 text-sm mb-10 max-w-2xl mx-auto">
-              Cette approche pragmatique permet de sécuriser l'implémentation, de mesurer le ROI fiscal dès les premières semaines et de former les équipes en conditions réelles avant le déploiement à l'échelle nationale.
+              This pragmatic approach secures implementation, measures fiscal ROI within weeks and trains teams in real conditions ahead of nationwide deployment.
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {[
-                { icon: Database, label: "Collecte numérique" },
-                { icon: Activity, label: "Supervision temps réel" },
-                { icon: Search, label: "Détection de fraude" },
-                { icon: PieChart, label: "Reporting exécutif" },
-                { icon: Cpu, label: "IA fiscale" },
+                { icon: Database, label: "Digital collection" },
+                { icon: Activity, label: "Real-time supervision" },
+                { icon: Search, label: "Fraud detection" },
+                { icon: PieChart, label: "Executive reporting" },
+                { icon: Cpu, label: "AI for tax" },
               ].map((t) => (
                 <span
                   key={t.label}
@@ -684,7 +684,7 @@ export default function RevenueSupervision() {
 
             <Link href="/contact">
               <a className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-emerald-500/20">
-                Planifier un pilote avec nos experts
+                Schedule a pilot with our experts
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Link>
