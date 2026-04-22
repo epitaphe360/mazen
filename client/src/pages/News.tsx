@@ -3,15 +3,16 @@ import { Link } from "wouter";
 import { trpc } from "../lib/trpc";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 import { Search, SlidersHorizontal, Sparkles } from "lucide-react";
 
 const CATEGORIES = [
-  { key: "", label: "Toutes" },
+  { key: "", label: "All" },
   { key: "innovation", label: "Innovation" },
-  { key: "deployment", label: "Déploiement" },
-  { key: "trends", label: "Tendances" },
-  { key: "events", label: "Événements" },
-  { key: "testimonials", label: "Témoignages" },
+  { key: "deployment", label: "Deployment" },
+  { key: "trends", label: "Trends" },
+  { key: "events", label: "Events" },
+  { key: "testimonials", label: "Testimonials" },
 ];
 
 const CATEGORY_BADGE: Record<string, string> = {
@@ -24,6 +25,7 @@ const CATEGORY_BADGE: Record<string, string> = {
 
 // Page actualités (sans tRPC ici pour pouvoir être utilisé sans auth)
 export default function News() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
@@ -44,33 +46,31 @@ export default function News() {
           <div className="absolute -left-10 -bottom-10 w-44 h-44 rounded-full bg-amber-200/40 blur-3xl" aria-hidden="true" />
           <div className="relative">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700 mb-4">
-              <Sparkles className="w-4 h-4" /> Veille institutionnelle
+              <Sparkles className="w-4 h-4" /> {t('news.kicker')}
             </span>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">Actualités Mazen GovTech Groupe</h1>
-            <p className="text-lg text-gray-700 max-w-3xl">
-              Restez informé des dernières actualités de Mazen GovTech Groupe et de l'évolution de la technologie de gouvernance à travers le monde.
-            </p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{t('news.title')}</h1>
+            <p className="text-lg text-gray-700 max-w-3xl">{t('news.subtitle')}</p>
           </div>
         </div>
 
         {/* Filtres */}
-        <div className="glass-panel p-5 mb-8">
+          <div className="glass-panel p-5 mb-8">
           <div className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-4">
-            <SlidersHorizontal className="w-4 h-4 text-blue-700" /> Filtres éditoriaux
+            <SlidersHorizontal className="w-4 h-4 text-blue-700" /> {t('news.filters.kicker')}
           </div>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="search"
-                placeholder="Rechercher un article..."
+                placeholder={t('news.filters.searchPlaceholder')}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 className="w-full border border-gray-300 rounded-xl pl-9 pr-4 py-2.5 text-sm bg-white/90"
               />
             </div>
             <div className="flex gap-2 flex-wrap">
-            {CATEGORIES.map(cat => (
+              {CATEGORIES.map(cat => (
               <button
                 key={cat.key}
                 onClick={() => setCategory(cat.key)}
@@ -92,7 +92,7 @@ export default function News() {
           </div>
         ) : (data?.data ?? []).length === 0 ? (
           <div className="text-center py-20 glass-panel">
-            <p className="text-gray-600">Aucun article trouvé.</p>
+            <p className="text-gray-600">{t('news.empty')}</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -117,7 +117,7 @@ export default function News() {
                   <div className="mt-auto flex items-center text-xs text-gray-500 gap-2 pt-3 border-t border-gray-100">
                     <span>{article.author}</span>
                     <span>·</span>
-                    <span>{new Date(article.published_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
+                    <span>{new Date(article.published_at).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" })}</span>
                   </div>
                 </a>
               </Link>
@@ -127,12 +127,10 @@ export default function News() {
 
         {/* Newsletter CTA */}
         <div className="mt-16 bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-900 rounded-3xl p-10 md:p-12 text-center text-white shadow-xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">Suivez nos actualités</h2>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            Abonnez-vous à notre newsletter ou suivez nos canaux sur les réseaux sociaux pour ne manquer aucune mise à jour essentielle.
-          </p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">{t('news.cta.title')}</h2>
+          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">{t('news.cta.subtitle')}</p>
           <Link href="/contact">
-            <a className="btn-gold">S'abonner à la newsletter</a>
+            <a className="btn-gold">{t('news.cta.subscribe')}</a>
           </Link>
         </div>
       </div>

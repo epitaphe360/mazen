@@ -86,4 +86,13 @@
     },
     "errors": { "mustAccept": "You must accept the terms to continue." }
   }
+  ,
+  "news": {
+    "kicker": "Institutional watch",
+    "title": "Mazen GovTech Group News",
+    "subtitle": "Stay informed about Mazen GovTech Group and governance technology developments worldwide.",
+    "filters": { "kicker": "Editorial filters", "searchPlaceholder": "Search an article..." },
+    "empty": "No articles found.",
+    "cta": { "title": "Follow our news", "subtitle": "Subscribe to our newsletter or follow our social channels to never miss an important update.", "subscribe": "Subscribe to newsletter" }
+  }
 }
