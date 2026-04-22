@@ -4,6 +4,7 @@ import { KEY_STATS, SECTORS_DATA } from "@shared/types";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 import {
   Award,
   CalendarDays,
@@ -460,6 +461,7 @@ function TestimonialsCarousel({ items }: { items: Array<{ quote: string; name: s
 
 /* ─── PAGE ────────────────────────────────────────────────────── */
 export default function Home() {
+  const { t } = useTranslation();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSent, setNewsletterSent] = useState(false);
   const [activeEtl, setActiveEtl] = useState(0);
@@ -563,7 +565,7 @@ export default function Home() {
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-14">
                 <Link href="/contact">
                   <a className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-amber-500/25 text-sm">
-                    Demander une présentation
+                    {t('cta.requestDemo')}
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </Link>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, Waves, BarChart2 } from "lucide-react";
+import { useTranslation } from "../lib/i18n";
 
 type NavLink = { href: string; label: string };
 
@@ -56,6 +57,7 @@ export default function PublicNavbar({
   }, []);
 
   const isSolutionActive = location.startsWith("/solutions");
+  const { t, locale, setLocale } = useTranslation();
 
   return (
     <nav className="sticky top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 shadow-[0_8px_30px_rgba(15,42,95,0.06)]">
@@ -83,7 +85,7 @@ export default function PublicNavbar({
               <Link key={item.href} href={item.href}>
                 <a className={`hover:text-govblue transition-colors ${
                   location === item.href ? "text-govblue font-bold" : ""
-                }`}>{item.label}</a>
+                }`}>{t(`nav.${item.label === 'Accueil' ? 'home' : item.label.replace(/\s+/g, '')}`) || item.label}</a>
               </Link>
             )
           )}
@@ -125,7 +127,7 @@ export default function PublicNavbar({
           </div>
 
           <Link href={ctaHref}>
-            <a className="btn-primary py-2.5 px-5 text-sm">{ctaLabel}</a>
+            <a className="btn-primary py-2.5 px-5 text-sm">{t('nav.login') || ctaLabel}</a>
           </Link>
         </div>
 
@@ -154,7 +156,7 @@ export default function PublicNavbar({
                   <a onClick={() => setOpen(false)} className={`hover:text-govblue transition-colors ${
                     location === item.href ? "text-govblue font-bold" : ""
                   }`}>
-                    {item.label}
+                    {t(`nav.${item.label === 'Accueil' ? 'home' : item.label.replace(/\s+/g, '')}`) || item.label}
                   </a>
                 </Link>
               )
@@ -189,7 +191,7 @@ export default function PublicNavbar({
 
             <Link href={ctaHref}>
               <a onClick={() => setOpen(false)} className="btn-primary justify-center py-2.5 mt-1">
-                {ctaLabel}
+                {t('nav.login') || ctaLabel}
               </a>
             </Link>
           </div>

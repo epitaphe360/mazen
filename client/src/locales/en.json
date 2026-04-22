@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "caseStudies": "Case Studies",
+    "news": "News",
+    "contact": "Contact",
+    "login": "Login",
+    "solutions": "Solutions"
+  },
+  "footer": {
+    "company": "Mazen GovTech Groupe",
+    "copy": "© {{year}} — Sovereign Strategic Infrastructure Company"
+  },
+  "cta": {
+    "contact": "Contact us",
+    "requestDemo": "Request a presentation"
+  },
+  "home": {
+    "hero": {
+      "title": "Leading GovTech for public revenue mobilization",
+      "subtitle": "Certified ISO 9001 & ISO 27001 — Trusted by governments"
+    }
+  }
+}
