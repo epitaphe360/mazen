@@ -96,6 +96,11 @@
     "cta": { "title": "Follow our news", "subtitle": "Subscribe to our newsletter or follow our social channels to never miss an important update.", "subscribe": "Subscribe to newsletter" }
   }
   ,
+  "news.detail": {
+    "notFound": { "title": "Article not found", "subtitle": "This article does not exist or has been removed.", "back": "Back to news" },
+    "cta": { "title": "Never miss an update", "subtitle": "Receive weekly analyses and reports from Mazen GovTech Group directly to your inbox.", "thanks": "Subscription recorded, thank you!" }
+  }
+  ,
   "case": {
     "kicker": "Field references",
     "title": "Institutional references & operational deployments",

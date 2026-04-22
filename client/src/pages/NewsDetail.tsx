@@ -3,17 +3,19 @@ import { useParams, Link } from "wouter";
 import { trpc } from "../lib/trpc";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 
 const CATEGORY_CONFIG: Record<string, { label: string; color: string }> = {
   innovation: { label: "Innovation", color: "bg-purple-100 text-purple-800" },
-  deployment: { label: "Déploiement", color: "bg-blue-100 text-blue-800" },
-  trends: { label: "Tendances", color: "bg-orange-100 text-orange-800" },
-  events: { label: "Événements", color: "bg-green-100 text-green-800" },
-  testimonials: { label: "Témoignages", color: "bg-yellow-100 text-yellow-800" },
+  deployment: { label: "Deployment", color: "bg-blue-100 text-blue-800" },
+  trends: { label: "Trends", color: "bg-orange-100 text-orange-800" },
+  events: { label: "Events", color: "bg-green-100 text-green-800" },
+  testimonials: { label: "Testimonials", color: "bg-yellow-100 text-yellow-800" },
 };
 
 export default function NewsDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const { t } = useTranslation();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSent, setNewsletterSent] = useState(false);
 
@@ -34,15 +36,15 @@ export default function NewsDetail() {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center gap-4">
         <p className="text-6xl">📭</p>
-        <h1 className="text-2xl font-bold text-gray-900">Article introuvable</h1>
-        <p className="text-gray-500">Cet article n'existe pas ou a été supprimé.</p>
-        <Link href="/news" className="btn-primary">← Retour aux actualités</Link>
+        <h1 className="text-2xl font-bold text-gray-900">{t('news.detail.notFound.title')}</h1>
+        <p className="text-gray-500">{t('news.detail.notFound.subtitle')}</p>
+        <Link href="/news" className="btn-primary">← {t('news.detail.notFound.back')}</Link>
       </div>
     );
   }
 
   const catCfg = CATEGORY_CONFIG[article.category] ?? { label: article.category, color: "bg-gray-100 text-gray-700" };
-  const publishedDate = new Date(article.published_at).toLocaleDateString("fr-FR", { year: "numeric", month: "long", day: "numeric" });
+  const publishedDate = new Date(article.published_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -105,13 +107,11 @@ export default function NewsDetail() {
 
         {/* CTA Newsletter */}
         <div className="mt-12 p-8 bg-gradient-to-br from-blue-950 to-blue-800 rounded-2xl text-white text-center">
-          <h3 className="text-xl font-bold mb-2">Ne manquez plus aucune actualité</h3>
-          <p className="text-blue-200 mb-5 text-sm">
-            Recevez chaque semaine les dernières analyses et rapports de Mazen GovTech Groupe directement dans votre boîte mail.
-          </p>
+          <h3 className="text-xl font-bold mb-2">{t('news.detail.cta.title')}</h3>
+          <p className="text-blue-200 mb-5 text-sm">{t('news.detail.cta.subtitle')}</p>
           {newsletterSent ? (
             <p className="inline-flex items-center gap-2 bg-green-500/20 border border-green-400/30 text-green-300 px-5 py-2.5 rounded-lg text-sm font-medium">
-              ✅ Inscription enregistrée, merci !
+              ✅ {t('news.detail.cta.thanks')}
             </p>
           ) : (
             <form
