@@ -3,9 +3,9 @@ import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 
 const REQUEST_TYPE_LABELS: Record<string, string> = {
-  demo: "Démonstration",
+  demo: "Demo",
   information: "Information",
-  partnership: "Partenariat",
+  partnership: "Partnership",
 };
 
 export default function AdminMessages() {
@@ -24,9 +24,9 @@ export default function AdminMessages() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              Messages de contact
+              Contact messages
             </h1>
-            <p className="text-gray-500">Demandes reçues via le formulaire de contact</p>
+            <p className="text-gray-500">Requests received via the contact form</p>
           </div>
           {/* Toggle non lus */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -36,7 +36,7 @@ export default function AdminMessages() {
               onChange={e => { setUnreadOnly(e.target.checked); setPage(1); }}
               className="w-4 h-4 rounded accent-govblue"
             />
-            <span className="text-sm font-medium text-gray-700">Non lus uniquement</span>
+            <span className="text-sm font-medium text-gray-700">Unread only</span>
           </label>
         </div>
 
@@ -49,7 +49,7 @@ export default function AdminMessages() {
           ) : (data?.data ?? []).length === 0 ? (
             <div className="card text-center py-16">
               <p className="text-5xl mb-3">📭</p>
-              <p className="text-gray-500">Aucun message{unreadOnly ? " non lu" : ""}</p>
+              <p className="text-gray-500">No messages{unreadOnly ? " (unread)" : ""}</p>
             </div>
           ) : (
             (data?.data ?? []).map(msg => {
@@ -74,7 +74,7 @@ export default function AdminMessages() {
                         <span className="text-gray-400">·</span>
                         <span className="text-sm text-gray-500">{msg.country as string}</span>
                         {!msg.is_read && (
-                          <span className="badge bg-govblue text-white text-xs">Nouveau</span>
+                          <span className="badge bg-govblue text-white text-xs">New</span>
                         )}
                       </div>
                       <div className="flex flex-wrap gap-2 mb-2">
@@ -85,7 +85,7 @@ export default function AdminMessages() {
                           {REQUEST_TYPE_LABELS[msg.request_type as string] ?? msg.request_type as string}
                         </span>
                         <span className="text-xs text-gray-400">
-                          {new Date(msg.created_at as string).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                          {new Date(msg.created_at as string).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}
                         </span>
                       </div>
 
@@ -99,7 +99,7 @@ export default function AdminMessages() {
                           onClick={() => setExpanded(isExpanded ? null : msg.id as number)}
                           className="text-xs text-govblue hover:underline"
                         >
-                          {isExpanded ? "Réduire" : "Lire le message complet"}
+                          {isExpanded ? "Collapse" : "Read full message"}
                         </button>
                         {!msg.is_read && (
                           <button
@@ -107,14 +107,14 @@ export default function AdminMessages() {
                             disabled={markReadMut.isPending}
                             className="text-xs text-green-700 hover:underline disabled:opacity-50"
                           >
-                            ✓ Marquer comme lu
+                            ✓ Mark as read
                           </button>
                         )}
                         <a
-                          href={`mailto:${msg.email as string}?subject=Re: ${REQUEST_TYPE_LABELS[msg.request_type as string] ?? "Votre demande"} — Mazen GovTech Groupe`}
+                          href={`mailto:${msg.email as string}?subject=Re: ${REQUEST_TYPE_LABELS[msg.request_type as string] ?? "Your request"} — Mazen GovTech Groupe`}
                           className="text-xs text-gray-500 hover:text-govblue"
                         >
-                          ✉️ Répondre
+                          ✉️ Reply
                         </a>
                       </div>
                     </div>
@@ -129,16 +129,16 @@ export default function AdminMessages() {
         {(data?.total ?? 0) > 20 && (
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-500">
-              {(page - 1) * 20 + 1}–{Math.min(page * 20, data?.total ?? 0)} sur {data?.total}
+              {(page - 1) * 20 + 1}–{Math.min(page * 20, data?.total ?? 0)} of {data?.total}
             </span>
             <div className="flex gap-2">
               <button disabled={page <= 1} onClick={() => setPage(p => p - 1)}
                 className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-white transition-colors">
-                Précédent
+                Previous
               </button>
               <button disabled={page * 20 >= (data?.total ?? 0)} onClick={() => setPage(p => p + 1)}
                 className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-white transition-colors">
-                Suivant
+                Next
               </button>
             </div>
           </div>
