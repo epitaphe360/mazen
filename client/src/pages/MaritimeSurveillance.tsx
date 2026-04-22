@@ -38,110 +38,110 @@ const fadeUp = {
 /* ─── DONNÉES ─────────────────────────────────────────────────── */
 
 const THREATS = [
-  "Pêche illégale non déclarée",
-  "Trafics maritimes illicites",
-  "Menaces sur infrastructures offshore",
-  "Violations de frontières maritimes",
+  "Illegal or unreported fishing",
+  "Illicit maritime trafficking",
+  "Threats to offshore infrastructure",
+  "Maritime border violations",
 ];
 
 const NEEDS = [
-  { text: "Renforcement de la", bold: "souveraineté maritime" },
-  { text: "Surveillance des", bold: "Zones Économiques Exclusives" },
-  { text: "Lutte contre la", bold: "pêche illégale" },
-  { text: "Sécurité des", bold: "infrastructures offshore" },
-  { text: "Détection des", bold: "trafics maritimes" },
+  { text: "Strengthen", bold: "maritime sovereignty" },
+  { text: "Surveillance of", bold: "Exclusive Economic Zones" },
+  { text: "Combat", bold: "illegal fishing" },
+  { text: "Security of", bold: "offshore infrastructure" },
+  { text: "Detection of", bold: "maritime trafficking" },
 ];
 
 const LAYERS = [
   {
     id: 1,
     icon: Radar,
-    title: "Radars Maritimes",
-    subtitle: "Longue Portée",
+    title: "Maritime Radars",
+    subtitle: "Long Range",
     color: "from-blue-900 to-blue-700",
     border: "border-blue-500/30",
     features: [
-      { label: "Portée opérationnelle", value: "60 à 96 km de couverture radiale par unité radar déployée sur le littoral" },
-      { label: "Détection des navires", value: "Identification automatique des contacts maritimes, y compris les cibles à faible signature radar" },
-      { label: "Suivi de trajectoire", value: "Calcul continu des vecteurs vitesse et cap pour chaque cible suivie en temps réel" },
-      { label: "Classification cible", value: "Algorithmes embarqués de discrimination et de classification automatique des contacts" },
+      { label: "Operational range", value: "60 to 96 km radial coverage per coastal radar unit" },
+      { label: "Vessel detection", value: "Automatic identification of maritime contacts, including low radar-signature targets" },
+      { label: "Track tracking", value: "Continuous calculation of speed and heading vectors for each tracked target in real time" },
+      { label: "Target classification", value: "Embedded algorithms for automatic discrimination and classification of contacts" },
     ],
   },
   {
     id: 2,
     icon: Waves,
-    title: "Bouées Intelligentes",
-    subtitle: "AIS + Caméra PTZ",
+    title: "Smart Buoys",
+    subtitle: "AIS + PTZ Camera",
     color: "from-emerald-900 to-emerald-700",
     border: "border-emerald-500/30",
     features: [
-      { label: "Équipements embarqués", value: "Caméra maritime HD PTZ · Récepteur AIS professionnel · GPS haute précision · Transmission chiffrée · Alimentation solaire autonome" },
-      { label: "Identification visuelle", value: "Reconnaissance visuelle HD des navires en approche avec caméras PTZ maritimes embarquées" },
-      { label: "Surveillance permanente", value: "Opération 24h/24, 7j/7 en totale autonomie énergétique par panneaux solaires" },
-      { label: "Zone de couverture", value: "Plusieurs dizaines de kilomètres carrés par bouée, garantissant un maillage serré de la zone d'intérêt" },
+      { label: "Onboard equipment", value: "HD maritime PTZ camera · professional AIS receiver · high-precision GPS · encrypted transmission · autonomous solar power" },
+      { label: "Visual identification", value: "HD visual recognition of approaching vessels with maritime PTZ cameras" },
+      { label: "Continuous monitoring", value: "24/7 operation, fully energy-autonomous via solar panels" },
+      { label: "Coverage area", value: "Several tens of square kilometers per buoy, ensuring dense coverage of the area of interest" },
     ],
   },
   {
     id: 3,
     icon: Monitor,
-    title: "Centre de Commandement",
+    title: "Command Center",
     subtitle: "Maritime C2",
     color: "from-purple-900 to-purple-700",
     border: "border-purple-500/30",
     features: [
-      { label: "Fusion des données", value: "Corrélation automatique en temps réel de toutes les sources : radar, AIS, vidéo, GPS en un tableau de bord unique" },
-      { label: "Cartographie maritime", value: "Représentation géospatiale dynamique de toutes les cibles suivies avec historique de trajectoire et classification automatique" },
-      { label: "Vidéo temps réel", value: "Affichage simultané des flux caméra de l'ensemble des bouées intelligentes avec zoom et contrôle PTZ à distance" },
-      { label: "Alertes automatiques", value: "Génération d'alertes paramétrables sur comportements suspects, intrusions de zone ou anomalies de navigation détectées" },
+      { label: "Data fusion", value: "Real-time correlation of all sources: radar, AIS, video, GPS into a single dashboard" },
+      { label: "Maritime mapping", value: "Dynamic geospatial representation of all tracked targets with track history and automatic classification" },
+      { label: "Real-time video", value: "Simultaneous display of camera feeds from all smart buoys with zoom and remote PTZ control" },
+      { label: "Automated alerts", value: "Configurable alerts generation on suspicious behavior, zone intrusions or detected navigation anomalies" },
     ],
   },
 ];
 
 const TECH_SENSORS = [
-  { icon: Radar, label: "Radar Bande X / S", desc: "Détection tous temps longue portée" },
-  { icon: Camera, label: "Caméra PTZ Maritime", desc: "Identification visuelle haute définition" },
-  { icon: Radio, label: "Récepteur AIS", desc: "Identification automatique des navires" },
-  { icon: Navigation, label: "GPS Haute Précision", desc: "Géolocalisation et synchronisation" },
+  { icon: Radar, label: "X/S-band radar", desc: "All-weather long-range detection" },
+  { icon: Camera, label: "Maritime PTZ camera", desc: "High-definition visual identification" },
+  { icon: Radio, label: "AIS receiver", desc: "Automatic identification of vessels" },
+  { icon: Navigation, label: "High-precision GPS", desc: "Geolocation and synchronization" },
 ];
 
 const TECH_LINKS = [
-  { icon: Radio, label: "Radio Longue Portée", desc: "Couverture maritime sans infrastructure" },
-  { icon: Zap, label: "LTE Maritime", desc: "Haut débit vidéo dans les zones couvertes" },
-  { icon: Satellite, label: "Liaison Satellite", desc: "Connectivité universelle hors zone LTE" },
-  { icon: Lock, label: "Réseau Gouvernemental", desc: "Infrastructure chiffrée et sécurisée" },
+  { icon: Radio, label: "Long-range radio", desc: "Maritime coverage without infrastructure" },
+  { icon: Zap, label: "Maritime LTE", desc: "High-bandwidth video in covered areas" },
+  { icon: Satellite, label: "Satellite link", desc: "Universal connectivity outside LTE range" },
+  { icon: Lock, label: "Government network", desc: "Encrypted and secure infrastructure" },
 ];
 
 const CAPABILITIES = [
-  { icon: Eye, label: "Détection Navires Non Déclarés", desc: "Identification des contacts sans transpondeur AIS actif grâce à la fusion radar-vidéo" },
-  { icon: Globe, label: "Surveillance des Frontières Maritimes", desc: "Contrôle continu des lignes de base et des limites de la ZEE nationale" },
-  { icon: Anchor, label: "Lutte contre la Pêche Illégale", desc: "Détection et suivi des navires de pêche en infraction dans les zones protégées" },
-  { icon: Shield, label: "Protection Infrastructures Offshore", desc: "Surveillance des périmètres de sécurité autour des plateformes et câbles sous-marins" },
-  { icon: TrendingUp, label: "Suivi Trafic Maritime", desc: "Analyse des flux de navigation et détection des comportements anormaux en temps réel" },
-  { icon: Lock, label: "Sécurité Portuaire", desc: "Surveillance des approches portuaires et contrôle des accès aux zones sensibles" },
+  { icon: Eye, label: "Detection of unreported vessels", desc: "Identification of contacts without an active AIS transponder through radar-video fusion" },
+  { icon: Globe, label: "Maritime border surveillance", desc: "Continuous monitoring of baselines and national EEZ limits" },
+  { icon: Anchor, label: "Combat illegal fishing", desc: "Detection and tracking of fishing vessels violating protected zones" },
+  { icon: Shield, label: "Offshore infrastructure protection", desc: "Perimeter surveillance around platforms and submarine cables" },
+  { icon: TrendingUp, label: "Maritime traffic monitoring", desc: "Analysis of navigation flows and real-time detection of abnormal behavior" },
+  { icon: Lock, label: "Port security", desc: "Monitoring port approaches and controlling access to sensitive areas" },
 ];
 
 const COMPARISON = [
-  { criteria: "Identification visuelle", radar: "Non disponible", msg: "Caméra HD PTZ", msgGood: true },
-  { criteria: "Couverture zones mortes", radar: "Faible, lacunes résiduelles", msg: "Élevée, maillage distribué", msgGood: true },
-  { criteria: "Surveillance permanente", radar: "Moyenne, dépendante météo", msg: "Élevée, redondance capteurs", msgGood: true },
-  { criteria: "Identification AIS", radar: "Absente ou limitée", msg: "Intégrée et temps réel", msgGood: true },
-  { criteria: "Coût d'infrastructure", radar: "Élevé, stations fixes", msg: "Optimisé, architecture distribuée", msgGood: true },
-  { criteria: "Évolutivité", radar: "Limitée, architecture rigide", msg: "Modulaire, extensions", msgGood: true },
+  { criteria: "Visual identification", radar: "Not available", msg: "HD PTZ camera", msgGood: true },
+  { criteria: "Coverage of blind spots", radar: "Low, residual gaps", msg: "High, distributed mesh", msgGood: true },
+  { criteria: "Continuous monitoring", radar: "Medium, weather dependent", msg: "High, sensor redundancy", msgGood: true },
+  { criteria: "AIS identification", radar: "Absent or limited", msg: "Integrated and real-time", msgGood: true },
+  { criteria: "Infrastructure cost", radar: "High, fixed stations", msg: "Optimized, distributed architecture", msgGood: true },
+  { criteria: "Scalability", radar: "Limited, rigid architecture", msg: "Modular, extensible", msgGood: true },
 ];
 
 const EVOLUTIONS = [
-  { icon: Wind, label: "Drones Maritimes Autonomes", desc: "Patrouille autonome, levée de doute rapide sur contacts d'intérêt identifiés par le radar ou les bouées" },
-  { icon: Wind, label: "Drones Aériens", desc: "Déploiement de drones aériens télécommandés ou autonomes pour la levée de doute visuelle rapide" },
-  { icon: Satellite, label: "Satellites AIS & Over-the-Horizon", desc: "Extension de la couverture au-delà de la ligne d'horizon grâce aux données AIS satellitaires et radars OTH" },
-  { icon: Cpu, label: "Intelligence Artificielle de Détection", desc: "Algorithmes de machine learning pour la détection automatique des menaces, classification et optimisation dynamique" },
+  { icon: Wind, label: "Autonomous maritime drones", desc: "Autonomous patrol, rapid visual verification of contacts of interest identified by radar or buoys" },
+  { icon: Wind, label: "Aerial drones", desc: "Deployment of remotely piloted or autonomous aerial drones for rapid visual verification" },
+  { icon: Satellite, label: "AIS & Over-the-Horizon satellites", desc: "Extend coverage beyond the horizon using satellite AIS data and OTH radars" },
+  { icon: Cpu, label: "Detection AI", desc: "Machine learning algorithms for automatic threat detection, classification and dynamic optimization" },
 ];
 
 const GOV_APPS = [
-  { icon: Shield, label: "Ministère de la Défense", desc: "Renseignement maritime stratégique, surveillance des approches, appui aux opérations navales et gestion des crises maritimes." },
-  { icon: Anchor, label: "Marine Nationale", desc: "Image opérationnelle maritime en temps réel, désignation d'objectifs, appui aux patrouilles et coordination des interceptions en mer." },
-  { icon: Globe, label: "Garde-Côtes", desc: "Surveillance des frontières maritimes, sauvetage en mer, lutte contre la pêche illégale et contrôle des flux d'immigration maritime." },
-  { icon: Zap, label: "Protection Offshore", desc: "Sécurisation des périmètres autour des plateformes pétrolières, parcs éoliens offshore et câbles de communication sous-marins." },
-  { icon: Lock, label: "Sécurité Portuaire", desc: "Surveillance des approches portuaires, contrôle des accès, détection des menaces sous-marines et gestion du trafic des navires." },
+  { icon: Shield, label: "Ministry of Defense", desc: "Strategic maritime intelligence, approach surveillance, support to naval operations and maritime crisis management." },
+  { icon: Anchor, label: "Navy", desc: "Real-time maritime operational picture, target designation, patrol support and coordination of interceptions at sea." },
+  { icon: Globe, label: "Coast Guard", desc: "Surveillance of maritime borders, search and rescue, combat illegal fishing and control of maritime immigration flows." },
+  { icon: Zap, label: "Offshore protection", desc: "Securing perimeters around oil platforms, offshore wind farms and submarine communication cables." },
+  { icon: Lock, label: "Port security", desc: "Monitoring port approaches, access control, detection of underwater threats and vessel traffic management." },
 ];
 
 /* ─── COMPOSANTS INTERNES ─────────────────────────────────────── */
@@ -164,7 +164,7 @@ export default function MaritimeSurveillance() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
-      <PublicNavbar ctaLabel="Demander une présentation" ctaHref="/contact" />
+      <PublicNavbar ctaLabel="Request a presentation" ctaHref="/contact" />
 
       {/* ══ HERO ══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden min-h-[92vh] flex items-center">
@@ -191,25 +191,25 @@ export default function MaritimeSurveillance() {
               Maritime Surveillance Grid · MSG
             </span>
             <h1 className="text-5xl md:text-6xl font-black leading-[1.05] mb-6">
-              Souveraineté{" "}
+              Maritime{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Maritime
+                Sovereignty
               </span>
             </h1>
             <p className="text-lg text-blue-100/80 mb-8 leading-relaxed max-w-xl">
-              Architecture multi-capteurs distribuée combinant radars longue portée, bouées intelligentes et centre de commandement intégré pour une couverture maritime permanente et sans angles morts.
+              Distributed multi-sensor architecture combining long-range radars, smart buoys and an integrated command center for continuous maritime coverage with no blind spots.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/contact">
                 <a className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-cyan-500/20">
-                  Demander une présentation <ArrowRight className="w-4 h-4" />
+                  Request a presentation <ArrowRight className="w-4 h-4" />
                 </a>
               </Link>
               <a
                 href="#concept"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/10 transition-all"
               >
-                Découvrir le système
+                Explore the system
               </a>
             </div>
           </motion.div>
@@ -223,10 +223,10 @@ export default function MaritimeSurveillance() {
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { value: "96 km", label: "Portée radar côtier", icon: Radar },
-              { value: "24h/24", label: "Surveillance continue", icon: Eye },
-              { value: "3 couches", label: "Architecture hybride", icon: Shield },
-              { value: "99,5%", label: "Disponibilité système", icon: CheckCircle },
+              { value: "96 km", label: "Coastal radar range", icon: Radar },
+              { value: "24/7", label: "Continuous monitoring", icon: Eye },
+              { value: "3 layers", label: "Hybrid architecture", icon: Shield },
+              { value: "99.5%", label: "System availability", icon: CheckCircle },
             ].map((m) => (
               <div
                 key={m.label}
@@ -251,9 +251,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="01 — Contexte stratégique"
-              title="Un enjeu de souveraineté nationale"
-              subtitle="Les États côtiers font face à des menaces maritimes croissantes qui exigent des réponses technologiques robustes et intégrées. Les solutions radar seules présentent des lacunes structurelles importantes : zones d'ombre géographiques, absence d'identification visuelle des cibles, et manque de capteurs distribués capables de couvrir de vastes étendues maritimes."
+              tag="01 — Strategic context"
+              title="A national sovereignty challenge"
+              subtitle="Coastal states face increasing maritime threats that require robust, integrated technological responses. Radar-only solutions present significant structural gaps: geographic blind spots, lack of visual identification, and insufficient distributed sensors to cover vast maritime areas."
             />
           </motion.div>
 
@@ -271,7 +271,7 @@ export default function MaritimeSurveillance() {
                 <span className="w-9 h-9 rounded-lg bg-red-500/20 flex items-center justify-center">
                   <AlertTriangle className="w-5 h-5 text-red-400" />
                 </span>
-                <h3 className="font-bold text-white text-lg">Menaces identifiées</h3>
+                <h3 className="font-bold text-white text-lg">Identified threats</h3>
               </div>
               <ul className="space-y-3">
                 {THREATS.map((t) => (
@@ -296,7 +296,7 @@ export default function MaritimeSurveillance() {
                 <span className="w-9 h-9 rounded-lg bg-blue-500/20 flex items-center justify-center">
                   <CheckCircle className="w-5 h-5 text-blue-400" />
                 </span>
-                <h3 className="font-bold text-white text-lg">Besoins opérationnels</h3>
+                <h3 className="font-bold text-white text-lg">Operational needs</h3>
               </div>
               <ul className="space-y-3">
                 {NEEDS.map((n) => (
@@ -309,7 +309,7 @@ export default function MaritimeSurveillance() {
             </motion.div>
           </div>
 
-          <motion.p
+            <motion.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -317,8 +317,8 @@ export default function MaritimeSurveillance() {
             custom={3}
             className="mt-10 text-center text-blue-200/70 max-w-3xl mx-auto text-sm leading-relaxed border border-white/10 rounded-2xl bg-white/5 p-6"
           >
-            D'où l'intérêt stratégique d'un <strong className="text-white">réseau hybride distribué</strong> combinant
-            radars côtiers, bouées intelligentes et systèmes d'identification — le{" "}
+            Hence the strategic interest of a <strong className="text-white">distributed hybrid network</strong> combining
+            coastal radars, smart buoys and identification systems — the{" "}
             <strong className="text-cyan-400">Maritime Surveillance Grid</strong>.
           </motion.p>
         </div>
@@ -329,9 +329,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="02 — Concept opérationnel"
-              title="Architecture multi-capteurs en 3 couches"
-              subtitle="Le Maritime Surveillance Grid repose sur le déploiement d'une architecture multi-capteurs distribuée conçue pour assurer une couverture maritime permanente, sans angles morts. Ce concept fusionne en temps réel les données issues de trois couches technologiques complémentaires."
+              tag="02 — Operational concept"
+              title="Three-layer multi-sensor architecture"
+              subtitle="The Maritime Surveillance Grid is built on a distributed multi-sensor architecture designed to ensure continuous maritime coverage with no blind spots. This concept fuses data from three complementary technological layers in real time."
             />
           </motion.div>
 
@@ -348,7 +348,7 @@ export default function MaritimeSurveillance() {
                 }`}
               >
                 <layer.icon className="w-4 h-4" />
-                <span>Couche {layer.id} — {layer.title}</span>
+                <span>Layer {layer.id} — {layer.title}</span>
               </button>
             ))}
           </div>
@@ -400,7 +400,7 @@ export default function MaritimeSurveillance() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Capteurs */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400 mb-4">Capteurs &amp; Équipements</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400 mb-4">Sensors &amp; Equipment</h3>
               <div className="space-y-3">
                 {TECH_SENSORS.map((s) => (
                   <div key={s.label} className="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
@@ -418,7 +418,7 @@ export default function MaritimeSurveillance() {
 
             {/* Liaisons */}
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400 mb-4">Liaisons de Communication</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400 mb-4">Communication Links</h3>
               <div className="space-y-3">
                 {TECH_LINKS.map((l) => (
                   <div key={l.label} className="flex items-center gap-4 p-4 rounded-xl border border-white/10 bg-white/5">
@@ -446,12 +446,9 @@ export default function MaritimeSurveillance() {
           >
             <Lock className="w-6 h-6 text-amber-400 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="font-bold text-white mb-1">Sécurisation des communications</p>
+              <p className="font-bold text-white mb-1">Communication security</p>
               <p className="text-amber-200/70 text-sm leading-relaxed">
-                L'ensemble des flux de données, qu'ils soient transmis par radio longue portée, LTE maritime ou satellite, est
-                chiffré de bout en bout selon les standards cryptographiques en vigueur. L'architecture réseau prévoit des
-                redondances de liaisons et des protocoles de bascule automatique garantissant un taux de disponibilité
-                supérieur à <strong className="text-white">99,5%</strong> en conditions opérationnelles normales.
+                All data flows, whether transmitted via long-range radio, maritime LTE or satellite, are end-to-end encrypted according to current cryptographic standards. The network architecture provides link redundancies and automatic failover protocols ensuring an availability rate above <strong className="text-white">99.5%</strong> under normal operational conditions.
               </p>
             </div>
           </motion.div>
@@ -463,9 +460,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="04 — Capacités opérationnelles"
-              title="6 missions couvertes en temps réel"
-              subtitle="Le MSG délivre un ensemble complet de capacités opérationnelles couvrant le spectre élargi des missions de sécurité maritime, de la surveillance permanente à la conduite des situations de crise."
+              tag="04 — Operational capabilities"
+              title="6 missions covered in real-time"
+              subtitle="The MSG delivers a comprehensive set of operational capabilities covering the broad spectrum of maritime security missions, from continuous monitoring to crisis management."
             />
           </motion.div>
 
@@ -496,9 +493,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="05 — Avantages stratégiques"
-              title="Radar seul vs Système Hybride MSG"
-              subtitle="La différence ne repose pas uniquement sur la détection, mais sur la qualité de l'information opérationnelle mise à disposition des décideurs."
+              tag="05 — Strategic benefits"
+              title="Radar alone vs Hybrid MSG System"
+              subtitle="The difference is not only about detection, but about the quality of operational information made available to decision-makers."
             />
           </motion.div>
 
@@ -537,9 +534,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="06 — Évolutivité"
-              title="Une architecture ouverte vers le futur"
-              subtitle="L'architecture ouverte et modulaire du MSG a été pensée pour intégrer facilement de nouvelles capacités. Cette flexibilité représente un avantage stratégique majeur : elle protège l'investissement initial et permet d'adapter le système aux menaces émergentes sans modifier l'infrastructure existante."
+              tag="06 — Scalability"
+              title="An open architecture for the future"
+              subtitle="The open and modular architecture of the MSG is designed to easily integrate new capabilities. This flexibility is a major strategic advantage: it protects the initial investment and allows adapting the system to emerging threats without modifying the existing infrastructure."
             />
           </motion.div>
 
@@ -570,9 +567,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="07 — Applications gouvernementales"
-              title="Adapté à chaque institution"
-              subtitle="Le MSG est conçu pour répondre aux besoins opérationnels des différentes administrations engagées dans la sécurité et la surveillance des espaces maritimes nationaux. Grâce à son architecture ouverte et modulaire, il s'adapte aux doctrines, procédures et priorités de chaque institution."
+              tag="07 — Government applications"
+              title="Adapted to every institution"
+              subtitle="The MSG is designed to meet the operational needs of various administrations engaged in the security and surveillance of national maritime spaces. Thanks to its open and modular architecture, it adapts to each institution's doctrines, procedures and priorities."
             />
           </motion.div>
 
@@ -607,34 +604,29 @@ export default function MaritimeSurveillance() {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <span className="inline-block text-xs font-bold uppercase tracking-[0.22em] text-cyan-400 mb-4">
-              Conclusion &amp; Proposition
+              Conclusion &amp; Proposal
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
               Proof of Concept —{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Première étape pragmatique
+                A pragmatic first step
               </span>
             </h2>
             <p className="text-blue-100/80 text-base leading-relaxed mb-4 max-w-3xl mx-auto">
-              Le Maritime Surveillance Grid apporte une <strong className="text-white">réponse concrète, moderne</strong> et immédiatement
-              opérationnelle aux enjeux de surveillance maritime. Afin d'engager cette dynamique de manière pragmatique et
-              maîtrisée, nous proposons la mise en œuvre d'un{" "}
-              <strong className="text-cyan-400">Proof of Concept (POC)</strong> sur une zone maritime représentative
-              de la ZEE du pays.
+              The Maritime Surveillance Grid provides a <strong className="text-white">concrete, modern</strong> and immediately operational response to maritime surveillance challenges. To engage pragmatically and in a controlled manner, we propose implementing a <strong className="text-cyan-400">Proof of Concept (POC)</strong> in a maritime area representative of the country's EEZ.
             </p>
             <p className="text-blue-200/60 text-sm mb-10 max-w-2xl mx-auto">
-              Cette première étape permettra de valider les performances du système en conditions réelles, de mesurer les
-              gains opérationnels et de définir le schéma de déploiement le plus adapté aux priorités souveraines.
+              This initial step will validate system performance in real conditions, measure operational gains and define the most suitable deployment plan aligned with sovereign priorities.
             </p>
 
             {/* Technos finales */}
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {[
-                { icon: Radar, label: "Radars côtiers" },
-                { icon: Wind, label: "Drones maritimes autonomes" },
-                { icon: Wind, label: "Drones aériens" },
-                { icon: Satellite, label: "Satellites AIS / OTH" },
-                { icon: Camera, label: "Caméras PTZ marines" },
+                { icon: Radar, label: "Coastal radars" },
+                { icon: Wind, label: "Autonomous maritime drones" },
+                { icon: Wind, label: "Aerial drones" },
+                { icon: Satellite, label: "AIS / OTH satellites" },
+                { icon: Camera, label: "Marine PTZ cameras" },
               ].map((t) => (
                 <span
                   key={t.label}
@@ -648,7 +640,7 @@ export default function MaritimeSurveillance() {
 
             <Link href="/contact">
               <a className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-cyan-500/20">
-                Planifier le POC avec nos experts
+                Schedule the POC with our experts
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Link>
