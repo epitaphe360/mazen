@@ -37,7 +37,7 @@ const ETL_PILLARS = [
     title: "EXTRACTION",
     accent: "#3b82f6",
     description:
-      "Collecte et décodage XDR de fichiers bruts des opérateurs. Transformation des enregistrements de données d'événements à partir de multiples sources hétérogènes.",
+      "Collection and XDR decoding of raw operator files. Transforming event data records from multiple heterogeneous sources.",
   },
   {
     step: "02",
@@ -45,15 +45,15 @@ const ETL_PILLARS = [
     title: "TRANSFORMATION",
     accent: "#6366f1",
     description:
-      "Conversion des enregistrements dans un format unique et compréhensible. Consolidation automatisée avec transmission confidentielle et normalisée.",
+      "Conversion of records into a single, interpretable format. Automated consolidation with confidential, standardized delivery.",
   },
   {
     step: "03",
     letter: "L",
-    title: "CHARGEMENT",
+    title: "LOADING",
     accent: "#8b5cf6",
     description:
-      "Stockage dans une base de données unique et exploitation via des outils de business intelligence pour extraire les informations fiscales pertinentes.",
+      "Storage in a single database and analysis via business intelligence tools to extract relevant fiscal insights.",
   },
   {
     step: "04",
@@ -61,85 +61,85 @@ const ETL_PILLARS = [
     title: "CERTIFICATION",
     accent: "#f59e0b",
     description:
-      "Certification des données avec les algorithmes propriétaires ETL-Certification® garantissant l'intégrité absolue et l'opposabilité légale des résultats.",
+      "Data certification using proprietary ETL-Certification® algorithms ensuring absolute integrity and legal enforceability of results.",
   },
 ];
 
 const CASE_STUDIES = [
   {
     id: 1,
-    country: "RDC",
+    country: "DRC",
     flag: "🇨🇩",
-    fullName: "République Démocratique du Congo",
-    title: "Taxes Télécommunications",
+    fullName: "Democratic Republic of the Congo",
+    title: "Telecommunications Taxes",
     img: "/case-rdc.svg",
-    partner: "Direction Générale des Douanes et Accises (DGDA)",
+    partner: "Directorate General of Customs and Excise (DGDA)",
     result: "+60%",
-    resultLabel: "d'accises & TVA après 1 an",
+    resultLabel: "excise & VAT after 1 year",
     accent: "#3b82f6",
-    details: "Services de télécommunications soumis aux droits d'accises, à la TVA et à d'autres prélèvements. Les revenus des opérateurs mobile représentent 5% du PIB.",
+    details: "Telecommunications services subject to excise duties, VAT and other levies. Mobile operator revenues represent 5% of GDP.",
   },
   {
     id: 2,
     country: "Mali",
     flag: "🇲🇱",
-    fullName: "République du Mali",
+    fullName: "Republic of Mali",
     title: "Mobile Money",
     img: "/case-mali.svg",
-    partner: "Ministère des Finances",
+    partner: "Ministry of Finance",
     result: "100%",
-    resultLabel: "visibilité des transactions",
+    resultLabel: "transaction visibility",
     accent: "#10b981",
-    details: "Traitement et analyse des métadonnées des transactions d'argent mobile. Production de rapports détaillés sur les activités et les taxes à percevoir.",
+    details: "Processing and analysis of mobile money transaction metadata. Production of detailed reports on activities and taxes due.",
   },
   {
     id: 3,
     country: "Burundi",
     flag: "🇧🇮",
-    fullName: "République du Burundi",
-    title: "Jeux & Paris en ligne",
+    fullName: "Republic of Burundi",
+    title: "Online Gambling & Betting",
     img: "/case-burundi.svg",
-    partner: "Ministère des Finances & Ministère du Commerce",
+    partner: "Ministry of Finance & Ministry of Commerce",
     result: "8",
-    resultLabel: "opérateurs certifiés",
+    resultLabel: "certified operators",
     accent: "#ef4444",
-    details: "Redevances sur les jeux de hasard et de paris en ligne. Signature janvier 2024 — Installation mars 2024.",
+    details: "Levies on online gambling and betting. Contract signed January 2024 — Deployment March 2024.",
   },
   {
     id: 4,
     country: "Sierra Leone",
     flag: "🇸🇱",
     fullName: "Sierra Leone",
-    title: "Taxes Télécommunications",
+    title: "Telecommunications Taxes",
     img: "/case-sierra-leone.svg",
-    partner: "NRA — Autorité Nationale des Recettes",
+    partner: "NRA — National Revenue Authority",
     result: "552%",
-    resultLabel: "hausse maximale des recettes",
+    resultLabel: "maximum revenue increase",
     accent: "#f59e0b",
-    details: "Accord BOT signé en avril 2023 avec la NRA pour les télécommunications, le mobile money et les paris.",
+    details: "BOT agreement signed in April 2023 with the NRA for telecommunications, mobile money and betting.",
   },
 ];
 
 const WHY_US_PILLARS = [
   {
     icon: Award,
-    title: "Certifications internationales",
-    desc: "ISO 9001 & ISO 27001 actives — qualité de service et sécurité des données garanties pour tous nos partenaires gouvernementaux.",
+    title: "International Certifications",
+    desc: "ISO 9001 & ISO 27001 active — service quality and data security guaranteed for all our government partners.",
   },
   {
     icon: Search,
-    title: "Transparence totale",
-    desc: "Visibilité complète sur l'ensemble des transactions numériques — les gouvernements identifient les fuites et réduisent la dette publique.",
+    title: "Full Transparency",
+    desc: "Complete visibility across digital transactions — governments detect revenue leaks and reduce public debt.",
   },
   {
     icon: CalendarDays,
-    title: "Fondée en 1986",
-    desc: "Quatre décennies d'expertise en gouvernance fiscale — réseau mondial Europe, Asie, Afrique avec un département R&D florissant.",
+    title: "Founded in 1986",
+    desc: "Four decades of fiscal governance expertise — global network across Europe, Asia and Africa with a thriving R&D department.",
   },
   {
     icon: ShieldCheck,
-    title: "Souveraineté numérique",
-    desc: "Hébergement souverain, données sous juridiction nationale — les États affirment leur pleine souveraineté sur leurs flux économiques.",
+    title: "Digital Sovereignty",
+    desc: "Sovereign hosting, data under national jurisdiction — states retain full control over their economic flows.",
   },
 ];
 
@@ -147,51 +147,51 @@ const SOLUTIONS_CARDS = [
   {
     icon: Waves,
     label: "Maritime Surveillance Grid",
-    tag: "Défense & Sécurité",
+    tag: "Defense & Security",
     href: "/solutions/maritime",
     image: "/maritime-surveillance-grid.png",
     accent: "from-blue-600 to-cyan-600",
     border: "border-blue-500/30",
-    desc: "Architecture multi-capteurs distribuée pour une surveillance maritime permanente, sans angles morts, en couverture 96 km.",
+    desc: "Distributed multi-sensor architecture for continuous maritime surveillance with no blind spots and 96 km coverage.",
     metric: "96 km",
-    metricLabel: "Portée radar",
+    metricLabel: "Radar range",
   },
   {
     icon: BarChart2,
     label: "Revenue Intelligence Platform",
-    tag: "Fiscalité & Recettes",
+    tag: "Tax & Revenue",
     href: "/solutions/revenues",
     image: "/digital-economy.png",
     accent: "from-emerald-600 to-teal-600",
     border: "border-emerald-500/30",
-    desc: "Collecte numérique, supervision temps réel et détection intelligente de la fraude fiscale pour les administrations nationales.",
+    desc: "Digital collection, real-time monitoring and intelligent tax fraud detection for national administrations.",
     metric: "+35%",
-    metricLabel: "Taux de recouvrement",
+    metricLabel: "Recovery rate",
   },
 ];
 
 const TESTIMONIALS = [
   {
-    quote: "Mazen a transformé notre capacité de supervision fiscale. En 12 mois, nous avons observé une hausse de 60% des recettes sur les opérateurs télécoms — des chiffres qui dépassent toutes nos projections initiales.",
-    name: "Directeur Général",
-    role: "Direction Générale des Douanes et Accises, RDC",
+    quote: "Mazen transformed our fiscal supervision capability. In 12 months we saw a 60% increase in telecom revenues — figures exceeding all our initial projections.",
+    name: "Director General",
+    role: "Directorate General of Customs and Excise, DRC",
     stars: 5,
   },
   {
-    quote: "L'approche ETL-Certification® nous a permis d'atteindre une visibilité totale sur les transactions mobile money. La plateforme est robuste, fiable et l'équipe d'intégration a été exemplaire.",
-    name: "Ministre délégué",
-    role: "Ministère des Finances, République du Mali",
+    quote: "The ETL-Certification® approach delivered full visibility on mobile money transactions. The platform is robust, reliable and the integration team was exemplary.",
+    name: "Deputy Minister",
+    role: "Ministry of Finance, Republic of Mali",
     stars: 5,
   },
   {
-    quote: "La qualité technique de la solution, combinée à la rigueur du transfert de compétences aux équipes nationales, fait de Mazen un partenaire stratégique de premier plan pour la souveraineté fiscale.",
-    name: "Directeur des Systèmes d'Information",
-    role: "Autorité Nationale des Recettes, Sierra Leone",
+    quote: "The technical quality of the solution, combined with rigorous capacity transfer to national teams, makes Mazen a top strategic partner for fiscal sovereignty.",
+    name: "IT Director",
+    role: "National Revenue Authority, Sierra Leone",
     stars: 5,
   },
 ];
 
-const ROTATING_WORDS = ["Fiscale", "Maritime", "Num\u00e9rique", "Publique"];
+const ROTATING_WORDS = ["Fiscal", "Maritime", "Digital", "Public"];
 
 const AFRICA_DEPLOYMENTS = [
   { id: "mali", country: "Mali", flag: "\uD83C\uDDF2\uD83C\uDDF1", x: 195, y: 212, color: "#10b981", caseIdx: 1 },
@@ -325,10 +325,10 @@ function AnimatedBar({ value, max, color, label, country }: {
 function MiniTrendChart() {
   const d = "M8,112 C40,95 70,88 100,70 C130,52 170,58 196,42 C222,26 252,22 280,14";
   return (
-    <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3">
+      <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300/70 font-bold">Trajectoire Recettes</p>
-        <span className="text-[10px] text-emerald-300 font-bold">+18.4% trimestriel</span>
+        <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300/70 font-bold">Revenue trajectory</p>
+        <span className="text-[10px] text-emerald-300 font-bold">+18.4% quarterly</span>
       </div>
       <svg viewBox="0 0 288 120" className="w-full h-[84px]">
         <path d={d} fill="none" stroke="#f59e0b" strokeWidth="3" strokeLinecap="round" />
@@ -385,7 +385,7 @@ function AfricaMap({ onSelect, selected }: { onSelect: (idx: number) => void; se
           </g>
         ))}
       </svg>
-      <p className="text-[10px] text-slate-500 text-center mt-1 italic">Cliquez un pays pour les détails</p>
+      <p className="text-[10px] text-slate-500 text-center mt-1 italic">Click a country for details</p>
     </div>
   );
 }
@@ -431,7 +431,7 @@ function TestimonialsCarousel({ items }: { items: Array<{ quote: string; name: s
         <button
           onClick={() => setActive((i) => (i - 1 + items.length) % items.length)}
           className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-amber-400 hover:text-amber-500 transition-colors"
-          aria-label="Précédent"
+          aria-label="Previous"
         >
           <ChevronRight className="w-4 h-4 rotate-180" />
         </button>
@@ -443,14 +443,14 @@ function TestimonialsCarousel({ items }: { items: Array<{ quote: string; name: s
               className={`rounded-full transition-all duration-300 ${
                 i === active ? "w-7 h-2.5 bg-amber-500" : "w-2.5 h-2.5 bg-gray-200 hover:bg-gray-300"
               }`}
-              aria-label={`Témoignage ${i + 1}`}
+              aria-label={`Testimonial ${i + 1}`}
             />
           ))}
         </div>
         <button
           onClick={() => setActive((i) => (i + 1) % items.length)}
           className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-amber-400 hover:text-amber-500 transition-colors"
-          aria-label="Suivant"
+          aria-label="Next"
         >
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -490,9 +490,9 @@ export default function Home() {
   const homeLinks = [
     { href: "#vision", label: "Vision" },
     { href: "#solutions", label: "Solutions" },
-    { href: "#etlc", label: "Technologie" },
-    { href: "#references", label: "Références" },
-    { href: "/news", label: "Actualités" },
+    { href: "#etlc", label: "Technology" },
+    { href: "#references", label: "References" },
+    { href: "/news", label: "News" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -543,7 +543,7 @@ export default function Home() {
             >
               <motion.div variants={fadeUp}>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 text-[11px] font-bold bg-amber-500/15 text-amber-300 rounded-full mb-7 border border-amber-500/25 uppercase tracking-[0.22em]">
-                  Plateforme institutionnelle certifiée ISO 9001 · ISO 27001
+                  ISO-certified institutional platform · ISO 9001 · ISO 27001
                 </span>
               </motion.div>
               <motion.h1
@@ -559,8 +559,8 @@ export default function Home() {
                 variants={fadeUp}
                 className="text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed mb-10"
               >
-                Depuis 1986, Mazen GovTech Groupe fournit aux États une infrastructure de gouvernance certifiée —
-                lecture consolidée des flux fiscaux, détection des anomalies et pilotage exécutif en temps réel.
+                Since 1986, Mazen GovTech Group has provided states with certified governance infrastructure —
+                consolidated fiscal flow monitoring, anomaly detection and executive decision-making in real time.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-14">
                 <Link href="/contact">
@@ -573,7 +573,7 @@ export default function Home() {
                   href="#references"
                   className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-4 rounded-xl hover:bg-white/10 transition-all text-sm"
                 >
-                  Voir les références terrain
+                  See field references
                   <ChevronRight className="w-4 h-4" />
                 </a>
               </motion.div>
@@ -585,7 +585,7 @@ export default function Home() {
                   <span className="text-[10px] font-bold tracking-[0.4em] text-white/35 uppercase">Scroll</span>
                 </div>
                 <div className="h-px flex-1 max-w-[200px] bg-gradient-to-r from-white/20 to-transparent" />
-                <span className="text-xs text-white/30">4 pays · 15 Mrd$ supervisés</span>
+                <span className="text-xs text-white/30">4 countries · $15B supervised</span>
               </motion.div>
             </motion.div>
 
@@ -600,17 +600,17 @@ export default function Home() {
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0" />
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300/70 mb-1">Synthèse exécutive</p>
-                    <h2 className="text-base font-bold text-white">Tableau de bord</h2>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300/70 mb-1">Executive summary</p>
+                    <h2 className="text-base font-bold text-white">Dashboard</h2>
                   </div>
                   <span className="px-2.5 py-1 rounded-full border border-amber-400/30 bg-amber-400/10 text-xs text-amber-300 font-semibold">Live</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-6">
                   {[
-                    { v: "$15 Mrd", l: "Flux supervisés", sub: "Depuis 2009" },
-                    { v: "13 Mrd", l: "Tx / jour", sub: "Traitement continu" },
-                    { v: "+552%", l: "Hausse record", sub: "Sierra Leone" },
-                    { v: "1986", l: "Fondation", sub: "4 décennies" },
+                    { v: "$15B", l: "Supervised flows", sub: "Since 2009" },
+                    { v: "13B", l: "Tx / day", sub: "Continuous processing" },
+                    { v: "+552%", l: "Record increase", sub: "Sierra Leone" },
+                    { v: "1986", l: "Founded", sub: "4 decades" },
                   ].map((s) => (
                     <div key={s.v} className="executive-metric">
                       <div className="text-2xl font-extrabold text-amber-400 mb-0.5">{s.v}</div>
@@ -621,9 +621,9 @@ export default function Home() {
                 </div>
                 <div className="space-y-2.5 border-t border-white/10 pt-5">
                   {[
-                    "Traçabilité totale des flux fiscaux sensibles",
-                    "Réduction des zones d'opacité sectorielles",
-                    "Lecture consolidée pour la décision publique",
+                    "Full traceability of sensitive fiscal flows",
+                    "Reduction of sectoral opacity",
+                    "Consolidated insights for public decision-making",
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-2.5 text-xs text-blue-100/80">
                       <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 mt-0.5 flex-shrink-0" />
@@ -669,7 +669,7 @@ export default function Home() {
               variants={staggerContainer}
             >
               <motion.div variants={fadeUp}>
-                <SectionTag>Notre vision</SectionTag>
+                <SectionTag>Our vision</SectionTag>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 leading-tight mb-6">
                 L'Excellence au Service de la{" "}
@@ -713,25 +713,25 @@ export default function Home() {
             >
               <div className="relative">
                 <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 border border-blue-900/50 shadow-2xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-4">Notre approche en 3 étapes</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-4">Our approach in 3 steps</p>
                   <div className="space-y-5">
                     {[
                       {
                         n: "01",
-                        title: "Le Big Data devient ingérable",
-                        text: "De plus en plus de secteurs se numérisent, générant des quantités massives de données cryptées et hétérogènes.",
+                        title: "Big Data becomes unmanageable",
+                        text: "Sectors are increasingly digitized, generating massive, encrypted and heterogeneous datasets.",
                         color: "bg-blue-500",
                       },
                       {
                         n: "02",
-                        title: "MAZEN certifie la donnée",
-                        text: "Notre technologie ETL-Certification® transforme ce Big Data en données structurées, certifiées et fiscalement opposables.",
+                        title: "MAZEN certifies the data",
+                        text: "Our ETL-Certification® technology turns Big Data into structured, certified and legally enforceable fiscal data.",
                         color: "bg-amber-500",
                       },
                       {
                         n: "03",
-                        title: "L'État recouvre ses recettes",
-                        text: "Les administrations disposent d'une vision complète et fiable pour maximiser la mobilisation des recettes publiques.",
+                        title: "The state recovers revenues",
+                        text: "Administrations gain a complete and reliable view to maximize public revenue mobilization.",
                         color: "bg-emerald-500",
                       },
                     ].map((step, i) => (
@@ -749,14 +749,14 @@ export default function Home() {
                   </div>
                   <div className="mt-8 pt-6 border-t border-white/10">
                     <p className="text-amber-400 font-bold text-base">
-                      15 milliards de dollars supervisés depuis 2009
+                      $15 billion supervised since 2009
                     </p>
-                    <p className="text-blue-300/70 text-xs mt-1">Sur les réseaux des opérateurs de 4 pays africains</p>
+                    <p className="text-blue-300/70 text-xs mt-1">Across operator networks in 4 African countries</p>
                   </div>
                 </div>
                 {/* Floating badge */}
                 <div className="absolute -bottom-5 -right-5 bg-amber-400 text-gray-950 rounded-2xl px-4 py-3 shadow-xl">
-                  <p className="text-xs font-black uppercase tracking-wider">Certifié</p>
+                  <p className="text-xs font-black uppercase tracking-wider">Certified</p>
                   <p className="text-lg font-black leading-tight">ISO 9001<br/>ISO 27001</p>
                 </div>
               </div>
@@ -778,7 +778,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeUp}>
-              <SectionTag light>Nos solutions souveraines</SectionTag>
+              <SectionTag light>Our sovereign solutions</SectionTag>
             </motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-white mb-4">
               Deux solutions souveraines, <br className="hidden md:block" />
