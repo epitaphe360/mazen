@@ -12,31 +12,31 @@ type PublicNavbarProps = {
 };
 
 const DEFAULT_LINKS: NavLink[] = [
-  { href: "/", label: "Accueil", key: "nav.home" },
-  { href: "/about", label: "À propos", key: "nav.about" },
-  { href: "/case-studies", label: "Cas d'usage", key: "nav.caseStudies" },
-  { href: "/news", label: "Actualités", key: "nav.news" },
+  { href: "/", label: "Home", key: "nav.home" },
+  { href: "/about", label: "About", key: "nav.about" },
+  { href: "/case-studies", label: "Case studies", key: "nav.caseStudies" },
+  { href: "/news", label: "News", key: "nav.news" },
   { href: "/contact", label: "Contact", key: "nav.contact" },
 ];
 
 const SOLUTIONS = [
   {
     href: "/solutions/maritime",
-    label: "Souveraineté Maritime",
-    desc: "Maritime Surveillance Grid · 3 couches",
+    label: "Maritime Sovereignty",
+    desc: "Maritime Surveillance Grid · 3 layers",
     icon: Waves,
   },
   {
     href: "/solutions/revenues",
-    label: "Recettes Publiques",
-    desc: "Revenue Intelligence Platform · Fiscalité",
+    label: "Public Revenues",
+    desc: "Revenue Intelligence Platform · Taxation",
     icon: BarChart2,
   },
 ];
 
 export default function PublicNavbar({
   links = DEFAULT_LINKS,
-  ctaLabel = "Connexion",
+  ctaLabel = "Login",
   ctaHref = "/login",
 }: PublicNavbarProps) {
   const [open, setOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function PublicNavbar({
     <nav className="sticky top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 shadow-[0_8px_30px_rgba(15,42,95,0.06)]">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         <Link href="/">
-          <a className="flex items-center gap-3" aria-label="Retour à l'accueil">
+          <a className="flex items-center gap-3" aria-label="Back to homepage">
             <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
             <div className="hidden md:block">
               <div className="text-sm font-extrabold text-gray-900 leading-tight">
@@ -126,12 +126,12 @@ export default function PublicNavbar({
             )}
           </div>
 
-          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 border border-blue-100 rounded-md overflow-hidden">
               <button
                 onClick={() => setLocale('fr')}
                 className={`px-2 py-1 text-xs ${locale === 'fr' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
-                aria-label="Français"
+                aria-label="French"
               >FR</button>
               <button
                 onClick={() => setLocale('en')}
@@ -149,7 +149,7 @@ export default function PublicNavbar({
           type="button"
           onClick={() => setOpen((v) => !v)}
           className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-blue-50"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -208,7 +208,7 @@ export default function PublicNavbar({
                 <button
                   onClick={() => { setLocale('fr'); setOpen(false); }}
                   className={`px-2 py-1 text-xs ${locale === 'fr' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
-                  aria-label="Français"
+                  aria-label="French"
                 >FR</button>
                 <button
                   onClick={() => { setLocale('en'); setOpen(false); }}
