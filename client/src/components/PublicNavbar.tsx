@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, Waves, BarChart2 } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
 
-type NavLink = { href: string; label: string };
+type NavLink = { href: string; label: string; key?: string };
 
 type PublicNavbarProps = {
   links?: NavLink[];
@@ -12,11 +12,11 @@ type PublicNavbarProps = {
 };
 
 const DEFAULT_LINKS: NavLink[] = [
-  { href: "/", label: "Accueil" },
-  { href: "/about", label: "À propos" },
-  { href: "/case-studies", label: "Cas d'usage" },
-  { href: "/news", label: "Actualités" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Accueil", key: "nav.home" },
+  { href: "/about", label: "À propos", key: "nav.about" },
+  { href: "/case-studies", label: "Cas d'usage", key: "nav.caseStudies" },
+  { href: "/news", label: "Actualités", key: "nav.news" },
+  { href: "/contact", label: "Contact", key: "nav.contact" },
 ];
 
 const SOLUTIONS = [
@@ -85,7 +85,7 @@ export default function PublicNavbar({
               <Link key={item.href} href={item.href}>
                 <a className={`hover:text-govblue transition-colors ${
                   location === item.href ? "text-govblue font-bold" : ""
-                }`}>{t(`nav.${item.label === 'Accueil' ? 'home' : item.label.replace(/\s+/g, '')}`) || item.label}</a>
+                }`}>{item.key ? t(item.key) : item.label}</a>
               </Link>
             )
           )}
@@ -126,9 +126,23 @@ export default function PublicNavbar({
             )}
           </div>
 
-          <Link href={ctaHref}>
-            <a className="btn-primary py-2.5 px-5 text-sm">{t('nav.login') || ctaLabel}</a>
-          </Link>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 border border-blue-100 rounded-md overflow-hidden">
+              <button
+                onClick={() => setLocale('fr')}
+                className={`px-2 py-1 text-xs ${locale === 'fr' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
+                aria-label="Français"
+              >FR</button>
+              <button
+                onClick={() => setLocale('en')}
+                className={`px-2 py-1 text-xs ${locale === 'en' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
+                aria-label="English"
+              >EN</button>
+            </div>
+            <Link href={ctaHref}>
+              <a className="btn-primary py-2.5 px-5 text-sm">{t('nav.login') || ctaLabel}</a>
+            </Link>
+          </div>
         </div>
 
         <button
@@ -156,7 +170,7 @@ export default function PublicNavbar({
                   <a onClick={() => setOpen(false)} className={`hover:text-govblue transition-colors ${
                     location === item.href ? "text-govblue font-bold" : ""
                   }`}>
-                    {t(`nav.${item.label === 'Accueil' ? 'home' : item.label.replace(/\s+/g, '')}`) || item.label}
+                    {item.key ? t(item.key) : item.label}
                   </a>
                 </Link>
               )
@@ -189,11 +203,25 @@ export default function PublicNavbar({
               )}
             </div>
 
-            <Link href={ctaHref}>
-              <a onClick={() => setOpen(false)} className="btn-primary justify-center py-2.5 mt-1">
-                {t('nav.login') || ctaLabel}
-              </a>
-            </Link>
+            <div className="flex items-center gap-3 mt-2">
+              <div className="flex items-center gap-1 border border-blue-100 rounded-md overflow-hidden">
+                <button
+                  onClick={() => { setLocale('fr'); setOpen(false); }}
+                  className={`px-2 py-1 text-xs ${locale === 'fr' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
+                  aria-label="Français"
+                >FR</button>
+                <button
+                  onClick={() => { setLocale('en'); setOpen(false); }}
+                  className={`px-2 py-1 text-xs ${locale === 'en' ? 'bg-blue-700 text-white' : 'text-slate-700 bg-white'}`}
+                  aria-label="English"
+                >EN</button>
+              </div>
+              <Link href={ctaHref}>
+                <a onClick={() => setOpen(false)} className="btn-primary justify-center py-2.5">
+                  {t('nav.login') || ctaLabel}
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       )}
