@@ -128,4 +128,12 @@
     "submit": { "login": "Sign in", "register": "Create account" },
     "backToSite": "Back to site"
   }
+  ,
+  "dashboard": {
+    "loading": "Loading dashboard...",
+    "title": "Executive dashboard",
+    "subtitle": "Consolidated view of transactions, revenues and real-time alerts",
+    "meta": { "scope": "Scope", "updated": "Updated", "view": "View" },
+    "stats": { "revenue": "Mobilized revenues", "transactions": "Transactional flows", "compliance": "Compliance rate", "alerts": "Active alerts" }
+  }
 }

@@ -6,20 +6,21 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 import { AlertTriangle, BadgeCheck, Coins, BarChart2 } from "lucide-react";
+import { useTranslation } from "../lib/i18n";
 
 const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2", "#65a30d", "#dc2626", "#9333ea"];
 
 const SEVERITY_LABELS: Record<string, string> = {
-  critical: "Critique",
-  high: "Élevée",
-  medium: "Modérée",
-  low: "Faible",
+  critical: "Critical",
+  high: "High",
+  medium: "Medium",
+  low: "Low",
 };
 
 const COMPLIANCE_LABELS: Record<string, string> = {
-  compliant: "Conforme",
-  anomaly: "Anomalie",
-  pending: "En attente",
+  compliant: "Compliant",
+  anomaly: "Anomaly",
+  pending: "Pending",
 };
 
 function StatCard({
@@ -52,10 +53,11 @@ function StatCard({
 }
 
 function formatCurrency(n: number) {
-  return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", notation: "compact" }).format(n);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR", notation: "compact" }).format(n);
 }
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const { data: stats, isLoading: statsLoading } = trpc.dashboard.stats.useQuery();
   const { data: revenueChart } = trpc.dashboard.revenueChart.useQuery();
   const { data: sectorChart } = trpc.dashboard.sectorChart.useQuery();
@@ -68,7 +70,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
             <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-gray-500">Chargement du dashboard...</p>
+            <p className="text-gray-500">{t('dashboard.loading')}</p>
           </div>
         </div>
       </DashboardLayout>
@@ -81,14 +83,14 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Tableau de bord exécutif</h1>
-            <p className="text-gray-600">Vue consolidée des transactions, recettes et alertes en temps réel</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.title')}</h1>
+            <p className="text-gray-600">{t('dashboard.subtitle')}</p>
           </div>
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
             {[
-              { label: "Périmètre", value: "National" },
-              { label: "Mise à jour", value: "Temps réel" },
-              { label: "Lecture", value: "Consolidée" },
+              { label: t('dashboard.meta.scope'), value: "National" },
+              { label: t('dashboard.meta.updated'), value: "Real-time" },
+              { label: t('dashboard.meta.view'), value: "Consolidated" },
             ].map((item) => (
               <div key={item.label} className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
                 <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400">{item.label}</p>
@@ -99,26 +101,26 @@ export default function Dashboard() {
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <StatCard
-            label="Recettes mobilisées"
+            label={t('dashboard.stats.revenue')}
             value={formatCurrency(stats?.total_revenue ?? 0)}
             change={stats?.revenue_change_percent}
             icon={Coins}
           />
           <StatCard
-            label="Flux transactionnels"
-            value={(stats?.total_transactions ?? 0).toLocaleString("fr-FR")}
+            label={t('dashboard.stats.transactions')}
+            value={(stats?.total_transactions ?? 0).toLocaleString('en-US')}
             change={stats?.transactions_change_percent}
             icon={BarChart2}
           />
           <StatCard
-            label="Taux de conformité"
+            label={t('dashboard.stats.compliance')}
             value={`${stats?.compliance_rate ?? 0}%`}
             icon={BadgeCheck}
           />
           <StatCard
-            label="Alertes en cours"
+            label={t('dashboard.stats.alerts')}
             value={String(stats?.active_alerts ?? 0)}
             icon={AlertTriangle}
           />
