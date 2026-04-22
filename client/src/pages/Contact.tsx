@@ -51,7 +51,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen page-atmosphere">
-      <PublicNavbar ctaLabel="Connexion" ctaHref="/login" />
+      <PublicNavbar ctaLabel="Login" ctaHref="/login" />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
         <section className="glass-panel p-8 md:p-10 mb-10 relative overflow-hidden">
@@ -158,7 +158,7 @@ export default function Contact() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Message *</label>
                 <textarea required rows={4} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
-                  placeholder="Décrivez votre projet ou vos questions..."
+                  placeholder={t('contact.form.messagePlaceholder') || "Describe your project or your questions..."}
                   minLength={10}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none" />
               </div>

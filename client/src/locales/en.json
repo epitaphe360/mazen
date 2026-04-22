@@ -74,6 +74,7 @@
       "fullNamePlaceholder": "First Last",
       "email": "Email *",
       "emailPlaceholder": "you@government.gov",
+      "messagePlaceholder": "Describe your project or your questions...",
       "country": "Country *",
       "selectCountry": "Select your country",
       "sector": "Sector of interest *",
