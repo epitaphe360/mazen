@@ -95,4 +95,13 @@
     "empty": "No articles found.",
     "cta": { "title": "Follow our news", "subtitle": "Subscribe to our newsletter or follow our social channels to never miss an important update.", "subscribe": "Subscribe to newsletter" }
   }
+  ,
+  "case": {
+    "kicker": "Field references",
+    "title": "Institutional references & operational deployments",
+    "subtitle": "Four real deployments demonstrating measurable impact on national public revenues.",
+    "itemLabel": "Case",
+    "partnerLabel": "Partner institution",
+    "cta": { "title": "Study a deployment adapted to your national context", "subtitle": "Talk to our teams to assess a supervision, certification and revenue optimization setup." }
+  }
 }

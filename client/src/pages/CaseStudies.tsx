@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 
 const CASES = [
   {
@@ -100,6 +101,7 @@ const colorMap: Record<string, { border: string; bg: string; badge: string; stat
 };
 
 export default function CaseStudies() {
+  const { t } = useTranslation();
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -110,11 +112,9 @@ export default function CaseStudies() {
       <section className="pt-16 pb-16 bg-gradient-to-br from-blue-950 to-indigo-900 text-white">
         <div className="max-w-7xl mx-auto px-6 pt-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">Références terrain</span>
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Références institutionnelles et déploiements opérationnels</h1>
-            <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-              Quatre déploiements réels illustrant l'impact mesurable de Mazen GovTech Groupe sur les recettes publiques nationales.
-            </p>
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">{t('case.kicker')}</span>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{t('case.title')}</h1>
+            <p className="text-xl text-blue-200 max-w-3xl mx-auto">{t('case.subtitle')}</p>
           </motion.div>
 
           {/* Overview cards */}
@@ -168,7 +168,7 @@ export default function CaseStudies() {
                       <div className="flex items-center gap-3 mb-4">
                         <span className="text-5xl">{c.flag}</span>
                         <div>
-                          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Cas d'usage {c.num}</div>
+                          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">{t('case.itemLabel')} {c.num}</div>
                           <h2 className="text-2xl font-extrabold text-gray-900">{c.country}</h2>
                         </div>
                       </div>
@@ -184,7 +184,7 @@ export default function CaseStudies() {
                         <div className="text-gray-600 text-sm font-medium">{c.resultLabel}</div>
                       </div>
 
-                      <p className="text-sm font-semibold text-gray-500 mb-1">Institution partenaire</p>
+                      <p className="text-sm font-semibold text-gray-500 mb-1">{t('case.partnerLabel')}</p>
                       <p className="text-gray-800 font-medium mb-6">{c.partner}</p>
 
                       <ul className="space-y-3">
@@ -221,13 +221,11 @@ export default function CaseStudies() {
       <section className="py-20 bg-gradient-to-br from-blue-950 to-indigo-900 text-white text-center">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl font-extrabold mb-4">Étudier un déploiement adapté à votre contexte national</h2>
-            <p className="text-blue-200 mb-8 text-lg">
-              Échangez avec nos équipes pour évaluer un dispositif de supervision, de certification et d'optimisation des recettes publiques.
-            </p>
+            <h2 className="text-3xl font-extrabold mb-4">{t('case.cta.title')}</h2>
+            <p className="text-blue-200 mb-8 text-lg">{t('case.cta.subtitle')}</p>
             <Link href="/contact">
               <a className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg">
-                Demander une présentation
+                {t('cta.requestDemo')}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </Link>
