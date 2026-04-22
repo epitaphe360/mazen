@@ -104,4 +104,23 @@
     "partnerLabel": "Partner institution",
     "cta": { "title": "Study a deployment adapted to your national context", "subtitle": "Talk to our teams to assess a supervision, certification and revenue optimization setup." }
   }
+  ,
+  "login": {
+    "subtitle": "Public Revenue Mobilization Platform",
+    "verifyEmail": "Check your email to confirm your account.",
+    "oauth": { "google": "Continue with Google" },
+    "orEmail": "or by email",
+    "form": {
+      "fullName": "Full name",
+      "fullNamePlaceholder": "First Last",
+      "email": "Email",
+      "emailPlaceholder": "you@government.gov",
+      "password": "Password",
+      "passwordPlaceholder": "••••••••"
+    },
+    "labels": { "login": "Login", "register": "Register" },
+    "loading": "Loading...",
+    "submit": { "login": "Sign in", "register": "Create account" },
+    "backToSite": "Back to site"
+  }
 }
