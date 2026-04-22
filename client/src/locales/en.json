@@ -136,4 +136,21 @@
     "meta": { "scope": "Scope", "updated": "Updated", "view": "View" },
     "stats": { "revenue": "Mobilized revenues", "transactions": "Transactional flows", "compliance": "Compliance rate", "alerts": "Active alerts" }
   }
+  ,
+  "report": {
+    "title": "Multi-sector report",
+    "subtitle": "Consolidated view of revenues, transaction volumes and levies by sector and period",
+    "meta": { "view": "View", "scope": "Scope", "export": "Export" },
+    "filters": { "title": "Analysis parameters", "from": "From", "to": "To", "reset": "Reset filters", "sectorScope": "Sector scope" },
+    "summary": { "revenues": "Consolidated revenues", "transactions": "Transaction volume", "taxes": "Calculated levies" },
+    "table": {
+      "title": "Transactions detail",
+      "tax": "Tax",
+      "volume": "Volume",
+      "headers": { "date": "Date", "sector": "Sector", "operator": "Operator", "amount": "Amount", "transactions": "Transactions", "tax": "Tax", "status": "Status" },
+      "records": "records"
+    },
+    "pagination": { "prev": "Previous", "next": "Next" },
+    "exportCSV": "Export CSV"
+  }
 }

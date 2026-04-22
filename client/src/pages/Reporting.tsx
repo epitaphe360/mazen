@@ -3,14 +3,16 @@ import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Coins, Receipt, BarChart3, Download } from "lucide-react";
+import { useTranslation } from "../lib/i18n";
 
 const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2"];
 
 function formatCurrency(n: number) {
-  return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", notation: "compact" }).format(n);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR", notation: "compact" }).format(n);
 }
 
 export default function Reporting() {
+  const { t } = useTranslation();
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [selectedSectors, setSelectedSectors] = useState<number[]>([]);
@@ -34,7 +36,7 @@ export default function Reporting() {
 
   function handleExportCSV() {
     if (!report?.data) return;
-    const headers = ["Date", "Secteur", "Opérateur", "Montant", "Transactions", "Taxe", "Statut"];
+    const headers = ["Date", "Sector", "Operator", "Amount", "Transactions", "Tax", "Status"];
     const rows = report.data.map(t => [
       t.date, (t.sectors as { name?: string } | null)?.name ?? "", t.operator_name,
       t.transaction_amount, t.transaction_count, t.tax_amount, t.compliance_status
@@ -44,7 +46,7 @@ export default function Reporting() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `rapport_mazen_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `mazen_report_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -54,15 +56,15 @@ export default function Reporting() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Rapport multi-sectoriel</h1>
-            <p className="text-gray-600">Lecture consolidée des recettes, volumes transactionnels et prélèvements par secteur et par période</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('report.title')}</h1>
+            <p className="text-gray-600">{t('report.subtitle')}</p>
           </div>
           <div className="flex items-center gap-3">
             <div className="hidden md:grid grid-cols-3 gap-3">
               {[
-                { label: "Lecture", value: "Consolidée" },
-                { label: "Périmètre", value: selectedSectors.length ? `${selectedSectors.length} secteurs` : "Tous secteurs" },
-                { label: "Export", value: "CSV" },
+                { label: t('report.meta.view'), value: "Consolidated" },
+                { label: t('report.meta.scope'), value: selectedSectors.length ? `${selectedSectors.length} sectors` : "All sectors" },
+                { label: t('report.meta.export'), value: "CSV" },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm min-w-28">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400">{item.label}</p>
@@ -78,27 +80,27 @@ export default function Reporting() {
 
         {/* Filtres */}
         <div className="data-card">
-          <h2 className="font-semibold text-gray-800 mb-4">Paramètres d'analyse</h2>
+          <h2 className="font-semibold text-gray-800 mb-4">{t('report.filters.title')}</h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Date de début</label>
+              <label className="block text-sm text-gray-600 mb-1">{t('report.filters.from')}</label>
               <input type="date" value={from} onChange={e => { setFrom(e.target.value); setPage(1); }}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
             <div>
-              <label className="block text-sm text-gray-600 mb-1">Date de fin</label>
+              <label className="block text-sm text-gray-600 mb-1">{t('report.filters.to')}</label>
               <input type="date" value={to} onChange={e => { setTo(e.target.value); setPage(1); }}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
             </div>
             <div className="flex items-end">
               <button onClick={() => { setFrom(""); setTo(""); setSelectedSectors([]); setPage(1); }}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-                Réinitialiser les filtres
+                {t('report.filters.reset')}
               </button>
             </div>
           </div>
           <div className="mt-4">
-            <p className="text-sm text-gray-600 mb-2">Périmètre sectoriel</p>
+            <p className="text-sm text-gray-600 mb-2">{t('report.filters.sectorScope')}</p>
             <div className="flex flex-wrap gap-2">
               {(sectors ?? []).map(s => (
                 <button
@@ -121,9 +123,9 @@ export default function Reporting() {
         {report?.summary && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { label: "Recettes consolidées", value: formatCurrency(report.summary.total_revenue), icon: Coins },
-              { label: "Volume transactionnel", value: report.summary.total_transactions.toLocaleString("fr-FR"), icon: BarChart3 },
-              { label: "Prélèvements calculés", value: formatCurrency(report.summary.total_tax), icon: Receipt },
+              { label: t('report.summary.revenues'), value: formatCurrency(report.summary.total_revenue), icon: Coins },
+              { label: t('report.summary.transactions'), value: report.summary.total_transactions.toLocaleString('en-US'), icon: BarChart3 },
+              { label: t('report.summary.taxes'), value: formatCurrency(report.summary.total_tax), icon: Receipt },
             ].map(s => (
               <div key={s.label} className="stat-card text-center">
                 <span className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-700 mb-2">
@@ -138,9 +140,8 @@ export default function Reporting() {
 
         {/* Tableau */}
         <div className="data-card">
-          <h2 className="font-semibold text-gray-800 mb-4">
-            Détail des transactions{" "}
-            <span className="text-gray-400 text-sm font-normal">({report?.total ?? 0} enregistrements)</span>
+            <h2 className="font-semibold text-gray-800 mb-4">
+            {t('report.table.title')} <span className="text-gray-400 text-sm font-normal">({report?.total ?? 0} records)</span>
           </h2>
           {isLoading ? (
             <div className="flex justify-center py-12">
@@ -160,10 +161,10 @@ export default function Reporting() {
                         {tx.compliance_status}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("fr-FR")}</p>
+                    <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("en-US")}</p>
                     <p className="text-sm text-gray-700 mt-1">{(tx.sectors as { name?: string } | null)?.name ?? "-"}</p>
                     <p className="mt-1 text-base font-bold text-gray-900">{formatCurrency(tx.transaction_amount)}</p>
-                    <p className="text-xs text-gray-600 mt-1">Prélèvement: {formatCurrency(tx.tax_amount)} · Volume: {tx.transaction_count.toLocaleString("fr-FR")}</p>
+                    <p className="text-xs text-gray-600 mt-1">{t('report.table.tax')}: {formatCurrency(tx.tax_amount)} · {t('report.table.volume')}: {tx.transaction_count.toLocaleString('en-US')}</p>
                   </article>
                 ))}
               </div>
@@ -172,23 +173,23 @@ export default function Reporting() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left text-xs text-gray-500 border-b pb-2">
-                      <th className="pb-3 pr-4">Date</th>
-                      <th className="pb-3 pr-4">Secteur</th>
-                      <th className="pb-3 pr-4">Opérateur</th>
-                      <th className="pb-3 pr-4">Montant</th>
-                      <th className="pb-3 pr-4">Transactions</th>
-                      <th className="pb-3 pr-4">Taxe</th>
-                      <th className="pb-3">Statut</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.date')}</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.sector')}</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.operator')}</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.amount')}</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.transactions')}</th>
+                      <th className="pb-3 pr-4">{t('report.table.headers.tax')}</th>
+                      <th className="pb-3">{t('report.table.headers.status')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {(report?.data ?? []).map(tx => (
                       <tr key={tx.id} className="hover:bg-gray-50">
-                        <td className="py-3 pr-4 text-gray-500">{new Date(tx.date).toLocaleDateString("fr-FR")}</td>
+                        <td className="py-3 pr-4 text-gray-500">{new Date(tx.date).toLocaleDateString("en-US")}</td>
                         <td className="py-3 pr-4 text-gray-700">{(tx.sectors as { name?: string } | null)?.name ?? "-"}</td>
                         <td className="py-3 pr-4 font-medium text-gray-900">{tx.operator_name}</td>
                         <td className="py-3 pr-4">{formatCurrency(tx.transaction_amount)}</td>
-                        <td className="py-3 pr-4">{tx.transaction_count.toLocaleString("fr-FR")}</td>
+                        <td className="py-3 pr-4">{tx.transaction_count.toLocaleString('en-US')}</td>
                         <td className="py-3 pr-4 text-gray-600">{formatCurrency(tx.tax_amount)}</td>
                         <td className="py-3">
                           <span className={`badge ${
@@ -207,15 +208,15 @@ export default function Reporting() {
               {/* Pagination */}
               {(report?.totalPages ?? 1) > 1 && (
                 <div className="flex items-center justify-between mt-4">
-                  <p className="text-sm text-gray-500">Page {page} sur {report?.totalPages}</p>
+                  <p className="text-sm text-gray-500">Page {page} of {report?.totalPages}</p>
                   <div className="flex gap-2">
                     <button disabled={page <= 1} onClick={() => setPage(p => p - 1)}
                       className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition-colors">
-                      Précédent
+                      {t('report.pagination.prev')}
                     </button>
                     <button disabled={page >= (report?.totalPages ?? 1)} onClick={() => setPage(p => p + 1)}
                       className="px-3 py-1.5 text-sm border rounded-lg disabled:opacity-40 hover:bg-gray-50 transition-colors">
-                      Suivant
+                      {t('report.pagination.next')}
                     </button>
                   </div>
                 </div>
