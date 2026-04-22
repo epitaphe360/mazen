@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 import { Globe, Search, GraduationCap, ShieldCheck } from "lucide-react";
 
 const TEAM_VALUES = [
@@ -25,6 +26,7 @@ const ARCHITECTURE_ITEMS = [
 ];
 
 export default function About() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen page-atmosphere font-sans">
       <PublicNavbar />
@@ -33,11 +35,9 @@ export default function About() {
       <section className="pt-16 pb-16 bg-gradient-to-br from-blue-950 to-indigo-900 text-white">
         <div className="max-w-7xl mx-auto px-6 text-center pt-12">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">Notre histoire</span>
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">À propos de MAZEN</h1>
-            <p className="text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed">
-              Leader mondial des technologies gouvernementales depuis 1986, MAZEN transforme les économies numériques en recettes publiques certifiées et auditables.
-            </p>
+            <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4 block">{t('about.hero.kicker')}</span>
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-6">{t('about.hero.title')}</h1>
+            <p className="text-xl text-blue-200 max-w-3xl mx-auto leading-relaxed">{t('about.hero.subtitle')}</p>
           </motion.div>
         </div>
       </section>
@@ -47,19 +47,11 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">Depuis 1986</span>
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
-                Une capacité technologique conçue pour les administrations souveraines
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4 text-base">
-                MAZEN développe des solutions de technologie gouvernementale depuis <strong>1986</strong>. L'entreprise s'appuie sur un réseau de collaborateurs hautement qualifiés répartis entre <strong>l'Europe, l'Asie et l'Afrique</strong>, ainsi que sur une capacité de recherche et développement durable.
-              </p>
-              <p className="text-gray-700 leading-relaxed mb-4 text-base">
-                Nos équipes réunissent des compétences confirmées en <strong>traitement de données, fiscalité numérique, conformité et gouvernance</strong>, au service d'environnements institutionnels exigeants.
-              </p>
-              <p className="text-gray-700 leading-relaxed text-base">
-                Nos systèmes analysent et traitent quotidiennement <strong className="text-blue-700">13 milliards de transactions</strong>, supervisant plus de <strong className="text-blue-700">15 milliards de dollars</strong> sur les réseaux des opérateurs depuis 2009.
-              </p>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">{t('about.history.kicker')}</span>
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">{t('about.history.title')}</h2>
+              <p className="text-gray-700 leading-relaxed mb-4 text-base">{t('about.history.p1')}</p>
+              <p className="text-gray-700 leading-relaxed mb-4 text-base">{t('about.history.p2')}</p>
+              <p className="text-gray-700 leading-relaxed text-base">{t('about.history.p3')}</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="grid grid-cols-2 gap-4">
@@ -89,11 +81,9 @@ export default function About() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">Références</span>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-4">Nos partenaires gouvernementaux</h2>
-            <p className="text-gray-500 mb-10 max-w-2xl mx-auto">
-              À titre indicatif, voici une sélection de partenaires pour lesquels Mazen Partner est la solution officielle de Gouvernance
-            </p>
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">{t('about.partners.kicker')}</span>
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-4">{t('about.partners.title')}</h2>
+            <p className="text-gray-500 mb-10 max-w-2xl mx-auto">{t('about.partners.description')}</p>
             <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm inline-block">
               <img src="/partners.png" alt="Partenaires Mazen" className="max-h-28 mx-auto object-contain" />
             </div>
@@ -144,8 +134,8 @@ export default function About() {
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-6">
                 <img src="/mazen-logo.jpg?v=20260413" alt="Plateforme Mazen Gov" className="w-32 h-32 object-contain mx-auto mb-4" />
-                <h3 className="text-center font-bold text-gray-900 mb-2">Plateforme Mazen Gov</h3>
-                <p className="text-center text-gray-500 text-sm">Solution de gouvernance certifiée ETL-Certification®</p>
+                <h3 className="text-center font-bold text-gray-900 mb-2">{t('about.platform.title')}</h3>
+                  <p className="text-center text-gray-500 text-sm">{t('about.platform.subtitle')}</p>
               </div>
               <img src="/tech-transfer.png" alt="Transfert technologique" className="w-full rounded-2xl shadow-lg" />
             </motion.div>

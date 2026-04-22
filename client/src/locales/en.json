@@ -22,4 +22,28 @@
       "subtitle": "Certified ISO 9001 & ISO 27001 — Trusted by governments"
     }
   }
+  ,
+  "about": {
+    "hero": {
+      "kicker": "Our Story",
+      "title": "About MAZEN",
+      "subtitle": "Global GovTech leader since 1986 — transforming digital economies into auditable public revenue"
+    },
+    "history": {
+      "kicker": "Since 1986",
+      "title": "Technology built for sovereign administrations",
+      "p1": "MAZEN has delivered government technology solutions since 1986. We rely on a network of highly skilled collaborators across Europe, Asia and Africa and a sustainable R&D capability.",
+      "p2": "Our teams combine expertise in data engineering, digital taxation, compliance and governance to serve demanding institutional environments.",
+      "p3": "Our systems analyze and process 13 billion daily transactions and supervise over $15bn in operator flows since 2009."
+    },
+    "partners": {
+      "kicker": "References",
+      "title": "Our government partners",
+      "description": "Representative selection of partners that chose MAZEN as their official governance solution."
+    },
+    "platform": {
+      "title": "Mazen Gov Platform",
+      "subtitle": "ETL-Certification® certified governance solution"
+    }
+  }
 }
