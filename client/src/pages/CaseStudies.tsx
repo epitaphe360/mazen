@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
@@ -11,7 +11,7 @@ const CASES = [
     num: "01",
     country: "DEMOCRATIC REPUBLIC OF CONGO",
     shortName: "DRC",
-    flag: "🇨🇩",
+    flag: "ðŸ‡¨ðŸ‡©",
     title: "Telecommunications Taxes",
     img: "/case-rdc.svg",
     partner: "General Directorate of Customs and Excise (DGDA)",
@@ -32,7 +32,7 @@ const CASES = [
     num: "02",
     country: "MALI",
     shortName: "Mali",
-    flag: "🇲🇱",
+    flag: "ðŸ‡²ðŸ‡±",
     title: "Mobile Money",
     img: "/case-mali.svg",
     partner: "Ministry of Finance",
@@ -53,7 +53,7 @@ const CASES = [
     num: "03",
     country: "BURUNDI",
     shortName: "Burundi",
-    flag: "🇧🇮",
+    flag: "ðŸ‡§ðŸ‡®",
     title: "Royalties on Gambling and Betting",
     img: "/case-burundi.svg",
     partner: "Ministry of Finance & Ministry of Commerce, Transport, Industry and Tourism",
@@ -67,7 +67,7 @@ const CASES = [
       "Gambling and betting services subject to royalties",
       "Only online gambling is authorized in the country",
       "Number of licensed operators: 8",
-      "Contract signed: January 2024 — Installation end: March 2024",
+      "Contract signed: January 2024 â€” Installation end: March 2024",
     ],
   },
   {
@@ -75,10 +75,10 @@ const CASES = [
     num: "04",
     country: "SIERRA LEONE",
     shortName: "Sierra Leone",
-    flag: "🇸🇱",
+    flag: "ðŸ‡¸ðŸ‡±",
     title: "Telecommunications Taxes",
     img: "/case-sierra-leone.svg",
-    partner: "NRA — National Revenue Authority (BOT Agreement)",
+    partner: "NRA â€” National Revenue Authority (BOT Agreement)",
     ministry: "NRA & Ministry of Finance",
     result: "552%",
     resultLabel: "maximum increase in national revenues",

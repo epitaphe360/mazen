@@ -4,8 +4,9 @@ import { trpc } from "../lib/trpc";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Coins, Receipt, BarChart3, Download } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
+import { SpotlightCard } from "../design-system";
 
-const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2"];
+const COLORS = ["#0d3461", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2"];
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR", notation: "compact" }).format(n);
@@ -56,8 +57,8 @@ export default function Reporting() {
       <div className="space-y-6">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('report.title')}</h1>
-            <p className="text-gray-600">{t('report.subtitle')}</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('report.title')}</h1>
+            <p className="text-gray-600 dark:text-navy-400">{t('report.subtitle')}</p>
           </div>
           <div className="flex items-center gap-3">
             <div className="hidden md:grid grid-cols-3 gap-3">
@@ -79,8 +80,9 @@ export default function Reporting() {
         </div>
 
         {/* Filtres */}
-        <div className="data-card">
-          <h2 className="font-semibold text-gray-800 mb-4">{t('report.filters.title')}</h2>
+        <SpotlightCard>
+          <div className="p-5">
+          <h2 className="font-semibold text-gray-800 dark:text-white mb-4">{t('report.filters.title')}</h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm text-gray-600 mb-1">{t('report.filters.from')}</label>
@@ -108,8 +110,8 @@ export default function Reporting() {
                   onClick={() => toggleSector(s.id)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                     selectedSectors.includes(s.id)
-                      ? "bg-blue-700 text-white border-blue-700"
-                      : "bg-white text-gray-700 border-gray-300 hover:border-blue-400"
+                      ? "bg-navy-700 text-white border-navy-700"
+                      : "bg-white text-gray-700 border-gray-300 hover:border-navy-400"
                   }`}
                 >
                   {s.icon} {s.name}
@@ -117,7 +119,8 @@ export default function Reporting() {
               ))}
             </div>
           </div>
-        </div>
+          </div>
+        </SpotlightCard>
 
         {/* Résumé */}
         {report?.summary && (
@@ -128,7 +131,7 @@ export default function Reporting() {
               { label: t('report.summary.taxes'), value: formatCurrency(report.summary.total_tax), icon: Receipt },
             ].map(s => (
               <div key={s.label} className="stat-card text-center">
-                <span className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-700 mb-2">
+                <span className="inline-flex p-2 rounded-lg bg-navy-100 text-navy-700 mb-2">
                   <s.icon className="w-5 h-5" aria-hidden="true" />
                 </span>
                 <div className="text-2xl font-extrabold text-gray-900">{s.value}</div>

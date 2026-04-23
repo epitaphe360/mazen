@@ -1002,8 +1002,8 @@ export default function Home() {
               transition={{ duration: 0.7 }}
             >
               <div className="relative">
-                <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 border border-blue-900/50 shadow-2xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-4">Our approach in 3 steps</p>
+                <div className="bg-navy-950 rounded-3xl p-8 border border-navy-800/50 shadow-2xl">
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold-400 mb-4">Our approach in 3 steps</p>
                   <div className="space-y-5">
                     {[
                       {

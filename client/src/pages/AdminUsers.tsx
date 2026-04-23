@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { SpotlightCard } from "../design-system";
 
 export default function AdminUsers() {
   const { user: currentUser } = useAuthContext();
@@ -18,29 +19,35 @@ export default function AdminUsers() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">User management</h1>
-          <p className="text-gray-500">Manage roles and access rights of registered users</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">User management</h1>
+          <p className="text-gray-500 dark:text-navy-400">Manage roles and access rights of registered users</p>
         </div>
 
         {/* Statistiques rapides */}
         {data && (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-govblue">{data.total}</p>
-              <p className="text-sm text-gray-500 mt-1">Total users</p>
-            </div>
-            <div className="card text-center">
+            <SpotlightCard>
+              <div className="p-5 text-center">
+              <p className="text-3xl font-bold text-navy-600 dark:text-gold-400">{data.total}</p>
+              <p className="text-sm text-gray-500 dark:text-navy-400 mt-1">Total users</p>
+              </div>
+            </SpotlightCard>
+            <SpotlightCard>
+              <div className="p-5 text-center">
               <p className="text-3xl font-bold text-green-600">
                 {(data.data ?? []).filter(u => u.role === "admin").length}
               </p>
-              <p className="text-sm text-gray-500 mt-1">Administrators</p>
-            </div>
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-gray-600">
+              <p className="text-sm text-gray-500 dark:text-navy-400 mt-1">Administrators</p>
+              </div>
+            </SpotlightCard>
+            <SpotlightCard>
+              <div className="p-5 text-center">
+              <p className="text-3xl font-bold text-gray-600 dark:text-navy-300">
                 {(data.data ?? []).filter(u => u.role === "user").length}
               </p>
-              <p className="text-sm text-gray-500 mt-1">Standard users</p>
-            </div>
+              <p className="text-sm text-gray-500 dark:text-navy-400 mt-1">Standard users</p>
+              </div>
+            </SpotlightCard>
           </div>
         )}
 
@@ -79,12 +86,12 @@ export default function AdminUsers() {
                       <tr key={u.id} className="hover:bg-gray-50 transition-colors">
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-govblue flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-navy-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                               {(u.name ?? u.email ?? "?").charAt(0).toUpperCase()}
                             </div>
                             <div>
                               <p className="font-medium text-gray-900">{u.name ?? "—"}</p>
-                              {isSelf && <p className="text-xs text-govblue">You</p>}
+                              {isSelf && <p className="text-xs text-navy-600 dark:text-gold-400">You</p>}
                             </div>
                           </div>
                         </td>
@@ -120,7 +127,7 @@ export default function AdminUsers() {
                           ) : (
                             <button
                               onClick={() => setChanging(u.id as string)}
-                              className="px-3 py-1 text-xs text-govblue border border-govblue/30 rounded-lg hover:bg-blue-50 transition-colors"
+                              className="px-3 py-1 text-xs text-navy-600 border border-navy-600/30 rounded-lg hover:bg-navy-50 dark:hover:bg-navy-900 transition-colors"
                             >
                               Change role
                             </button>

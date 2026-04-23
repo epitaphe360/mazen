@@ -36,7 +36,7 @@ export default function Alerts() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               Alerts & Anomalies
               {unresolvedCount !== null && unresolvedCount > 0 && (
                 <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white text-xs font-bold">
@@ -44,7 +44,7 @@ export default function Alerts() {
                 </span>
               )}
             </h1>
-            <p className="text-gray-500">Monitoring of detected anomalies and compliance incidents</p>
+            <p className="text-gray-500 dark:text-navy-400">Monitoring of detected anomalies and compliance incidents</p>
           </div>
         </div>
 

@@ -66,7 +66,7 @@ export default function NewsDetail() {
         {/* Méta */}
         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-8 pb-8 border-b border-gray-200">
           <span className="flex items-center gap-1.5">
-            <span className="w-7 h-7 rounded-full bg-govblue flex items-center justify-center text-white text-xs font-bold">
+            <span className="w-7 h-7 rounded-full bg-navy-600 flex items-center justify-center text-white text-xs font-bold">
               {article.author?.charAt(0).toUpperCase() ?? "M"}
             </span>
             {article.author ?? "Mazen GovTech Group"}
@@ -106,9 +106,10 @@ export default function NewsDetail() {
         </article>
 
         {/* CTA Newsletter */}
-        <div className="mt-12 p-8 bg-gradient-to-br from-blue-950 to-blue-800 rounded-2xl text-white text-center">
+        <div className="mt-12 p-8 bg-navy-950 rounded-2xl text-white text-center relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,_rgba(212,175,55,0.1),_transparent)]" />
           <h3 className="text-xl font-bold mb-2">{t('news.detail.cta.title')}</h3>
-          <p className="text-blue-200 mb-5 text-sm">{t('news.detail.cta.subtitle')}</p>
+          <p className="text-navy-300 mb-5 text-sm">{t('news.detail.cta.subtitle')}</p>
           {newsletterSent ? (
             <p className="inline-flex items-center gap-2 bg-green-500/20 border border-green-400/30 text-green-300 px-5 py-2.5 rounded-lg text-sm font-medium">
               ✅ {t('news.detail.cta.thanks')}
@@ -155,7 +156,7 @@ export default function NewsDetail() {
                     )}
                     <div className="p-4">
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${relCfg.color}`}>{relCfg.label}</span>
-                      <h3 className="mt-2 text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-govblue transition-colors">
+                      <h3 className="mt-2 text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-navy-700 transition-colors">
                         {rel.title}
                       </h3>
                       <p className="mt-1 text-xs text-gray-400">

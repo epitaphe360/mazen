@@ -39,8 +39,8 @@ export default function Transactions() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Transactions</h1>
-          <p className="text-gray-500">Complete history of transactions by sector and operator</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Transactions</h1>
+          <p className="text-gray-500 dark:text-navy-400">Complete history of transactions by sector and operator</p>
         </div>
 
         {/* Filtres */}
@@ -88,7 +88,7 @@ export default function Transactions() {
             </div>
           </div>
           <div className="mt-3 flex justify-end">
-            <button onClick={resetFilters} className="text-sm text-govblue hover:underline">
+            <button onClick={resetFilters} className="text-sm text-navy-600 hover:underline">
               Reset filters
             </button>
           </div>

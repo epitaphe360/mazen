@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { trpc } from "../lib/trpc";
 import { SECTORS_DATA } from "@shared/types";
@@ -6,6 +7,8 @@ import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { CalendarClock, Globe, Mail, ShieldCheck, ArrowRight } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
+import AuroraBackground from "../design-system/AuroraBackground";
+import { SpotlightCard } from "../design-system";
 
 const COUNTRIES = [
   "France", "Morocco", "Senegal", "Ivory Coast", "Tunisia", "Algeria", "Mali", "Cameroon",
@@ -39,7 +42,7 @@ export default function Contact() {
   if (success) {
     return (
       <div className="min-h-screen page-atmosphere flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-6 glass-panel py-10">
+        <div className="text-center max-w-md mx-auto px-6 bg-white rounded-3xl border border-gray-100 shadow-xl py-10">
           <div className="text-6xl mb-4">✅</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-3">{t('contact.success.title')}</h1>
           <p className="text-gray-600 mb-6">{t('contact.success.subtitle')}</p>
@@ -53,16 +56,23 @@ export default function Contact() {
     <div className="min-h-screen page-atmosphere">
       <PublicNavbar ctaLabel="Login" ctaHref="/login" />
 
+      {/* ─── Hero ─── */}
+      <section className="relative pt-16 pb-16 bg-navy-950 text-white overflow-hidden">
+        <AuroraBackground className="opacity-70" />
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")', backgroundSize: '200px' }}
+        />
+        <div className="max-w-7xl mx-auto px-6 pt-12 relative">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+            <p className="text-xs uppercase tracking-[0.2em] text-gold-400 font-bold mb-3">{t('contact.hero.kicker')}</p>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-3 leading-tight">{t('contact.hero.title')}</h1>
+            <p className="text-navy-300 max-w-3xl">{t('contact.hero.subtitle')}</p>
+          </motion.div>
+        </div>
+      </section>
+
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <section className="glass-panel p-8 md:p-10 mb-10 relative overflow-hidden">
-          <div className="absolute right-0 top-0 w-56 h-56 rounded-full bg-blue-200/30 blur-3xl" aria-hidden="true" />
-          <div className="absolute left-0 bottom-0 w-48 h-48 rounded-full bg-amber-200/35 blur-3xl" aria-hidden="true" />
-          <div className="relative">
-            <p className="text-xs uppercase tracking-[0.2em] text-blue-700 font-bold mb-3">{t('contact.hero.kicker')}</p>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">{t('contact.hero.title')}</h1>
-            <p className="text-gray-700 max-w-3xl">{t('contact.hero.subtitle')}</p>
-          </div>
-        </section>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Côté gauche — Info */}
@@ -75,32 +85,35 @@ export default function Contact() {
                 { icon: CalendarClock, title: t('contact.channels.demo.title'), desc: t('contact.channels.demo.desc') },
                 { icon: Globe, title: t('contact.channels.solutions.title'), desc: t('contact.channels.solutions.desc') },
               ].map(item => (
-                <div key={item.title} className="editorial-card flex gap-4">
-                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 text-blue-700 flex-shrink-0">
+                <SpotlightCard key={item.title}>
+                  <div className="flex gap-4 p-4">
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-navy-100 text-navy-700 flex-shrink-0">
                     <item.icon className="w-5 h-5" aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="font-semibold text-gray-900">{item.title}</h3>
                     <p className="text-gray-600 text-sm">{item.desc}</p>
-                    {item.action && <a href={`mailto:${item.action}`} className="text-blue-600 text-sm font-medium hover:underline">{item.action}</a>}
+                    {item.action && <a href={`mailto:${item.action}`} className="text-gold-600 text-sm font-medium hover:underline">{item.action}</a>}
                   </div>
-                </div>
+                  </div>
+                </SpotlightCard>
               ))}
             </div>
 
-            <div className="mt-6 editorial-card bg-blue-950 text-white border-blue-900">
+            <div className="mt-6 rounded-2xl bg-navy-900 text-white border border-navy-700 p-5">
               <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-amber-300 mt-0.5" aria-hidden="true" />
+                <ShieldCheck className="w-5 h-5 text-gold-400 mt-0.5" aria-hidden="true" />
                 <div>
                   <p className="font-semibold">{t('contact.security.title')}</p>
-                  <p className="text-sm text-blue-100 mt-1">{t('contact.security.desc')}</p>
+                  <p className="text-sm text-navy-300 mt-1">{t('contact.security.desc')}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Formulaire */}
-          <div className="glass-panel p-6 md:p-8">
+          <SpotlightCard>
+          <div className="p-6 md:p-8">
             <h2 className="text-xl font-bold text-gray-900 mb-6">{t('contact.form.title')}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
@@ -146,7 +159,7 @@ export default function Contact() {
                       type="button"
                       onClick={() => setForm(p => ({ ...p, request_type: type }))}
                       className={`flex-1 py-2 text-sm rounded-lg border font-medium transition-colors ${
-                        form.request_type === type ? "bg-blue-700 text-white border-blue-700" : "bg-white text-gray-700 border-gray-300 hover:border-blue-400"
+                        form.request_type === type ? "bg-navy-700 text-white border-navy-700" : "bg-white text-gray-700 border-gray-300 hover:border-navy-400"
                       }`}
                     >
                       {type === "demo" ? t('contact.form.types.demo') : type === "information" ? t('contact.form.types.information') : t('contact.form.types.partnership')}
@@ -183,6 +196,7 @@ export default function Contact() {
               </button>
             </form>
           </div>
+          </SpotlightCard>
         </div>
       </div>
       <PublicFooter />

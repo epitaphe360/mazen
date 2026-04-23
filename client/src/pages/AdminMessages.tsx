@@ -23,10 +23,10 @@ export default function AdminMessages() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
               Contact messages
             </h1>
-            <p className="text-gray-500">Requests received via the contact form</p>
+            <p className="text-gray-500 dark:text-navy-400">Requests received via the contact form</p>
           </div>
           {/* Toggle non lus */}
           <label className="flex items-center gap-2 cursor-pointer">
@@ -34,7 +34,7 @@ export default function AdminMessages() {
               type="checkbox"
               checked={unreadOnly}
               onChange={e => { setUnreadOnly(e.target.checked); setPage(1); }}
-              className="w-4 h-4 rounded accent-govblue"
+              className="w-4 h-4 rounded accent-navy-600"
             />
             <span className="text-sm font-medium text-gray-700">Unread only</span>
           </label>
@@ -57,11 +57,11 @@ export default function AdminMessages() {
               return (
                 <div
                   key={msg.id}
-                  className={`card border-l-4 transition-all ${msg.is_read ? "border-l-gray-200 opacity-75" : "border-l-govblue"}`}
+                  className={`card border-l-4 transition-all ${msg.is_read ? "border-l-gray-200 opacity-75" : "border-l-navy-600"}`}
                 >
                   <div className="flex items-start gap-4">
                     {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-govblue flex items-center justify-center text-white font-bold flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-navy-600 flex items-center justify-center text-white font-bold flex-shrink-0">
                       {(msg.name as string).charAt(0).toUpperCase()}
                     </div>
 
@@ -74,7 +74,7 @@ export default function AdminMessages() {
                         <span className="text-gray-400">·</span>
                         <span className="text-sm text-gray-500">{msg.country as string}</span>
                         {!msg.is_read && (
-                          <span className="badge bg-govblue text-white text-xs">New</span>
+                          <span className="badge bg-navy-600 text-white text-xs">New</span>
                         )}
                       </div>
                       <div className="flex flex-wrap gap-2 mb-2">
@@ -97,7 +97,7 @@ export default function AdminMessages() {
                       <div className="flex items-center gap-3 mt-2">
                         <button
                           onClick={() => setExpanded(isExpanded ? null : msg.id as number)}
-                          className="text-xs text-govblue hover:underline"
+                          className="text-xs text-navy-600 hover:underline"
                         >
                           {isExpanded ? "Collapse" : "Read full message"}
                         </button>
@@ -112,7 +112,7 @@ export default function AdminMessages() {
                         )}
                         <a
                           href={`mailto:${msg.email as string}?subject=Re: ${REQUEST_TYPE_LABELS[msg.request_type as string] ?? "Your request"} — Mazen GovTech Group`}
-                          className="text-xs text-gray-500 hover:text-govblue"
+                          className="text-xs text-gray-500 hover:text-navy-600"
                         >
                           ✉️ Reply
                         </a>

@@ -56,8 +56,8 @@ export default function SectorManagement() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('sectors.page.title')}</h1>
-            <p className="text-gray-500">{t('sectors.page.subtitle')}</p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t('sectors.page.title')}</h1>
+            <p className="text-gray-500 dark:text-navy-400">{t('sectors.page.subtitle')}</p>
           </div>
           {isAdmin && (
             <button
@@ -71,7 +71,7 @@ export default function SectorManagement() {
 
         {/* Formulaire création/édition */}
         {showForm && isAdmin && (
-          <div className="card border-2 border-blue-200">
+          <div className="card border-2 border-navy-200 dark:border-navy-600/30">
             <h2 className="font-semibold text-gray-900 mb-4">
               {editing ? t('sectors.form.editTitle') : t('sectors.form.newTitle')}
             </h2>

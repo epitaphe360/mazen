@@ -133,7 +133,7 @@ export default function AdminNews() {
 
         {/* Create/edit form */}
         {showForm && (
-          <div className="card border-2 border-govblue/20">
+          <div className="card border-2 border-navy-600/20">
             <h2 className="text-lg font-semibold text-gray-900 mb-5">
               {editId ? "Edit article" : "Create article"}
             </h2>
@@ -294,11 +294,11 @@ export default function AdminNews() {
                       <td className="px-4 py-3 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <a href={`/news/${article.slug}`} target="_blank" rel="noopener noreferrer"
-                            className="p-1.5 text-gray-400 hover:text-govblue rounded transition-colors" title="View article">
+                            className="p-1.5 text-gray-400 hover:text-navy-600 rounded transition-colors" title="View article">
                             👁
                           </a>
                           <button onClick={() => openEdit(article)}
-                            className="p-1.5 text-gray-400 hover:text-govblue rounded transition-colors" title="Edit">
+                            className="p-1.5 text-gray-400 hover:text-navy-600 rounded transition-colors" title="Edit">
                             ✏️
                           </button>
                           <button onClick={() => setDeleteTarget({ id: article.id as number, title: article.title })}
