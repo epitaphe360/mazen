@@ -391,9 +391,9 @@ export default function MaritimeSurveillance() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <SectionHeader
-              tag="03 — Architecture technique"
-              title="Conçue pour les environnements défense"
-              subtitle="Chaque composant a été sélectionné sur la base de critères de fiabilité, de robustesse en milieu maritime hostile et de compatibilité avec les infrastructures gouvernementales existantes. Disponibilité supérieure à 99,5% en conditions opérationnelles normales."
+              tag="03 — Technical Architecture"
+              title="Designed for defense environments"
+              subtitle="Each component was selected for reliability, robustness in harsh maritime environments, and compatibility with existing government infrastructures. Availability above 99.5% under normal operational conditions."
             />
           </motion.div>
 

@@ -37,7 +37,7 @@ export default function News() {
 
   return (
     <div className="min-h-screen page-atmosphere">
-      <PublicNavbar ctaLabel="Demander une présentation" ctaHref="/contact" />
+      <PublicNavbar ctaLabel={t('cta.requestDemo')} ctaHref="/contact" />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header */}

@@ -51,8 +51,8 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link href="/">
             <a className="inline-flex items-center gap-2 text-white">
-              <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Groupe" className="h-14 w-auto object-contain" />
-                <span className="text-2xl font-bold">Mazen GovTech Groupe</span>
+                <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Group" className="h-14 w-auto object-contain" />
+                  <span className="text-2xl font-bold">Mazen GovTech Group</span>
             </a>
           </Link>
             <p className="text-blue-200 mt-2 text-sm">{t('login.subtitle')}</p>
@@ -137,7 +137,7 @@ export default function Login() {
             </div>
 
             {error && (
-                <div className={`p-3 rounded-lg text-sm ${error.includes("Vérifiez") ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
+                <div className={`p-3 rounded-lg text-sm ${/verify|check/i.test(error) ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
                 {error}
               </div>
             )}

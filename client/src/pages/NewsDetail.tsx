@@ -48,7 +48,7 @@ export default function NewsDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <PublicNavbar ctaLabel="Connexion" ctaHref="/login" />
+      <PublicNavbar ctaLabel={t('nav.login')} ctaHref="/login" />
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         {/* Catégorie */}
@@ -69,14 +69,14 @@ export default function NewsDetail() {
             <span className="w-7 h-7 rounded-full bg-govblue flex items-center justify-center text-white text-xs font-bold">
               {article.author?.charAt(0).toUpperCase() ?? "M"}
             </span>
-            {article.author ?? "Mazen GovTech Groupe"}
+            {article.author ?? "Mazen GovTech Group"}
           </span>
           <span>·</span>
           <time dateTime={article.published_at}>{publishedDate}</time>
           {article.read_time != null && (
             <>
               <span>·</span>
-              <span>⏱ {article.read_time} min de lecture</span>
+              <span>⏱ {article.read_time} min read</span>
             </>
           )}
         </div>
@@ -123,7 +123,7 @@ export default function NewsDetail() {
             >
               <input
                 type="email"
-                placeholder="votre@email.com"
+                placeholder="you@organization.gov"
                 value={newsletterEmail}
                 onChange={e => setNewsletterEmail(e.target.value)}
                 required
@@ -133,16 +133,16 @@ export default function NewsDetail() {
                 type="submit"
                 className="px-5 py-2 bg-amber-500 text-white font-semibold rounded-lg text-sm hover:bg-amber-600 transition-colors whitespace-nowrap"
               >
-                S'abonner
+                Subscribe
               </button>
             </form>
           )}
         </div>
 
-        {/* Articles connexes */}
+        {/* Related articles */}
         {related.length > 0 && (
           <section className="mt-14">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Articles connexes</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-6">Related articles</h2>
             <div className="grid sm:grid-cols-3 gap-5">
               {related.map(rel => {
                 const relCfg = CATEGORY_CONFIG[rel.category] ?? { label: rel.category, color: "bg-gray-100 text-gray-700" };
@@ -159,7 +159,7 @@ export default function NewsDetail() {
                         {rel.title}
                       </h3>
                       <p className="mt-1 text-xs text-gray-400">
-                        {new Date(rel.published_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
+                        {rel.published_at ? new Date(rel.published_at).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }) : ""}
                       </p>
                     </div>
                   </Link>
