@@ -46,7 +46,7 @@ export default function Contact() {
           <div className="text-6xl mb-4">✅</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-3">{t('contact.success.title')}</h1>
           <p className="text-gray-600 mb-6">{t('contact.success.subtitle')}</p>
-          <Link href="/"><a className="btn-primary">{t('contact.success.backToHome')}</a></Link>
+          <Link href="/" className="btn-primary">{t('contact.success.backToHome')}</Link>
         </div>
       </div>
     );

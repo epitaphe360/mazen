@@ -207,10 +207,8 @@ export default function MaritimeSurveillance() {
               Distributed multi-sensor architecture combining long-range radars, smart buoys and an integrated command center for continuous maritime coverage with no blind spots.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact">
-                <a className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-cyan-500/20">
-                  Request a presentation <ArrowRight className="w-4 h-4" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-cyan-500/20">
+                Request a presentation <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#concept"
@@ -651,11 +649,9 @@ export default function MaritimeSurveillance() {
               ))}
             </div>
 
-            <Link href="/contact">
-              <a className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-cyan-500/20">
-                Schedule the POC with our experts
-                <ArrowRight className="w-5 h-5" />
-              </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-cyan-500/20">
+              Schedule the POC with our experts
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
         </div>

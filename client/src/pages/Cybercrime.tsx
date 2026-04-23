@@ -175,10 +175,8 @@ export default function Cybercrime() {
             </div>
 
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact">
-                <a className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm transition-all shadow-lg shadow-gold-500/30">
-                  Talk to our team <ArrowRight className="w-4 h-4" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm transition-all shadow-lg shadow-gold-500/30">
+                Talk to our team <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </motion.div>
@@ -334,10 +332,8 @@ export default function Cybercrime() {
             <p className="text-navy-300 mb-8">
               Contact MAZEN to discuss how our partner network can support your national cybercrime investigation capability.
             </p>
-            <Link href="/contact">
-              <a className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-black text-sm transition-all shadow-xl shadow-gold-500/30">
-                Contact our cybercrime team <ArrowRight className="w-4 h-4" />
-              </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-black text-sm transition-all shadow-xl shadow-gold-500/30">
+              Contact our cybercrime team <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

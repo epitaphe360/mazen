@@ -15,7 +15,7 @@ export default function NotFound() {
           <p className="text-9xl font-extrabold text-blue-100">404</p>
           <h1 className="text-3xl font-bold text-gray-900 -mt-4 mb-4">{t('notFound.title')}</h1>
           <p className="text-gray-500 mb-8">{t('notFound.description')}</p>
-          <Link href="/"><a className="btn-primary">{t('notFound.back')}</a></Link>
+          <Link href="/" className="btn-primary">{t('notFound.back')}</Link>
         </div>
       </div>
       <PublicFooter />

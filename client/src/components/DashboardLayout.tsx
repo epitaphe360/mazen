@@ -118,21 +118,21 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
             const active = location === item.href || location.startsWith(item.href + "/");
             const Icon = item.icon;
             return (
-              <Link key={item.href} href={item.href}>
-                <a
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
-                    active
-                      ? "bg-gold-500/20 text-gold-300 border border-gold-500/30"
-                      : "text-white/60 hover:bg-white/8 hover:text-white"
-                  }`}
-                >
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 ${
+                  active
+                    ? "bg-gold-500/20 text-gold-300 border border-gold-500/30"
+                    : "text-white/60 hover:bg-white/8 hover:text-white"
+                }`}
+              >
                   <Icon className={`w-4 h-4 flex-shrink-0 ${active ? "text-gold-400" : ""}`} aria-hidden="true" />
                   {!collapsed && <span>{item.label}</span>}
                   {!collapsed && active && (
                     <span className="ml-auto w-1.5 h-1.5 rounded-full bg-gold-400" />
                   )}
-                </a>
-              </Link>
+                </Link>
             );
           })}
 
@@ -145,12 +145,14 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           {PUBLIC_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
-              <Link key={item.href} href={item.href}>
-                <a className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:bg-white/8 hover:text-white transition-colors">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:bg-white/8 hover:text-white transition-colors"
+              >
                   <Icon className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                   {!collapsed && <span>{item.label}</span>}
-                </a>
-              </Link>
+                </Link>
             );
           })}
         </nav>
@@ -243,16 +245,15 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
             {/* User avatar */}
             {user && (
               <div className="flex items-center gap-2">
-                <Link href="/dashboard/profile">
-                  <a
+                  <Link
+                    href="/dashboard/profile"
                     title="My profile"
                     className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black transition-all ${
                       isDark ? "bg-navy-700 text-gold-300 border border-gold-500/30 hover:border-gold-400/60" : "bg-navy-800 text-white hover:opacity-80"
                     }`}
                   >
                     {user.name?.[0]?.toUpperCase() ?? "U"}
-                  </a>
-                </Link>
+                  </Link>
                 <span
                   className={`text-sm font-semibold hidden sm:block ${
                     isDark ? "text-white/70" : "text-slate-700"

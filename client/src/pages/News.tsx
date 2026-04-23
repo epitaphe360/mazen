@@ -137,9 +137,7 @@ export default function News() {
           <div className="relative">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">{t('news.cta.title')}</h2>
           <p className="text-navy-300 mb-6 max-w-2xl mx-auto">{t('news.cta.subtitle')}</p>
-          <Link href="/contact">
-            <a className="btn-gold">{t('news.cta.subscribe')}</a>
-          </Link>
+          <Link href="/contact" className="btn-gold">{t('news.cta.subscribe')}</Link>
           </div>
         </div>
       </div>

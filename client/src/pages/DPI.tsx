@@ -210,15 +210,11 @@ export default function DPI() {
               MAZEN's DPI platform gives governments and telecom regulators independent, real-time visibility into all network flows — closing the gap between operator declarations and actual taxable digital revenues.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="/contact">
-                <a className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm transition-all shadow-lg shadow-gold-500/30">
-                  Request a demo <ArrowRight className="w-4 h-4" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold text-sm transition-all shadow-lg shadow-gold-500/30">
+                Request a demo <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/case-studies">
-                <a className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-white font-semibold text-sm transition-all">
-                  Field deployments
-                </a>
+              <Link href="/case-studies" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-white font-semibold text-sm transition-all">
+                Field deployments
               </Link>
             </div>
           </motion.div>
@@ -464,10 +460,8 @@ export default function DPI() {
             <p className="text-navy-300 mb-8">
               Talk to our network intelligence team to assess a DPI deployment adapted to your national telecom infrastructure.
             </p>
-            <Link href="/contact">
-              <a className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-black text-sm transition-all shadow-xl shadow-gold-500/30">
-                Request a deployment assessment <ArrowRight className="w-4 h-4" />
-              </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-black text-sm transition-all shadow-xl shadow-gold-500/30">
+              Request a deployment assessment <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>

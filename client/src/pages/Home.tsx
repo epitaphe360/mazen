@@ -836,12 +836,10 @@ export default function Home() {
                 consolidated fiscal flow monitoring, anomaly detection and executive decision-making in real time.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-14">
-                <Link href="/contact">
-                  <MagneticAnchor className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-gold-500/30 text-sm glow-ring">
-                    {t('cta.requestDemo')}
-                    <ArrowRight className="w-4 h-4" />
-                  </MagneticAnchor>
-                </Link>
+                <MagneticAnchor href="/contact" className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-gold-500/30 text-sm glow-ring">
+                  {t('cta.requestDemo')}
+                  <ArrowRight className="w-4 h-4" />
+                </MagneticAnchor>
                 <MagneticAnchor
                   href="#references"
                   className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-4 rounded-xl hover:bg-white/10 transition-all text-sm backdrop-blur-sm"
@@ -1090,39 +1088,37 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.6 }}
               >
-                <Link href={sol.href}>
-                  <a className={`block rounded-3xl border ${sol.border} bg-white/5 hover:bg-white/8 transition-all duration-300 overflow-hidden group h-full`}>
-                    {/* Accent bar */}
-                    <div className={`h-1 w-full bg-gradient-to-r ${sol.accent}`} />
-                    <div className="relative h-52 overflow-hidden border-b border-white/10">
-                      <img src={sol.image} alt={sol.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
-                      <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">Priority solution</div>
-                    </div>
-                    <div className="p-7">
-                      <div className="flex items-start justify-between mb-5">
-                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center shadow-lg`}>
-                          <sol.icon className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 bg-white/8 px-3 py-1 rounded-full border border-white/10">
-                          {sol.tag}
-                        </span>
+                <Link href={sol.href} className={`block rounded-3xl border ${sol.border} bg-white/5 hover:bg-white/8 transition-all duration-300 overflow-hidden group h-full`}>
+                  {/* Accent bar */}
+                  <div className={`h-1 w-full bg-gradient-to-r ${sol.accent}`} />
+                  <div className="relative h-52 overflow-hidden border-b border-white/10">
+                    <img src={sol.image} alt={sol.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
+                    <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">Priority solution</div>
+                  </div>
+                  <div className="p-7">
+                    <div className="flex items-start justify-between mb-5">
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center shadow-lg`}>
+                        <sol.icon className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="font-extrabold text-white text-xl mb-3 group-hover:text-amber-300 transition-colors">
-                        {sol.label}
-                      </h3>
-                      <p className="text-blue-200/60 text-sm leading-relaxed mb-6">{sol.desc}</p>
-                      <div className="flex items-end justify-between border-t border-white/8 pt-5">
-                        <div>
-                          <p className="text-3xl font-extrabold text-amber-400">{sol.metric}</p>
-                          <p className="text-xs text-blue-300/60">{sol.metricLabel}</p>
-                        </div>
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-300 group-hover:text-amber-300 transition-colors">
-                          Discover <ArrowRight className="w-3.5 h-3.5" />
-                        </span>
-                      </div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-white/40 bg-white/8 px-3 py-1 rounded-full border border-white/10">
+                        {sol.tag}
+                      </span>
                     </div>
-                  </a>
+                    <h3 className="font-extrabold text-white text-xl mb-3 group-hover:text-amber-300 transition-colors">
+                      {sol.label}
+                    </h3>
+                    <p className="text-blue-200/60 text-sm leading-relaxed mb-6">{sol.desc}</p>
+                    <div className="flex items-end justify-between border-t border-white/8 pt-5">
+                      <div>
+                        <p className="text-3xl font-extrabold text-amber-400">{sol.metric}</p>
+                        <p className="text-xs text-blue-300/60">{sol.metricLabel}</p>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-300 group-hover:text-amber-300 transition-colors">
+                        Discover <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               </motion.div>
             ))}
@@ -1270,11 +1266,9 @@ export default function Home() {
               <p className="text-gray-500 leading-relaxed mb-6">
                 Our solutions bring transparency and fiscal traceability across the modern digital economy — from telecoms to online gaming.
               </p>
-              <Link href="/contact">
-                <a className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm">
-                  Discuss your sector
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm">
+                Discuss your sector
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
 
@@ -1536,11 +1530,9 @@ export default function Home() {
                 Our teams support ministries and administrations in modernizing the public revenue chain — from strategy to operational deployment.
               </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <a className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-8 py-4.5 py-[18px] rounded-xl transition-all shadow-xl shadow-amber-500/20 text-base">
-                  Schedule a demo
-                  <ArrowRight className="w-5 h-5" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-8 py-[18px] rounded-xl transition-all shadow-xl shadow-amber-500/20 text-base">
+                Schedule a demo
+                <ArrowRight className="w-5 h-5" />
               </Link>
               <a
                 href="mailto:contact@mazen-govtech.com"

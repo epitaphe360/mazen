@@ -56,8 +56,7 @@ export default function PublicFooter() {
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 pb-12 border-b border-white/10">
           {/* Brand block */}
           <div>
-            <Link href="/">
-              <a className="flex items-center gap-3 mb-5">
+            <Link href="/" className="flex items-center gap-3 mb-5">
                 <img
                   src="/mazen-logo.jpg?v=20260413"
                   alt="Mazen GovTech Group"
@@ -71,8 +70,7 @@ export default function PublicFooter() {
                     Sovereign Strategic Infrastructure Company
                   </div>
                 </div>
-              </a>
-            </Link>
+              </Link>
             <p className="text-sm text-white/65 leading-relaxed max-w-md mb-6">
               Since 1986, Mazen GovTech Group has equipped sovereign states with certified
               fiscal-flow supervision and maritime intelligence platforms — engineered for absolute
@@ -125,12 +123,13 @@ export default function PublicFooter() {
                 <ul className="space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.href + link.fallback}>
-                      <Link href={link.href}>
-                        <a className="group inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors link-underline">
+                      <Link
+                        href={link.href}
+                        className="group inline-flex items-center gap-1 text-sm text-white/70 hover:text-white transition-colors link-underline"
+                      >
                           {link.labelKey ? t(link.labelKey) || link.fallback : link.fallback}
                           <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0 transition-all" />
-                        </a>
-                      </Link>
+                        </Link>
                     </li>
                   ))}
                 </ul>
@@ -144,11 +143,11 @@ export default function PublicFooter() {
           <div className="flex flex-wrap items-center gap-4">
             <span>© {year} Mazen GovTech Group. All rights reserved.</span>
             <span className="hidden md:inline text-white/20">·</span>
-            <Link href="/legal"><a className="hover:text-white transition-colors">Legal notice</a></Link>
+            <Link href="/legal" className="hover:text-white transition-colors">Legal notice</Link>
             <span className="text-white/20">·</span>
-            <Link href="/privacy"><a className="hover:text-white transition-colors">Privacy</a></Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <span className="text-white/20">·</span>
-            <Link href="/terms"><a className="hover:text-white transition-colors">Terms</a></Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </div>
 
           <div className="flex items-center gap-3">

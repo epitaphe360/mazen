@@ -135,11 +135,9 @@ export default function About() {
             <span className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4 block">Partnership</span>
             <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Let's work together</h2>
             <p className="text-navy-300 mb-8 text-lg">Discover how Mazen GovTech Group can transform your country's public revenues.</p>
-            <Link href="/contact">
-              <a className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-gold-500/20">
-                {t('cta.contact')}
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-gold-500/20">
+              {t('cta.contact')}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </Link>
           </motion.div>
         </div>

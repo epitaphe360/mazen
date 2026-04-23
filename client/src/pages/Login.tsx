@@ -69,8 +69,7 @@ export default function Login() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-3 group">
+          <Link href="/" className="inline-flex items-center gap-3 group">
               <img
                 src="/mazen-logo.jpg?v=20260413"
                 alt="Mazen GovTech Group"
@@ -79,8 +78,7 @@ export default function Login() {
               <span className="text-xl font-black text-white tracking-tight group-hover:text-gold-300 transition-colors">
                 Mazen GovTech
               </span>
-            </a>
-          </Link>
+            </Link>
           <p className="text-white/40 mt-2.5 text-sm">{t("login.subtitle")}</p>
         </div>
 
@@ -250,11 +248,9 @@ export default function Login() {
 
         {/* Footer links */}
         <div className="flex items-center justify-between mt-5 px-1">
-          <Link href="/">
-            <a className="text-xs text-white/30 hover:text-white/60 transition-colors">
+          <Link href="/" className="text-xs text-white/30 hover:text-white/60 transition-colors">
               ← {t("login.backToSite")}
-            </a>
-          </Link>
+            </Link>
           <div className="flex items-center gap-1.5 text-[10px] text-white/20 font-mono">
             <Terminal className="w-3 h-3" />
             Press{" "}

@@ -107,23 +107,21 @@ export default function PublicNavbar({
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/">
-          <a className="flex items-center gap-3 group" aria-label="Back to homepage">
-            <img
-              src="/mazen-logo.jpg?v=20260413"
-              alt="Mazen GovTech Group"
-              className="h-10 w-auto object-contain rounded-lg ring-1 ring-navy-100 group-hover:ring-gold-400/50 transition-all"
-            />
-            <div className="hidden md:block">
-              <div className="text-sm font-black text-navy-950 leading-tight tracking-tight">
-                Mazen GovTech{" "}
-                <span className="text-navy-600">Group</span>
-              </div>
-              <div className="text-[11px] text-slate-400 font-medium tracking-wide">
-                Sovereign Strategic Infrastructure
-              </div>
+        <Link href="/" className="flex items-center gap-3 group" aria-label="Back to homepage">
+          <img
+            src="/mazen-logo.jpg?v=20260413"
+            alt="Mazen GovTech Group"
+            className="h-10 w-auto object-contain rounded-lg ring-1 ring-navy-100 group-hover:ring-gold-400/50 transition-all"
+          />
+          <div className="hidden md:block">
+            <div className="text-sm font-black text-navy-950 leading-tight tracking-tight">
+              Mazen GovTech{" "}
+              <span className="text-navy-600">Group</span>
             </div>
-          </a>
+            <div className="text-[11px] text-slate-400 font-medium tracking-wide">
+              Sovereign Strategic Infrastructure
+            </div>
+          </div>
         </Link>
 
         {/* Desktop nav */}
@@ -135,19 +133,19 @@ export default function PublicNavbar({
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gold-500 group-hover:w-full transition-all duration-300 rounded-full" />
               </a>
             ) : (
-              <Link key={item.href} href={item.href}>
-                <a
-                  className={`relative py-1 hover:text-navy-800 transition-colors group ${
-                    location === item.href ? "text-navy-900 font-bold" : ""
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`relative py-1 hover:text-navy-800 transition-colors group ${
+                  location === item.href ? "text-navy-900 font-bold" : ""
+                }`}
+              >
+                {item.key ? t(item.key) : item.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-gold-500 rounded-full transition-all duration-300 ${
+                    location === item.href ? "w-full" : "w-0 group-hover:w-full"
                   }`}
-                >
-                  {item.key ? t(item.key) : item.label}
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 bg-gold-500 rounded-full transition-all duration-300 ${
-                      location === item.href ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                </a>
+                />
               </Link>
             )
           )}
@@ -184,28 +182,28 @@ export default function PublicNavbar({
                   {/* Accent bar */}
                   <div className="h-0.5 w-full bg-gradient-to-r from-navy-600 via-gold-400 to-navy-600 mb-1" />
                   {SOLUTIONS.map((sol) => (
-                    <Link key={sol.href} href={sol.href}>
-                      <a
-                        onClick={() => setSolutionsOpen(false)}
-                        className="flex items-start gap-3 px-4 py-3.5 hover:bg-navy-50/70 transition-colors group"
+                    <Link
+                      key={sol.href}
+                      href={sol.href}
+                      onClick={() => setSolutionsOpen(false)}
+                      className="flex items-start gap-3 px-4 py-3.5 hover:bg-navy-50/70 transition-colors group"
+                    >
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors"
+                        style={{ background: `${sol.color}18` }}
                       >
-                        <div
-                          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors"
-                          style={{ background: `${sol.color}18` }}
+                        <sol.icon className="w-4 h-4" style={{ color: sol.color }} />
+                      </div>
+                      <div>
+                        <p
+                          className={`font-bold text-sm transition-colors ${
+                            location === sol.href ? "text-navy-700" : "text-navy-950 group-hover:text-navy-700"
+                          }`}
                         >
-                          <sol.icon className="w-4 h-4" style={{ color: sol.color }} />
-                        </div>
-                        <div>
-                          <p
-                            className={`font-bold text-sm transition-colors ${
-                              location === sol.href ? "text-navy-700" : "text-navy-950 group-hover:text-navy-700"
-                            }`}
-                          >
-                            {sol.label}
-                          </p>
-                          <p className="text-xs text-slate-400 mt-0.5">{sol.desc}</p>
-                        </div>
-                      </a>
+                          {sol.label}
+                        </p>
+                        <p className="text-xs text-slate-400 mt-0.5">{sol.desc}</p>
+                      </div>
                     </Link>
                   ))}
                 </motion.div>
@@ -248,10 +246,11 @@ export default function PublicNavbar({
             </div>
 
             {/* CTA */}
-            <Link href={ctaHref}>
-              <a className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow-navy-500/20 hover:shadow-md">
-                {t("nav.login") || ctaLabel}
-              </a>
+            <Link
+              href={ctaHref}
+              className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow-navy-500/20 hover:shadow-md"
+            >
+              {t("nav.login") || ctaLabel}
             </Link>
           </div>
         </div>
@@ -300,15 +299,15 @@ export default function PublicNavbar({
                     {item.key ? t(item.key) : item.label}
                   </a>
                 ) : (
-                  <Link key={item.href} href={item.href}>
-                    <a
-                      onClick={() => setOpen(false)}
-                      className={`py-2.5 block hover:text-navy-700 transition-colors ${
-                        location === item.href ? "text-navy-700 font-bold" : ""
-                      }`}
-                    >
-                      {item.key ? t(item.key) : item.label}
-                    </a>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`py-2.5 block hover:text-navy-700 transition-colors ${
+                      location === item.href ? "text-navy-700 font-bold" : ""
+                    }`}
+                  >
+                    {item.key ? t(item.key) : item.label}
                   </Link>
                 )
               )}
@@ -336,16 +335,16 @@ export default function PublicNavbar({
                       className="ml-4 border-l-2 border-gold-300 pl-4 overflow-hidden"
                     >
                       {SOLUTIONS.map((sol) => (
-                        <Link key={sol.href} href={sol.href}>
-                          <a
-                            onClick={() => { setOpen(false); setMobileExpanded(false); }}
-                            className={`flex items-center gap-2 py-2.5 text-sm hover:text-navy-700 transition-colors ${
-                              location === sol.href ? "text-navy-700 font-bold" : "text-slate-600"
-                            }`}
-                          >
-                            <sol.icon className="w-4 h-4" style={{ color: sol.color }} />
-                            {sol.label}
-                          </a>
+                        <Link
+                          key={sol.href}
+                          href={sol.href}
+                          onClick={() => { setOpen(false); setMobileExpanded(false); }}
+                          className={`flex items-center gap-2 py-2.5 text-sm hover:text-navy-700 transition-colors ${
+                            location === sol.href ? "text-navy-700 font-bold" : "text-slate-600"
+                          }`}
+                        >
+                          <sol.icon className="w-4 h-4" style={{ color: sol.color }} />
+                          {sol.label}
                         </Link>
                       ))}
                     </motion.div>
@@ -373,13 +372,12 @@ export default function PublicNavbar({
                     EN
                   </button>
                 </div>
-                <Link href={ctaHref}>
-                  <a
-                    onClick={() => setOpen(false)}
-                    className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all"
-                  >
-                    {t("nav.login") || ctaLabel}
-                  </a>
+                <Link
+                  href={ctaHref}
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all"
+                >
+                  {t("nav.login") || ctaLabel}
                 </Link>
               </div>
             </div>

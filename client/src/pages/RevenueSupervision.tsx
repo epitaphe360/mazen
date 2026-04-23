@@ -259,10 +259,8 @@ export default function RevenueSupervision() {
               Integrated platform for supervision and mobilization of public revenues — digital collection, executive real-time dashboard and intelligent tax fraud detection.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/contact">
-                <a className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20">
-                  Request a presentation <ArrowRight className="w-4 h-4" />
-                </a>
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+                Request a presentation <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#contexte"
@@ -696,11 +694,9 @@ export default function RevenueSupervision() {
               ))}
             </div>
 
-            <Link href="/contact">
-              <a className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-emerald-500/20">
-                Schedule a pilot with our experts
-                <ArrowRight className="w-5 h-5" />
-              </a>
+            <Link href="/contact" className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-xl shadow-emerald-500/20">
+              Schedule a pilot with our experts
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
         </div>
