@@ -17,18 +17,18 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/dashboard", icon: BarChart3, label: "Vue exécutive", adminOnly: false },
-  { href: "/dashboard/reporting", icon: FileText, label: "Rapports", adminOnly: false },
+  { href: "/dashboard", icon: BarChart3, label: "Executive view", adminOnly: false },
+  { href: "/dashboard/reporting", icon: FileText, label: "Reports", adminOnly: false },
   { href: "/dashboard/transactions", icon: CreditCard, label: "Transactions", adminOnly: false },
-  { href: "/dashboard/sectors", icon: Factory, label: "Secteurs", adminOnly: false },
-  { href: "/dashboard/alerts", icon: Bell, label: "Alertes", adminOnly: false },
-  { href: "/dashboard/news", icon: Newspaper, label: "Actualités internes", adminOnly: true },
+  { href: "/dashboard/sectors", icon: Factory, label: "Sectors", adminOnly: false },
+  { href: "/dashboard/alerts", icon: Bell, label: "Alerts", adminOnly: false },
+  { href: "/dashboard/news", icon: Newspaper, label: "Internal news", adminOnly: true },
   { href: "/dashboard/messages", icon: Mail, label: "Messages", adminOnly: true },
-  { href: "/dashboard/users", icon: Users, label: "Utilisateurs", adminOnly: true },
+  { href: "/dashboard/users", icon: Users, label: "Users", adminOnly: true },
 ];
 
 const PUBLIC_ITEMS = [
-  { href: "/news", icon: Newspaper, label: "Actualités" },
+  { href: "/news", icon: Newspaper, label: "News" },
   { href: "/contact", icon: Phone, label: "Contact" },
 ];
 
@@ -43,11 +43,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className={`${collapsed ? "w-16" : "w-64"} bg-gradient-to-b from-[#0a1c3d] via-[#0f2a5f] to-[#123a7b] text-white flex flex-col transition-all duration-300 flex-shrink-0`}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
-          <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain flex-shrink-0 brightness-125" />
+          <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Group" className="h-10 w-auto object-contain flex-shrink-0 brightness-125" />
           {!collapsed && (
             <div>
-              <div className="font-extrabold text-sm text-white leading-tight">Mazen GovTech Groupe</div>
-              <div className="text-blue-300 text-xs">Pilotage stratégique</div>
+              <div className="font-extrabold text-sm text-white leading-tight">Mazen GovTech Group</div>
+              <div className="text-blue-300 text-xs">Strategic oversight</div>
             </div>
           )}
         </div>
@@ -72,7 +72,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {/* Séparateur liens publics */}
           {!collapsed && (
             <p className="px-3 pt-4 pb-1 text-[10px] uppercase tracking-[0.15em] text-blue-400/70 font-semibold">
-              Site public
+              Public site
             </p>
           )}
           {collapsed && <div className="border-t border-white/10 my-2" />}
@@ -95,7 +95,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="px-3 py-2 mb-2">
               <p className="text-xs text-blue-300 truncate">{user.email}</p>
               <span className={`badge mt-1 ${user.role === "admin" ? "badge-blue" : "badge-gray"}`}>
-                {user.role === "admin" ? "Administration" : "Utilisateur"}
+                {user.role === "admin" ? "Admin" : "User"}
               </span>
             </div>
           )}
@@ -104,7 +104,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-blue-100 hover:bg-white/10 hover:text-white transition-colors"
           >
             <LogOut className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-            {!collapsed && <span>Déconnexion</span>}
+            {!collapsed && <span>Sign out</span>}
           </button>
         </div>
       </aside>
@@ -116,7 +116,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
-            aria-label={collapsed ? "Déplier la barre latérale" : "Réduire la barre latérale"}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {collapsed ? <Menu className="w-5 h-5" /> : <X className="w-5 h-5" />}
           </button>

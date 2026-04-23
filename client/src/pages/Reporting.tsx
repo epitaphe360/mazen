@@ -73,7 +73,7 @@ export default function Reporting() {
               ))}
             </div>
             <button onClick={handleExportCSV} className="btn-primary text-sm py-2">
-              <Download className="w-4 h-4" aria-hidden="true" /> Exporter CSV
+              <Download className="w-4 h-4" aria-hidden="true" /> {t('report.exportCSV')}
             </button>
           </div>
         </div>
