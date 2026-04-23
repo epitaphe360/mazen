@@ -7,6 +7,7 @@ import { transactionsRouter } from "./routers/transactions.js";
 import { newsRouter } from "./routers/news.js";
 import { contactRouter } from "./routers/contact.js";
 import { alertsRouter } from "./routers/alerts.js";
+import { settingsRouter } from "./routers/settings.js";
 
 export const appRouter = router({
   auth: authRouter,
@@ -17,6 +18,7 @@ export const appRouter = router({
   news: newsRouter,
   contact: contactRouter,
   alerts: alertsRouter,
+  settings: settingsRouter,
 });
 
 export type AppRouter = typeof appRouter;

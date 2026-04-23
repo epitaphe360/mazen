@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, Waves, BarChart2, Terminal } from "lucide-react";
+import { Menu, X, ChevronDown, Waves, BarChart2, Filter, ShieldCheck, Fingerprint } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,6 +34,27 @@ const SOLUTIONS = [
     desc: "Revenue Intelligence Platform · Taxation",
     icon: BarChart2,
     color: "#f59e0b",
+  },
+  {
+    href: "/solutions/dpi",
+    label: "Deep Packet Inspection",
+    desc: "Network traffic intelligence · OTT revenue",
+    icon: Filter,
+    color: "#6366f1",
+  },
+  {
+    href: "/solutions/cybersecurity",
+    label: "Network Cybersecurity",
+    desc: "SOC · SIEM · Incident response",
+    icon: ShieldCheck,
+    color: "#10b981",
+  },
+  {
+    href: "/solutions/cybercrime",
+    label: "Cybercrime Investigation",
+    desc: "Digital forensics · Attribution · Partner network",
+    icon: Fingerprint,
+    color: "#f43f5e",
   },
 ];
 

@@ -13,6 +13,7 @@ import {
   Moon,
   Newspaper,
   Phone,
+  Settings2,
   Sun,
   Terminal,
   UserCircle,
@@ -65,6 +66,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/news", icon: Newspaper, label: "Internal news", adminOnly: true },
   { href: "/dashboard/messages", icon: Mail, label: "Messages", adminOnly: true },
   { href: "/dashboard/users", icon: Users, label: "Users", adminOnly: true },
+  { href: "/dashboard/api-config", icon: Settings2, label: "API Configuration", adminOnly: true },
   { href: "/dashboard/profile", icon: UserCircle, label: "My profile", adminOnly: false },
 ];
 

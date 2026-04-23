@@ -31,6 +31,10 @@ const NewsDetail = lazy(() => import("./pages/NewsDetail"));
 const Contact = lazy(() => import("./pages/Contact"));
 const MaritimeSurveillance = lazy(() => import("./pages/MaritimeSurveillance"));
 const RevenueSupervision = lazy(() => import("./pages/RevenueSupervision"));
+const DPI = lazy(() => import("./pages/DPI"));
+const CybersecurityNetwork = lazy(() => import("./pages/CybersecurityNetwork"));
+const Cybercrime = lazy(() => import("./pages/Cybercrime"));
+const AdminApiConfig = lazy(() => import("./pages/AdminApiConfig"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Profile = lazy(() => import("./pages/Profile"));
 
@@ -74,6 +78,9 @@ export default function App() {
                 <Route path="/contact" component={Contact} />
                 <Route path="/solutions/maritime" component={MaritimeSurveillance} />
                 <Route path="/solutions/revenues" component={RevenueSupervision} />
+                <Route path="/solutions/dpi" component={DPI} />
+                <Route path="/solutions/cybersecurity" component={CybersecurityNetwork} />
+                <Route path="/solutions/cybercrime" component={Cybercrime} />
 
                 <Route path="/dashboard">
                   {() => (<ProtectedRoute><Dashboard /></ProtectedRoute>)}
@@ -101,6 +108,9 @@ export default function App() {
                 </Route>
                 <Route path="/dashboard/profile">
                   {() => (<ProtectedRoute><Profile /></ProtectedRoute>)}
+                </Route>
+                <Route path="/dashboard/api-config">
+                  {() => (<ProtectedRoute adminOnly><AdminApiConfig /></ProtectedRoute>)}
                 </Route>
 
                 <Route component={NotFound} />

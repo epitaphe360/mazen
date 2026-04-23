@@ -134,6 +134,21 @@ ALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;
 -- Le service role (backend) peut tout faire — aucun accès client direct
 CREATE POLICY "No public access" ON public.contact_messages USING (false);
 
+-- ─── API Settings (admin config panel) ───────────────────────
+CREATE TABLE IF NOT EXISTS public.api_settings (
+  key         TEXT PRIMARY KEY,
+  label       TEXT NOT NULL,
+  value       TEXT NOT NULL DEFAULT '',
+  description TEXT NOT NULL DEFAULT '',
+  category    TEXT NOT NULL DEFAULT 'general',
+  is_secret   BOOLEAN NOT NULL DEFAULT false,
+  updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.api_settings ENABLE ROW LEVEL SECURITY;
+-- Seul le service_role (backend) peut lire et écrire — aucun accès client direct
+CREATE POLICY "No public access" ON public.api_settings USING (false);
+
 -- ─── Données de démonstration ─────────────────────────────────
 INSERT INTO public.sectors (name, description, icon, is_active, alert_threshold_transactions, alert_threshold_revenue, alert_threshold_compliance) VALUES
   ('Télécommunications', 'Calcule le revenu exact généré par les opérateurs de télécommunications ainsi que le nombre total de transactions pour révéler les taxes inexploitées.', '📡', true, 5000, 500000, 80),
