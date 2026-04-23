@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 import {
   Radar,
   Radio,
@@ -161,6 +162,7 @@ function SectionHeader({ tag, title, subtitle }: { tag: string; title: string; s
 export default function MaritimeSurveillance() {
   const [activeLayer, setActiveLayer] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
@@ -508,9 +510,9 @@ export default function MaritimeSurveillance() {
             className="rounded-2xl border border-white/10 overflow-hidden"
           >
             <div className="grid grid-cols-3 bg-gray-800/80 text-xs font-bold uppercase tracking-wider">
-              <div className="px-6 py-4 text-blue-300">Critère</div>
-              <div className="px-6 py-4 text-red-300 border-l border-white/10">Radar Seul</div>
-              <div className="px-6 py-4 text-cyan-300 border-l border-white/10">Système Hybride MSG</div>
+              <div className="px-6 py-4 text-blue-300">{t('maritime.comparison.criteria')}</div>
+              <div className="px-6 py-4 text-red-300 border-l border-white/10">{t('maritime.comparison.radarOnly')}</div>
+              <div className="px-6 py-4 text-cyan-300 border-l border-white/10">{t('maritime.comparison.hybrid')}</div>
             </div>
             {COMPARISON.map((row, i) => (
               <div

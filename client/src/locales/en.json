@@ -160,4 +160,12 @@
     "description": "The page you requested doesn't exist or has been moved.",
     "back": "Back to home"
   }
+  ,
+  "maritime": {
+    "comparison": {
+      "criteria": "Criteria",
+      "radarOnly": "Radar only",
+      "hybrid": "Hybrid MSG system"
+    }
+  }
 }
