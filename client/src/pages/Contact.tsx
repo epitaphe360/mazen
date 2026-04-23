@@ -138,7 +138,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Type de demande *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('contact.form.typeLabel')}</label>
                 <div className="flex gap-3">
                   {(["demo", "information", "partnership"] as const).map(type => (
                     <button
@@ -156,7 +156,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('contact.form.messageLabel')}</label>
                 <textarea required rows={4} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                   placeholder={t('contact.form.messagePlaceholder') || "Describe your project or your questions..."}
                   minLength={10}

@@ -63,11 +63,11 @@ export default function PublicNavbar({
     <nav className="sticky top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 shadow-[0_8px_30px_rgba(15,42,95,0.06)]">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         <Link href="/">
-          <a className="flex items-center gap-3" aria-label="Back to homepage">
-            <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Groupe" className="h-10 w-auto object-contain" />
+            <a className="flex items-center gap-3" aria-label="Back to homepage">
+            <img src="/mazen-logo.jpg?v=20260413" alt="Mazen GovTech Group" className="h-10 w-auto object-contain" />
             <div className="hidden md:block">
               <div className="text-sm font-extrabold text-gray-900 leading-tight">
-                Mazen GovTech <span className="text-blue-700">Groupe</span>
+                Mazen GovTech <span className="text-blue-700">Group</span>
               </div>
               <div className="text-xs text-slate-500 font-medium">Sovereign Strategic Infrastructure Company</div>
             </div>

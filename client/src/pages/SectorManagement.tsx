@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useTranslation } from "../lib/i18n";
 
 export default function SectorManagement() {
+  const { t } = useTranslation();
   const { user } = useAuthContext();
   const isAdmin = user?.role === "admin";
 
@@ -54,15 +56,15 @@ export default function SectorManagement() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Gestion des Secteurs</h1>
-            <p className="text-gray-500">Configurez le monitoring et les seuils d'alerte par secteur</p>
+            <h1 className="text-2xl font-bold text-gray-900">{t('sectors.page.title')}</h1>
+            <p className="text-gray-500">{t('sectors.page.subtitle')}</p>
           </div>
           {isAdmin && (
             <button
               onClick={() => { setShowForm(!showForm); setEditing(null); resetForm(); }}
               className="btn-primary text-sm py-2"
             >
-              {showForm ? "✕ Annuler" : "+ Nouveau secteur"}
+              {showForm ? t('sectors.form.cancel') : t('sectors.form.new')}
             </button>
           )}
         </div>
@@ -71,38 +73,38 @@ export default function SectorManagement() {
         {showForm && isAdmin && (
           <div className="card border-2 border-blue-200">
             <h2 className="font-semibold text-gray-900 mb-4">
-              {editing ? "Modifier le secteur" : "Nouveau secteur"}
+              {editing ? t('sectors.form.editTitle') : t('sectors.form.newTitle')}
             </h2>
             <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.name')}</label>
                 <input required value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Icône</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.icon')}</label>
                 <input value={form.icon} onChange={e => setForm(p => ({ ...p, icon: e.target.value }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.description')}</label>
                 <textarea rows={2} value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Seuil transactions</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.thresholdTransactions')}</label>
                 <input type="number" value={form.alert_threshold_transactions}
                   onChange={e => setForm(p => ({ ...p, alert_threshold_transactions: Number(e.target.value) }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Seuil revenus (€)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.thresholdRevenue')}</label>
                 <input type="number" value={form.alert_threshold_revenue}
                   onChange={e => setForm(p => ({ ...p, alert_threshold_revenue: Number(e.target.value) }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Seuil conformité (%)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('sectors.form.thresholdCompliance')}</label>
                 <input type="number" min={0} max={100} value={form.alert_threshold_compliance}
                   onChange={e => setForm(p => ({ ...p, alert_threshold_compliance: Number(e.target.value) }))}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
@@ -110,11 +112,11 @@ export default function SectorManagement() {
               <div className="md:col-span-2 flex gap-3">
                 <button type="submit" disabled={createMutation.isPending || updateMutation.isPending}
                   className="btn-primary text-sm disabled:opacity-60">
-                  {editing ? "Mettre à jour" : "Créer"}
+                  {editing ? t('sectors.form.update') : t('sectors.form.create')}
                 </button>
                 <button type="button" onClick={() => { setShowForm(false); setEditing(null); resetForm(); }}
                   className="px-4 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                  Annuler
+                  {t('sectors.form.cancel')}
                 </button>
               </div>
             </form>
@@ -134,13 +136,13 @@ export default function SectorManagement() {
                   </div>
                 </div>
                 <span className={`badge flex-shrink-0 ${sector.is_active ? "badge-green" : "badge-gray"}`}>
-                  {sector.is_active ? "Actif" : "Inactif"}
+                  {sector.is_active ? t('sectors.status.active') : t('sectors.status.inactive')}
                 </span>
               </div>
               <div className="grid grid-cols-3 gap-2 text-xs text-gray-600 mb-3">
-                <div><span className="text-gray-400 block">Transactions</span>{sector.alert_threshold_transactions.toLocaleString("fr-FR")}</div>
-                <div><span className="text-gray-400 block">Revenus</span>{Number(sector.alert_threshold_revenue).toLocaleString("fr-FR")} €</div>
-                <div><span className="text-gray-400 block">Conformité</span>{sector.alert_threshold_compliance}%</div>
+                <div><span className="text-gray-400 block">{t('sectors.labels.transactions')}</span>{sector.alert_threshold_transactions.toLocaleString("en-US")}</div>
+                <div><span className="text-gray-400 block">{t('sectors.labels.revenue')}</span>{Number(sector.alert_threshold_revenue).toLocaleString("en-US")} €</div>
+                <div><span className="text-gray-400 block">{t('sectors.labels.compliance')}</span>{sector.alert_threshold_compliance}%</div>
               </div>
               {isAdmin && (
                 <div className="flex gap-2">
@@ -148,17 +150,17 @@ export default function SectorManagement() {
                     onClick={() => toggleMutation.mutate({ id: sector.id, is_active: !sector.is_active })}
                     className="flex-1 text-xs py-1.5 border rounded hover:bg-gray-50 transition-colors"
                   >
-                    {sector.is_active ? "Désactiver" : "Activer"}
+                    {sector.is_active ? t('sectors.action.disable') : t('sectors.action.enable')}
                   </button>
                   <button onClick={() => handleEdit(sector)}
                     className="flex-1 text-xs py-1.5 border border-blue-300 text-blue-700 rounded hover:bg-blue-50 transition-colors">
-                    Modifier
+                    {t('sectors.action.edit')}
                   </button>
                   <button
-                    onClick={() => { if (confirm(`Supprimer "${sector.name}" ?`)) deleteMutation.mutate({ id: sector.id }); }}
+                    onClick={() => { if (confirm(t('sectors.confirmDelete', { name: sector.name }))) deleteMutation.mutate({ id: sector.id }); }}
                     className="flex-1 text-xs py-1.5 border border-red-300 text-red-600 rounded hover:bg-red-50 transition-colors"
                   >
-                    Supprimer
+                    {t('sectors.action.delete')}
                   </button>
                 </div>
               )}
@@ -171,11 +173,11 @@ export default function SectorManagement() {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">Secteur</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">Statut</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">Seuil transactions</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">Seuil revenus</th>
-                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">Conformité min</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">{t('sectors.table.headers.sector')}</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">{t('sectors.table.headers.status')}</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">{t('sectors.table.headers.thresholdTransactions')}</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">{t('sectors.table.headers.thresholdRevenue')}</th>
+                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500">{t('sectors.table.headers.compliance')}</th>
                 {isAdmin && <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500">Actions</th>}
               </tr>
             </thead>
@@ -193,11 +195,11 @@ export default function SectorManagement() {
                   </td>
                   <td className="px-6 py-4">
                     <span className={`badge ${sector.is_active ? "badge-green" : "badge-gray"}`}>
-                      {sector.is_active ? "Actif" : "Inactif"}
+                      {sector.is_active ? t('sectors.status.active') : t('sectors.status.inactive')}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-gray-700">{sector.alert_threshold_transactions.toLocaleString("fr-FR")}</td>
-                  <td className="px-6 py-4 text-gray-700">{Number(sector.alert_threshold_revenue).toLocaleString("fr-FR")} €</td>
+                  <td className="px-6 py-4 text-gray-700">{sector.alert_threshold_transactions.toLocaleString("en-US")}</td>
+                  <td className="px-6 py-4 text-gray-700">{Number(sector.alert_threshold_revenue).toLocaleString("en-US")} €</td>
                   <td className="px-6 py-4 text-gray-700">{sector.alert_threshold_compliance}%</td>
                   {isAdmin && (
                     <td className="px-6 py-4">
@@ -206,17 +208,17 @@ export default function SectorManagement() {
                           onClick={() => toggleMutation.mutate({ id: sector.id, is_active: !sector.is_active })}
                           className="text-xs px-2.5 py-1 border rounded hover:bg-gray-50 transition-colors"
                         >
-                          {sector.is_active ? "Désactiver" : "Activer"}
+                          {sector.is_active ? t('sectors.action.disable') : t('sectors.action.enable')}
                         </button>
                         <button onClick={() => handleEdit(sector)}
                           className="text-xs px-2.5 py-1 border border-blue-300 text-blue-700 rounded hover:bg-blue-50 transition-colors">
-                          Modifier
+                          {t('sectors.action.edit')}
                         </button>
                         <button
-                          onClick={() => { if (confirm(`Supprimer "${sector.name}" ?`)) deleteMutation.mutate({ id: sector.id }); }}
+                          onClick={() => { if (confirm(t('sectors.confirmDelete', { name: sector.name }))) deleteMutation.mutate({ id: sector.id }); }}
                           className="text-xs px-2.5 py-1 border border-red-300 text-red-600 rounded hover:bg-red-50 transition-colors"
                         >
-                          Supprimer
+                          {t('sectors.action.delete')}
                         </button>
                       </div>
                     </td>

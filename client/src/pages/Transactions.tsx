@@ -117,12 +117,12 @@ export default function Transactions() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-5 py-3 text-left font-semibold text-gray-600">Date</th>
-                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Secteur</th>
-                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Opérateur</th>
-                    <th className="px-4 py-3 text-right font-semibold text-gray-600">Montant</th>
-                    <th className="px-4 py-3 text-right font-semibold text-gray-600">Taxe</th>
-                    <th className="px-4 py-3 text-center font-semibold text-gray-600">Nb transactions</th>
-                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Conformité</th>
+                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Sector</th>
+                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Operator</th>
+                    <th className="px-4 py-3 text-right font-semibold text-gray-600">Amount</th>
+                    <th className="px-4 py-3 text-right font-semibold text-gray-600">Tax</th>
+                    <th className="px-4 py-3 text-center font-semibold text-gray-600">Transactions</th>
+                    <th className="px-4 py-3 text-left font-semibold text-gray-600">Compliance</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">

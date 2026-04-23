@@ -37,20 +37,20 @@ export default function Alerts() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              Alertes & Anomalies
+              Alerts & Anomalies
               {unresolvedCount !== null && unresolvedCount > 0 && (
                 <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white text-xs font-bold">
                   {unresolvedCount}
                 </span>
               )}
             </h1>
-            <p className="text-gray-500">Monitoring des anomalies et incidents de conformité détectés</p>
+            <p className="text-gray-500">Monitoring of detected anomalies and compliance incidents</p>
           </div>
         </div>
 
-        {/* Filtres */}
+        {/* Filters */}
         <div className="card flex flex-wrap gap-3 items-center">
-          {/* Toggle résolu / actif */}
+          {/* Toggle resolved / active */}
           <div className="flex rounded-lg bg-gray-100 p-1">
             {[
               { value: false, label: "Active" },
@@ -68,7 +68,7 @@ export default function Alerts() {
             ))}
           </div>
 
-          {/* Filtre sévérité */}
+          {/* Severity filter */}
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => { setFilter(f => ({ ...f, severity: undefined })); setPage(1); }}
@@ -114,7 +114,7 @@ export default function Alerts() {
           </div>
         )}
 
-        {/* Liste des alertes */}
+        {/* Alerts list */}
         <div className="card p-0 overflow-hidden">
           {isLoading ? (
             <div className="flex justify-center py-16">
@@ -133,10 +133,10 @@ export default function Alerts() {
                 const cfg = SEVERITY_CONFIG[alert.severity as SeverityKey];
                 return (
                   <div key={alert.id} className={`p-5 flex items-start gap-4 ${alert.is_resolved ? "bg-gray-50 opacity-75" : "bg-white hover:bg-gray-50"} transition-colors`}>
-                    {/* Icône sévérité */}
+                    {/* Severity icon */}
                     <div className="flex-shrink-0 text-2xl mt-0.5">{cfg?.icon ?? "❓"}</div>
 
-                    {/* Contenu */}
+                    {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
                         <span className={`badge text-xs ${cfg?.badgeClass ?? "badge-gray"}`}>

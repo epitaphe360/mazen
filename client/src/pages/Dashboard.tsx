@@ -3,12 +3,14 @@ import DashboardLayout from "../components/DashboardLayout";
 import { trpc } from "../lib/trpc";
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart,
 } from "recharts";
 import { AlertTriangle, BadgeCheck, Coins, BarChart2 } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
+import { NumberTicker, SpotlightCard, SkeletonCard, SkeletonChart, SkeletonRow } from "../design-system";
 
-const COLORS = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#16a34a", "#0891b2", "#65a30d", "#dc2626", "#9333ea"];
+/** Brand-aligned chart palette (no off-brand colours) */
+const COLORS = ["#173068", "#bd8632", "#2f599f", "#dcbc6c", "#85a3d3", "#7a5024", "#1f4084", "#cda046", "#5079bb"];
 
 const SEVERITY_LABELS: Record<string, string> = {
   critical: "Critical",
@@ -26,29 +28,51 @@ const COMPLIANCE_LABELS: Record<string, string> = {
 function StatCard({
   label,
   value,
+  numericValue,
+  prefix,
+  suffix,
+  decimals = 0,
   change,
   icon: Icon,
+  tone = "navy",
 }: {
   label: string;
-  value: string;
+  value?: string;
+  numericValue?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
   change?: number;
   icon: React.ComponentType<{ className?: string }>;
+  tone?: "navy" | "gold" | "success" | "danger";
 }) {
+  const toneStyles: Record<string, string> = {
+    navy:    "bg-navy-50 text-navy-700 ring-1 ring-navy-100",
+    gold:    "bg-gold-50 text-gold-700 ring-1 ring-gold-100",
+    success: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100",
+    danger:  "bg-rose-50 text-rose-700 ring-1 ring-rose-100",
+  };
   return (
-    <div className="stat-card">
+    <SpotlightCard className="surface-interactive group">
       <div className="flex items-center justify-between mb-3">
-        <span className="inline-flex p-2 rounded-lg bg-blue-50 text-blue-700">
+        <span className={`inline-flex p-2.5 rounded-xl ${toneStyles[tone]}`}>
           <Icon className="w-5 h-5" />
         </span>
         {change !== undefined && (
-          <span className={`text-sm font-semibold ${change >= 0 ? "text-green-600" : "text-red-600"}`}>
-            {change >= 0 ? "+" : ""}{change}%
+          <span className={`text-xs font-bold tabular-nums ${change >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
+            {change >= 0 ? "▲ +" : "▼ "}{change}%
           </span>
         )}
       </div>
-      <p className="text-2xl font-extrabold text-gray-900 mb-1">{value}</p>
-      <p className="text-sm text-gray-500">{label}</p>
-    </div>
+      <p className="text-3xl font-display font-bold text-navy-900 mb-1 tracking-tight">
+        {numericValue !== undefined ? (
+          <NumberTicker value={numericValue} prefix={prefix} suffix={suffix} decimals={decimals} />
+        ) : (
+          value
+        )}
+      </p>
+      <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{label}</p>
+    </SpotlightCard>
   );
 }
 
@@ -67,10 +91,28 @@ export default function Dashboard() {
   if (statsLoading) {
     return (
       <DashboardLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="text-center">
-            <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-gray-500">{t('dashboard.loading')}</p>
+        <div className="space-y-6">
+          <div className="flex items-end justify-between">
+            <div className="space-y-2">
+              <div className="skeleton h-8 w-48" />
+              <div className="skeleton h-4 w-72" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
+          </div>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <SkeletonChart />
+            <SkeletonChart />
+          </div>
+          <SkeletonChart height={320} />
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="surface">
+              {Array.from({ length: 4 }).map((_, i) => <SkeletonRow key={i} />)}
+            </div>
+            <div className="surface">
+              {Array.from({ length: 4 }).map((_, i) => <SkeletonRow key={i} />)}
+            </div>
           </div>
         </div>
       </DashboardLayout>
@@ -104,47 +146,66 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <StatCard
             label={t('dashboard.stats.revenue')}
-            value={formatCurrency(stats?.total_revenue ?? 0)}
+            numericValue={Math.round((stats?.total_revenue ?? 0) / 1_000_000)}
+            prefix="€"
+            suffix="M"
             change={stats?.revenue_change_percent}
             icon={Coins}
+            tone="gold"
           />
           <StatCard
             label={t('dashboard.stats.transactions')}
-            value={(stats?.total_transactions ?? 0).toLocaleString('en-US')}
+            numericValue={stats?.total_transactions ?? 0}
             change={stats?.transactions_change_percent}
             icon={BarChart2}
+            tone="navy"
           />
           <StatCard
             label={t('dashboard.stats.compliance')}
-            value={`${stats?.compliance_rate ?? 0}%`}
+            numericValue={stats?.compliance_rate ?? 0}
+            suffix="%"
             icon={BadgeCheck}
+            tone="success"
           />
           <StatCard
             label={t('dashboard.stats.alerts')}
-            value={String(stats?.active_alerts ?? 0)}
+            numericValue={stats?.active_alerts ?? 0}
             icon={AlertTriangle}
+            tone="danger"
           />
         </div>
 
         {/* Graphiques */}
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Évolution revenus */}
-          <div className="card">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Évolution des recettes sur 30 jours</h2>
+          {/* Revenue trend */}
+          <SpotlightCard className="surface">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-display font-bold text-navy-900 tracking-tight">Revenue — last 30 days</h2>
+              <span className="badge-info">Live</span>
+            </div>
             <ResponsiveContainer width="100%" height={250}>
-              <LineChart data={revenueChart ?? []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 11 }} tickFormatter={d => d.slice(5)} />
-                <YAxis tick={{ fontSize: 11 }} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
-                <Tooltip formatter={(v: number) => formatCurrency(v)} />
-                <Line type="monotone" dataKey="revenue" stroke="#2563eb" strokeWidth={2} dot={false} name="Revenus" />
-              </LineChart>
+              <AreaChart data={revenueChart ?? []}>
+                <defs>
+                  <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#bd8632" stopOpacity={0.35} />
+                    <stop offset="100%" stopColor="#bd8632" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#eef2f8" />
+                <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#7a8aa6" }} tickFormatter={d => d.slice(5)} />
+                <YAxis tick={{ fontSize: 11, fill: "#7a8aa6" }} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+                <Tooltip
+                  formatter={(v: number) => formatCurrency(v)}
+                  contentStyle={{ borderRadius: 12, border: "1px solid #dde6f4", background: "rgba(255,255,255,0.96)", backdropFilter: "blur(8px)" }}
+                />
+                <Area type="monotone" dataKey="revenue" stroke="#bd8632" strokeWidth={2.5} fill="url(#revGrad)" name="Revenue" />
+              </AreaChart>
             </ResponsiveContainer>
-          </div>
+          </SpotlightCard>
 
-          {/* Répartition sectorielle */}
-          <div className="card">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Répartition sectorielle des recettes</h2>
+          {/* Sector distribution */}
+          <SpotlightCard className="surface">
+            <h2 className="text-base font-display font-bold text-navy-900 mb-4 tracking-tight">Sector revenue distribution</h2>
             <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
@@ -153,7 +214,9 @@ export default function Dashboard() {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  outerRadius={90}
+                  outerRadius={88}
+                  innerRadius={48}
+                  paddingAngle={2}
                   label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`}
                   labelLine={false}
                 >
@@ -161,40 +224,46 @@ export default function Dashboard() {
                     <Cell key={i} fill={COLORS[i % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(v: number) => formatCurrency(v)} />
+                <Tooltip
+                  formatter={(v: number) => formatCurrency(v)}
+                  contentStyle={{ borderRadius: 12, border: "1px solid #dde6f4", background: "rgba(255,255,255,0.96)" }}
+                />
               </PieChart>
             </ResponsiveContainer>
-          </div>
+          </SpotlightCard>
         </div>
 
-        {/* Comparaison secteurs */}
-        <div className="card">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Recettes par secteur</h2>
-          <ResponsiveContainer width="100%" height={280}>
+        {/* Revenue by sector */}
+        <SpotlightCard className="surface">
+          <h2 className="text-base font-display font-bold text-navy-900 mb-4 tracking-tight">Revenue by sector</h2>
+          <ResponsiveContainer width="100%" height={300}>
             <BarChart data={sectorChart ?? []} margin={{ top: 5, right: 20, bottom: 60, left: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} angle={-30} textAnchor="end" />
-              <YAxis tick={{ fontSize: 11 }} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
-              <Tooltip formatter={(v: number) => formatCurrency(v)} />
-              <Bar dataKey="revenue" fill="#2563eb" name="Revenus" radius={[4, 4, 0, 0]}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#eef2f8" />
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#7a8aa6" }} angle={-30} textAnchor="end" />
+              <YAxis tick={{ fontSize: 11, fill: "#7a8aa6" }} tickFormatter={v => `${(v / 1000).toFixed(0)}k`} />
+              <Tooltip
+                formatter={(v: number) => formatCurrency(v)}
+                contentStyle={{ borderRadius: 12, border: "1px solid #dde6f4", background: "rgba(255,255,255,0.96)" }}
+              />
+              <Bar dataKey="revenue" name="Revenue" radius={[6, 6, 0, 0]}>
                 {(sectorChart ?? []).map((_, i) => (
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </SpotlightCard>
 
-        {/* Alertes et transactions récentes */}
+        {/* Recent alerts and transactions */}
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Alertes */}
+          {/* Alerts */}
           <div className="card">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Alertes récentes</h2>
-              <span className="badge badge-red">{alerts?.total ?? 0} actives</span>
+              <h2 className="text-lg font-semibold text-gray-900">Recent alerts</h2>
+              <span className="badge badge-red">{alerts?.total ?? 0} active</span>
             </div>
             {(alerts?.data ?? []).length === 0 ? (
-              <p className="text-gray-500 text-sm text-center py-6">Aucune alerte active</p>
+              <p className="text-gray-500 text-sm text-center py-6">No active alerts</p>
             ) : (
               <div className="space-y-3">
                 {(alerts?.data ?? []).map(alert => (
@@ -208,7 +277,7 @@ export default function Dashboard() {
                     </span>
                     <div>
                       <p className="text-sm font-medium text-gray-900">{alert.description}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{new Date(alert.created_at).toLocaleDateString("fr-FR")}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{new Date(alert.created_at).toLocaleDateString("en-US")}</p>
                     </div>
                   </div>
                 ))}
@@ -216,11 +285,11 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Transactions récentes */}
+          {/* Recent transactions */}
           <div className="card">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Transactions récentes</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent transactions</h2>
             {(transactions?.data ?? []).length === 0 ? (
-              <p className="text-gray-400 text-sm text-center py-6">Aucune transaction</p>
+              <p className="text-gray-400 text-sm text-center py-6">No transactions</p>
             ) : (
               <>
                 <div className="space-y-3 md:hidden">
@@ -235,7 +304,7 @@ export default function Dashboard() {
                           {COMPLIANCE_LABELS[tx.compliance_status] ?? tx.compliance_status}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("fr-FR")}</p>
+                      <p className="text-xs text-gray-600">{new Date(tx.date).toLocaleDateString("en-US")}</p>
                       <p className="mt-1 text-base font-bold text-gray-900">{formatCurrency(tx.transaction_amount)}</p>
                     </article>
                   ))}
@@ -246,15 +315,15 @@ export default function Dashboard() {
                     <thead>
                       <tr className="text-left text-xs text-gray-500 border-b">
                         <th className="pb-2">Date</th>
-                        <th className="pb-2">Opérateur</th>
-                        <th className="pb-2">Montant</th>
-                        <th className="pb-2">Statut</th>
+                        <th className="pb-2">Operator</th>
+                        <th className="pb-2">Amount</th>
+                        <th className="pb-2">Status</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
                       {(transactions?.data ?? []).map(tx => (
                         <tr key={tx.id} className="hover:bg-gray-50">
-                          <td className="py-2 text-gray-500">{new Date(tx.date).toLocaleDateString("fr-FR")}</td>
+                          <td className="py-2 text-gray-500">{new Date(tx.date).toLocaleDateString("en-US")}</td>
                           <td className="py-2 font-medium text-gray-900">{tx.operator_name}</td>
                           <td className="py-2">{formatCurrency(tx.transaction_amount)}</td>
                           <td className="py-2">

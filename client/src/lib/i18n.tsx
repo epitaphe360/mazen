@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
 import en from "../locales/en.json";
 import fr from "../locales/fr.json";
 
@@ -19,14 +19,44 @@ function lookup(obj: any, path: string): any {
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<string>("fr");
-  const translations = useMemo(() => LOCALES[locale] || LOCALES["fr"], [locale]);
+  const [locale, setLocaleState] = useState<string>(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const saved = localStorage.getItem("locale");
+        if (saved) return saved;
+        const nav = (navigator.language || (navigator as any).languages?.[0] || "").toLowerCase();
+        return nav.startsWith("fr") ? "fr" : "en";
+      }
+    } catch (e) {
+      // ignore
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") localStorage.setItem("locale", locale);
+    } catch (e) {
+      // ignore
+    }
+  }, [locale]);
+
+  const translations = useMemo(() => LOCALES[locale] || LOCALES["en"], [locale]);
 
   function t(key: string, vars?: Record<string, string | number>) {
     const raw = lookup(translations, key) ?? key;
     if (!vars) return String(raw);
     return Object.keys(vars).reduce((s, k) => s.replace(new RegExp(`{{\\s*${k}\\s*}}`, "g"), String(vars[k])), String(raw));
   }
+
+  const setLocale = (l: string) => {
+    setLocaleState(l);
+    try {
+      if (typeof window !== "undefined") localStorage.setItem("locale", l);
+    } catch (e) {
+      // ignore
+    }
+  };
 
   const value: I18nContextValue = {
     locale,

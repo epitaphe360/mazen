@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import { KEY_STATS, SECTORS_DATA } from "@shared/types";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
+import { MagneticAnchor, SpotlightCard, NumberTicker } from "../design-system";
+const SovereignGlobe = lazy(() => import("../design-system/SovereignGlobe"));
 import {
   Award,
   CalendarDays,
@@ -28,7 +30,7 @@ import {
   Zap,
 } from "lucide-react";
 
-/* ─── DONNÉES ─────────────────────────────────────────────────── */
+/* ─── DATA ─────────────────────────────────────────────────── */
 
 const ETL_PILLARS = [
   {
@@ -196,15 +198,15 @@ const ROTATING_WORDS = ["Fiscal", "Maritime", "Digital", "Public"];
 const AFRICA_DEPLOYMENTS = [
   { id: "mali", country: "Mali", flag: "\uD83C\uDDF2\uD83C\uDDF1", x: 195, y: 212, color: "#10b981", caseIdx: 1 },
   { id: "sierra", country: "Sierra Leone", flag: "\uD83C\uDDF8\uD83C\uDDF1", x: 118, y: 316, color: "#f59e0b", caseIdx: 3 },
-  { id: "rdc", country: "RDC", flag: "\uD83C\uDDE8\uD83C\uDDE9", x: 328, y: 448, color: "#3b82f6", caseIdx: 0 },
+  { id: "rdc", country: "DRC", flag: "\uD83C\uDDE8\uD83C\uDDE9", x: 328, y: 448, color: "#3b82f6", caseIdx: 0 },
   { id: "burundi", country: "Burundi", flag: "\uD83C\uDDE7\uD83C\uDDEE", x: 410, y: 454, color: "#ef4444", caseIdx: 2 },
 ];
 
 const RESULT_BARS = [
   { country: "Sierra Leone", label: "+552%", value: 552, color: "#f59e0b" },
-  { country: "RDC", label: "+60%", value: 60, color: "#3b82f6" },
-  { country: "Mali", label: "100% visibilit\u00e9", value: 100, color: "#10b981" },
-  { country: "Burundi", label: "8 op\u00e9rateurs", value: 40, color: "#ef4444" },
+  { country: "DRC", label: "+60%", value: 60, color: "#3b82f6" },
+  { country: "Mali", label: "100% visibility", value: 100, color: "#10b981" },
+  { country: "Burundi", label: "8 certified operators", value: 40, color: "#ef4444" },
 ];
 
 /* ─── SUB-COMPOSANTS ──────────────────────────────────────────── */
@@ -501,9 +503,9 @@ export default function Home() {
       <ScrollProgressBar />
       <PublicNavbar links={homeLinks} />
 
-      {/* ══════════════════════════════════════════════════════════
-          1. HERO — Plein écran, fond sombre executive
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          1. HERO — Fullscreen, executive dark background
+        ══════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden executive-shell">
         <motion.img
           src="/hero-bg.jpg"
@@ -550,10 +552,7 @@ export default function Home() {
                 variants={fadeUp}
                 className="text-5xl md:text-7xl font-black text-white leading-[1.0] mb-8 max-w-4xl"
               >
-                Souveraineté{" "}
-                <RotatingWord />
-                <br />
-                <span className="text-white/90">de l'État</span>
+                <RotatingWord /> Sovereignty for the State
               </motion.h1>
               <motion.p
                 variants={fadeUp}
@@ -564,18 +563,18 @@ export default function Home() {
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-14">
                 <Link href="/contact">
-                  <a className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-amber-500/25 text-sm">
+                  <MagneticAnchor className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-gold-500/30 text-sm glow-ring">
                     {t('cta.requestDemo')}
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </MagneticAnchor>
                 </Link>
-                <a
+                <MagneticAnchor
                   href="#references"
-                  className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-4 rounded-xl hover:bg-white/10 transition-all text-sm"
+                  className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-4 rounded-xl hover:bg-white/10 transition-all text-sm backdrop-blur-sm"
                 >
                   See field references
                   <ChevronRight className="w-4 h-4" />
-                </a>
+                </MagneticAnchor>
               </motion.div>
 
               {/* Scroll cue */}
@@ -589,12 +588,33 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Right — Executive panel */}
+            {/* Right — Sovereign 3D Globe (signature) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:block relative w-[480px] h-[480px]"
+            >
+              <div className="absolute inset-0 rounded-full bg-gold-500/10 blur-3xl scale-110 pointer-events-none" />
+              <Suspense fallback={<div className="w-full h-full rounded-full bg-navy-800/40 animate-pulse" />}>
+                <SovereignGlobe height="100%" />
+              </Suspense>
+              {/* Floating live indicators around the globe */}
+              <div className="absolute top-6 -left-4 px-3 py-1.5 rounded-full bg-navy-900/70 backdrop-blur border border-white/10 text-[10px] uppercase tracking-widest text-gold-400 font-bold animate-float">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2 animate-pulse" />
+                Live · 4 deployments
+              </div>
+              <div className="absolute bottom-10 -right-2 px-3 py-1.5 rounded-full bg-navy-900/70 backdrop-blur border border-white/10 text-[10px] uppercase tracking-widest text-white/70 font-bold animate-float" style={{ animationDelay: '1.2s' }}>
+                Africa · Atlantic
+              </div>
+            </motion.div>
+
+            {/* Hidden legacy panel kept for screen-readers stats — visually hidden */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="hidden lg:block min-w-[320px] max-w-[360px]"
+              className="sr-only"
             >
               <div className="executive-panel p-7 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400/0 via-amber-400 to-amber-400/0" />
@@ -656,9 +676,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          2. NOTRE VISION
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          2. OUR VISION
+        ══════════════════════════════════════════════════════════ */}
       <section id="vision" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -672,24 +692,20 @@ export default function Home() {
                 <SectionTag>Our vision</SectionTag>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 leading-tight mb-6">
-                L'Excellence au Service de la{" "}
-                <span className="text-blue-700">Gouvernance Fiscale</span>
+                Excellence in Service of Fiscal Governance
               </motion.h2>
               <motion.p variants={fadeUp} className="text-gray-500 text-lg leading-relaxed mb-6">
-                MAZEN est une entreprise leader dans le domaine des technologies gouvernementales. Depuis 1986, nous avons
-                constitué un réseau de collaborateurs hautement qualifiés basés en <strong className="text-gray-900">Europe, en Asie et en Afrique</strong>,
-                avec un département R&D florissant.
+                MAZEN is a leading company in government technologies. Since 1986, we have built a network of highly skilled collaborators across <strong className="text-gray-900">Europe, Asia and Africa</strong>, supported by a thriving R&D department.
               </motion.p>
               <motion.p variants={fadeUp} className="text-gray-500 leading-relaxed mb-8">
-                Notre équipe est composée d'ingénieurs exceptionnels diplômés d'universités de renommée mondiale et
-                possédant une solide expertise en traitement de données massives, fiscalité numérique et gouvernance publique.
+                Our team includes outstanding engineers from top universities, with deep expertise in big data processing, digital taxation and public governance.
               </motion.p>
               <motion.div variants={staggerContainer} className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Globe, label: "Présence mondiale", sub: "Europe · Asie · Afrique" },
-                  { icon: Search, label: "R&D florissant", sub: "Innovation continue" },
-                  { icon: BookOpen, label: "Ingénieurs experts", sub: "Universités mondiales" },
-                  { icon: Award, label: "ISO 9001 & 27001", sub: "Qualité & Sécurité" },
+                  { icon: Globe, label: "Global presence", sub: "Europe · Asia · Africa" },
+                  { icon: Search, label: "Thriving R&D", sub: "Continuous innovation" },
+                  { icon: BookOpen, label: "Expert engineers", sub: "Top-tier universities" },
+                  { icon: Award, label: "ISO 9001 & 27001", sub: "Quality & Security" },
                 ].map((item) => (
                   <motion.div key={item.label} variants={fadeUp} className="institution-card p-5 flex items-center gap-3">
                     <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex-shrink-0">
@@ -765,9 +781,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          3. NOS SOLUTIONS
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          3. OUR SOLUTIONS
+        ══════════════════════════════════════════════════════════ */}
       <section id="solutions" className="py-28 bg-gray-950">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -781,13 +797,13 @@ export default function Home() {
               <SectionTag light>Our sovereign solutions</SectionTag>
             </motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Deux solutions souveraines, <br className="hidden md:block" />
+              Two sovereign solutions, <br className="hidden md:block" />
               <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                une exécution d'excellence
+                executed with excellence
               </span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-blue-300/70 max-w-xl mx-auto">
-              Deux plateformes opérationnelles pour les États. ETL-Certification® agit comme moteur technologique commun.
+              Two operational platforms for states. ETL-Certification® serves as the shared technological engine.
             </motion.p>
           </motion.div>
 
@@ -807,7 +823,7 @@ export default function Home() {
                     <div className="relative h-52 overflow-hidden border-b border-white/10">
                       <img src={sol.image} alt={sol.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
-                      <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">Solution prioritaire</div>
+                      <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">Priority solution</div>
                     </div>
                     <div className="p-7">
                       <div className="flex items-start justify-between mb-5">
@@ -828,7 +844,7 @@ export default function Home() {
                           <p className="text-xs text-blue-300/60">{sol.metricLabel}</p>
                         </div>
                         <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-300 group-hover:text-amber-300 transition-colors">
-                          Découvrir <ArrowRight className="w-3.5 h-3.5" />
+                          Discover <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
@@ -855,21 +871,21 @@ export default function Home() {
               className="lg:sticky lg:top-28"
             >
               <motion.div variants={fadeUp}>
-                <SectionTag>Notre technologie</SectionTag>
+                <SectionTag>Our technology</SectionTag>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl font-extrabold text-gray-950 leading-tight mb-4">
                 ETL-Certification<span className="text-blue-700">®</span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-gray-500 leading-relaxed mb-6">
-                Déposée et brevetée — la seule technologie certifiée pour la vérification fiscale des données numériques à l'échelle nationale.
+                Patented and trademarked — the only certified technology for fiscal verification of national-scale digital data.
               </motion.p>
               <motion.div variants={fadeUp} className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-2xl p-6 border border-blue-900/50">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4">Performance validée</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4">Validated performance</p>
                 <p className="text-4xl font-extrabold text-white mb-1">13 Mrd</p>
-                <p className="text-blue-300/70 text-sm">transactions traitées et certifiées quotidiennement</p>
+                <p className="text-blue-300/70 text-sm">transactions processed and certified daily</p>
                 <div className="h-px bg-white/10 my-4" />
                 <p className="text-4xl font-extrabold text-amber-400 mb-1">$15 Mrd</p>
-                <p className="text-blue-300/70 text-sm">de flux fiscaux supervisés depuis 2009</p>
+                <p className="text-blue-300/70 text-sm">fiscal flows supervised since 2009</p>
               </motion.div>
             </motion.div>
 
@@ -903,7 +919,7 @@ export default function Home() {
                       <div className="h-px flex-1 bg-gray-100" />
                       {activeEtl === i && (
                         <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: pillar.accent }}>
-                          Actif
+                          Active
                         </span>
                       )}
                     </div>
@@ -919,7 +935,7 @@ export default function Home() {
                       >
                         <div className="flex items-center gap-2 text-xs font-semibold" style={{ color: pillar.accent }}>
                           <ChevronRight className="w-3.5 h-3.5" />
-                          Étape {pillar.step} de la chaîne ETL-Certification® — technologie brevetée Mazen GovTech
+                          Step {pillar.step} of the ETL-Certification® chain — Mazen GovTech patented technology
                         </div>
                       </motion.div>
                     )}
@@ -935,9 +951,7 @@ export default function Home() {
                 className="mt-2 p-6 bg-amber-50 rounded-2xl border border-amber-100"
               >
                 <p className="text-sm text-gray-600 leading-relaxed italic">
-                  "En utilisant l'approche ETL-C propriétaire de Mazen, les autorités fiscales peuvent{" "}
-                  <strong className="text-gray-900 not-italic">extraire, transformer, charger et certifier</strong>{" "}
-                  automatiquement toutes les données transactionnelles — sans travail manuel, sans risque d'erreur."
+                  "Using Mazen's proprietary ETL-C approach, tax authorities can automatically extract, transform, load and certify all transactional data — with no manual work and no risk of error."
                 </p>
               </motion.div>
             </div>
@@ -945,9 +959,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          5. RÉFÉRENCES TERRAIN
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          5. FIELD REFERENCES
+        ══════════════════════════════════════════════════════════ */}
       <section id="references" className="py-28 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -957,13 +971,13 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Références terrain</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>Field references</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              4 déploiements. <br className="hidden md:block" />
-              <span className="text-blue-700">Des résultats mesurables.</span>
+              4 deployments. <br className="hidden md:block" />
+              <span className="text-blue-700">Measurable results.</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 max-w-xl mx-auto">
-              Chaque référence est un engagement contractuel avec une administration nationale — et des chiffres vérifiables.
+              Each reference represents a contractual engagement with a national administration — and verifiable figures.
             </motion.p>
           </motion.div>
 
@@ -1011,7 +1025,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Résultats animés + carte interactive */}
+          {/* Animated results + interactive map */}
           <div className="mt-10 grid lg:grid-cols-2 gap-8 items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -1019,11 +1033,11 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-white rounded-3xl border border-gray-100 p-7 shadow-sm"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">Hausse des recettes documentée</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">Documented revenue increases</p>
               {RESULT_BARS.map((b) => (
                 <AnimatedBar key={b.country} country={b.country} label={b.label} value={b.value} max={600} color={b.color} />
               ))}
-              <p className="text-[11px] text-gray-400 mt-5 italic">* Résultats validés contractuellement avec les administrations partenaires</p>
+              <p className="text-[11px] text-gray-400 mt-5 italic">* Results contractually validated with partner administrations</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -1031,7 +1045,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-6 border border-blue-900/40 shadow-xl"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4 text-center">Carte des déploiements</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4 text-center">Deployment map</p>
               <AfricaMap selected={selectedCountry} onSelect={setSelectedCountry} />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -1059,9 +1073,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          6. SECTEURS
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          6. SECTORS
+        ══════════════════════════════════════════════════════════ */}
       <section id="secteurs" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -1072,17 +1086,17 @@ export default function Home() {
             className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start"
           >
             <motion.div variants={fadeUp} className="lg:sticky lg:top-28">
-              <SectionTag>Couverture sectorielle</SectionTag>
+              <SectionTag>Sector coverage</SectionTag>
               <h2 className="text-4xl font-extrabold text-gray-950 leading-tight mb-4">
-                9 secteurs,<br />
-                <span className="text-blue-700">une vision unifiée</span>
+                9 sectors,<br />
+                <span className="text-blue-700">a unified vision</span>
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Nos solutions apportent de la transparence et de la traçabilité fiscale à l'ensemble de l'économie numérique moderne — des télécoms au jeu en ligne.
+                Our solutions bring transparency and fiscal traceability across the modern digital economy — from telecoms to online gaming.
               </p>
               <Link href="/contact">
                 <a className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm">
-                  Discuter de votre secteur
+                  Discuss your sector
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </Link>
@@ -1123,21 +1137,20 @@ export default function Home() {
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              <motion.div variants={fadeUp}><SectionTag light>Notre engagement</SectionTag></motion.div>
+              <motion.div variants={fadeUp}><SectionTag light>Our commitment</SectionTag></motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
-                Transfert total de<br />
-                <span className="text-amber-400">technologie & compétences</span>
+                Full transfer of<br />
+                <span className="text-amber-400">technology & skills</span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-blue-200/80 text-lg leading-relaxed mb-8">
-                Nous assurons un transfert total de notre technologie aux États clients tout en offrant une formation
-                complète pour permettre à leurs équipes de réaliser des opérations pleinement autonomes.
+                We ensure a complete transfer of our technology to client states while providing comprehensive training to enable their teams to operate independently.
               </motion.p>
               <motion.div variants={staggerContainer} className="space-y-4">
                 {[
-                  { icon: BookOpen, title: "Formation complète", desc: "Programmes adaptés aux équipes gouvernementales — théorie, pratique et certification interne." },
-                  { icon: Wrench, title: "Support continu", desc: "Accompagnement technique dédié et maintenance proactive sur toute la durée du contrat." },
-                  { icon: Rocket, title: "Autonomie totale", desc: "Vos équipes maîtrisent pleinement la plateforme, sans dépendance technologique externe." },
-                  { icon: Lock, title: "Hébergement souverain", desc: "Infrastructure nationale, données sous juridiction de l'État — zéro transfert vers des serveurs étrangers." },
+                  { icon: BookOpen, title: "Comprehensive training", desc: "Programs tailored to government teams — theory, practice and internal certification." },
+                  { icon: Wrench, title: "Continuous support", desc: "Dedicated technical support and proactive maintenance throughout the contract." },
+                  { icon: Rocket, title: "Full autonomy", desc: "Your teams fully master the platform without external technological dependence." },
+                  { icon: Lock, title: "Sovereign hosting", desc: "National infrastructure, data under state jurisdiction — no transfer to foreign servers." },
                 ].map((item, i) => (
                   <motion.div key={item.title} variants={fadeUp} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/5 hover:bg-white/8 transition-colors">
                     <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex-shrink-0">
@@ -1161,13 +1174,13 @@ export default function Home() {
               className="space-y-6"
             >
               <div className="rounded-3xl bg-gradient-to-br from-blue-900/50 to-indigo-900/50 border border-blue-800/30 p-8">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-6">Certifications actives</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-6">Active certifications</p>
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { cert: "ISO 9001", label: "Management de la Qualité", icon: Award },
-                    { cert: "ISO 27001", label: "Sécurité de l'Information", icon: ShieldCheck },
-                    { cert: "ETL-C®", label: "Brevet propriétaire", icon: Zap },
-                    { cert: "Depuis 1986", label: "38 ans d'expertise", icon: CalendarDays },
+                    { cert: "ISO 9001", label: "Quality Management", icon: Award },
+                    { cert: "ISO 27001", label: "Information Security", icon: ShieldCheck },
+                    { cert: "ETL-C®", label: "Proprietary patent", icon: Zap },
+                    { cert: "Since 1986", label: "38 years of expertise", icon: CalendarDays },
                   ].map((c) => (
                     <div key={c.cert} className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
                       <c.icon className="w-6 h-6 text-amber-400 mx-auto mb-2" />
@@ -1179,9 +1192,9 @@ export default function Home() {
               </div>
               <div className="rounded-3xl bg-amber-500 p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-amber-400/50 blur-2xl" />
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70 mb-2 relative">Chiffre clé</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70 mb-2 relative">Key figure</p>
                 <p className="text-5xl font-black text-gray-950 relative mb-2">+552%</p>
-                <p className="text-amber-950/80 font-semibold relative">Hausse maximale observée des recettes publiques</p>
+                <p className="text-amber-950/80 font-semibold relative">Maximum increase observed in public revenues</p>
                 <p className="text-xs text-amber-950/60 mt-1 relative">National Revenue Authority, Sierra Leone (2023)</p>
               </div>
             </motion.div>
@@ -1189,9 +1202,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          8. POURQUOI NOUS
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          8. WHY US
+        ══════════════════════════════════════════════════════════ */}
       <section id="why-us" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -1201,12 +1214,12 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Notre différence</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>Our difference</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              Pourquoi les États nous choisissent
+              Why states choose us
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 max-w-xl mx-auto">
-              Quatre piliers fondent l'excellence de Mazen et la confiance durable de nos partenaires gouvernementaux.
+              Four pillars underpin Mazen's excellence and the lasting trust of our government partners.
             </motion.p>
           </motion.div>
 
@@ -1233,9 +1246,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          9. TÉMOIGNAGES
-      ══════════════════════════════════════════════════════════ */}
+        {/* ══════════════════════════════════════════════════════════
+          9. TESTIMONIALS
+        ══════════════════════════════════════════════════════════ */}
       <section className="py-28 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -1245,15 +1258,15 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Témoignages</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>Testimonials</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              La voix de nos partenaires
+              What our partners say
             </motion.h2>
             <motion.div variants={fadeUp} className="flex items-center justify-center gap-1 mb-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
-              <span className="text-sm font-bold text-gray-700 ml-2">4.9 · Satisfaction des administrations partenaires</span>
+              <span className="text-sm font-bold text-gray-700 ml-2">4.9 · Partner satisfaction</span>
             </motion.div>
           </motion.div>
 
@@ -1274,15 +1287,15 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Mail className="w-5 h-5 text-amber-950/70" />
-                <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70">Bulletin trimestriel</span>
+                <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70">Quarterly newsletter</span>
               </div>
-              <h3 className="text-2xl font-extrabold text-gray-950">Restez informé de nos avancées</h3>
-              <p className="text-amber-950/70 text-sm mt-1">Nouvelles solutions, références terrain, réformes fiscales — 1 publication par trimestre. Sans spam.</p>
+              <h3 className="text-2xl font-extrabold text-gray-950">Stay updated on our progress</h3>
+              <p className="text-amber-950/70 text-sm mt-1">New solutions, field references, tax reforms — one issue per quarter. No spam.</p>
             </div>
             {newsletterSent ? (
-              <div className="flex items-center gap-3 bg-white/30 rounded-2xl px-6 py-4 border border-white/40">
+                <div className="flex items-center gap-3 bg-white/30 rounded-2xl px-6 py-4 border border-white/40">
                 <CheckCircle2 className="w-5 h-5 text-gray-950" />
-                <span className="font-bold text-gray-950">Inscription confirmée. Merci !</span>
+                <span className="font-bold text-gray-950">Subscription confirmed. Thank you!</span>
               </div>
             ) : (
               <form
@@ -1294,19 +1307,19 @@ export default function Home() {
                   required
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Votre adresse institutionnelle"
+                  placeholder="Your institutional email address"
                   className="flex-1 md:w-72 px-4 py-3.5 rounded-xl border-0 bg-white/90 text-gray-950 placeholder-gray-400 text-sm font-medium focus:ring-2 focus:ring-gray-950 outline-none"
                 />
                 <button
                   type="submit"
                   className="bg-gray-950 hover:bg-gray-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm flex items-center gap-2 flex-shrink-0"
                 >
-                  S'inscrire <ArrowRight className="w-4 h-4" />
+                  Subscribe <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
             )}
           </div>
-          <p className="mt-4 text-xs text-amber-950/50 text-center md:text-left">🔒 Aucun spam. Données strictement confidentielles. Désinscription en 1 clic.</p>
+          <p className="mt-4 text-xs text-amber-950/50 text-center md:text-left">🔒 No spam. Data strictly confidential. One-click unsubscribe.</p>
         </div>
       </section>
 
@@ -1329,28 +1342,27 @@ export default function Home() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-amber-400 mb-6">
-                <span className="w-7 h-px bg-amber-400" />
-                L'avenir vous appartient
-                <span className="w-7 h-px bg-amber-400" />
-              </span>
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-black text-white leading-[1.05] mb-6">
-              L'Avenir Fiscal de votre{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                Pays
-              </span>{" "}
-              commence aujourd'hui.
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-blue-200/70 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-              Nos équipes accompagnent les ministères et administrations dans la modernisation de la chaîne de revenus publics —
-              de la stratégie au déploiement opérationnel.
-            </motion.p>
+              <motion.div variants={fadeUp}>
+                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-amber-400 mb-6">
+                  <span className="w-7 h-px bg-amber-400" />
+                  The future is yours
+                  <span className="w-7 h-px bg-amber-400" />
+                </span>
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-black text-white leading-[1.05] mb-6">
+                Your country's fiscal
+                <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
+                  future
+                </span>
+                starts today.
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-blue-200/70 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+                Our teams support ministries and administrations in modernizing the public revenue chain — from strategy to operational deployment.
+              </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
                 <a className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-8 py-4.5 py-[18px] rounded-xl transition-all shadow-xl shadow-amber-500/20 text-base">
-                  Planifier une démonstration
+                  Schedule a demo
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </Link>
@@ -1364,11 +1376,11 @@ export default function Home() {
             </motion.div>
             <motion.div variants={fadeUp} className="mt-14 flex flex-wrap justify-center gap-4">
               {[
-                "ISO 9001 Certifié",
-                "ISO 27001 Certifié",
-                "ETL-Certification® Breveté",
-                "Fondé en 1986",
-                "4 pays · 15 Mrd$ supervisés",
+                "ISO 9001 Certified",
+                "ISO 27001 Certified",
+                "ETL-Certification® Patented",
+                "Founded in 1986",
+                "4 countries · $15B supervised",
               ].map((tag) => (
                 <span key={tag} className="text-xs font-semibold text-white/40 border border-white/10 px-4 py-2 rounded-full">
                   {tag}
@@ -1379,15 +1391,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ──── NAVIGATION LATÉRALE ──── */}
+      {/* ──── SIDE NAVIGATION ──── */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col gap-3">
         {[
           { id: "vision", label: "Vision" },
           { id: "solutions", label: "Solutions" },
-          { id: "etlc", label: "Technologie" },
-          { id: "references", label: "Références" },
-          { id: "secteurs", label: "Secteurs" },
-          { id: "why-us", label: "Différence" },
+          { id: "etlc", label: "Technology" },
+          { id: "references", label: "References" },
+          { id: "secteurs", label: "Sectors" },
+          { id: "why-us", label: "Why us" },
         ].map((s) => (
           <a key={s.id} href={`#${s.id}`} title={s.label} className="group flex items-center gap-2 justify-end">
             <span className={`text-[10px] font-bold uppercase tracking-wider transition-all duration-300 ${
@@ -1413,7 +1425,7 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-amber-500 hover:bg-amber-400 text-gray-950 shadow-xl shadow-amber-500/30 flex items-center justify-center transition-colors"
-            aria-label="Retour en haut"
+            aria-label="Back to top"
           >
             <ChevronUp className="w-5 h-5" />
           </motion.button>

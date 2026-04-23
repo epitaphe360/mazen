@@ -32,8 +32,8 @@ export default function ProtectedRoute({ children, adminOnly = false }: Props) {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4">
             <ShieldOff className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Accès refusé</h1>
-          <p className="text-gray-500">Vous n'avez pas les droits administrateur pour accéder à cette page.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Access denied</h1>
+          <p className="text-gray-500">You do not have administrator rights to access this page.</p>
         </div>
       </div>
     );

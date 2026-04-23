@@ -113,7 +113,7 @@ export default function About() {
               <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3 block">Infrastructure</span>
               <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Mazen Gov Platform Architecture</h2>
               <p className="text-gray-600 leading-relaxed mb-8">
-                Notre infrastructure repose sur une architecture redondante et sécurisée utilisant des tunnels VPN, des pare-feux de niveau enterprise, des serveurs XDR de traitement distribué et des bases de données répliquées.
+                Our infrastructure is built on a secure, redundant architecture using VPN tunnels, enterprise-grade firewalls, distributed XDR processing servers and replicated databases.
               </p>
               <div className="space-y-3">
                 {ARCHITECTURE_ITEMS.map((item, i) => (
@@ -133,11 +133,11 @@ export default function About() {
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-6">
-                <img src="/mazen-logo.jpg?v=20260413" alt="Plateforme Mazen Gov" className="w-32 h-32 object-contain mx-auto mb-4" />
+                <img src="/mazen-logo.jpg?v=20260413" alt="Mazen Gov Platform" className="w-32 h-32 object-contain mx-auto mb-4" />
                 <h3 className="text-center font-bold text-gray-900 mb-2">{t('about.platform.title')}</h3>
                   <p className="text-center text-gray-500 text-sm">{t('about.platform.subtitle')}</p>
               </div>
-              <img src="/tech-transfer.png" alt="Transfert technologique" className="w-full rounded-2xl shadow-lg" />
+              <img src="/tech-transfer.png" alt="Technology transfer" className="w-full rounded-2xl shadow-lg" />
             </motion.div>
           </div>
         </div>
