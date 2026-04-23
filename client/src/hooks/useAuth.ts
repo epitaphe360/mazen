@@ -66,5 +66,10 @@ export function useAuth() {
     setUser(null);
   };
 
-  return { user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut };
+  const resetPasswordForEmail = (email: string) =>
+    supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/callback`,
+    });
+
+  return { user, loading, signInWithGoogle, signInWithEmail, signUpWithEmail, signOut, resetPasswordForEmail };
 }

@@ -15,6 +15,7 @@ import {
   Phone,
   Sun,
   Terminal,
+  UserCircle,
   Users,
   X,
 } from "lucide-react";
@@ -64,6 +65,7 @@ const NAV_ITEMS = [
   { href: "/dashboard/news", icon: Newspaper, label: "Internal news", adminOnly: true },
   { href: "/dashboard/messages", icon: Mail, label: "Messages", adminOnly: true },
   { href: "/dashboard/users", icon: Users, label: "Users", adminOnly: true },
+  { href: "/dashboard/profile", icon: UserCircle, label: "My profile", adminOnly: false },
 ];
 
 const PUBLIC_ITEMS = [
@@ -239,13 +241,16 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
             {/* User avatar */}
             {user && (
               <div className="flex items-center gap-2">
-                <div
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black ${
-                    isDark ? "bg-navy-700 text-gold-300 border border-gold-500/30" : "bg-navy-800 text-white"
-                  }`}
-                >
-                  {user.name?.[0]?.toUpperCase() ?? "U"}
-                </div>
+                <Link href="/dashboard/profile">
+                  <a
+                    title="My profile"
+                    className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black transition-all ${
+                      isDark ? "bg-navy-700 text-gold-300 border border-gold-500/30 hover:border-gold-400/60" : "bg-navy-800 text-white hover:opacity-80"
+                    }`}
+                  >
+                    {user.name?.[0]?.toUpperCase() ?? "U"}
+                  </a>
+                </Link>
                 <span
                   className={`text-sm font-semibold hidden sm:block ${
                     isDark ? "text-white/70" : "text-slate-700"

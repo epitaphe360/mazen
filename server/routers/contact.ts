@@ -3,9 +3,16 @@ import { router, publicProcedure, adminProcedure } from "../_core/trpc.js";
 import { supabaseAdmin } from "../_core/supabase.js";
 import { env } from "../_core/env.js";
 import { TRPCError } from "@trpc/server";
+import { Resend } from "resend";
 
 // Vérification rate-limiting simple (en mémoire, suffisant pour le MVP)
 const submissionCounts = new Map<string, { count: number; resetAt: number }>();
+
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend && env.RESEND_API_KEY) resend = new Resend(env.RESEND_API_KEY);
+  return resend;
+}
 
 function checkRateLimit(ip: string) {
   const now = Date.now();
@@ -49,11 +56,26 @@ export const contactRouter = router({
       const { error } = await supabaseAdmin.from("contact_messages").insert(messageData);
       if (error) throw new Error(error.message);
 
-      // Notification propriétaire (log en dev, email en prod)
-      if (env.NODE_ENV === "production") {
-        console.log(`[CONTACT] Nouvelle demande de ${input.name} (${input.email}) - ${input.request_type}`);
+      // Notification par email (Resend si RESEND_API_KEY configuré, log sinon)
+      const r = getResend();
+      if (r && env.NODE_ENV === "production") {
+        await r.emails.send({
+          from: "Mazen GovTech <noreply@mazen-govtech.com>",
+          to: [env.OWNER_EMAIL],
+          subject: `[Contact] ${input.request_type} — ${input.name} (${input.country})`,
+          html: `
+            <h2>New contact request</h2>
+            <p><strong>Name:</strong> ${input.name}</p>
+            <p><strong>Email:</strong> ${input.email}</p>
+            <p><strong>Country:</strong> ${input.country}</p>
+            <p><strong>Sector:</strong> ${input.sector_of_interest}</p>
+            <p><strong>Type:</strong> ${input.request_type}</p>
+            <hr/>
+            <p>${input.message.replace(/\n/g, "<br/>")}</p>
+          `,
+        });
       } else {
-        console.log(`[DEV] Demande contact :`, messageData);
+        console.log(`[${env.NODE_ENV.toUpperCase()}] Contact request from ${input.name} (${input.email}) — ${input.request_type}`);
       }
 
       return { success: true, message: "Votre message a bien été envoyé. Nous vous répondrons sous 48h." };

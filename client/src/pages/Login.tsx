@@ -9,9 +9,9 @@ import { ShieldCheck, Mail, Lock, User, ArrowRight, Terminal } from "lucide-reac
 
 export default function Login() {
   const { t } = useTranslation();
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail, user, loading } = useAuthContext();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, resetPasswordForEmail, user, loading } = useAuthContext();
   const [, navigate] = useLocation();
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [mode, setMode] = useState<"login" | "register" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -28,7 +28,11 @@ export default function Login() {
     setError("");
     setSubmitting(true);
     try {
-      if (mode === "login") {
+      if (mode === "forgot") {
+        const { error: err } = (await resetPasswordForEmail(email)) as { error: { message: string } | null };
+        if (err) setError(err.message);
+        else setError(t("login.forgotPasswordSent"));
+      } else if (mode === "login") {
         const { error: err } = (await signInWithEmail(email, password)) as { error: { message: string } | null };
         if (err) setError(err.message);
         else navigate("/dashboard");
@@ -82,6 +86,29 @@ export default function Login() {
 
         {/* Card */}
         <div className="rounded-2xl border border-white/10 bg-white/[0.07] backdrop-blur-xl shadow-[0_32px_64px_rgba(0,0,0,0.5)] p-8">
+          <AnimatePresence mode="wait">
+          {mode === "forgot" ? (
+            <motion.div key="forgot" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              <h2 className="text-lg font-black text-white mb-1">{t("login.forgotPasswordTitle")}</h2>
+              <p className="text-sm text-white/40 mb-6">{t("login.forgotPasswordSubtitle")}</p>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FloatingLabelInput label={t("login.form.email")} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required icon={Mail} autoComplete="email" />
+                <AnimatePresence mode="wait">
+                  {error && (
+                    <motion.div key={error} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                      className={`p-3.5 rounded-xl text-sm font-medium flex items-start gap-2.5 ${/sent|envoy/i.test(error) ? "bg-emerald-500/15 border border-emerald-400/30 text-emerald-300" : "bg-rose-500/15 border border-rose-400/30 text-rose-300"}`}>
+                      <ShieldCheck className="w-4 h-4 mt-0.5 flex-shrink-0" />{error}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <button type="submit" disabled={submitting} className="relative w-full flex items-center justify-center gap-2.5 rounded-xl py-3.5 font-bold text-sm bg-gold-500 hover:bg-gold-400 text-navy-950 transition-all shadow-lg shadow-gold-500/30 disabled:opacity-60">
+                  {submitting ? <><span className="w-4 h-4 border-2 border-navy-950/30 border-t-navy-950 rounded-full animate-spin" />{t("login.loading")}</> : <>{t("login.sendResetLink")}<ArrowRight className="w-4 h-4" /></>}
+                </button>
+                <button type="button" onClick={() => { setMode("login"); setError(""); }} className="w-full text-sm text-white/40 hover:text-white/70 transition-colors pt-1">← {t("login.backToLogin")}</button>
+              </form>
+            </motion.div>
+          ) : (
+            <motion.div key="auth" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
           {/* Mode toggle */}
           <div className="relative flex rounded-xl bg-white/[0.06] border border-white/10 p-1 mb-7">
             <motion.div
@@ -209,7 +236,16 @@ export default function Login() {
                 </>
               )}
             </button>
+
+            {mode === "login" && (
+              <button type="button" onClick={() => { setMode("forgot"); setError(""); }} className="w-full text-sm text-white/30 hover:text-white/60 transition-colors pt-1">
+                {t("login.forgotPassword")}
+              </button>
+            )}
           </form>
+          </motion.div>
+          )}
+          </AnimatePresence>
         </div>
 
         {/* Footer links */}

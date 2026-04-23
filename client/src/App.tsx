@@ -32,6 +32,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const MaritimeSurveillance = lazy(() => import("./pages/MaritimeSurveillance"));
 const RevenueSupervision = lazy(() => import("./pages/RevenueSupervision"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
@@ -97,6 +98,9 @@ export default function App() {
                 </Route>
                 <Route path="/dashboard/users">
                   {() => (<ProtectedRoute adminOnly><AdminUsers /></ProtectedRoute>)}
+                </Route>
+                <Route path="/dashboard/profile">
+                  {() => (<ProtectedRoute><Profile /></ProtectedRoute>)}
                 </Route>
 
                 <Route component={NotFound} />

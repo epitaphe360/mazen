@@ -69,6 +69,19 @@ export const authRouter = router({
       return { success: true };
     }),
 
+  // Mettre à jour le profil de l'utilisateur connecté
+  updateProfile: protectedProcedure
+    .input(z.object({ name: z.string().min(2, "Name too short") }))
+    .mutation(async ({ input, ctx }) => {
+      const { error } = await supabaseAdmin
+        .from("profiles")
+        .update({ name: input.name, updated_at: new Date().toISOString() })
+        .eq("id", ctx.user.id);
+
+      if (error) throw new Error(error.message);
+      return { success: true };
+    }),
+
   // Lister tous les utilisateurs (admin only)
   listUsers: adminProcedure
     .input(z.object({ page: z.number().default(1), limit: z.number().default(20) }))

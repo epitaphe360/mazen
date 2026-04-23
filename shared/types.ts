@@ -1,4 +1,4 @@
-// Types partagés entre client et serveur
+﻿// Types partagés entre client et serveur
 
 export type UserRole = "admin" | "user" | "public";
 
@@ -105,75 +105,69 @@ export interface SectorChartData {
   compliance: number;
 }
 
-// Statistiques clés de la page d'accueil (source: présentation corporate MAZEN)
+
+// Statistiques cles de la page d accueil (source: presentation corporate MAZEN)
 export const KEY_STATS = [
-  { value: "$15Mrd", label: "Supervisés sur les réseaux opérateurs", description: "De 2009 à ce jour" },
-  { value: "13Mrd", label: "Transactions analysées / jour", description: "Traitement quotidien en temps réel" },
-  { value: "1986", label: "Fondée en", description: "Plus de 35 ans d'expertise GovTech" },
-  { value: "+60%", label: "Hausse des recettes fiscales en RDC", description: "Accises & TVA après 1 an de fonctionnement" },
+  { value: "$15Mrd", label: "Supervises sur les reseaux operateurs", description: "De 2009 a ce jour" },
+  { value: "13Mrd", label: "Transactions analysees / jour", description: "Traitement quotidien en temps reel" },
+  { value: "1986", label: "Fondee en", description: "Plus de 35 ans d expertise GovTech" },
+  { value: "+60%", label: "Hausse des recettes fiscales en RDC", description: "Accises & TVA apres 1 an de fonctionnement" },
 ] as const;
 
 // Les 9 secteurs couverts
 export const SECTORS_DATA = [
   {
     id: 1,
-    name: "Télécommunications",
-    icon: "📡",
-    description:
-      "Calcule le revenu exact généré par les opérateurs de télécommunications ainsi que le nombre total de transactions pour révéler les taxes inexploitées.",
+    name: "Telecommunications",
+    icon: "\ud83d\udce1",
+    description: "Calcule le revenu exact genere par les operateurs de telecommunications ainsi que le nombre total de transactions pour reveler les taxes inexploitees.",
   },
   {
     id: 2,
     name: "Argent mobile",
-    icon: "📱",
-    description:
-      "Traite et analyse les métadonnées des transactions d'argent mobile afin de produire des rapports détaillés sur les activités et les taxes à percevoir.",
+    icon: "\ud83d\udcf1",
+    description: "Traite et analyse les metadonnees des transactions d argent mobile afin de produire des rapports detailles sur les activites et les taxes a percevoir.",
   },
   {
     id: 3,
-    name: "MPIE – Importation mobiles",
-    icon: "📦",
-    description: "Détecte et taxe les appareils mobiles importés illégalement.",
+    name: "MPIE - Importation mobiles",
+    icon: "\ud83d\udce6",
+    description: "Detecte et taxe les appareils mobiles importes illegalement.",
   },
   {
     id: 4,
-    name: "BiT-IT – Publicité numérique",
-    icon: "📢",
-    description:
-      "Revenus provenant de la publicité numérique et des services d'abonnement.",
+    name: "BiT-IT - Publicite numerique",
+    icon: "\ud83d\udce2",
+    description: "Revenus provenant de la publicite numerique et des services d abonnement.",
   },
   {
     id: 5,
-    name: "BiT-IT – Services d'abonnement",
-    icon: "🎬",
-    description:
-      "Calcule avec précision les taxes sur les revenus des services d'abonnement numériques tels que les plateformes de diffusion en continu.",
+    name: "BiT-IT - Services d abonnement",
+    icon: "\ud83c\udfa6",
+    description: "Calcule avec precision les taxes sur les revenus des services d abonnement numeriques tels que les plateformes de diffusion en continu.",
   },
   {
     id: 6,
-    name: "Jeux d'argent",
-    icon: "🎰",
-    description: "Suivi des taxes dues sur les jeux d'argent en ligne.",
+    name: "Jeux d argent",
+    icon: "\ud83c\udfb0",
+    description: "Suivi des taxes dues sur les jeux d argent en ligne.",
   },
   {
     id: 7,
     name: "Services bancaires",
-    icon: "🏦",
-    description:
-      "L'accès aux services bancaires et financiers dans les économies émergentes est en plein essor.",
+    icon: "\ud83c\udfe6",
+    description: "L acces aux services bancaires et financiers dans les economies emergentes est en plein essor.",
   },
   {
     id: 8,
-    name: "Télévision payante",
-    icon: "📺",
-    description:
-      "Automatise le traitement des factures et la taxation pour les fournisseurs de télévision payante, améliorant ainsi la transparence des revenus.",
+    name: "Television payante",
+    icon: "\ud83d\udcfa",
+    description: "Automatise le traitement des factures et la taxation pour les fournisseurs de television payante, ameliorant ainsi la transparence des revenus.",
   },
   {
     id: 9,
     name: "Services publics & municipaux",
-    icon: "🏛️",
-    description:
-      "Amélioration de la mobilisation des recettes dans les secteurs des services publics tels que l'électricité, l'essence et l'eau, ainsi que le ramassage des ordures, le stationnement, l'assurance et les taxes municipales.",
+    icon: "\ud83c\udfd7\ufe0f",
+    description: "Amelioration de la mobilisation des recettes dans les secteurs des services publics tels que l electricite, l essence et l eau, ainsi que le ramassage des ordures, le stationnement, l assurance et les taxes municipales.",
   },
 ] as const;

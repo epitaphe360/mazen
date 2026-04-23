@@ -1,25 +1,188 @@
-{
+﻿{
   "nav": {
     "home": "Accueil",
-    "about": "À propos",
+    "about": "\u00c0 propos",
     "caseStudies": "Cas d'usage",
-    "news": "Actualités",
+    "news": "Actualit\u00e9s",
     "contact": "Contact",
     "login": "Connexion",
     "solutions": "Solutions"
   },
   "footer": {
     "company": "Mazen GovTech Groupe",
-    "copy": "© {{year}} — Sovereign Strategic Infrastructure Company"
+    "copy": "\u00a9 {{year}} \u2014 Sovereign Strategic Infrastructure Company"
   },
   "cta": {
     "contact": "Contactez-nous",
-    "requestDemo": "Demander une présentation"
+    "requestDemo": "Demander une pr\u00e9sentation"
   },
   "home": {
     "hero": {
       "title": "Leader des technologies gouvernementales pour la mobilisation des recettes",
-      "subtitle": "Certifié ISO 9001 & ISO 27001 — Fiable pour les institutions publiques"
+      "subtitle": "Certifi\u00e9 ISO 9001 & ISO 27001 \u2014 Fiable pour les institutions publiques"
     }
+  },
+  "about": {
+    "hero": {
+      "kicker": "Notre histoire",
+      "title": "\u00c0 propos de MAZEN",
+      "subtitle": "Leader mondial GovTech depuis 1986 \u2014 transformer les \u00e9conomies num\u00e9riques en recettes publiques auditables"
+    },
+    "history": {
+      "kicker": "Depuis 1986",
+      "title": "Technologie con\u00e7ue pour les administrations souveraines",
+      "p1": "MAZEN d\u00e9livre des solutions technologiques gouvernementales depuis 1986. Nous nous appuyons sur un r\u00e9seau de collaborateurs hautement qualifi\u00e9s en Europe, Asie et Afrique et une capacit\u00e9 R&D durable.",
+      "p2": "Nos \u00e9quipes combinent expertise en ing\u00e9nierie des donn\u00e9es, taxation num\u00e9rique, conformit\u00e9 et gouvernance pour servir des environnements institutionnels exigeants.",
+      "p3": "Nos syst\u00e8mes analysent et traitent 13 milliards de transactions quotidiennes et supervisent plus de 15 milliards USD de flux op\u00e9rateurs depuis 2009."
+    },
+    "partners": {
+      "kicker": "R\u00e9f\u00e9rences",
+      "title": "Nos partenaires gouvernementaux",
+      "description": "S\u00e9lection repr\u00e9sentative des partenaires ayant choisi MAZEN comme solution officielle de gouvernance."
+    },
+    "platform": {
+      "title": "Mazen Gov Platform",
+      "subtitle": "Solution de gouvernance certifi\u00e9e ETL-Certification\u00ae"
+    }
+  },
+  "contact": {
+    "hero": {
+      "kicker": "\u00c9change institutionnel",
+      "title": "Faites avancer votre strat\u00e9gie de recettes publiques",
+      "subtitle": "Parlez \u00e0 nos experts pour d\u00e9finir un plan de d\u00e9ploiement adapt\u00e9 \u00e0 votre contexte national."
+    },
+    "success": {
+      "title": "Message envoy\u00e9 !",
+      "subtitle": "Votre demande a \u00e9t\u00e9 re\u00e7ue. Notre \u00e9quipe r\u00e9pondra dans les 48 heures.",
+      "backToHome": "Retour \u00e0 l'accueil"
+    },
+    "info": {
+      "title": "Pr\u00eat \u00e0 transformer les recettes publiques ?",
+      "subtitle": "Contactez-nous \u2014 notre \u00e9quipe accompagne la transformation num\u00e9rique et l'optimisation des revenus pour les gouvernements."
+    },
+    "channels": {
+      "email": { "title": "Envoyez-nous un email", "desc": "Posez vos questions ou demandes d'information \u2014 notre \u00e9quipe r\u00e9pondra rapidement." },
+      "demo": { "title": "Planifier une d\u00e9mo", "desc": "D\u00e9couvrez nos solutions en action lors d'une session personnalis\u00e9e." },
+      "solutions": { "title": "Explorer les solutions", "desc": "Les certifications ISO 9001 et ISO 27001 garantissent la plus haute qualit\u00e9 de service." }
+    },
+    "security": { "title": "Confidentialit\u00e9 & S\u00e9curit\u00e9", "desc": "Donn\u00e9es trait\u00e9es selon les normes de s\u00e9curit\u00e9 align\u00e9es ISO 27001." },
+    "form": {
+      "title": "Formulaire de contact",
+      "fullName": "Nom complet *",
+      "fullNamePlaceholder": "Pr\u00e9nom Nom",
+      "email": "Email *",
+      "emailPlaceholder": "vous@gouvernement.gouv",
+      "messagePlaceholder": "D\u00e9crivez votre projet ou vos questions...",
+      "country": "Pays *",
+      "selectCountry": "S\u00e9lectionnez votre pays",
+      "sector": "Secteur d'int\u00e9r\u00eat *",
+      "selectSector": "S\u00e9lectionnez un secteur",
+      "allSectors": "Tous les secteurs",
+      "types": { "demo": "D\u00e9mo", "information": "Information", "partnership": "Partenariat" },
+      "acceptTerms": "J'accepte que mes donn\u00e9es soient trait\u00e9es pour r\u00e9pondre \u00e0 cette demande.",
+      "submit": "Envoyer la demande",
+      "sending": "Envoi en cours..."
+    },
+    "errors": { "mustAccept": "Vous devez accepter les conditions pour continuer." }
+  },
+  "news": {
+    "kicker": "Veille institutionnelle",
+    "title": "Actualit\u00e9s du Mazen GovTech Groupe",
+    "subtitle": "Restez inform\u00e9 des actualit\u00e9s du Mazen GovTech Groupe et des \u00e9volutions de la technologie de gouvernance dans le monde.",
+    "filters": { "kicker": "Filtres \u00e9ditoriaux", "searchPlaceholder": "Rechercher un article..." },
+    "empty": "Aucun article trouv\u00e9.",
+    "cta": { "title": "Suivez nos actualit\u00e9s", "subtitle": "Abonnez-vous \u00e0 notre newsletter ou suivez nos r\u00e9seaux sociaux pour ne manquer aucune mise \u00e0 jour importante.", "subscribe": "S'abonner \u00e0 la newsletter" }
+  },
+  "news.detail": {
+    "notFound": { "title": "Article introuvable", "subtitle": "Cet article n'existe pas ou a \u00e9t\u00e9 supprim\u00e9.", "back": "Retour aux actualit\u00e9s" },
+    "cta": { "title": "Ne manquez aucune mise \u00e0 jour", "subtitle": "Recevez chaque semaine les analyses et rapports du Mazen GovTech Groupe directement dans votre bo\u00eete mail.", "thanks": "Inscription enregistr\u00e9e, merci !" }
+  },
+  "case": {
+    "kicker": "R\u00e9f\u00e9rences terrain",
+    "title": "R\u00e9f\u00e9rences institutionnelles & d\u00e9ploiements op\u00e9rationnels",
+    "subtitle": "Quatre d\u00e9ploiements r\u00e9els d\u00e9montrant un impact mesurable sur les recettes publiques nationales.",
+    "itemLabel": "Cas",
+    "partnerLabel": "Institution partenaire",
+    "cta": { "title": "\u00c9tudier un d\u00e9ploiement adapt\u00e9 \u00e0 votre contexte national", "subtitle": "\u00c9changez avec nos \u00e9quipes pour \u00e9valuer une configuration de supervision, certification et optimisation des recettes." }
+  },
+  "login": {
+    "subtitle": "Plateforme de mobilisation des recettes publiques",
+    "verifyEmail": "V\u00e9rifiez votre email pour confirmer votre compte.",
+    "oauth": { "google": "Continuer avec Google" },
+    "orEmail": "ou par email",
+    "form": {
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Pr\u00e9nom Nom",
+      "email": "Email",
+      "emailPlaceholder": "vous@gouvernement.gouv",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+    },
+    "labels": { "login": "Connexion", "register": "Inscription" },
+    "loading": "Chargement...",
+    "submit": { "login": "Se connecter", "register": "Cr\u00e9er un compte" },
+    "backToSite": "Retour au site",
+    "forgotPassword": "Mot de passe oubli\u00e9 ?",
+    "forgotPasswordTitle": "R\u00e9initialiser le mot de passe",
+    "forgotPasswordSubtitle": "Entrez votre email pour recevoir un lien de r\u00e9initialisation.",
+    "forgotPasswordSent": "Email envoy\u00e9 ! V\u00e9rifiez votre bo\u00eete de r\u00e9ception.",
+    "backToLogin": "Retour \u00e0 la connexion",
+    "sendResetLink": "Envoyer le lien"
+  },
+  "dashboard": {
+    "loading": "Chargement du tableau de bord...",
+    "title": "Tableau de bord ex\u00e9cutif",
+    "subtitle": "Vue consolid\u00e9e des transactions, revenus et alertes en temps r\u00e9el",
+    "meta": { "scope": "P\u00e9rim\u00e8tre", "updated": "Mis \u00e0 jour", "view": "Vue" },
+    "stats": { "revenue": "Revenus mobilis\u00e9s", "transactions": "Flux transactionnels", "compliance": "Taux de conformit\u00e9", "alerts": "Alertes actives" }
+  },
+  "report": {
+    "title": "Rapport multi-sectoriel",
+    "subtitle": "Vue consolid\u00e9e des revenus, volumes transactionnels et pr\u00e9l\u00e8vements par secteur et p\u00e9riode",
+    "meta": { "view": "Vue", "scope": "P\u00e9rim\u00e8tre", "export": "Export" },
+    "filters": { "title": "Param\u00e8tres d'analyse", "from": "Du", "to": "Au", "reset": "R\u00e9initialiser les filtres", "sectorScope": "P\u00e9rim\u00e8tre sectoriel" },
+    "summary": { "revenues": "Revenus consolid\u00e9s", "transactions": "Volume transactionnel", "taxes": "Pr\u00e9l\u00e8vements calcul\u00e9s" },
+    "table": {
+      "title": "D\u00e9tail des transactions",
+      "tax": "Taxe",
+      "volume": "Volume",
+      "headers": { "date": "Date", "sector": "Secteur", "operator": "Op\u00e9rateur", "amount": "Montant", "transactions": "Transactions", "tax": "Taxe", "status": "Statut" },
+      "records": "enregistrements"
+    },
+    "pagination": { "prev": "Pr\u00e9c\u00e9dent", "next": "Suivant" },
+    "exportCSV": "Exporter CSV"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous demandez n'existe pas ou a \u00e9t\u00e9 d\u00e9plac\u00e9e.",
+    "back": "Retour \u00e0 l'accueil"
+  },
+  "maritime": {
+    "comparison": {
+      "criteria": "Crit\u00e8res",
+      "radarOnly": "Radar uniquement",
+      "hybrid": "Syst\u00e8me hybride MSG"
+    }
+  },
+  "revenue": {
+    "comparison": {
+      "criteria": "Crit\u00e8res",
+      "before": "Avant (administration traditionnelle)",
+      "after": "Apr\u00e8s (avec RIP)"
+    }
+  },
+  "profile": {
+    "title": "Mon profil",
+    "subtitle": "G\u00e9rez vos informations personnelles et votre s\u00e9curit\u00e9",
+    "name": "Nom complet",
+    "email": "Adresse email",
+    "role": "R\u00f4le",
+    "member": "Membre depuis",
+    "saveChanges": "Enregistrer les modifications",
+    "saving": "Enregistrement...",
+    "saved": "Profil mis \u00e0 jour avec succ\u00e8s !",
+    "resetPassword": "R\u00e9initialiser le mot de passe",
+    "resetPasswordDesc": "Recevez un email pour r\u00e9initialiser votre mot de passe.",
+    "resetSent": "Email de r\u00e9initialisation envoy\u00e9 !"
   }
 }
