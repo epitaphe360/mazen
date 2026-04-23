@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
+import { useTranslation } from "../lib/i18n";
 import {
   BarChart2,
   Database,
@@ -213,6 +214,7 @@ function SectionHeader({ tag, title, subtitle }: { tag: string; title: string; s
 
 export default function RevenueSupervision() {
   const [activePillar, setActivePillar] = useState(0);
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
@@ -550,9 +552,9 @@ export default function RevenueSupervision() {
             className="rounded-2xl border border-white/10 overflow-hidden"
           >
             <div className="grid grid-cols-3 bg-gray-800/80 text-xs font-bold uppercase tracking-wider">
-              <div className="px-6 py-4 text-emerald-300">Critère</div>
-              <div className="px-6 py-4 text-red-300 border-l border-white/10">Avant (Administration traditionnelle)</div>
-              <div className="px-6 py-4 text-emerald-300 border-l border-white/10">Après (Avec RIP)</div>
+              <div className="px-6 py-4 text-emerald-300">{t('revenue.comparison.criteria')}</div>
+              <div className="px-6 py-4 text-red-300 border-l border-white/10">{t('revenue.comparison.before')}</div>
+              <div className="px-6 py-4 text-emerald-300 border-l border-white/10">{t('revenue.comparison.after')}</div>
             </div>
             {COMPARISON.map((row, i) => (
               <div

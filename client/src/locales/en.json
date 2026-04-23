@@ -168,4 +168,12 @@
       "hybrid": "Hybrid MSG system"
     }
   }
+  ,
+  "revenue": {
+    "comparison": {
+      "criteria": "Criteria",
+      "before": "Before (traditional administration)",
+      "after": "After (with RIP)"
+    }
+  }
 }
