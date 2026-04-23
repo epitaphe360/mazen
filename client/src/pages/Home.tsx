@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
 import { KEY_STATS, SECTORS_DATA } from "@shared/types";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
-import { MagneticAnchor, SpotlightCard, NumberTicker } from "../design-system";
+import { MagneticAnchor, SpotlightCard, NumberTicker, TiltCard } from "../design-system";
 const SovereignGlobe = lazy(() => import("../design-system/SovereignGlobe"));
 import {
   Award,
@@ -461,6 +461,280 @@ function TestimonialsCarousel({ items }: { items: Array<{ quote: string; name: s
   );
 }
 
+/* ─── ETL+C PINNED SCROLL NARRATIVE ───────────────────────────── */
+function EtlcPinnedSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // each pillar occupies 1/4 of the scroll range
+  const activeIndex = useMotionValue(0);
+
+  // Derive which pillar is active from scroll progress
+  function useActiveForIndex(idx: number) {
+    return useTransform(scrollYProgress, (p) => {
+      const start = idx / 4;
+      const end = (idx + 1) / 4;
+      const mid = (start + end) / 2;
+      // fade in approaching mid, full at mid, fade out after
+      const raw = 1 - Math.abs(p - mid) / (1 / 4);
+      return Math.max(0, Math.min(1, raw * 2));
+    });
+  }
+
+  const ACCENT_VARS = ["#3b82f6", "#6366f1", "#8b5cf6", "#f59e0b"] as const;
+
+  return (
+    <section
+      id="etlc"
+      ref={containerRef}
+      className="relative"
+      style={{ height: "400vh" }}
+    >
+      {/* Sticky wrapper — stays in viewport while container scrolls */}
+      <div className="sticky top-0 h-screen overflow-hidden bg-navy-950 flex flex-col">
+        {/* Ambient blobs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-navy-800/60 blur-[120px]" />
+          <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gold-900/30 blur-[100px]" />
+        </div>
+
+        {/* Grain */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundSize: "200px 200px",
+          }}
+        />
+
+        {/* Top eyebrow */}
+        <div className="relative z-10 pt-10 pb-6 text-center">
+          <span className="inline-block text-[10px] font-black uppercase tracking-[0.4em] text-gold-400 mb-2">
+            Patented technology
+          </span>
+          <motion.h2
+            className="text-3xl md:text-5xl font-black text-white"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            ETL-Certification<span className="text-gold-400">®</span>
+          </motion.h2>
+        </div>
+
+        {/* Main area */}
+        <div className="relative z-10 flex-1 flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+              {/* Left: animated letter + step info */}
+              <div className="relative h-[320px] flex items-center">
+                <AnimatePresence mode="wait">
+                  {ETL_PILLARS.map((pillar, i) => (
+                    <EtlPillarContent
+                      key={pillar.letter}
+                      pillar={pillar}
+                      index={i}
+                      scrollYProgress={scrollYProgress}
+                    />
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              {/* Right: progress dots + quote */}
+              <div className="space-y-8">
+                {/* Step dots */}
+                <div className="flex items-center gap-4">
+                  {ETL_PILLARS.map((p, i) => (
+                    <EtlDot key={p.letter} index={i} scrollYProgress={scrollYProgress} accent={p.accent} />
+                  ))}
+                </div>
+
+                {/* Cards stack */}
+                <div className="relative h-[220px]">
+                  {ETL_PILLARS.map((pillar, i) => (
+                    <EtlCard key={pillar.letter} pillar={pillar} index={i} scrollYProgress={scrollYProgress} />
+                  ))}
+                </div>
+
+                {/* Stats bar */}
+                <div className="flex gap-6 pt-4 border-t border-white/10">
+                  <div>
+                    <p className="text-2xl font-black text-gold-400">13 Mrd</p>
+                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Tx / day</p>
+                  </div>
+                  <div className="w-px bg-white/10" />
+                  <div>
+                    <p className="text-2xl font-black text-white">$15 Mrd</p>
+                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Supervised</p>
+                  </div>
+                  <div className="w-px bg-white/10" />
+                  <div>
+                    <p className="text-2xl font-black text-emerald-400">100%</p>
+                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Data integrity</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom scroll hint */}
+        <div className="relative z-10 py-5 flex justify-center">
+          <EtlScrollBar scrollYProgress={scrollYProgress} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function EtlPillarContent({
+  pillar,
+  index,
+  scrollYProgress,
+}: {
+  pillar: (typeof ETL_PILLARS)[0];
+  index: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const start = index / 4;
+  const end = (index + 1) / 4;
+  const opacity = useTransform(scrollYProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [start, start + 0.05], [40, 0]);
+  const scale = useTransform(scrollYProgress, [start, start + 0.05], [0.92, 1]);
+
+  return (
+    <motion.div
+      style={{ opacity, y, scale, position: "absolute", width: "100%" }}
+    >
+      <div className="flex flex-col gap-4">
+        {/* Giant letter */}
+        <div className="relative inline-flex">
+          <span
+            className="text-[10rem] font-black leading-none select-none"
+            style={{
+              color: "transparent",
+              WebkitTextStroke: `2px ${pillar.accent}`,
+              textShadow: `0 0 80px ${pillar.accent}55`,
+            }}
+          >
+            {pillar.letter}
+          </span>
+          <span
+            className="absolute inset-0 text-[10rem] font-black leading-none select-none opacity-10"
+            style={{ color: pillar.accent }}
+          >
+            {pillar.letter}
+          </span>
+        </div>
+        {/* Step badge */}
+        <div className="flex items-center gap-3">
+          <span
+            className="text-xs font-black px-3 py-1 rounded-full text-white"
+            style={{ background: pillar.accent }}
+          >
+            {pillar.step}
+          </span>
+          <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: pillar.accent }}>
+            {pillar.title}
+          </span>
+        </div>
+        <p className="text-white/60 text-base max-w-sm leading-relaxed">
+          {pillar.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+function EtlCard({
+  pillar,
+  index,
+  scrollYProgress,
+}: {
+  pillar: (typeof ETL_PILLARS)[0];
+  index: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const start = index / 4;
+  const end = (index + 1) / 4;
+  const opacity = useTransform(scrollYProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [start, start + 0.04], [20, 0]);
+
+  return (
+    <motion.div
+      style={{ opacity, y, position: "absolute", width: "100%" }}
+      className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6"
+    >
+      <div className="flex items-start gap-4">
+        <div
+          className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-black text-white flex-shrink-0"
+          style={{ background: `linear-gradient(135deg, ${pillar.accent}cc, ${pillar.accent}66)` }}
+        >
+          {pillar.letter}
+        </div>
+        <div>
+          <p className="font-black text-white text-lg mb-1">{pillar.title}</p>
+          <p className="text-white/50 text-xs leading-relaxed">{pillar.description}</p>
+          <div
+            className="mt-3 text-[10px] font-bold uppercase tracking-[0.25em] px-2.5 py-1 rounded-full inline-block"
+            style={{ background: `${pillar.accent}22`, color: pillar.accent }}
+          >
+            Step {pillar.step} · ETL-C® Chain
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function EtlDot({
+  index,
+  scrollYProgress,
+  accent,
+}: {
+  index: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+  accent: string;
+}) {
+  const start = index / 4;
+  const end = (index + 1) / 4;
+  const active = useTransform(scrollYProgress, [start, start + 0.04, end - 0.04, end], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      style={{
+        width: 12,
+        height: 12,
+        borderRadius: 6,
+        backgroundColor: accent,
+        opacity: active,
+        boxShadow: `0 0 12px ${accent}`,
+      }}
+    />
+  );
+}
+
+function EtlScrollBar({
+  scrollYProgress,
+}: {
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+  return (
+    <div className="relative w-40 h-1 rounded-full bg-white/10 overflow-hidden">
+      <motion.div
+        style={{ scaleX, originX: 0 }}
+        className="absolute inset-0 rounded-full bg-gradient-to-r from-gold-400 to-gold-600"
+      />
+    </div>
+  );
+}
+
 /* ─── PAGE ────────────────────────────────────────────────────── */
 export default function Home() {
   const { t } = useTranslation();
@@ -857,107 +1131,9 @@ export default function Home() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          4. TECHNOLOGIE ETL-C
+          4. TECHNOLOGIE ETL-C — Pinned Scroll Narrative
       ══════════════════════════════════════════════════════════ */}
-      <section id="etlc" className="py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
-            {/* Left sticky */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="lg:sticky lg:top-28"
-            >
-              <motion.div variants={fadeUp}>
-                <SectionTag>Our technology</SectionTag>
-              </motion.div>
-              <motion.h2 variants={fadeUp} className="text-4xl font-extrabold text-gray-950 leading-tight mb-4">
-                ETL-Certification<span className="text-blue-700">®</span>
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-gray-500 leading-relaxed mb-6">
-                Patented and trademarked — the only certified technology for fiscal verification of national-scale digital data.
-              </motion.p>
-              <motion.div variants={fadeUp} className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-2xl p-6 border border-blue-900/50">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4">Validated performance</p>
-                <p className="text-4xl font-extrabold text-white mb-1">13 Mrd</p>
-                <p className="text-blue-300/70 text-sm">transactions processed and certified daily</p>
-                <div className="h-px bg-white/10 my-4" />
-                <p className="text-4xl font-extrabold text-amber-400 mb-1">$15 Mrd</p>
-                <p className="text-blue-300/70 text-sm">fiscal flows supervised since 2009</p>
-              </motion.div>
-            </motion.div>
-
-            {/* Right — 4 steps */}
-            <div className="space-y-4">
-              {ETL_PILLARS.map((pillar, i) => (
-                <motion.div
-                  key={pillar.letter}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12, duration: 0.55 }}
-                  onClick={() => setActiveEtl(i)}
-                  className={`flex gap-5 items-start p-6 rounded-2xl border cursor-pointer transition-all duration-300 ${
-                    activeEtl === i
-                      ? "border-blue-300 bg-blue-50 shadow-lg -translate-y-0.5"
-                      : "border-gray-100 bg-white hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5"
-                  }`}
-                >
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black text-white shadow-lg transition-transform duration-300"
-                    style={{ background: pillar.accent, transform: activeEtl === i ? "scale(1.1)" : "scale(1)" }}
-                  >
-                    {pillar.letter}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: activeEtl === i ? pillar.accent : "#d1d5db" }}>
-                        {pillar.step}
-                      </span>
-                      <div className="h-px flex-1 bg-gray-100" />
-                      {activeEtl === i && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: pillar.accent }}>
-                          Active
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="text-lg font-extrabold mb-2 transition-colors" style={{ color: activeEtl === i ? pillar.accent : "#030712" }}>
-                      {pillar.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{pillar.description}</p>
-                    {activeEtl === i && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="mt-3 pt-3 border-t border-blue-100 overflow-hidden"
-                      >
-                        <div className="flex items-center gap-2 text-xs font-semibold" style={{ color: pillar.accent }}>
-                          <ChevronRight className="w-3.5 h-3.5" />
-                          Step {pillar.step} of the ETL-Certification® chain — Mazen GovTech patented technology
-                        </div>
-                      </motion.div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-
-              {/* Quote */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mt-2 p-6 bg-amber-50 rounded-2xl border border-amber-100"
-              >
-                <p className="text-sm text-gray-600 leading-relaxed italic">
-                  "Using Mazen's proprietary ETL-C approach, tax authorities can automatically extract, transform, load and certify all transactional data — with no manual work and no risk of error."
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EtlcPinnedSection />
 
         {/* ══════════════════════════════════════════════════════════
           5. FIELD REFERENCES

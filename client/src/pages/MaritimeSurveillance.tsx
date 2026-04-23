@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
+import { SpotlightCard, NumberTicker, TiltCard } from "../design-system";
+import AuroraBackground from "../design-system/AuroraBackground";
 import {
   Radar,
   Radio,
@@ -169,17 +171,20 @@ export default function MaritimeSurveillance() {
       <PublicNavbar ctaLabel="Request a presentation" ctaHref="/contact" />
 
       {/* ══ HERO ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden min-h-[92vh] flex items-center">
-        {/* Fond animé */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-blue-950/80 to-slate-950" />
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-600/8 blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan-500/6 blur-3xl" />
-          <div className="absolute top-1/2 left-0 w-[300px] h-[300px] rounded-full bg-indigo-600/6 blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden min-h-[92vh] flex items-center bg-navy-950">
+        {/* Aurora ambient */}
+        <AuroraBackground className="opacity-70" />
+        {/* Grain */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundSize: "200px 200px",
+          }}
+        />
         {/* Grille décorative */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: "linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(to right, #3b82f6 1px, transparent 1px)",
             backgroundSize: "60px 60px",
@@ -225,19 +230,25 @@ export default function MaritimeSurveillance() {
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { value: "96 km", label: "Coastal radar range", icon: Radar },
-              { value: "24/7", label: "Continuous monitoring", icon: Eye },
-              { value: "3 layers", label: "Hybrid architecture", icon: Shield },
-              { value: "99.5%", label: "System availability", icon: CheckCircle },
+              { numVal: 96, suffix: " km", label: "Coastal radar range", icon: Radar },
+              { numVal: null, textVal: "24/7", label: "Continuous monitoring", icon: Eye },
+              { numVal: 3, suffix: " layers", label: "Hybrid architecture", icon: Shield },
+              { numVal: 99.5, suffix: "%", label: "System availability", icon: CheckCircle },
             ].map((m) => (
-              <div
+              <SpotlightCard
                 key={m.label}
                 className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 flex flex-col gap-2"
               >
                 <m.icon className="w-6 h-6 text-cyan-400" />
-                <p className="text-3xl font-black text-white">{m.value}</p>
+                <p className="text-3xl font-black text-white">
+                  {m.numVal !== null && m.numVal !== undefined ? (
+                    <NumberTicker value={m.numVal} suffix={m.suffix} decimals={m.suffix?.includes("%") ? 1 : 0} />
+                  ) : (
+                    m.textVal
+                  )}
+                </p>
                 <p className="text-xs text-blue-300/80 font-medium">{m.label}</p>
-              </div>
+              </SpotlightCard>
             ))}
           </motion.div>
         </div>
