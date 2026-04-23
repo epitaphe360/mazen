@@ -19,19 +19,164 @@
   "home": {
     "hero": {
       "title": "Leader des technologies gouvernementales pour la mobilisation des recettes",
-      "subtitle": "Certifi\u00e9 ISO 9001 & ISO 27001 \u2014 Fiable pour les institutions publiques"
+      "subtitle": "Certifié ISO 9001 & ISO 27001 — Fiable pour les institutions publiques",
+      "certBadge": "Plateforme institutionnelle certifiée ISO · ISO 9001 · ISO 27001",
+      "sovereigntyLabel": "Souveraineté pour l'État",
+      "desc": "Depuis 2016, le Groupe Mazen GovTech fournit aux États une infrastructure de gouvernance certifiée — supervision consolidée des flux fiscaux, détection d'anomalies et prise de décision exécutive en temps réel.",
+      "seeReferences": "Voir les références terrain"
+    },
+    "vision": {
+      "tag": "Notre vision",
+      "title": "L'excellence au service de la gouvernance fiscale",
+      "p1": "MAZEN est un leader des technologies gouvernementales. Depuis 2016, nous avons constitué un réseau de collaborateurs hautement qualifiés en Europe, en Asie et en Afrique, soutenu par un département R&D florissant.",
+      "p2": "Nos équipes regroupent des ingénieurs d'excellence issus des meilleures universités, avec une expertise approfondie en traitement big data, fiscalité numérique et gouvernance publique.",
+      "approachTag": "Notre approche en 3 étapes",
+      "step1Title": "Le Big Data devient ingérable",
+      "step1Text": "Les secteurs se numérisent massivement, générant des données volumineuses, chiffrées et hétérogènes.",
+      "step2Title": "MAZEN certifie la donnée",
+      "step2Text": "Notre technologie ETL-Certification® transforme le Big Data en données fiscales structurées, certifiées et juridiquement exécutoires.",
+      "step3Title": "L'État recouvre ses revenus",
+      "step3Text": "Les administrations disposent d'une vision complète et fiable pour maximiser la mobilisation des recettes publiques.",
+      "supervised": "15 milliards USD supervisés depuis 2009",
+      "supervisedSub": "Sur les réseaux d'opérateurs dans 4 pays africains"
+    },
+    "solutions": {
+      "tag": "Nos solutions souveraines",
+      "title": "Deux solutions souveraines,",
+      "titleHighlight": "exécutées avec excellence",
+      "subtitle": "Deux plateformes opérationnelles pour les États. ETL-Certification® constitue le moteur technologique commun.",
+      "prioritySolution": "Solution prioritaire",
+      "discover": "Découvrir"
+    },
+    "references": {
+      "tag": "Références terrain",
+      "title": "4 déploiements.",
+      "titleHighlight": "Des résultats mesurables.",
+      "subtitle": "Chaque référence représente un engagement contractuel avec une administration nationale — et des chiffres vérifiables.",
+      "revenueChart": "Augmentations de revenus documentées",
+      "chartNote": "* Résultats validés contractuellement avec les administrations partenaires",
+      "deploymentMap": "Carte des déploiements",
+      "clickCountry": "Cliquez sur un pays pour les détails"
+    },
+    "sectors": {
+      "tag": "Couverture sectorielle",
+      "title": "9 secteurs,",
+      "titleHighlight": "une vision unifiée",
+      "desc": "Nos solutions apportent transparence et traçabilité fiscale à travers l'économie numérique moderne — des télécoms aux jeux en ligne.",
+      "cta": "Discuter de votre secteur"
+    },
+    "techTransfer": {
+      "tag": "Notre engagement",
+      "title": "Transfert complet de",
+      "titleHighlight": "technologie & compétences",
+      "desc": "Nous assurons un transfert complet de notre technologie aux États clients tout en fournissant une formation complète pour permettre à leurs équipes d'opérer de manière autonome.",
+      "trainingTitle": "Formation complète",
+      "trainingDesc": "Programmes adaptés aux équipes gouvernementales — théorie, pratique et certification interne.",
+      "supportTitle": "Support continu",
+      "supportDesc": "Support technique dédié et maintenance proactive tout au long du contrat.",
+      "autonomyTitle": "Pleine autonomie",
+      "autonomyDesc": "Vos équipes maîtrisent totalement la plateforme sans dépendance technologique externe.",
+      "hostingTitle": "Hébergement souverain",
+      "hostingDesc": "Infrastructure nationale, données sous juridiction étatique — aucun transfert vers des serveurs étrangers.",
+      "certTag": "Certifications actives",
+      "keyFigure": "Chiffre clé",
+      "maxIncrease": "Augmentation maximale observée des recettes publiques",
+      "sierraRef": "Autorité Nationale des Recettes, Sierra Leone (2023)"
+    },
+    "whyUs": {
+      "tag": "Notre différence",
+      "title": "Pourquoi les États nous choisissent",
+      "subtitle": "Quatre piliers soutiennent l'excellence de Mazen et la confiance durable de nos partenaires gouvernementaux.",
+      "certifications": {
+        "title": "Certifié ISO 9001 & ISO 27001",
+        "desc": "Certifications internationales attestant de nos normes de gestion de la qualité et de sécurité de l'information."
+      },
+      "transparency": {
+        "title": "Auditabilité totale",
+        "desc": "Chaque transaction traitée par notre plateforme est entièrement traçable, vérifiable et juridiquement exécutoire."
+      },
+      "founded": {
+        "title": "Fondé en 2016",
+        "desc": "38 ans d'expertise institutionnelle en technologie gouvernementale — une référence reconnue pour la gouvernance fiscale."
+      },
+      "digitalSovereignty": {
+        "title": "Souveraineté numérique",
+        "desc": "Tous nos déploiements incluent un hébergement national, une pleine souveraineté des données et un transfert de technologie complet aux équipes étatiques."
+      }
+    },
+    "testimonials": {
+      "tag": "Témoignages",
+      "title": "Ce que disent nos partenaires",
+      "rating": "4,9 · Satisfaction partenaires"
+    },
+    "newsletter": {
+      "tag": "Newsletter trimestrielle",
+      "title": "Restez informé de nos avancées",
+      "desc": "Nouvelles solutions, références terrain, réformes fiscales — un numéro par trimestre. Pas de spam.",
+      "emailPlaceholder": "Votre adresse email institutionnelle",
+      "subscribe": "S'abonner",
+      "confirmed": "Inscription confirmée. Merci !",
+      "privacy": "🔒 Pas de spam. Données strictement confidentielles. Désinscription en un clic."
+    },
+    "prefooter": {
+      "tag": "L'avenir vous appartient",
+      "title": "L'avenir fiscal de",
+      "titleHighlight": "votre pays",
+      "titleEnd": "commence aujourd'hui.",
+      "desc": "Nos équipes accompagnent les ministères et administrations dans la modernisation de la chaîne des recettes publiques — de la stratégie au déploiement opérationnel.",
+      "scheduleDemo": "Planifier une démo"
+    },
+    "etl": {
+      "extraction": {
+        "title": "EXTRACTION",
+        "description": "Collecte et décodage XDR des fichiers bruts des opérateurs. Transformation des données d'événements provenant de sources hétérogènes."
+      },
+      "transformation": {
+        "title": "TRANSFORMATION",
+        "description": "Conversion des enregistrements en un format unique et interprétable. Consolidation automatisée avec livraison standardisée et confidentielle."
+      },
+      "loading": {
+        "title": "CHARGEMENT",
+        "description": "Stockage dans une base de données unique et analyse via des outils de business intelligence pour extraire des informations fiscales pertinentes."
+      },
+      "certification": {
+        "title": "CERTIFICATION",
+        "description": "Certification des données à l'aide d'algorithmes propriétaires ETL-Certification® garantissant une intégrité absolue et une force exécutoire légale des résultats."
+      }
+    },
+    "caseStudies": {
+      "drc": {
+        "fullName": "République Démocratique du Congo",
+        "title": "Taxes sur les télécommunications",
+        "partner": "Direction Générale des Douanes et Accises (DGDA)"
+      },
+      "mali": {
+        "fullName": "République du Mali",
+        "title": "Supervision de la monnaie mobile",
+        "partner": "Direction Générale des Impôts (DGI)"
+      },
+      "burundi": {
+        "fullName": "République du Burundi",
+        "title": "Taxes sur les jeux en ligne et paris",
+        "partner": "Office Burundais des Recettes (OBR)"
+      },
+      "sierraLeone": {
+        "fullName": "République de Sierra Leone",
+        "title": "Modernisation des recettes nationales",
+        "partner": "Autorité Nationale des Recettes (NRA)"
+      }
     }
   },
   "about": {
     "hero": {
       "kicker": "Notre histoire",
       "title": "\u00c0 propos de MAZEN",
-      "subtitle": "Leader mondial GovTech depuis 1986 \u2014 transformer les \u00e9conomies num\u00e9riques en recettes publiques auditables"
+      "subtitle": "Leader mondial GovTech depuis 2016 \u2014 transformer les \u00e9conomies num\u00e9riques en recettes publiques auditables"
     },
     "history": {
-      "kicker": "Depuis 1986",
+      "kicker": "Depuis 2016",
       "title": "Technologie con\u00e7ue pour les administrations souveraines",
-      "p1": "MAZEN d\u00e9livre des solutions technologiques gouvernementales depuis 1986. Nous nous appuyons sur un r\u00e9seau de collaborateurs hautement qualifi\u00e9s en Europe, Asie et Afrique et une capacit\u00e9 R&D durable.",
+      "p1": "MAZEN délivre des solutions technologiques gouvernementales depuis 2016. Nous nous appuyons sur un réseau de collaborateurs hautement qualifiés en Europe, Asie et Afrique et une capacité R&D durable.",
       "p2": "Nos \u00e9quipes combinent expertise en ing\u00e9nierie des donn\u00e9es, taxation num\u00e9rique, conformit\u00e9 et gouvernance pour servir des environnements institutionnels exigeants.",
       "p3": "Nos syst\u00e8mes analysent et traitent 13 milliards de transactions quotidiennes et supervisent plus de 15 milliards USD de flux op\u00e9rateurs depuis 2009."
     },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, type Variants } from "framer-motion";
 import { KEY_STATS, SECTORS_DATA } from "@shared/types";
 import { Link } from "wouter";
 import PublicNavbar from "../components/PublicNavbar";
@@ -28,6 +28,8 @@ import {
   TrendingUp,
   Lock,
   Zap,
+  Filter,
+  Fingerprint,
 } from "lucide-react";
 
 /* ─── DATA ─────────────────────────────────────────────────── */
@@ -36,34 +38,30 @@ const ETL_PILLARS = [
   {
     step: "01",
     letter: "E",
-    title: "EXTRACTION",
+    title: "home.etl.extraction.title",
     accent: "#3b82f6",
-    description:
-      "Collection and XDR decoding of raw operator files. Transforming event data records from multiple heterogeneous sources.",
+    description: "home.etl.extraction.description",
   },
   {
     step: "02",
     letter: "T",
-    title: "TRANSFORMATION",
+    title: "home.etl.transformation.title",
     accent: "#6366f1",
-    description:
-      "Conversion of records into a single, interpretable format. Automated consolidation with confidential, standardized delivery.",
+    description: "home.etl.transformation.description",
   },
   {
     step: "03",
     letter: "L",
-    title: "LOADING",
+    title: "home.etl.loading.title",
     accent: "#8b5cf6",
-    description:
-      "Storage in a single database and analysis via business intelligence tools to extract relevant fiscal insights.",
+    description: "home.etl.loading.description",
   },
   {
     step: "04",
     letter: "C",
-    title: "CERTIFICATION",
+    title: "home.etl.certification.title",
     accent: "#f59e0b",
-    description:
-      "Data certification using proprietary ETL-Certification® algorithms ensuring absolute integrity and legal enforceability of results.",
+    description: "home.etl.certification.description",
   },
 ];
 
@@ -72,10 +70,10 @@ const CASE_STUDIES = [
     id: 1,
     country: "DRC",
     flag: "🇨🇩",
-    fullName: "Democratic Republic of the Congo",
-    title: "Telecommunications Taxes",
+    fullName: "home.caseStudies.drc.fullName",
+    title: "home.caseStudies.drc.title",
     img: "/case-rdc.svg",
-    partner: "Directorate General of Customs and Excise (DGDA)",
+    partner: "home.caseStudies.drc.partner",
     result: "+60%",
     resultLabel: "excise & VAT after 1 year",
     accent: "#3b82f6",
@@ -85,10 +83,10 @@ const CASE_STUDIES = [
     id: 2,
     country: "Mali",
     flag: "🇲🇱",
-    fullName: "Republic of Mali",
-    title: "Mobile Money",
+    fullName: "home.caseStudies.mali.fullName",
+    title: "home.caseStudies.mali.title",
     img: "/case-mali.svg",
-    partner: "Ministry of Finance",
+    partner: "home.caseStudies.mali.partner",
     result: "100%",
     resultLabel: "transaction visibility",
     accent: "#10b981",
@@ -98,10 +96,10 @@ const CASE_STUDIES = [
     id: 3,
     country: "Burundi",
     flag: "🇧🇮",
-    fullName: "Republic of Burundi",
-    title: "Online Gambling & Betting",
+    fullName: "home.caseStudies.burundi.fullName",
+    title: "home.caseStudies.burundi.title",
     img: "/case-burundi.svg",
-    partner: "Ministry of Finance & Ministry of Commerce",
+    partner: "home.caseStudies.burundi.partner",
     result: "8",
     resultLabel: "certified operators",
     accent: "#ef4444",
@@ -111,10 +109,10 @@ const CASE_STUDIES = [
     id: 4,
     country: "Sierra Leone",
     flag: "🇸🇱",
-    fullName: "Sierra Leone",
-    title: "Telecommunications Taxes",
+    fullName: "home.caseStudies.sierraLeone.fullName",
+    title: "home.caseStudies.sierraLeone.title",
     img: "/case-sierra-leone.svg",
-    partner: "NRA — National Revenue Authority",
+    partner: "home.caseStudies.sierraLeone.partner",
     result: "552%",
     resultLabel: "maximum revenue increase",
     accent: "#f59e0b",
@@ -125,23 +123,23 @@ const CASE_STUDIES = [
 const WHY_US_PILLARS = [
   {
     icon: Award,
-    title: "International Certifications",
-    desc: "ISO 9001 & ISO 27001 active — service quality and data security guaranteed for all our government partners.",
+    title: "home.whyUs.certifications.title",
+    desc: "home.whyUs.certifications.desc",
   },
   {
     icon: Search,
-    title: "Full Transparency",
-    desc: "Complete visibility across digital transactions — governments detect revenue leaks and reduce public debt.",
+    title: "home.whyUs.transparency.title",
+    desc: "home.whyUs.transparency.desc",
   },
   {
     icon: CalendarDays,
-    title: "Founded in 1986",
-    desc: "Four decades of fiscal governance expertise — global network across Europe, Asia and Africa with a thriving R&D department.",
+    title: "home.whyUs.founded.title",
+    desc: "home.whyUs.founded.desc",
   },
   {
     icon: ShieldCheck,
-    title: "Digital Sovereignty",
-    desc: "Sovereign hosting, data under national jurisdiction — states retain full control over their economic flows.",
+    title: "home.whyUs.digitalSovereignty.title",
+    desc: "home.whyUs.digitalSovereignty.desc",
   },
 ];
 
@@ -163,12 +161,48 @@ const SOLUTIONS_CARDS = [
     label: "Revenue Intelligence Platform",
     tag: "Tax & Revenue",
     href: "/solutions/revenues",
-    image: "/digital-economy.png",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
     accent: "from-emerald-600 to-teal-600",
     border: "border-emerald-500/30",
     desc: "Digital collection, real-time monitoring and intelligent tax fraud detection for national administrations.",
     metric: "+35%",
     metricLabel: "Recovery rate",
+  },
+  {
+    icon: Filter,
+    label: "Deep Packet Inspection",
+    tag: "Network & OTT",
+    href: "/solutions/dpi",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
+    accent: "from-indigo-600 to-violet-600",
+    border: "border-indigo-500/30",
+    desc: "Network traffic intelligence, OTT revenue identification and real-time operator compliance monitoring.",
+    metric: "100%",
+    metricLabel: "Traffic visibility",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Network Cybersecurity",
+    tag: "Cyber Defense",
+    href: "/solutions/cybersecurity",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80&auto=format&fit=crop",
+    accent: "from-green-600 to-emerald-600",
+    border: "border-green-500/30",
+    desc: "SOC operations, SIEM integration and 24/7 incident response for national critical infrastructure protection.",
+    metric: "24/7",
+    metricLabel: "SOC monitoring",
+  },
+  {
+    icon: Fingerprint,
+    label: "Cybercrime Investigation",
+    tag: "Forensics & Attribution",
+    href: "/solutions/cybercrime",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80&auto=format&fit=crop",
+    accent: "from-rose-600 to-pink-600",
+    border: "border-rose-500/30",
+    desc: "Digital forensics, threat attribution and inter-agency partner network for cybercrime prosecution support.",
+    metric: "+80%",
+    metricLabel: "Case resolution rate",
   },
 ];
 
@@ -195,11 +229,17 @@ const TESTIMONIALS = [
 
 const ROTATING_WORDS = ["Fiscal", "Maritime", "Digital", "Public"];
 
+// Equirectangular projection: lng[-18..52] -> x[10..570], lat[38..-35] -> y[10..620]
+// kx = 8, ky = 8.36, viewBox 0 0 580 620.
 const AFRICA_DEPLOYMENTS = [
-  { id: "mali", country: "Mali", flag: "\uD83C\uDDF2\uD83C\uDDF1", x: 195, y: 212, color: "#10b981", caseIdx: 1 },
-  { id: "sierra", country: "Sierra Leone", flag: "\uD83C\uDDF8\uD83C\uDDF1", x: 118, y: 316, color: "#f59e0b", caseIdx: 3 },
-  { id: "rdc", country: "DRC", flag: "\uD83C\uDDE8\uD83C\uDDE9", x: 328, y: 448, color: "#3b82f6", caseIdx: 0 },
-  { id: "burundi", country: "Burundi", flag: "\uD83C\uDDE7\uD83C\uDDEE", x: 410, y: 454, color: "#ef4444", caseIdx: 2 },
+  // Mali (Bamako 12.65 N, -8.0 W)
+  { id: "mali", country: "Mali", flag: "\uD83C\uDDF2\uD83C\uDDF1", x: 90, y: 222, color: "#10b981", caseIdx: 1 },
+  // Sierra Leone (Freetown 8.48 N, -13.23 W)
+  { id: "sierra", country: "Sierra Leone", flag: "\uD83C\uDDF8\uD83C\uDDF1", x: 48, y: 257, color: "#f59e0b", caseIdx: 3 },
+  // DRC (Kinshasa -4.32 S, 15.31 E)
+  { id: "rdc", country: "DRC", flag: "\uD83C\uDDE8\uD83C\uDDE9", x: 276, y: 364, color: "#3b82f6", caseIdx: 0 },
+  // Burundi (Bujumbura -3.38 S, 29.36 E)
+  { id: "burundi", country: "Burundi", flag: "\uD83C\uDDE7\uD83C\uDDEE", x: 389, y: 356, color: "#ef4444", caseIdx: 2 },
 ];
 
 const RESULT_BARS = [
@@ -211,11 +251,11 @@ const RESULT_BARS = [
 
 /* ─── SUB-COMPOSANTS ──────────────────────────────────────────── */
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 };
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
@@ -352,42 +392,53 @@ function MiniTrendChart() {
 
 /* ─── INTERACTIVE AFRICA MAP ─────────────────────────────────────── */
 function AfricaMap({ onSelect, selected }: { onSelect: (idx: number) => void; selected: number }) {
+  const { t } = useTranslation();
   return (
-    <div className="relative w-full max-w-[320px] mx-auto select-none">
-      <svg viewBox="0 0 520 720" className="w-full" fill="none">
+    <div className="relative w-full max-w-[420px] mx-auto select-none">
+      <svg viewBox="0 0 580 620" className="w-full" fill="none">
+        {/* Africa silhouette — traced from real coastline coordinates (equirectangular) */}
         <path
-          d="M185,68 L225,48 L268,42 L312,52 L355,75 L382,125 L398,175 L418,218 L438,268 L454,316 L460,370 L450,418 L425,462 L402,508 L378,558 L350,605 L328,650 L306,685 L278,715 L252,718 L228,698 L206,660 L182,612 L158,562 L138,510 L118,452 L104,395 L96,335 L100,278 L108,222 L126,174 L146,130 L165,94 Z"
-          fill="#0f172a" stroke="#1e3a5f" strokeWidth="2"
+          d="M98,29 L178,21 L237,20 L263,53 L321,59 L403,67 L425,77 L445,81 L470,150 L482,197 L512,232 L555,225 L580,230 L540,290 L531,311 L510,340 L484,361 L480,384 L460,440 L443,493 L425,544 L412,577 L360,605 L320,619 L308,615 L290,580 L280,545 L274,518 L263,460 L263,400 L252,366 L240,340 L232,323 L230,310 L234,292 L200,278 L181,272 L173,273 L152,280 L121,282 L100,278 L66,274 L46,256 L43,246 L30,225 L12,204 L18,190 L24,176 L25,128 L50,90 L75,72 L92,46 Z"
+          fill="#0f172a"
+          stroke="#1e3a5f"
+          strokeWidth="1.8"
         />
-        <path d="M460,370 L484,345 L510,328 L524,350 L514,378 L488,385 Z" fill="#0f172a" stroke="#1e3a5f" strokeWidth="2" />
-        <path d="M478,428 L492,418 L502,448 L497,488 L476,495 L466,468 Z" fill="#0f172a" stroke="#1e3a5f" strokeWidth="1.5" />
-        <line x1="100" y1="278" x2="510" y2="278" stroke="#1e293b" strokeWidth="0.8" strokeDasharray="5 10" />
-        <line x1="100" y1="370" x2="520" y2="370" stroke="#1e293b" strokeWidth="0.8" strokeDasharray="5 10" />
-        <line x1="300" y1="42" x2="300" y2="718" stroke="#1e293b" strokeWidth="0.8" strokeDasharray="5 10" />
+        {/* Madagascar */}
+        <path
+          d="M545,425 L560,440 L555,490 L540,540 L525,545 L520,500 L525,460 L535,430 Z"
+          fill="#0f172a"
+          stroke="#1e3a5f"
+          strokeWidth="1.5"
+        />
+        {/* Tropic of Cancer / Equator / Tropic of Capricorn */}
+        <line x1="10" y1="132" x2="570" y2="132" stroke="#1e293b" strokeWidth="0.6" strokeDasharray="4 8" />
+        <line x1="10" y1="327" x2="570" y2="327" stroke="#1e293b" strokeWidth="0.8" strokeDasharray="5 10" />
+        <line x1="10" y1="524" x2="570" y2="524" stroke="#1e293b" strokeWidth="0.6" strokeDasharray="4 8" />
         {AFRICA_DEPLOYMENTS.map((dep, i) => (
           <g key={dep.id} onClick={() => onSelect(dep.caseIdx)} style={{ cursor: "pointer" }}>
             <motion.circle
               cx={dep.x} cy={dep.y} r={18}
               fill="none" stroke={dep.color} strokeWidth="1"
+              initial={{ opacity: 0.2, r: 18 }}
               animate={{ opacity: [0.2, 0.65, 0.2], r: [18, 28, 18] }}
               transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
             />
-            <circle cx={dep.x} cy={dep.y} r={10}
+            <circle cx={dep.x} cy={dep.y} r={9}
               fill={selected === dep.caseIdx ? dep.color : "#1e293b"}
               stroke={dep.color} strokeWidth="2.5"
             />
             <text
-              x={dep.x + (dep.x > 280 ? 17 : -17)} y={dep.y + 4}
-              textAnchor={dep.x > 280 ? "start" : "end"}
-              fontSize="9" fontWeight="700"
-              fill={selected === dep.caseIdx ? dep.color : "#94a3b8"}
+              x={dep.x + (dep.x > 290 ? 16 : -16)} y={dep.y + 4}
+              textAnchor={dep.x > 290 ? "start" : "end"}
+              fontSize="12" fontWeight="700"
+              fill={selected === dep.caseIdx ? dep.color : "#cbd5e1"}
             >
               {dep.country}
             </text>
           </g>
         ))}
       </svg>
-      <p className="text-[10px] text-slate-500 text-center mt-1 italic">Click a country for details</p>
+      <p className="text-[10px] text-slate-500 text-center mt-1 italic">{t('home.references.clickCountry')}</p>
     </div>
   );
 }
@@ -461,57 +512,38 @@ function TestimonialsCarousel({ items }: { items: Array<{ quote: string; name: s
   );
 }
 
-/* ─── ETL+C PINNED SCROLL NARRATIVE ───────────────────────────── */
+/* ─── ETL+C SECTION (tab-based) ──────────────────────────────── */
 function EtlcPinnedSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const { t } = useTranslation();
+  const [active, setActive] = useState(0);
 
-  // each pillar occupies 1/4 of the scroll range
-  const activeIndex = useMotionValue(0);
+  // Auto-advance; reset timer on manual click
+  useEffect(() => {
+    const id = setInterval(() => setActive((i) => (i + 1) % ETL_PILLARS.length), 4000);
+    return () => clearInterval(id);
+  }, [active]);
 
-  // Derive which pillar is active from scroll progress
-  function useActiveForIndex(idx: number) {
-    return useTransform(scrollYProgress, (p) => {
-      const start = idx / 4;
-      const end = (idx + 1) / 4;
-      const mid = (start + end) / 2;
-      // fade in approaching mid, full at mid, fade out after
-      const raw = 1 - Math.abs(p - mid) / (1 / 4);
-      return Math.max(0, Math.min(1, raw * 2));
-    });
-  }
-
-  const ACCENT_VARS = ["#3b82f6", "#6366f1", "#8b5cf6", "#f59e0b"] as const;
+  const pillar = ETL_PILLARS[active];
 
   return (
-    <section
-      id="etlc"
-      ref={containerRef}
-      className="relative"
-      style={{ height: "400vh" }}
-    >
-      {/* Sticky wrapper — stays in viewport while container scrolls */}
-      <div className="sticky top-0 h-screen overflow-hidden bg-navy-950 flex flex-col">
-        {/* Ambient blobs */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-navy-800/60 blur-[120px]" />
-          <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gold-900/30 blur-[100px]" />
-        </div>
+    <section id="etlc" className="py-24 bg-navy-950 text-white relative overflow-hidden">
+      {/* Ambient blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full bg-navy-800/60 blur-[120px]" />
+        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gold-900/30 blur-[100px]" />
+      </div>
+      {/* Grain */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "200px 200px",
+        }}
+      />
 
-        {/* Grain */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
-
-        {/* Top eyebrow */}
-        <div className="relative z-10 pt-10 pb-6 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Eyebrow */}
+        <div className="text-center mb-12">
           <span className="inline-block text-[10px] font-black uppercase tracking-[0.4em] text-gold-400 mb-2">
             Patented technology
           </span>
@@ -526,212 +558,128 @@ function EtlcPinnedSection() {
           </motion.h2>
         </div>
 
-        {/* Main area */}
-        <div className="relative z-10 flex-1 flex items-center">
-          <div className="max-w-7xl mx-auto px-6 w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-              {/* Left: animated letter + step info */}
-              <div className="relative h-[320px] flex items-center">
-                <AnimatePresence mode="wait">
-                  {ETL_PILLARS.map((pillar, i) => (
-                    <EtlPillarContent
-                      key={pillar.letter}
-                      pillar={pillar}
-                      index={i}
-                      scrollYProgress={scrollYProgress}
-                    />
-                  ))}
-                </AnimatePresence>
-              </div>
-
-              {/* Right: progress dots + quote */}
-              <div className="space-y-8">
-                {/* Step dots */}
-                <div className="flex items-center gap-4">
-                  {ETL_PILLARS.map((p, i) => (
-                    <EtlDot key={p.letter} index={i} scrollYProgress={scrollYProgress} accent={p.accent} />
-                  ))}
-                </div>
-
-                {/* Cards stack */}
-                <div className="relative h-[220px]">
-                  {ETL_PILLARS.map((pillar, i) => (
-                    <EtlCard key={pillar.letter} pillar={pillar} index={i} scrollYProgress={scrollYProgress} />
-                  ))}
-                </div>
-
-                {/* Stats bar */}
-                <div className="flex gap-6 pt-4 border-t border-white/10">
-                  <div>
-                    <p className="text-2xl font-black text-gold-400">13 Mrd</p>
-                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Tx / day</p>
-                  </div>
-                  <div className="w-px bg-white/10" />
-                  <div>
-                    <p className="text-2xl font-black text-white">$15 Mrd</p>
-                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Supervised</p>
-                  </div>
-                  <div className="w-px bg-white/10" />
-                  <div>
-                    <p className="text-2xl font-black text-emerald-400">100%</p>
-                    <p className="text-[11px] text-white/40 uppercase tracking-wider">Data integrity</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Tab buttons */}
+        <div className="flex justify-center gap-2 mb-12">
+          {ETL_PILLARS.map((p, i) => (
+            <button
+              key={p.letter}
+              onClick={() => setActive(i)}
+              className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all border ${
+                active === i
+                  ? ""
+                  : "bg-white/5 border-white/10 text-white/50 hover:bg-white/10 hover:text-white/80"
+              }`}
+              style={
+                active === i
+                  ? { background: `${p.accent}22`, borderColor: `${p.accent}80`, color: p.accent }
+                  : {}
+              }
+            >
+              <span className="text-lg font-black" style={{ color: active === i ? p.accent : "inherit" }}>
+                {p.letter}
+              </span>
+              <span className="hidden sm:inline">{t(p.title)}</span>
+            </button>
+          ))}
         </div>
 
-        {/* Bottom scroll hint */}
-        <div className="relative z-10 py-5 flex justify-center">
-          <EtlScrollBar scrollYProgress={scrollYProgress} />
+        {/* Main content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+          >
+            {/* Left: giant letter */}
+            <div className="flex flex-col gap-4">
+              <div className="relative inline-flex">
+                <span
+                  className="text-[10rem] font-black leading-none select-none"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: `2px ${pillar.accent}`,
+                    textShadow: `0 0 80px ${pillar.accent}55`,
+                  }}
+                >
+                  {pillar.letter}
+                </span>
+                <span
+                  className="absolute inset-0 text-[10rem] font-black leading-none select-none opacity-10"
+                  style={{ color: pillar.accent }}
+                >
+                  {pillar.letter}
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span
+                  className="text-xs font-black px-3 py-1 rounded-full text-white"
+                  style={{ background: pillar.accent }}
+                >
+                  {pillar.step}
+                </span>
+                <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: pillar.accent }}>
+                  {t(pillar.title)}
+                </span>
+              </div>
+              <p className="text-white/60 text-base max-w-sm leading-relaxed">
+                {t(pillar.description)}
+              </p>
+            </div>
+
+            {/* Right: card */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-8">
+              <div className="flex items-start gap-4 mb-6">
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl font-black text-white flex-shrink-0"
+                  style={{ background: `linear-gradient(135deg, ${pillar.accent}cc, ${pillar.accent}66)` }}
+                >
+                  {pillar.letter}
+                </div>
+                <div>
+                  <p className="font-black text-white text-xl mb-1">{t(pillar.title)}</p>
+                  <div
+                    className="text-[10px] font-bold uppercase tracking-[0.25em] px-2.5 py-1 rounded-full inline-block"
+                    style={{ background: `${pillar.accent}22`, color: pillar.accent }}
+                  >
+                    Step {pillar.step} · ETL-C® Chain
+                  </div>
+                </div>
+              </div>
+              <p className="text-white/60 leading-relaxed">{t(pillar.description)}</p>
+              {/* Auto-advance progress indicators */}
+              <div className="mt-6 flex gap-2">
+                {ETL_PILLARS.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-1 flex-1 rounded-full transition-all duration-300"
+                    style={{ background: i === active ? pillar.accent : "rgba(255,255,255,0.1)" }}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Stats bar */}
+        <div className="mt-16 pt-10 border-t border-white/10 flex flex-wrap justify-center gap-12">
+          <div className="text-center">
+            <p className="text-3xl font-black text-gold-400">13 Mrd</p>
+            <p className="text-[11px] text-white/40 uppercase tracking-wider mt-1">Tx / day</p>
+          </div>
+          <div className="text-center">
+            <p className="text-3xl font-black text-white">$15 Mrd</p>
+            <p className="text-[11px] text-white/40 uppercase tracking-wider mt-1">Supervised</p>
+          </div>
+          <div className="text-center">
+            <p className="text-3xl font-black text-emerald-400">100%</p>
+            <p className="text-[11px] text-white/40 uppercase tracking-wider mt-1">Data integrity</p>
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function EtlPillarContent({
-  pillar,
-  index,
-  scrollYProgress,
-}: {
-  pillar: (typeof ETL_PILLARS)[0];
-  index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const start = index / 4;
-  const end = (index + 1) / 4;
-  const opacity = useTransform(scrollYProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [start, start + 0.05], [40, 0]);
-  const scale = useTransform(scrollYProgress, [start, start + 0.05], [0.92, 1]);
-
-  return (
-    <motion.div
-      style={{ opacity, y, scale, position: "absolute", width: "100%" }}
-    >
-      <div className="flex flex-col gap-4">
-        {/* Giant letter */}
-        <div className="relative inline-flex">
-          <span
-            className="text-[10rem] font-black leading-none select-none"
-            style={{
-              color: "transparent",
-              WebkitTextStroke: `2px ${pillar.accent}`,
-              textShadow: `0 0 80px ${pillar.accent}55`,
-            }}
-          >
-            {pillar.letter}
-          </span>
-          <span
-            className="absolute inset-0 text-[10rem] font-black leading-none select-none opacity-10"
-            style={{ color: pillar.accent }}
-          >
-            {pillar.letter}
-          </span>
-        </div>
-        {/* Step badge */}
-        <div className="flex items-center gap-3">
-          <span
-            className="text-xs font-black px-3 py-1 rounded-full text-white"
-            style={{ background: pillar.accent }}
-          >
-            {pillar.step}
-          </span>
-          <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: pillar.accent }}>
-            {pillar.title}
-          </span>
-        </div>
-        <p className="text-white/60 text-base max-w-sm leading-relaxed">
-          {pillar.description}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-function EtlCard({
-  pillar,
-  index,
-  scrollYProgress,
-}: {
-  pillar: (typeof ETL_PILLARS)[0];
-  index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const start = index / 4;
-  const end = (index + 1) / 4;
-  const opacity = useTransform(scrollYProgress, [start, start + 0.05, end - 0.05, end], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [start, start + 0.04], [20, 0]);
-
-  return (
-    <motion.div
-      style={{ opacity, y, position: "absolute", width: "100%" }}
-      className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6"
-    >
-      <div className="flex items-start gap-4">
-        <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-black text-white flex-shrink-0"
-          style={{ background: `linear-gradient(135deg, ${pillar.accent}cc, ${pillar.accent}66)` }}
-        >
-          {pillar.letter}
-        </div>
-        <div>
-          <p className="font-black text-white text-lg mb-1">{pillar.title}</p>
-          <p className="text-white/50 text-xs leading-relaxed">{pillar.description}</p>
-          <div
-            className="mt-3 text-[10px] font-bold uppercase tracking-[0.25em] px-2.5 py-1 rounded-full inline-block"
-            style={{ background: `${pillar.accent}22`, color: pillar.accent }}
-          >
-            Step {pillar.step} · ETL-C® Chain
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function EtlDot({
-  index,
-  scrollYProgress,
-  accent,
-}: {
-  index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  accent: string;
-}) {
-  const start = index / 4;
-  const end = (index + 1) / 4;
-  const active = useTransform(scrollYProgress, [start, start + 0.04, end - 0.04, end], [0, 1, 1, 0]);
-
-  return (
-    <motion.div
-      style={{
-        width: 12,
-        height: 12,
-        borderRadius: 6,
-        backgroundColor: accent,
-        opacity: active,
-        boxShadow: `0 0 12px ${accent}`,
-      }}
-    />
-  );
-}
-
-function EtlScrollBar({
-  scrollYProgress,
-}: {
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
-  return (
-    <div className="relative w-40 h-1 rounded-full bg-white/10 overflow-hidden">
-      <motion.div
-        style={{ scaleX, originX: 0 }}
-        className="absolute inset-0 rounded-full bg-gradient-to-r from-gold-400 to-gold-600"
-      />
-    </div>
   );
 }
 
@@ -819,21 +767,20 @@ export default function Home() {
             >
               <motion.div variants={fadeUp}>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 text-[11px] font-bold bg-amber-500/15 text-amber-300 rounded-full mb-7 border border-amber-500/25 uppercase tracking-[0.22em]">
-                  ISO-certified institutional platform · ISO 9001 · ISO 27001
+                  {t('home.hero.certBadge')}
                 </span>
               </motion.div>
               <motion.h1
                 variants={fadeUp}
                 className="text-5xl md:text-7xl font-black text-white leading-[1.0] mb-8 max-w-4xl"
               >
-                <RotatingWord /> Sovereignty for the State
+                <RotatingWord /> {t('home.hero.sovereigntyLabel')}
               </motion.h1>
               <motion.p
                 variants={fadeUp}
                 className="text-lg md:text-xl text-blue-100/80 max-w-2xl leading-relaxed mb-10"
               >
-                Since 1986, Mazen GovTech Group has provided states with certified governance infrastructure —
-                consolidated fiscal flow monitoring, anomaly detection and executive decision-making in real time.
+                {t('home.hero.desc')}
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-14">
                 <MagneticAnchor href="/contact" className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-7 py-4 rounded-xl transition-all shadow-xl shadow-gold-500/30 text-sm glow-ring">
@@ -844,7 +791,7 @@ export default function Home() {
                   href="#references"
                   className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-7 py-4 rounded-xl hover:bg-white/10 transition-all text-sm backdrop-blur-sm"
                 >
-                  See field references
+                  {t('home.hero.seeReferences')}
                   <ChevronRight className="w-4 h-4" />
                 </MagneticAnchor>
               </motion.div>
@@ -902,7 +849,7 @@ export default function Home() {
                     { v: "$15B", l: "Supervised flows", sub: "Since 2009" },
                     { v: "13B", l: "Tx / day", sub: "Continuous processing" },
                     { v: "+552%", l: "Record increase", sub: "Sierra Leone" },
-                    { v: "1986", l: "Founded", sub: "4 decades" },
+                    { v: "2016", l: "Founded", sub: "10 years" },
                   ].map((s) => (
                     <div key={s.v} className="executive-metric">
                       <div className="text-2xl font-extrabold text-amber-400 mb-0.5">{s.v}</div>
@@ -961,16 +908,16 @@ export default function Home() {
               variants={staggerContainer}
             >
               <motion.div variants={fadeUp}>
-                <SectionTag>Our vision</SectionTag>
+                <SectionTag>{t('home.vision.tag')}</SectionTag>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 leading-tight mb-6">
-                Excellence in Service of Fiscal Governance
+                {t('home.vision.title')}
               </motion.h2>
               <motion.p variants={fadeUp} className="text-gray-500 text-lg leading-relaxed mb-6">
-                MAZEN is a leading company in government technologies. Since 1986, we have built a network of highly skilled collaborators across <strong className="text-gray-900">Europe, Asia and Africa</strong>, supported by a thriving R&D department.
+                {t('home.vision.p1')}
               </motion.p>
               <motion.p variants={fadeUp} className="text-gray-500 leading-relaxed mb-8">
-                Our team includes outstanding engineers from top universities, with deep expertise in big data processing, digital taxation and public governance.
+                {t('home.vision.p2')}
               </motion.p>
               <motion.div variants={staggerContainer} className="grid grid-cols-2 gap-4">
                 {[
@@ -1001,35 +948,20 @@ export default function Home() {
             >
               <div className="relative">
                 <div className="bg-navy-950 rounded-3xl p-8 border border-navy-800/50 shadow-2xl">
-                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold-400 mb-4">Our approach in 3 steps</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold-400 mb-4">{t('home.vision.approachTag')}</p>
                   <div className="space-y-5">
                     {[
-                      {
-                        n: "01",
-                        title: "Big Data becomes unmanageable",
-                        text: "Sectors are increasingly digitized, generating massive, encrypted and heterogeneous datasets.",
-                        color: "bg-blue-500",
-                      },
-                      {
-                        n: "02",
-                        title: "MAZEN certifies the data",
-                        text: "Our ETL-Certification® technology turns Big Data into structured, certified and legally enforceable fiscal data.",
-                        color: "bg-amber-500",
-                      },
-                      {
-                        n: "03",
-                        title: "The state recovers revenues",
-                        text: "Administrations gain a complete and reliable view to maximize public revenue mobilization.",
-                        color: "bg-emerald-500",
-                      },
+                      { n: "01", titleKey: "home.vision.step1Title", textKey: "home.vision.step1Text", color: "bg-blue-500" },
+                      { n: "02", titleKey: "home.vision.step2Title", textKey: "home.vision.step2Text", color: "bg-amber-500" },
+                      { n: "03", titleKey: "home.vision.step3Title", textKey: "home.vision.step3Text", color: "bg-emerald-500" },
                     ].map((step, i) => (
                       <div key={step.n} className="flex gap-4 items-start">
                         <div className={`w-8 h-8 rounded-xl ${step.color} flex items-center justify-center text-white text-xs font-black flex-shrink-0`}>
                           {step.n}
                         </div>
                         <div>
-                          <p className="text-white font-bold text-sm mb-1">{step.title}</p>
-                          <p className="text-blue-200/70 text-xs leading-relaxed">{step.text}</p>
+                          <p className="text-white font-bold text-sm mb-1">{t(step.titleKey)}</p>
+                          <p className="text-blue-200/70 text-xs leading-relaxed">{t(step.textKey)}</p>
                         </div>
                         {i < 2 && <div className="absolute left-[2.75rem] mt-10 w-px h-6 bg-white/10" />}
                       </div>
@@ -1037,9 +969,9 @@ export default function Home() {
                   </div>
                   <div className="mt-8 pt-6 border-t border-white/10">
                     <p className="text-amber-400 font-bold text-base">
-                      $15 billion supervised since 2009
+                      {t('home.vision.supervised')}
                     </p>
-                    <p className="text-blue-300/70 text-xs mt-1">Across operator networks in 4 African countries</p>
+                    <p className="text-blue-300/70 text-xs mt-1">{t('home.vision.supervisedSub')}</p>
                   </div>
                 </div>
                 {/* Floating badge */}
@@ -1066,20 +998,20 @@ export default function Home() {
             className="text-center mb-16"
           >
             <motion.div variants={fadeUp}>
-              <SectionTag light>Our sovereign solutions</SectionTag>
+              <SectionTag light>{t('home.solutions.tag')}</SectionTag>
             </motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Two sovereign solutions, <br className="hidden md:block" />
+              {t('home.solutions.title')} <br className="hidden md:block" />
               <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                executed with excellence
+                {t('home.solutions.titleHighlight')}
               </span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-blue-300/70 max-w-xl mx-auto">
-              Two operational platforms for states. ETL-Certification® serves as the shared technological engine.
+              {t('home.solutions.subtitle')}
             </motion.p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SOLUTIONS_CARDS.map((sol, i) => (
               <motion.div
                 key={sol.label}
@@ -1094,7 +1026,7 @@ export default function Home() {
                   <div className="relative h-52 overflow-hidden border-b border-white/10">
                     <img src={sol.image} alt={sol.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
-                    <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">Priority solution</div>
+                    <div className="absolute left-5 bottom-4 text-white/90 text-xs font-semibold uppercase tracking-[0.18em]">{t('home.solutions.prioritySolution')}</div>
                   </div>
                   <div className="p-7">
                     <div className="flex items-start justify-between mb-5">
@@ -1115,7 +1047,7 @@ export default function Home() {
                         <p className="text-xs text-blue-300/60">{sol.metricLabel}</p>
                       </div>
                       <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-300 group-hover:text-amber-300 transition-colors">
-                        Discover <ArrowRight className="w-3.5 h-3.5" />
+                        {t('home.solutions.discover')} <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
                   </div>
@@ -1143,13 +1075,13 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Field references</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>{t('home.references.tag')}</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              4 deployments. <br className="hidden md:block" />
-              <span className="text-blue-700">Measurable results.</span>
+              {t('home.references.title')} <br className="hidden md:block" />
+              <span className="text-blue-700">{t('home.references.titleHighlight')}</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 max-w-xl mx-auto">
-              Each reference represents a contractual engagement with a national administration — and verifiable figures.
+              {t('home.references.subtitle')}
             </motion.p>
           </motion.div>
 
@@ -1176,13 +1108,13 @@ export default function Home() {
                     <div>
                       <div className="flex items-center gap-2 mb-1.5">
                         <span className="text-2xl">{c.flag}</span>
-                        <span className="font-extrabold text-gray-950 text-base">{c.fullName}</span>
+                        <span className="font-extrabold text-gray-950 text-base">{t(c.fullName)}</span>
                       </div>
                       <span
                         className="inline-block text-xs font-bold px-3 py-1 rounded-full text-white"
                         style={{ background: c.accent }}
                       >
-                        {c.title}
+                        {t(c.title)}
                       </span>
                     </div>
                     <div className="text-right flex-shrink-0">
@@ -1190,7 +1122,7 @@ export default function Home() {
                       <p className="text-xs text-gray-400 mt-1 max-w-[10ch] ml-auto">{c.resultLabel}</p>
                     </div>
                   </div>
-                  <p className="text-xs font-semibold text-gray-400 mb-2">▸ {c.partner}</p>
+                  <p className="text-xs font-semibold text-gray-400 mb-2">▸ {t(c.partner)}</p>
                   <p className="text-gray-600 text-sm leading-relaxed">{c.details}</p>
                 </div>
               </motion.div>
@@ -1205,11 +1137,11 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-white rounded-3xl border border-gray-100 p-7 shadow-sm"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">Documented revenue increases</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-6">{t('home.references.revenueChart')}</p>
               {RESULT_BARS.map((b) => (
                 <AnimatedBar key={b.country} country={b.country} label={b.label} value={b.value} max={600} color={b.color} />
               ))}
-              <p className="text-[11px] text-gray-400 mt-5 italic">* Results contractually validated with partner administrations</p>
+              <p className="text-[11px] text-gray-400 mt-5 italic">{t('home.references.chartNote')}</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -1217,7 +1149,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-6 border border-blue-900/40 shadow-xl"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4 text-center">Deployment map</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-4 text-center">{t('home.references.deploymentMap')}</p>
               <AfricaMap selected={selectedCountry} onSelect={setSelectedCountry} />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -1231,7 +1163,7 @@ export default function Home() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-lg">{CASE_STUDIES[selectedCountry].flag}</span>
-                      <span className="font-bold text-white text-sm">{CASE_STUDIES[selectedCountry].fullName}</span>
+                      <span className="font-bold text-white text-sm">{t(CASE_STUDIES[selectedCountry].fullName)}</span>
                     </div>
                     <span className="text-2xl font-extrabold" style={{ color: CASE_STUDIES[selectedCountry].accent }}>
                       {CASE_STUDIES[selectedCountry].result}
@@ -1258,16 +1190,16 @@ export default function Home() {
             className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start"
           >
             <motion.div variants={fadeUp} className="lg:sticky lg:top-28">
-              <SectionTag>Sector coverage</SectionTag>
+              <SectionTag>{t('home.sectors.tag')}</SectionTag>
               <h2 className="text-4xl font-extrabold text-gray-950 leading-tight mb-4">
-                9 sectors,<br />
-                <span className="text-blue-700">a unified vision</span>
+                {t('home.sectors.title')}<br />
+                <span className="text-blue-700">{t('home.sectors.titleHighlight')}</span>
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Our solutions bring transparency and fiscal traceability across the modern digital economy — from telecoms to online gaming.
+                {t('home.sectors.desc')}
               </p>
               <Link href="/contact" className="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm">
-                Discuss your sector
+                {t('home.sectors.cta')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -1307,28 +1239,28 @@ export default function Home() {
               viewport={{ once: true }}
               variants={staggerContainer}
             >
-              <motion.div variants={fadeUp}><SectionTag light>Our commitment</SectionTag></motion.div>
+              <motion.div variants={fadeUp}><SectionTag light>{t('home.techTransfer.tag')}</SectionTag></motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6">
-                Full transfer of<br />
-                <span className="text-amber-400">technology & skills</span>
+                {t('home.techTransfer.title')}<br />
+                <span className="text-amber-400">{t('home.techTransfer.titleHighlight')}</span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-blue-200/80 text-lg leading-relaxed mb-8">
-                We ensure a complete transfer of our technology to client states while providing comprehensive training to enable their teams to operate independently.
+                {t('home.techTransfer.desc')}
               </motion.p>
               <motion.div variants={staggerContainer} className="space-y-4">
                 {[
-                  { icon: BookOpen, title: "Comprehensive training", desc: "Programs tailored to government teams — theory, practice and internal certification." },
-                  { icon: Wrench, title: "Continuous support", desc: "Dedicated technical support and proactive maintenance throughout the contract." },
-                  { icon: Rocket, title: "Full autonomy", desc: "Your teams fully master the platform without external technological dependence." },
-                  { icon: Lock, title: "Sovereign hosting", desc: "National infrastructure, data under state jurisdiction — no transfer to foreign servers." },
-                ].map((item, i) => (
-                  <motion.div key={item.title} variants={fadeUp} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/5 hover:bg-white/8 transition-colors">
+                  { icon: BookOpen, titleKey: "home.techTransfer.trainingTitle", descKey: "home.techTransfer.trainingDesc" },
+                  { icon: Wrench, titleKey: "home.techTransfer.supportTitle", descKey: "home.techTransfer.supportDesc" },
+                  { icon: Rocket, titleKey: "home.techTransfer.autonomyTitle", descKey: "home.techTransfer.autonomyDesc" },
+                  { icon: Lock, titleKey: "home.techTransfer.hostingTitle", descKey: "home.techTransfer.hostingDesc" },
+                ].map((item) => (
+                  <motion.div key={item.titleKey} variants={fadeUp} className="flex items-start gap-4 p-5 rounded-2xl border border-white/8 bg-white/5 hover:bg-white/8 transition-colors">
                     <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex-shrink-0">
                       <item.icon className="w-5 h-5" />
                     </span>
                     <div>
-                      <div className="font-bold text-white text-sm mb-1">{item.title}</div>
-                      <div className="text-blue-200/60 text-sm leading-relaxed">{item.desc}</div>
+                      <div className="font-bold text-white text-sm mb-1">{t(item.titleKey)}</div>
+                      <div className="text-blue-200/60 text-sm leading-relaxed">{t(item.descKey)}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -1344,13 +1276,13 @@ export default function Home() {
               className="space-y-6"
             >
               <div className="rounded-3xl bg-gradient-to-br from-blue-900/50 to-indigo-900/50 border border-blue-800/30 p-8">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-6">Active certifications</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-400 mb-6">{t('home.techTransfer.certTag')}</p>
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { cert: "ISO 9001", label: "Quality Management", icon: Award },
                     { cert: "ISO 27001", label: "Information Security", icon: ShieldCheck },
                     { cert: "ETL-C®", label: "Proprietary patent", icon: Zap },
-                    { cert: "Since 1986", label: "38 years of expertise", icon: CalendarDays },
+                    { cert: "Since 2016", label: "10 years of expertise", icon: CalendarDays },
                   ].map((c) => (
                     <div key={c.cert} className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
                       <c.icon className="w-6 h-6 text-amber-400 mx-auto mb-2" />
@@ -1362,10 +1294,10 @@ export default function Home() {
               </div>
               <div className="rounded-3xl bg-amber-500 p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-amber-400/50 blur-2xl" />
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70 mb-2 relative">Key figure</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70 mb-2 relative">{t('home.techTransfer.keyFigure')}</p>
                 <p className="text-5xl font-black text-gray-950 relative mb-2">+552%</p>
-                <p className="text-amber-950/80 font-semibold relative">Maximum increase observed in public revenues</p>
-                <p className="text-xs text-amber-950/60 mt-1 relative">National Revenue Authority, Sierra Leone (2023)</p>
+                <p className="text-amber-950/80 font-semibold relative">{t('home.techTransfer.maxIncrease')}</p>
+                <p className="text-xs text-amber-950/60 mt-1 relative">{t('home.techTransfer.sierraRef')}</p>
               </div>
             </motion.div>
           </div>
@@ -1384,12 +1316,12 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Our difference</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>{t('home.whyUs.tag')}</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              Why states choose us
+              {t('home.whyUs.title')}
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 max-w-xl mx-auto">
-              Four pillars underpin Mazen's excellence and the lasting trust of our government partners.
+              {t('home.whyUs.subtitle')}
             </motion.p>
           </motion.div>
 
@@ -1407,8 +1339,8 @@ export default function Home() {
                   <pillar.icon className="w-6 h-6" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-extrabold text-gray-950 mb-2">{pillar.title}</h3>
-                  <p className="text-gray-500 leading-relaxed text-sm">{pillar.desc}</p>
+                  <h3 className="text-lg font-extrabold text-gray-950 mb-2">{t(pillar.title)}</h3>
+                  <p className="text-gray-500 leading-relaxed text-sm">{t(pillar.desc)}</p>
                 </div>
               </motion.div>
             ))}
@@ -1428,15 +1360,15 @@ export default function Home() {
             variants={staggerContainer}
             className="text-center mb-16"
           >
-            <motion.div variants={fadeUp}><SectionTag>Testimonials</SectionTag></motion.div>
+            <motion.div variants={fadeUp}><SectionTag>{t('home.testimonials.tag')}</SectionTag></motion.div>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-extrabold text-gray-950 mb-4">
-              What our partners say
+              {t('home.testimonials.title')}
             </motion.h2>
             <motion.div variants={fadeUp} className="flex items-center justify-center gap-1 mb-2">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
-              <span className="text-sm font-bold text-gray-700 ml-2">4.9 · Partner satisfaction</span>
+              <span className="text-sm font-bold text-gray-700 ml-2">{t('home.testimonials.rating')}</span>
             </motion.div>
           </motion.div>
 
@@ -1457,15 +1389,15 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <Mail className="w-5 h-5 text-amber-950/70" />
-                <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70">Quarterly newsletter</span>
+                <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-950/70">{t('home.newsletter.tag')}</span>
               </div>
-              <h3 className="text-2xl font-extrabold text-gray-950">Stay updated on our progress</h3>
-              <p className="text-amber-950/70 text-sm mt-1">New solutions, field references, tax reforms — one issue per quarter. No spam.</p>
+              <h3 className="text-2xl font-extrabold text-gray-950">{t('home.newsletter.title')}</h3>
+              <p className="text-amber-950/70 text-sm mt-1">{t('home.newsletter.desc')}</p>
             </div>
             {newsletterSent ? (
                 <div className="flex items-center gap-3 bg-white/30 rounded-2xl px-6 py-4 border border-white/40">
                 <CheckCircle2 className="w-5 h-5 text-gray-950" />
-                <span className="font-bold text-gray-950">Subscription confirmed. Thank you!</span>
+                <span className="font-bold text-gray-950">{t('home.newsletter.confirmed')}</span>
               </div>
             ) : (
               <form
@@ -1477,19 +1409,19 @@ export default function Home() {
                   required
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Your institutional email address"
+                  placeholder={t('home.newsletter.emailPlaceholder')}
                   className="flex-1 md:w-72 px-4 py-3.5 rounded-xl border-0 bg-white/90 text-gray-950 placeholder-gray-400 text-sm font-medium focus:ring-2 focus:ring-gray-950 outline-none"
                 />
                 <button
                   type="submit"
                   className="bg-gray-950 hover:bg-gray-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all text-sm flex items-center gap-2 flex-shrink-0"
                 >
-                  Subscribe <ArrowRight className="w-4 h-4" />
+                  {t('home.newsletter.subscribe')} <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
             )}
           </div>
-          <p className="mt-4 text-xs text-amber-950/50 text-center md:text-left">🔒 No spam. Data strictly confidential. One-click unsubscribe.</p>
+          <p className="mt-4 text-xs text-amber-950/50 text-center md:text-left">{t('home.newsletter.privacy')}</p>
         </div>
       </section>
 
@@ -1515,23 +1447,23 @@ export default function Home() {
               <motion.div variants={fadeUp}>
                 <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-amber-400 mb-6">
                   <span className="w-7 h-px bg-amber-400" />
-                  The future is yours
+                  {t('home.prefooter.tag')}
                   <span className="w-7 h-px bg-amber-400" />
                 </span>
               </motion.div>
               <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-black text-white leading-[1.05] mb-6">
-                Your country's fiscal
+                {t('home.prefooter.title')}
                 <span className="bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent">
-                  future
+                  {t('home.prefooter.titleHighlight')}
                 </span>
-                starts today.
+                {t('home.prefooter.titleEnd')}
               </motion.h2>
               <motion.p variants={fadeUp} className="text-blue-200/70 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-                Our teams support ministries and administrations in modernizing the public revenue chain — from strategy to operational deployment.
+                {t('home.prefooter.desc')}
               </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold px-8 py-[18px] rounded-xl transition-all shadow-xl shadow-amber-500/20 text-base">
-                Schedule a demo
+                {t('home.prefooter.scheduleDemo')}
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a
@@ -1547,7 +1479,7 @@ export default function Home() {
                 "ISO 9001 Certified",
                 "ISO 27001 Certified",
                 "ETL-Certification® Patented",
-                "Founded in 1986",
+                "Founded in 2016",
                 "4 countries · $15B supervised",
               ].map((tag) => (
                 <span key={tag} className="text-xs font-semibold text-white/40 border border-white/10 px-4 py-2 rounded-full">

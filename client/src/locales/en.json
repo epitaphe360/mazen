@@ -20,6 +20,155 @@
     "hero": {
       "title": "Leading GovTech for public revenue mobilization",
       "subtitle": "Certified ISO 9001 & ISO 27001 — Trusted by governments"
+    },
+    "etl": {
+      "extraction": {
+        "title": "EXTRACTION",
+        "description": "Collection and XDR decoding of raw operator files. Transforming event data records from multiple heterogeneous sources."
+      },
+      "transformation": {
+        "title": "TRANSFORMATION",
+        "description": "Conversion of records into a single, interpretable format. Automated consolidation with confidential, standardized delivery."
+      },
+      "loading": {
+        "title": "LOADING",
+        "description": "Storage in a single database and analysis via business intelligence tools to extract relevant fiscal insights."
+      },
+      "certification": {
+        "title": "CERTIFICATION",
+        "description": "Data certification using proprietary ETL-Certification® algorithms ensuring absolute integrity and legal enforceability of results."
+      }
+    },
+    "caseStudies": {
+      "drc": {
+        "fullName": "Democratic Republic of the Congo",
+        "title": "Telecommunications Taxes",
+        "partner": "Directorate General of Customs and Excise (DGDA)"
+      },
+      "mali": {
+        "fullName": "Republic of Mali",
+        "title": "Mobile Money Supervision",
+        "partner": "Directorate General of Taxes (DGI)"
+      },
+      "burundi": {
+        "fullName": "Republic of Burundi",
+        "title": "Online Gambling & Betting Taxes",
+        "partner": "Revenue Authority of Burundi (OBR)"
+      },
+      "sierraLeone": {
+        "fullName": "Republic of Sierra Leone",
+        "title": "National Revenue Modernization",
+        "partner": "National Revenue Authority (NRA)"
+      }
+    },
+    "hero": {
+      "title": "Leading GovTech for public revenue mobilization",
+      "subtitle": "Certified ISO 9001 & ISO 27001 — Trusted by governments",
+      "certBadge": "ISO-certified institutional platform · ISO 9001 · ISO 27001",
+      "sovereigntyLabel": "Sovereignty for the State",
+      "desc": "Since 2016, Mazen GovTech Group has provided states with certified governance infrastructure — consolidated fiscal flow monitoring, anomaly detection and executive decision-making in real time.",
+      "seeReferences": "See field references"
+    },
+    "vision": {
+      "tag": "Our vision",
+      "title": "Excellence in Service of Fiscal Governance",
+      "p1": "MAZEN is a leading company in government technologies. Since 2016, we have built a network of highly skilled collaborators across Europe, Asia and Africa, supported by a thriving R&D department.",
+      "p2": "Our team includes outstanding engineers from top universities, with deep expertise in big data processing, digital taxation and public governance.",
+      "approachTag": "Our approach in 3 steps",
+      "step1Title": "Big Data becomes unmanageable",
+      "step1Text": "Sectors are increasingly digitized, generating massive, encrypted and heterogeneous datasets.",
+      "step2Title": "MAZEN certifies the data",
+      "step2Text": "Our ETL-Certification® technology turns Big Data into structured, certified and legally enforceable fiscal data.",
+      "step3Title": "The state recovers revenues",
+      "step3Text": "Administrations gain a complete and reliable view to maximize public revenue mobilization.",
+      "supervised": "$15 billion supervised since 2009",
+      "supervisedSub": "Across operator networks in 4 African countries"
+    },
+    "solutions": {
+      "tag": "Our sovereign solutions",
+      "title": "Two sovereign solutions,",
+      "titleHighlight": "executed with excellence",
+      "subtitle": "Two operational platforms for states. ETL-Certification® serves as the shared technological engine.",
+      "prioritySolution": "Priority solution",
+      "discover": "Discover"
+    },
+    "references": {
+      "tag": "Field references",
+      "title": "4 deployments.",
+      "titleHighlight": "Measurable results.",
+      "subtitle": "Each reference represents a contractual engagement with a national administration — and verifiable figures.",
+      "revenueChart": "Documented revenue increases",
+      "chartNote": "* Results contractually validated with partner administrations",
+      "deploymentMap": "Deployment map",
+      "clickCountry": "Click a country for details"
+    },
+    "sectors": {
+      "tag": "Sector coverage",
+      "title": "9 sectors,",
+      "titleHighlight": "a unified vision",
+      "desc": "Our solutions bring transparency and fiscal traceability across the modern digital economy — from telecoms to online gaming.",
+      "cta": "Discuss your sector"
+    },
+    "techTransfer": {
+      "tag": "Our commitment",
+      "title": "Full transfer of",
+      "titleHighlight": "technology & skills",
+      "desc": "We ensure a complete transfer of our technology to client states while providing comprehensive training to enable their teams to operate independently.",
+      "trainingTitle": "Comprehensive training",
+      "trainingDesc": "Programs tailored to government teams — theory, practice and internal certification.",
+      "supportTitle": "Continuous support",
+      "supportDesc": "Dedicated technical support and proactive maintenance throughout the contract.",
+      "autonomyTitle": "Full autonomy",
+      "autonomyDesc": "Your teams fully master the platform without external technological dependence.",
+      "hostingTitle": "Sovereign hosting",
+      "hostingDesc": "National infrastructure, data under state jurisdiction — no transfer to foreign servers.",
+      "certTag": "Active certifications",
+      "keyFigure": "Key figure",
+      "maxIncrease": "Maximum increase observed in public revenues",
+      "sierraRef": "National Revenue Authority, Sierra Leone (2023)"
+    },
+    "whyUs": {
+      "tag": "Our difference",
+      "title": "Why states choose us",
+      "subtitle": "Four pillars underpin Mazen's excellence and the lasting trust of our government partners.",
+      "certifications": {
+        "title": "ISO 9001 & ISO 27001 Certified",
+        "desc": "International certifications attesting to our quality management and information security standards."
+      },
+      "transparency": {
+        "title": "Full Auditability",
+        "desc": "Every transaction processed by our platform is fully traceable, verifiable and legally enforceable."
+      },
+      "founded": {
+        "title": "Founded in 2016",
+        "desc": "38 years of institutional expertise in government technology — a recognized benchmark for fiscal governance."
+      },
+      "digitalSovereignty": {
+        "title": "Digital Sovereignty",
+        "desc": "All our deployments include national hosting, full data sovereignty and complete technology transfer to state teams."
+      }
+    },
+    "testimonials": {
+      "tag": "Testimonials",
+      "title": "What our partners say",
+      "rating": "4.9 · Partner satisfaction"
+    },
+    "newsletter": {
+      "tag": "Quarterly newsletter",
+      "title": "Stay updated on our progress",
+      "desc": "New solutions, field references, tax reforms — one issue per quarter. No spam.",
+      "emailPlaceholder": "Your institutional email address",
+      "subscribe": "Subscribe",
+      "confirmed": "Subscription confirmed. Thank you!",
+      "privacy": "🔒 No spam. Data strictly confidential. One-click unsubscribe."
+    },
+    "prefooter": {
+      "tag": "The future is yours",
+      "title": "Your country's fiscal",
+      "titleHighlight": "future",
+      "titleEnd": "starts today.",
+      "desc": "Our teams support ministries and administrations in modernizing the public revenue chain — from strategy to operational deployment.",
+      "scheduleDemo": "Schedule a demo"
     }
   }
   ,
@@ -27,12 +176,12 @@
     "hero": {
       "kicker": "Our Story",
       "title": "About MAZEN",
-      "subtitle": "Global GovTech leader since 1986 — transforming digital economies into auditable public revenue"
+      "subtitle": "Global GovTech leader since 2016 — transforming digital economies into auditable public revenue"
     },
     "history": {
-      "kicker": "Since 1986",
+      "kicker": "Since 2016",
       "title": "Technology built for sovereign administrations",
-      "p1": "MAZEN has delivered government technology solutions since 1986. We rely on a network of highly skilled collaborators across Europe, Asia and Africa and a sustainable R&D capability.",
+      "p1": "MAZEN has delivered government technology solutions since 2016. We rely on a network of highly skilled collaborators across Europe, Asia and Africa and a sustainable R&D capability.",
       "p2": "Our teams combine expertise in data engineering, digital taxation, compliance and governance to serve demanding institutional environments.",
       "p3": "Our systems analyze and process 13 billion daily transactions and supervise over $15bn in operator flows since 2009."
     },
