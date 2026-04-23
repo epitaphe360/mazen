@@ -25,7 +25,7 @@ const STATS = [
   { raw: 15, prefix: "$", suffix: "B", label: "Supervised flows", sub: "2009 — present" },
   { raw: 13, suffix: "B", label: "Transactions/day", sub: "Real-time processing" },
   { raw: 4, label: "Countries deployed", sub: "DRC, Mali, Burundi, Sierra Leone" },
-  { raw: 1986, label: "Founded", sub: "35+ years of expertise" },
+  { raw: 2016, label: "Founded", sub: "10 years of expertise" },
 ];
 
 const fadeUp = {

@@ -72,7 +72,7 @@ export default function PublicFooter() {
                 </div>
               </Link>
             <p className="text-sm text-white/65 leading-relaxed max-w-md mb-6">
-              Since 1986, Mazen GovTech Group has equipped sovereign states with certified
+              Since 2016, Mazen GovTech Group has equipped sovereign states with certified
               fiscal-flow supervision and maritime intelligence platforms — engineered for absolute
               data integrity and legal enforceability.
             </p>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, Waves, BarChart2, Filter, ShieldCheck, Fingerprint } from "lucide-react";
+import { Menu, X, ChevronDown, Waves, BarChart2, Filter, ShieldCheck, Fingerprint, Terminal } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
 import { motion, AnimatePresence } from "framer-motion";
 

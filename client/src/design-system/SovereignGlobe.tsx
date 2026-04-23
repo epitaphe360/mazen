@@ -1,9 +1,14 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, Stars, Html, Sphere, Line } from "@react-three/drei";
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
 
-/* Convert lat/lng to 3D vector on a sphere of given radius */
+// Public Earth texture (NASA Blue Marble, served by three-globe via unpkg, CORS-enabled)
+const EARTH_TEXTURE_URL = "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+
+/* Convert lat/lng to 3D vector matching three.js SphereGeometry UV mapping.
+ * three.js formula: x = -cos(u*2π)*sin(v*π), y = cos(v*π), z = sin(u*2π)*sin(v*π)
+ * where u = (lng+180)/360, v = (90-lat)/180 → x must be NEGATIVE. */
 function latLngToVec3(lat: number, lng: number, radius = 1) {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lng + 180) * (Math.PI / 180);
@@ -34,6 +39,7 @@ const DEPLOYMENTS: Deployment[] = [
 function GlobeMesh() {
   const ref = useRef<THREE.Mesh>(null!);
   const wireRef = useRef<THREE.Mesh>(null!);
+  const earthMap = useLoader(THREE.TextureLoader, EARTH_TEXTURE_URL);
 
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += delta * 0.06;
@@ -42,23 +48,23 @@ function GlobeMesh() {
 
   return (
     <group>
-      {/* Solid globe — deep navy */}
+      {/* Solid Earth with real texture */}
       <mesh ref={ref}>
         <sphereGeometry args={[1, 64, 64]} />
         <meshStandardMaterial
-          color="#0a1832"
-          metalness={0.4}
-          roughness={0.7}
-          emissive="#173068"
-          emissiveIntensity={0.15}
+          map={earthMap}
+          metalness={0.15}
+          roughness={0.85}
+          emissive="#0a1832"
+          emissiveIntensity={0.08}
         />
       </mesh>
-      {/* Wireframe overlay — gold */}
-      <mesh ref={wireRef} scale={1.001}>
+      {/* Subtle gold wireframe overlay (sovereign-tech vibe) */}
+      <mesh ref={wireRef} scale={1.002}>
         <sphereGeometry args={[1, 24, 18]} />
-        <meshBasicMaterial color="#bd8632" wireframe transparent opacity={0.18} />
+        <meshBasicMaterial color="#bd8632" wireframe transparent opacity={0.12} />
       </mesh>
-      {/* Atmosphere */}
+      {/* Atmosphere glow */}
       <mesh scale={1.08}>
         <sphereGeometry args={[1, 32, 32]} />
         <shaderMaterial
@@ -154,16 +160,27 @@ function Markers() {
   );
 }
 
+function RotatingOverlay({ children }: { children: ReactNode }) {
+  const ref = useRef<THREE.Group>(null!);
+  useFrame((_, delta) => {
+    if (ref.current) ref.current.rotation.y += delta * 0.06;
+  });
+  return <group ref={ref}>{children}</group>;
+}
+
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 3, 5]} intensity={1.4} color="#dcbc6c" />
-      <directionalLight position={[-5, -2, -3]} intensity={0.6} color="#85a3d3" />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 3, 5]} intensity={1.2} color="#ffffff" />
+      <directionalLight position={[-5, -2, -3]} intensity={0.4} color="#85a3d3" />
       <Stars radius={50} depth={40} count={1600} factor={2} fade speed={0.4} />
       <GlobeMesh />
-      <Markers />
-      <Connections />
+      {/* Markers + arcs rotate together with the Earth */}
+      <RotatingOverlay>
+        <Markers />
+        <Connections />
+      </RotatingOverlay>
     </>
   );
 }

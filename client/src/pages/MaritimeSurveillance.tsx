@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
@@ -55,6 +55,21 @@ const NEEDS = [
   { text: "Detection of", bold: "maritime trafficking" },
 ];
 
+const SLIDES_GALLERY = [
+  { src: "/maritime/slide-01.jpg", caption: "Maritime Sovereignty — Overview" },
+  { src: "/maritime/slide-02.jpg", caption: "System Architecture" },
+  { src: "/maritime/slide-03.jpg", caption: "Strategic Context" },
+  { src: "/maritime/slide-04.jpg", caption: "Layer 1 — Coastal Radars" },
+  { src: "/maritime/slide-05.jpg", caption: "Layer 2 — Smart Buoys" },
+  { src: "/maritime/slide-06.jpg", caption: "Layer 3 — Command Center" },
+  { src: "/maritime/slide-07.jpg", caption: "Technical Architecture" },
+  { src: "/maritime/slide-08.jpg", caption: "Operational Capabilities" },
+  { src: "/maritime/slide-09.jpg", caption: "Comparative Analysis" },
+  { src: "/maritime/slide-10.jpg", caption: "Scalability & Evolution" },
+  { src: "/maritime/slide-11.jpg", caption: "Government Applications" },
+  { src: "/maritime/slide-12.jpg", caption: "Proof of Concept" },
+];
+
 const LAYERS = [
   {
     id: 1,
@@ -63,6 +78,7 @@ const LAYERS = [
     subtitle: "Long Range",
     color: "from-blue-900 to-blue-700",
     border: "border-blue-500/30",
+    image: "/maritime/slide-04-photo.jpg",
     features: [
       { label: "Operational range", value: "60 to 96 km radial coverage per coastal radar unit" },
       { label: "Vessel detection", value: "Automatic identification of maritime contacts, including low radar-signature targets" },
@@ -77,6 +93,7 @@ const LAYERS = [
     subtitle: "AIS + PTZ Camera",
     color: "from-emerald-900 to-emerald-700",
     border: "border-emerald-500/30",
+    image: "/maritime/slide-05-photo.jpg",
     features: [
       { label: "Onboard equipment", value: "HD maritime PTZ camera · professional AIS receiver · high-precision GPS · encrypted transmission · autonomous solar power" },
       { label: "Visual identification", value: "HD visual recognition of approaching vessels with maritime PTZ cameras" },
@@ -91,6 +108,7 @@ const LAYERS = [
     subtitle: "Maritime C2",
     color: "from-purple-900 to-purple-700",
     border: "border-purple-500/30",
+    image: "/maritime/slide-06-photo.jpg",
     features: [
       { label: "Data fusion", value: "Real-time correlation of all sources: radar, AIS, video, GPS into a single dashboard" },
       { label: "Maritime mapping", value: "Dynamic geospatial representation of all tracked targets with track history and automatic classification" },
@@ -164,19 +182,61 @@ function SectionHeader({ tag, title, subtitle }: { tag: string; title: string; s
 export default function MaritimeSurveillance() {
   const [activeLayer, setActiveLayer] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroBgY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
   const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col">
       <PublicNavbar ctaLabel="Request a presentation" ctaHref="/contact" />
 
+      {/* ══ LIGHTBOX ══════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {lightboxSrc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out"
+            onClick={() => setLightboxSrc(null)}
+          >
+            <motion.img
+              src={lightboxSrc}
+              alt="Slide preview"
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              className="absolute top-4 right-4 text-white/60 hover:text-white text-3xl font-light leading-none"
+              onClick={() => setLightboxSrc(null)}
+            >
+              ×
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ══ HERO ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden min-h-[92vh] flex items-center bg-navy-950">
+      <section ref={heroRef} className="relative overflow-hidden min-h-[92vh] flex items-center">
+        {/* Parallax background image */}
+        <motion.div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/maritime/slide-01-photo.jpg')", y: heroBgY }}
+        />
+        {/* Dark overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/75 to-gray-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
         {/* Aurora ambient */}
-        <AuroraBackground className="opacity-70" />
+        <AuroraBackground className="opacity-25" />
         {/* Grain */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035] z-0"
+          className="absolute inset-0 pointer-events-none opacity-[0.025] z-0"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
             backgroundSize: "200px 200px",
@@ -184,7 +244,7 @@ export default function MaritimeSurveillance() {
         />
         {/* Grille décorative */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage: "linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(to right, #3b82f6 1px, transparent 1px)",
             backgroundSize: "60px 60px",
@@ -225,29 +285,47 @@ export default function MaritimeSurveillance() {
             animate="visible"
             variants={fadeUp}
             custom={2}
-            className="grid grid-cols-2 gap-4"
+            className="flex flex-col gap-4"
           >
-            {[
-              { numVal: 96, suffix: " km", label: "Coastal radar range", icon: Radar },
-              { numVal: null, textVal: "24/7", label: "Continuous monitoring", icon: Eye },
-              { numVal: 3, suffix: " layers", label: "Hybrid architecture", icon: Shield },
-              { numVal: 99.5, suffix: "%", label: "System availability", icon: CheckCircle },
-            ].map((m) => (
-              <SpotlightCard
-                key={m.label}
-                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 flex flex-col gap-2"
-              >
-                <m.icon className="w-6 h-6 text-cyan-400" />
-                <p className="text-3xl font-black text-white">
-                  {m.numVal !== null && m.numVal !== undefined ? (
-                    <NumberTicker value={m.numVal} suffix={m.suffix} decimals={m.suffix?.includes("%") ? 1 : 0} />
-                  ) : (
-                    m.textVal
-                  )}
-                </p>
-                <p className="text-xs text-blue-300/80 font-medium">{m.label}</p>
-              </SpotlightCard>
-            ))}
+            {/* Image dossier */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10 group cursor-pointer" onClick={() => setLightboxSrc("/maritime/slide-01.jpg")}>
+              <img
+                src="/maritime/slide-01.jpg"
+                alt="Maritime Sovereignty — Overview"
+                className="w-full object-cover max-h-72 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between">
+                <span className="text-xs text-cyan-300 font-semibold uppercase tracking-wider">View full dossier</span>
+                <span className="w-7 h-7 rounded-full bg-cyan-500/80 flex items-center justify-center">
+                  <Eye className="w-3.5 h-3.5 text-white" />
+                </span>
+              </div>
+            </div>
+            {/* Métriques */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { numVal: 96, suffix: " km", label: "Coastal radar range", icon: Radar },
+                { numVal: null, textVal: "24/7", label: "Continuous monitoring", icon: Eye },
+                { numVal: 3, suffix: " layers", label: "Hybrid architecture", icon: Shield },
+                { numVal: 99.5, suffix: "%", label: "System availability", icon: CheckCircle },
+              ].map((m) => (
+                <SpotlightCard
+                  key={m.label}
+                  className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 flex flex-col gap-2"
+                >
+                  <m.icon className="w-5 h-5 text-cyan-400" />
+                  <p className="text-2xl font-black text-white">
+                    {m.numVal !== null && m.numVal !== undefined ? (
+                      <NumberTicker value={m.numVal} suffix={m.suffix} decimals={m.suffix?.includes("%") ? 1 : 0} />
+                    ) : (
+                      m.textVal
+                    )}
+                  </p>
+                  <p className="text-xs text-blue-300/80 font-medium">{m.label}</p>
+                </SpotlightCard>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -335,6 +413,60 @@ export default function MaritimeSurveillance() {
         </div>
       </section>
 
+      {/* ══ GALERIE VISUELLE ══════════════════════════════════════ */}
+      <section className="py-20 bg-gray-900/40 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-center mb-12"
+          >
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.22em] text-cyan-400 mb-3">
+              — Technical Visual Dossier
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">
+              Complete 12-slide presentation
+            </h2>
+            <p className="text-blue-200/60 max-w-xl mx-auto text-sm">
+              Every aspect of the Maritime Surveillance Grid — from concept to deployment — documented in our official technical dossier.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {SLIDES_GALLERY.map((slide, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.05, ease: "easeOut" }}
+                className="relative overflow-hidden rounded-xl aspect-[2/3] group cursor-pointer border border-white/10 hover:border-cyan-500/40 transition-colors"
+                onClick={() => setLightboxSrc(slide.src)}
+              >
+                <img
+                  src={slide.src}
+                  alt={slide.caption}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <p className="text-xs text-white font-medium leading-tight">{slide.caption}</p>
+                </div>
+                <span className="absolute top-2 left-2 text-xs bg-cyan-500/80 backdrop-blur-sm text-white px-2 py-0.5 rounded-full font-bold">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Eye className="w-3 h-3 text-white" />
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ 2. CONCEPT OPÉRATIONNEL ═══════════════════════════════ */}
       <section id="concept" className="py-24 bg-gray-900/60">
         <div className="max-w-7xl mx-auto px-6">
@@ -383,6 +515,14 @@ export default function MaritimeSurveillance() {
                     <p className="text-white/60 text-sm">{layer.subtitle}</p>
                   </div>
                 </div>
+                {/* Photo de la couche */}
+                <div className="mb-6 rounded-2xl overflow-hidden border border-white/10 shadow-lg" style={{ height: "210px" }}>
+                  <img
+                    src={layer.image}
+                    alt={layer.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {layer.features.map((f) => (
                     <div key={f.label} className="rounded-xl bg-black/20 p-4 border border-white/10">
@@ -406,6 +546,28 @@ export default function MaritimeSurveillance() {
               title="Designed for defense environments"
               subtitle="Each component was selected for reliability, robustness in harsh maritime environments, and compatibility with existing government infrastructures. Availability above 99.5% under normal operational conditions."
             />
+          </motion.div>
+
+          {/* Panoramique système MSG */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={0}
+            className="mb-10 relative rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            style={{ height: "200px" }}
+          >
+            <img
+              src="/maritime/slide-04-photo.jpg"
+              alt="Maritime Surveillance Grid — Radar, buoys and patrol vessel"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-950/70 via-gray-950/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <p className="text-white font-bold text-sm">Long-range radar · Smart buoys · Naval patrol</p>
+              <p className="text-blue-300/70 text-xs mt-0.5">Complete MSG architecture overview</p>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -496,6 +658,28 @@ export default function MaritimeSurveillance() {
               </motion.div>
             ))}
           </div>
+
+          {/* Visual offshore */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={4}
+            className="mt-8 relative rounded-2xl overflow-hidden border border-white/10 shadow-xl"
+            style={{ height: "220px" }}
+          >
+            <img
+              src="/maritime/slide-08-photo.jpg"
+              alt="Offshore infrastructure protection"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-950/80 via-gray-950/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <p className="text-white font-bold text-sm">Offshore infrastructure protection</p>
+              <p className="text-cyan-300/70 text-xs mt-0.5">Perimeter surveillance · Platforms · Submarine cables</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -603,6 +787,28 @@ export default function MaritimeSurveillance() {
               </motion.div>
             ))}
           </div>
+
+          {/* Port panorama */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            custom={4}
+            className="mt-10 relative rounded-2xl overflow-hidden border border-white/10 shadow-xl"
+            style={{ height: "200px" }}
+          >
+            <img
+              src="/maritime/slide-07-photo.jpg"
+              alt="Port security — container port, buoy and patrol vessels"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-950/80 via-gray-950/30 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <p className="text-white font-bold text-sm">Port security & maritime approaches</p>
+              <p className="text-blue-300/70 text-xs mt-0.5">Integrated coverage across all sensitive maritime zones</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
