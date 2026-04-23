@@ -812,7 +812,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="hidden lg:block relative w-[480px] h-[480px]"
+              className="relative w-64 h-64 mx-auto sm:w-80 sm:h-80 lg:w-[480px] lg:h-[480px]"
             >
               <div className="absolute inset-0 rounded-full bg-gold-500/10 blur-3xl scale-110 pointer-events-none" />
               <Suspense fallback={<div className="w-full h-full rounded-full bg-navy-800/40 animate-pulse" />}>
