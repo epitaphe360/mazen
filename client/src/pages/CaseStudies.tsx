@@ -5,92 +5,11 @@ import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
 
-const CASES = [
-  {
-    id: 1,
-    num: "01",
-    country: "DEMOCRATIC REPUBLIC OF CONGO",
-    shortName: "DRC",
-    flag: "ðŸ‡¨ðŸ‡©",
-    title: "Telecommunications Taxes",
-    img: "/case-rdc.svg",
-    partner: "General Directorate of Customs and Excise (DGDA)",
-    ministry: "DGDA",
-    result: "+60%",
-    resultLabel: "in excise & VAT after 1 year of operation",
-    color: "blue",
-    tags: ["Telecommunications", "Excise", "VAT"],
-    details: [
-      "Contract signed with the General Directorate of Customs and Excise (DGDA)",
-      "Telecommunications services subject to excise duties, VAT and other levies",
-      "Mobile operators' revenues represent 5% of the country's GDP",
-      "60% increase in excise and VAT after 1 year of operation",
-    ],
-  },
-  {
-    id: 2,
-    num: "02",
-    country: "MALI",
-    shortName: "Mali",
-    flag: "ðŸ‡²ðŸ‡±",
-    title: "Mobile Money",
-    img: "/case-mali.svg",
-    partner: "Ministry of Finance",
-    ministry: "Ministry of Finance",
-    result: "100%",
-    resultLabel: "visibility on mobile money transactions",
-    color: "green",
-    tags: ["Mobile Money", "Digital Transactions"],
-    details: [
-      "Processing and analysis of mobile money transaction metadata",
-      "Production of detailed reports on activities and tax liabilities",
-      "Supervision of billions of daily transactions",
-      "Full transparency over the national mobile money ecosystem",
-    ],
-  },
-  {
-    id: 3,
-    num: "03",
-    country: "BURUNDI",
-    shortName: "Burundi",
-    flag: "ðŸ‡§ðŸ‡®",
-    title: "Royalties on Gambling and Betting",
-    img: "/case-burundi.svg",
-    partner: "Ministry of Finance & Ministry of Commerce, Transport, Industry and Tourism",
-    ministry: "Min. Finance + Min. Commerce",
-    result: "8",
-    resultLabel: "licensed operators under Mazen supervision",
-    color: "red",
-    tags: ["Gambling", "Online Betting", "Royalties"],
-    details: [
-      "Contract signed with the Ministry of Finance and the Ministry of Commerce, Transport, Industry and Tourism",
-      "Gambling and betting services subject to royalties",
-      "Only online gambling is authorized in the country",
-      "Number of licensed operators: 8",
-      "Contract signed: January 2024 â€” Installation end: March 2024",
-    ],
-  },
-  {
-    id: 4,
-    num: "04",
-    country: "SIERRA LEONE",
-    shortName: "Sierra Leone",
-    flag: "ðŸ‡¸ðŸ‡±",
-    title: "Telecommunications Taxes",
-    img: "/case-sierra-leone.svg",
-    partner: "NRA â€” National Revenue Authority (BOT Agreement)",
-    ministry: "NRA & Ministry of Finance",
-    result: "552%",
-    resultLabel: "maximum increase in national revenues",
-    color: "amber",
-    tags: ["Telecommunications", "Mobile Money", "Betting", "BOT Agreement"],
-    details: [
-      "In April 2023, the Ministry of Finance and the National Revenue Authority (NRA) of Sierra Leone signed a build-operate-transfer (BOT) agreement with N-SOFT",
-      "This partnership aims to increase national revenues in the telecommunications, mobile money and betting sectors",
-      "After one year of operation, telecommunications revenues saw a historic increase",
-      "First government BOT agreement for a GovTech solution in West Africa",
-    ],
-  },
+const CASES_STATIC = [
+  { id: 1, num: "01", key: "drc",         shortName: "DRC",          flag: "🇨🇩", img: "/case-rdc.svg",          result: "+60%",  color: "blue",  tagCount: 3, detailCount: 4 },
+  { id: 2, num: "02", key: "mali",        shortName: "Mali",         flag: "🇲🇱", img: "/case-mali.svg",         result: "100%", color: "green", tagCount: 2, detailCount: 4 },
+  { id: 3, num: "03", key: "burundi",     shortName: "Burundi",      flag: "🇧🇮", img: "/case-burundi.svg",      result: "8",    color: "red",   tagCount: 3, detailCount: 5 },
+  { id: 4, num: "04", key: "sierraLeone", shortName: "Sierra Leone", flag: "🇸🇱", img: "/case-sierra-leone.svg", result: "552%", color: "amber", tagCount: 4, detailCount: 4 },
 ];
 
 const colorMap: Record<string, { border: string; bg: string; badge: string; stat: string; tag: string }> = {
@@ -103,6 +22,16 @@ const colorMap: Record<string, { border: string; bg: string; badge: string; stat
 export default function CaseStudies() {
   const { t } = useTranslation();
   const [active, setActive] = useState<number | null>(null);
+
+  const CASES = CASES_STATIC.map(s => ({
+    ...s,
+    country: t(`case.cases.${s.key}.country`),
+    title: t(`case.cases.${s.key}.title`),
+    partner: t(`case.cases.${s.key}.partner`),
+    resultLabel: t(`case.cases.${s.key}.resultLabel`),
+    tags: Array.from({ length: s.tagCount }, (_, i) => t(`case.cases.${s.key}.t${i}`)),
+    details: Array.from({ length: s.detailCount }, (_, i) => t(`case.cases.${s.key}.d${i}`)),
+  }));
 
   return (
     <div className="min-h-screen page-atmosphere font-sans">

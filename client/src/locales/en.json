@@ -193,6 +193,37 @@
     "platform": {
       "title": "Mazen Gov Platform",
       "subtitle": "ETL-Certification® certified governance solution"
+    },
+    "teamValues": {
+      "globalPresence": { "title": "Global presence", "desc": "Highly skilled teams based in Europe, Asia and Africa" },
+      "rd": { "title": "Research & development", "desc": "Continuous innovation capacity serving our partner administrations" },
+      "expertise": { "title": "Top-tier expertise", "desc": "Engineers and specialists from leading academic institutions" },
+      "security": { "title": "Operational security", "desc": "Secure, redundant architecture fit for critical environments" }
+    },
+    "stats": {
+      "supervisedFlows": "Supervised flows", "supervisedSub": "2009 — present",
+      "transactionsDay": "Transactions/day", "transactionsSub": "Real-time processing",
+      "countriesDeployed": "Countries deployed", "countriesSub": "DRC, Mali, Burundi, Sierra Leone",
+      "founded": "Founded", "foundedSub": "10 years of expertise"
+    },
+    "infrastructure": {
+      "kicker": "Infrastructure",
+      "title": "Mazen Gov Platform Architecture",
+      "desc": "Our infrastructure is built on a secure, redundant architecture using VPN tunnels, enterprise-grade firewalls, distributed XDR processing servers and replicated databases.",
+      "i0": "File collection & XDR decoding",
+      "i1": "Data transformation",
+      "i2": "Data loading",
+      "i3": "Database servers",
+      "i4": "File & object storage",
+      "i5": "Data analytics",
+      "i6": "Network operations center",
+      "i7": "Secure Inspec VPN tunnel",
+      "i8": "Backup & XDR archives"
+    },
+    "partnership": {
+      "kicker": "Partnership",
+      "title": "Let's work together",
+      "desc": "Discover how Mazen GovTech Group can transform your country's public revenues."
     }
   }
   ,
@@ -243,7 +274,22 @@
     "subtitle": "Stay informed about Mazen GovTech Group and governance technology developments worldwide.",
     "filters": { "kicker": "Editorial filters", "searchPlaceholder": "Search an article..." },
     "empty": "No articles found.",
-    "cta": { "title": "Follow our news", "subtitle": "Subscribe to our newsletter or follow our social channels to never miss an important update.", "subscribe": "Subscribe to newsletter" }
+    "cta": { "title": "Follow our news", "subtitle": "Subscribe to our newsletter or follow our social channels to never miss an important update.", "subscribe": "Subscribe to newsletter" },
+    "categories": {
+      "all": "All", "innovation": "Innovation", "deployment": "Deployment",
+      "trends": "Trends", "events": "Events", "testimonials": "Testimonials"
+    },
+    "detail": {
+      "notFound": { "title": "Article not found", "subtitle": "This article does not exist or has been removed.", "back": "Back to news" },
+      "cta": { "title": "Never miss an update", "subtitle": "Receive weekly analyses and reports from Mazen GovTech Group directly to your inbox.", "thanks": "Subscription recorded, thank you!" },
+      "minRead": "min read",
+      "subscribe": "Subscribe",
+      "relatedArticles": "Related articles",
+      "categories": {
+        "innovation": "Innovation", "deployment": "Deployment",
+        "trends": "Trends", "events": "Events", "testimonials": "Testimonials"
+      }
+    }
   }
   ,
   "news.detail": {
@@ -257,7 +303,54 @@
     "subtitle": "Four real deployments demonstrating measurable impact on national public revenues.",
     "itemLabel": "Case",
     "partnerLabel": "Partner institution",
-    "cta": { "title": "Study a deployment adapted to your national context", "subtitle": "Talk to our teams to assess a supervision, certification and revenue optimization setup." }
+    "cta": { "title": "Study a deployment adapted to your national context", "subtitle": "Talk to our teams to assess a supervision, certification and revenue optimization setup." },
+    "cases": {
+      "drc": {
+        "country": "DEMOCRATIC REPUBLIC OF CONGO",
+        "title": "Telecommunications Taxes",
+        "partner": "General Directorate of Customs and Excise (DGDA)",
+        "resultLabel": "in excise & VAT after 1 year of operation",
+        "t0": "Telecommunications", "t1": "Excise", "t2": "VAT",
+        "d0": "Contract signed with the General Directorate of Customs and Excise (DGDA)",
+        "d1": "Telecommunications services subject to excise duties, VAT and other levies",
+        "d2": "Mobile operators' revenues represent 5% of the country's GDP",
+        "d3": "60% increase in excise and VAT after 1 year of operation"
+      },
+      "mali": {
+        "country": "MALI",
+        "title": "Mobile Money",
+        "partner": "Ministry of Finance",
+        "resultLabel": "visibility on mobile money transactions",
+        "t0": "Mobile Money", "t1": "Digital Transactions",
+        "d0": "Processing and analysis of mobile money transaction metadata",
+        "d1": "Production of detailed reports on activities and tax liabilities",
+        "d2": "Supervision of billions of daily transactions",
+        "d3": "Full transparency over the national mobile money ecosystem"
+      },
+      "burundi": {
+        "country": "BURUNDI",
+        "title": "Royalties on Gambling and Betting",
+        "partner": "Ministry of Finance & Ministry of Commerce, Transport, Industry and Tourism",
+        "resultLabel": "licensed operators under Mazen supervision",
+        "t0": "Gambling", "t1": "Online Betting", "t2": "Royalties",
+        "d0": "Contract signed with the Ministry of Finance and the Ministry of Commerce",
+        "d1": "Gambling and betting services subject to royalties",
+        "d2": "Only online gambling is authorized in the country",
+        "d3": "Number of licensed operators: 8",
+        "d4": "Contract signed: January 2024 — Installation end: March 2024"
+      },
+      "sierraLeone": {
+        "country": "SIERRA LEONE",
+        "title": "Telecommunications Taxes",
+        "partner": "NRA — National Revenue Authority (BOT Agreement)",
+        "resultLabel": "maximum increase in national revenues",
+        "t0": "Telecommunications", "t1": "Mobile Money", "t2": "Betting", "t3": "BOT Agreement",
+        "d0": "In April 2023, the Ministry of Finance and the NRA signed a BOT agreement with N-SOFT",
+        "d1": "This partnership aims to increase revenues in telecoms, mobile money and betting sectors",
+        "d2": "After one year of operation, telecommunications revenues saw a historic increase",
+        "d3": "First government BOT agreement for a GovTech solution in West Africa"
+      }
+    }
   }
   ,
   "login": {

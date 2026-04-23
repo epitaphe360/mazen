@@ -8,24 +8,20 @@ import { Globe, Search, GraduationCap, ShieldCheck } from "lucide-react";
 import AuroraBackground from "../design-system/AuroraBackground";
 import { SpotlightCard, NumberTicker, TiltCard } from "../design-system";
 
-const TEAM_VALUES = [
-  { icon: Globe, title: "Global presence", desc: "Highly skilled teams based in Europe, Asia and Africa" },
-  { icon: Search, title: "Research & development", desc: "Continuous innovation capacity serving our partner administrations" },
-  { icon: GraduationCap, title: "Top-tier expertise", desc: "Engineers and specialists from leading academic institutions" },
-  { icon: ShieldCheck, title: "Operational security", desc: "Secure, redundant architecture fit for critical environments" },
+const TEAM_VALUE_KEYS = [
+  { icon: Globe, titleKey: "about.teamValues.globalPresence.title", descKey: "about.teamValues.globalPresence.desc" },
+  { icon: Search, titleKey: "about.teamValues.rd.title", descKey: "about.teamValues.rd.desc" },
+  { icon: GraduationCap, titleKey: "about.teamValues.expertise.title", descKey: "about.teamValues.expertise.desc" },
+  { icon: ShieldCheck, titleKey: "about.teamValues.security.title", descKey: "about.teamValues.security.desc" },
 ];
 
-const ARCHITECTURE_ITEMS = [
-  "File collection & XDR decoding", "Data transformation", "Data loading",
-  "Database servers", "File & object storage", "Data analytics",
-  "Network operations center", "Secure Inspec VPN tunnel", "Backup & XDR archives",
-];
+const ARCHITECTURE_ITEM_KEYS = ["i0","i1","i2","i3","i4","i5","i6","i7","i8"];
 
-const STATS = [
-  { raw: 15, prefix: "$", suffix: "B", label: "Supervised flows", sub: "2009 — present" },
-  { raw: 13, suffix: "B", label: "Transactions/day", sub: "Real-time processing" },
-  { raw: 4, label: "Countries deployed", sub: "DRC, Mali, Burundi, Sierra Leone" },
-  { raw: 2016, label: "Founded", sub: "10 years of expertise" },
+const STAT_KEYS = [
+  { raw: 15, prefix: "$", suffix: "B", labelKey: "about.stats.supervisedFlows", subKey: "about.stats.supervisedSub" },
+  { raw: 13, suffix: "B", labelKey: "about.stats.transactionsDay", subKey: "about.stats.transactionsSub" },
+  { raw: 4, labelKey: "about.stats.countriesDeployed", subKey: "about.stats.countriesSub" },
+  { raw: 2016, labelKey: "about.stats.founded", subKey: "about.stats.foundedSub" },
 ];
 
 const fadeUp = {
@@ -60,13 +56,13 @@ export default function About() {
               <p className="text-gray-700 leading-relaxed text-base">{t('about.history.p3')}</p>
             </motion.div>
             <div className="grid grid-cols-2 gap-4">
-              {TEAM_VALUES.map((v, i) => (
-                <motion.div key={v.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              {TEAM_VALUE_KEYS.map((v, i) => (
+                <motion.div key={v.titleKey} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                   <TiltCard className="h-full">
                     <div className="p-6 h-full">
                       <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-navy-100 text-navy-700 mb-3"><v.icon className="w-5 h-5" aria-hidden="true" /></span>
-                      <h3 className="font-bold text-gray-900 text-sm mb-1">{v.title}</h3>
-                      <p className="text-gray-600 text-xs leading-relaxed">{v.desc}</p>
+                      <h3 className="font-bold text-gray-900 text-sm mb-1">{t(v.titleKey)}</h3>
+                      <p className="text-gray-600 text-xs leading-relaxed">{t(v.descKey)}</p>
                     </div>
                   </TiltCard>
                 </motion.div>
@@ -85,13 +81,13 @@ export default function About() {
               <img src="/partners.png" alt="Mazen partners" className="max-h-28 mx-auto object-contain" />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {STATS.map((s, i) => (
-                <motion.div key={s.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              {STAT_KEYS.map((s, i) => (
+                <motion.div key={s.labelKey} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                   <SpotlightCard>
                     <div className="p-6 text-center">
                       <div className="text-3xl font-extrabold text-gold-500 mb-1 tabular-nums">{s.prefix ?? ""}<NumberTicker value={s.raw} />{s.suffix ?? ""}</div>
-                      <div className="font-semibold text-gray-800 text-sm">{s.label}</div>
-                      <div className="text-gray-400 text-xs mt-1">{s.sub}</div>
+                      <div className="font-semibold text-gray-800 text-sm">{t(s.labelKey)}</div>
+                      <div className="text-gray-400 text-xs mt-1">{t(s.subKey)}</div>
                     </div>
                   </SpotlightCard>
                 </motion.div>
@@ -104,14 +100,14 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-3 block">Infrastructure</span>
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Mazen Gov Platform Architecture</h2>
-              <p className="text-gray-600 leading-relaxed mb-8">Our infrastructure is built on a secure, redundant architecture using VPN tunnels, enterprise-grade firewalls, distributed XDR processing servers and replicated databases.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-gold-500 mb-3 block">{t('about.infrastructure.kicker')}</span>
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-6">{t('about.infrastructure.title')}</h2>
+              <p className="text-gray-600 leading-relaxed mb-8">{t('about.infrastructure.desc')}</p>
               <div className="space-y-3">
-                {ARCHITECTURE_ITEMS.map((item, i) => (
-                  <motion.div key={item} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-navy-200 transition-colors">
+                {ARCHITECTURE_ITEM_KEYS.map((key, i) => (
+                  <motion.div key={key} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-navy-200 transition-colors">
                     <div className="w-6 h-6 rounded-full bg-navy-600 text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">{i + 1}</div>
-                    <span className="text-gray-700 text-sm font-medium">{item}</span>
+                    <span className="text-gray-700 text-sm font-medium">{t(`about.infrastructure.${key}`)}</span>
                   </motion.div>
                 ))}
               </div>
@@ -132,9 +128,9 @@ export default function About() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px] bg-gradient-to-r from-transparent via-gold-500/60 to-transparent" />
         <div className="max-w-3xl mx-auto px-6 relative">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4 block">Partnership</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Let's work together</h2>
-            <p className="text-navy-300 mb-8 text-lg">Discover how Mazen GovTech Group can transform your country's public revenues.</p>
+            <span className="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4 block">{t('about.partnership.kicker')}</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4">{t('about.partnership.title')}</h2>
+            <p className="text-navy-300 mb-8 text-lg">{t('about.partnership.desc')}</p>
             <Link href="/contact" className="inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-gold-500/20">
               {t('cta.contact')}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

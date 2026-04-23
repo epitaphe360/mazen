@@ -187,7 +187,38 @@
     },
     "platform": {
       "title": "Mazen Gov Platform",
-      "subtitle": "Solution de gouvernance certifi\u00e9e ETL-Certification\u00ae"
+      "subtitle": "Solution de gouvernance certifiée ETL-Certification®"
+    },
+    "teamValues": {
+      "globalPresence": { "title": "Présence mondiale", "desc": "Équipes hautement qualifiées en Europe, Asie et Afrique" },
+      "rd": { "title": "Recherche & développement", "desc": "Capacité d'innovation continue au service de nos administrations partenaires" },
+      "expertise": { "title": "Expertise de haut niveau", "desc": "Ingénieurs et spécialistes issus des meilleures institutions académiques" },
+      "security": { "title": "Sécurité opérationnelle", "desc": "Architecture sécurisée et redondante adaptée aux environnements critiques" }
+    },
+    "stats": {
+      "supervisedFlows": "Flux supervisés", "supervisedSub": "2009 — présent",
+      "transactionsDay": "Transactions/jour", "transactionsSub": "Traitement en temps réel",
+      "countriesDeployed": "Pays déployés", "countriesSub": "RDC, Mali, Burundi, Sierra Leone",
+      "founded": "Fondé", "foundedSub": "10 ans d'expertise"
+    },
+    "infrastructure": {
+      "kicker": "Infrastructure",
+      "title": "Architecture de la Mazen Gov Platform",
+      "desc": "Notre infrastructure repose sur une architecture sécurisée et redondante utilisant des tunnels VPN, des pare-feu entreprise, des serveurs XDR distribués et des bases de données répliquées.",
+      "i0": "Collecte de fichiers & décodage XDR",
+      "i1": "Transformation des données",
+      "i2": "Chargement des données",
+      "i3": "Serveurs de base de données",
+      "i4": "Stockage fichiers & objets",
+      "i5": "Analytique des données",
+      "i6": "Centre des opérations réseau",
+      "i7": "Tunnel VPN Secure Inspec",
+      "i8": "Sauvegardes & archives XDR"
+    },
+    "partnership": {
+      "kicker": "Partenariat",
+      "title": "Travaillons ensemble",
+      "desc": "Découvrez comment le Groupe Mazen GovTech peut transformer les recettes publiques de votre pays."
     }
   },
   "contact": {
@@ -236,7 +267,22 @@
     "subtitle": "Restez inform\u00e9 des actualit\u00e9s du Mazen GovTech Groupe et des \u00e9volutions de la technologie de gouvernance dans le monde.",
     "filters": { "kicker": "Filtres \u00e9ditoriaux", "searchPlaceholder": "Rechercher un article..." },
     "empty": "Aucun article trouv\u00e9.",
-    "cta": { "title": "Suivez nos actualit\u00e9s", "subtitle": "Abonnez-vous \u00e0 notre newsletter ou suivez nos r\u00e9seaux sociaux pour ne manquer aucune mise \u00e0 jour importante.", "subscribe": "S'abonner \u00e0 la newsletter" }
+    "cta": { "title": "Suivez nos actualités", "subtitle": "Abonnez-vous à notre newsletter ou suivez nos réseaux sociaux pour ne manquer aucune mise à jour importante.", "subscribe": "S'abonner à la newsletter" },
+    "categories": {
+      "all": "Tous", "innovation": "Innovation", "deployment": "Déploiement",
+      "trends": "Tendances", "events": "Événements", "testimonials": "Témoignages"
+    },
+    "detail": {
+      "notFound": { "title": "Article introuvable", "subtitle": "Cet article n'existe pas ou a été supprimé.", "back": "Retour aux actualités" },
+      "cta": { "title": "Ne manquez aucune mise à jour", "subtitle": "Recevez chaque semaine les analyses et rapports du Mazen GovTech Groupe directement dans votre boîte mail.", "thanks": "Inscription enregistrée, merci !" },
+      "minRead": "min de lecture",
+      "subscribe": "S'abonner",
+      "relatedArticles": "Articles connexes",
+      "categories": {
+        "innovation": "Innovation", "deployment": "Déploiement",
+        "trends": "Tendances", "events": "Événements", "testimonials": "Témoignages"
+      }
+    }
   },
   "news.detail": {
     "notFound": { "title": "Article introuvable", "subtitle": "Cet article n'existe pas ou a \u00e9t\u00e9 supprim\u00e9.", "back": "Retour aux actualit\u00e9s" },
@@ -248,7 +294,54 @@
     "subtitle": "Quatre d\u00e9ploiements r\u00e9els d\u00e9montrant un impact mesurable sur les recettes publiques nationales.",
     "itemLabel": "Cas",
     "partnerLabel": "Institution partenaire",
-    "cta": { "title": "\u00c9tudier un d\u00e9ploiement adapt\u00e9 \u00e0 votre contexte national", "subtitle": "\u00c9changez avec nos \u00e9quipes pour \u00e9valuer une configuration de supervision, certification et optimisation des recettes." }
+    "cta": { "title": "Étudier un déploiement adapté à votre contexte national", "subtitle": "Échangez avec nos équipes pour évaluer une configuration de supervision, certification et optimisation des recettes." },
+    "cases": {
+      "drc": {
+        "country": "RÉPUBLIQUE DÉMOCRATIQUE DU CONGO",
+        "title": "Taxes sur les télécommunications",
+        "partner": "Direction Générale des Douanes et Accises (DGDA)",
+        "resultLabel": "en accises & TVA après 1 an d'exploitation",
+        "t0": "Télécommunications", "t1": "Accises", "t2": "TVA",
+        "d0": "Contrat signé avec la Direction Générale des Douanes et Accises (DGDA)",
+        "d1": "Les services télécom sont soumis aux droits d'accises, TVA et autres prélèvements",
+        "d2": "Les revenus des opérateurs mobiles représentent 5% du PIB du pays",
+        "d3": "Augmentation de 60% des accises et de la TVA après 1 an d'exploitation"
+      },
+      "mali": {
+        "country": "MALI",
+        "title": "Monnaie Mobile",
+        "partner": "Ministère des Finances",
+        "resultLabel": "visibilité sur les transactions de monnaie mobile",
+        "t0": "Monnaie Mobile", "t1": "Transactions numériques",
+        "d0": "Traitement et analyse des métadonnées de transactions de monnaie mobile",
+        "d1": "Production de rapports détaillés sur les activités et obligations fiscales",
+        "d2": "Supervision de milliards de transactions quotidiennes",
+        "d3": "Transparence totale sur l'écosystème national de la monnaie mobile"
+      },
+      "burundi": {
+        "country": "BURUNDI",
+        "title": "Redevances sur les jeux et paris",
+        "partner": "Ministère des Finances & Ministère du Commerce, Transport, Industrie et Tourisme",
+        "resultLabel": "opérateurs agréés sous supervision Mazen",
+        "t0": "Jeux", "t1": "Paris en ligne", "t2": "Redevances",
+        "d0": "Contrat signé avec le Ministère des Finances et le Ministère du Commerce",
+        "d1": "Les services de jeux et paris sont soumis à des redevances",
+        "d2": "Seuls les jeux de hasard en ligne sont autorisés dans le pays",
+        "d3": "Nombre d'opérateurs agréés : 8",
+        "d4": "Contrat signé : janvier 2024 — Installation terminée : mars 2024"
+      },
+      "sierraLeone": {
+        "country": "SIERRA LEONE",
+        "title": "Taxes sur les télécommunications",
+        "partner": "NRA — Autorité Nationale des Recettes (accord BOT)",
+        "resultLabel": "augmentation maximale des revenus nationaux",
+        "t0": "Télécommunications", "t1": "Monnaie Mobile", "t2": "Paris", "t3": "Accord BOT",
+        "d0": "En avril 2023, le Ministère des Finances et la NRA ont signé un accord BOT avec N-SOFT",
+        "d1": "Ce partenariat vise à accroître les recettes dans les télécoms, la monnaie mobile et les paris",
+        "d2": "Après un an d'exploitation, les revenus télécom ont connu une augmentation historique",
+        "d3": "Premier accord gouvernemental BOT pour une solution GovTech en Afrique de l'Ouest"
+      }
+    }
   },
   "login": {
     "subtitle": "Plateforme de mobilisation des recettes publiques",

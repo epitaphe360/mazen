@@ -5,17 +5,17 @@ import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
 import { useTranslation } from "../lib/i18n";
 
-const CATEGORY_CONFIG: Record<string, { label: string; color: string }> = {
-  innovation: { label: "Innovation", color: "bg-purple-100 text-purple-800" },
-  deployment: { label: "Deployment", color: "bg-blue-100 text-blue-800" },
-  trends: { label: "Trends", color: "bg-orange-100 text-orange-800" },
-  events: { label: "Events", color: "bg-green-100 text-green-800" },
-  testimonials: { label: "Testimonials", color: "bg-yellow-100 text-yellow-800" },
+const CATEGORY_CONFIG: Record<string, { color: string }> = {
+  innovation: { color: "bg-purple-100 text-purple-800" },
+  deployment: { color: "bg-blue-100 text-blue-800" },
+  trends: { color: "bg-orange-100 text-orange-800" },
+  events: { color: "bg-green-100 text-green-800" },
+  testimonials: { color: "bg-yellow-100 text-yellow-800" },
 };
 
 export default function NewsDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSent, setNewsletterSent] = useState(false);
 
@@ -43,8 +43,9 @@ export default function NewsDetail() {
     );
   }
 
-  const catCfg = CATEGORY_CONFIG[article.category] ?? { label: article.category, color: "bg-gray-100 text-gray-700" };
-  const publishedDate = new Date(article.published_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const catCfg = CATEGORY_CONFIG[article.category] ?? { color: "bg-gray-100 text-gray-700" };
+  const catLabel = t(`news.detail.categories.${article.category}`) || article.category;
+  const publishedDate = new Date(article.published_at).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { year: "numeric", month: "long", day: "numeric" });
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -54,7 +55,7 @@ export default function NewsDetail() {
         {/* Catégorie */}
         <div className="mb-5">
           <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${catCfg.color}`}>
-            {catCfg.label}
+            {catLabel}
           </span>
         </div>
 
@@ -76,7 +77,7 @@ export default function NewsDetail() {
           {article.read_time != null && (
             <>
               <span>·</span>
-              <span>⏱ {article.read_time} min read</span>
+              <span>⏱ {article.read_time} {t('news.detail.minRead')}</span>
             </>
           )}
         </div>
@@ -134,7 +135,7 @@ export default function NewsDetail() {
                 type="submit"
                 className="px-5 py-2 bg-amber-500 text-white font-semibold rounded-lg text-sm hover:bg-amber-600 transition-colors whitespace-nowrap"
               >
-                Subscribe
+                {t('news.detail.subscribe')}
               </button>
             </form>
           )}
@@ -143,10 +144,11 @@ export default function NewsDetail() {
         {/* Related articles */}
         {related.length > 0 && (
           <section className="mt-14">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Related articles</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-6">{t('news.detail.relatedArticles')}</h2>
             <div className="grid sm:grid-cols-3 gap-5">
               {related.map(rel => {
-                const relCfg = CATEGORY_CONFIG[rel.category] ?? { label: rel.category, color: "bg-gray-100 text-gray-700" };
+                const relCfg = CATEGORY_CONFIG[rel.category] ?? { color: "bg-gray-100 text-gray-700" };
+                const relLabel = t(`news.detail.categories.${rel.category}`) || rel.category;
                 return (
                   <Link key={rel.id} href={`/news/${rel.slug}`} className="group block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
                     {rel.featured_image_url && (
@@ -155,12 +157,12 @@ export default function NewsDetail() {
                       </div>
                     )}
                     <div className="p-4">
-                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${relCfg.color}`}>{relCfg.label}</span>
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${relCfg.color}`}>{relLabel}</span>
                       <h3 className="mt-2 text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-navy-700 transition-colors">
                         {rel.title}
                       </h3>
                       <p className="mt-1 text-xs text-gray-400">
-                        {rel.published_at ? new Date(rel.published_at).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }) : ""}
+                        {rel.published_at ? new Date(rel.published_at).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { day: "numeric", month: "short", year: "numeric" }) : ""}
                       </p>
                     </div>
                   </Link>

@@ -9,15 +9,6 @@ import { motion } from "framer-motion";
 import AuroraBackground from "../design-system/AuroraBackground";
 import { SpotlightCard } from "../design-system";
 
-const CATEGORIES = [
-  { key: "", label: "All" },
-  { key: "innovation", label: "Innovation" },
-  { key: "deployment", label: "Deployment" },
-  { key: "trends", label: "Trends" },
-  { key: "events", label: "Events" },
-  { key: "testimonials", label: "Testimonials" },
-];
-
 const CATEGORY_BADGE: Record<string, string> = {
   innovation: "badge-blue",
   deployment: "badge-green",
@@ -29,6 +20,14 @@ const CATEGORY_BADGE: Record<string, string> = {
 // Page actualités (sans tRPC ici pour pouvoir être utilisé sans auth)
 export default function News() {
   const { t } = useTranslation();
+  const CATEGORIES = [
+    { key: "", label: t('news.categories.all') },
+    { key: "innovation", label: t('news.categories.innovation') },
+    { key: "deployment", label: t('news.categories.deployment') },
+    { key: "trends", label: t('news.categories.trends') },
+    { key: "events", label: t('news.categories.events') },
+    { key: "testimonials", label: t('news.categories.testimonials') },
+  ];
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
