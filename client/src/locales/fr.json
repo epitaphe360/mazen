@@ -6,7 +6,14 @@
     "news": "Actualit\u00e9s",
     "contact": "Contact",
     "login": "Connexion",
-    "solutions": "Solutions"
+    "solutions": "Solutions",
+    "sol": {
+      "maritime": { "label": "Souverainet\u00e9 Maritime", "desc": "Maritime Surveillance Grid · 3 couches" },
+      "revenues": { "label": "Recettes Publiques", "desc": "Revenue Intelligence Platform · Fiscalit\u00e9" },
+      "dpi": { "label": "Inspection Profonde de Paquets", "desc": "Intelligence r\u00e9seau · Revenus OTT" },
+      "cybersecurity": { "label": "Cybersécurité R\u00e9seau", "desc": "SOC · SIEM · R\u00e9ponse aux incidents" },
+      "cybercrime": { "label": "Enqu\u00eate Cybercriminalit\u00e9", "desc": "Forensique num\u00e9rique · Attribution · R\u00e9seau partenaires" }
+    }
   },
   "footer": {
     "company": "Mazen GovTech Groupe",
@@ -42,9 +49,9 @@
     },
     "solutions": {
       "tag": "Nos solutions souveraines",
-      "title": "Deux solutions souveraines,",
+      "title": "Cinq solutions souveraines,",
       "titleHighlight": "exécutées avec excellence",
-      "subtitle": "Deux plateformes opérationnelles pour les États. ETL-Certification® constitue le moteur technologique commun.",
+      "subtitle": "Cinq plateformes opérationnelles pour les États. ETL-Certification® constitue le moteur technologique commun.",
       "prioritySolution": "Solution prioritaire",
       "discover": "Découvrir"
     },

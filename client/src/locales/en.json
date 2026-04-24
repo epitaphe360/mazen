@@ -6,7 +6,14 @@
     "news": "News",
     "contact": "Contact",
     "login": "Login",
-    "solutions": "Solutions"
+    "solutions": "Solutions",
+    "sol": {
+      "maritime": { "label": "Maritime Sovereignty", "desc": "Maritime Surveillance Grid · 3 layers" },
+      "revenues": { "label": "Public Revenues", "desc": "Revenue Intelligence Platform · Taxation" },
+      "dpi": { "label": "Deep Packet Inspection", "desc": "Network traffic intelligence · OTT revenue" },
+      "cybersecurity": { "label": "Network Cybersecurity", "desc": "SOC · SIEM · Incident response" },
+      "cybercrime": { "label": "Cybercrime Investigation", "desc": "Digital forensics · Attribution · Partner network" }
+    }
   },
   "footer": {
     "company": "Mazen GovTech Groupe",
@@ -86,9 +93,9 @@
     },
     "solutions": {
       "tag": "Our sovereign solutions",
-      "title": "Two sovereign solutions,",
+      "title": "Five sovereign solutions,",
       "titleHighlight": "executed with excellence",
-      "subtitle": "Two operational platforms for states. ETL-Certification® serves as the shared technological engine.",
+      "subtitle": "Five operational platforms for states. ETL-Certification® serves as the shared technological engine.",
       "prioritySolution": "Priority solution",
       "discover": "Discover"
     },
