@@ -20,42 +20,12 @@ const DEFAULT_LINKS: NavLink[] = [
   { href: "/contact", label: "Contact", key: "nav.contact" },
 ];
 
-const SOLUTIONS = [
-  {
-    href: "/solutions/maritime",
-    label: "Maritime Sovereignty",
-    desc: "Maritime Surveillance Grid · 3 layers",
-    icon: Waves,
-    color: "#3b82f6",
-  },
-  {
-    href: "/solutions/revenues",
-    label: "Public Revenues",
-    desc: "Revenue Intelligence Platform · Taxation",
-    icon: BarChart2,
-    color: "#f59e0b",
-  },
-  {
-    href: "/solutions/dpi",
-    label: "Deep Packet Inspection",
-    desc: "Network traffic intelligence · OTT revenue",
-    icon: Filter,
-    color: "#6366f1",
-  },
-  {
-    href: "/solutions/cybersecurity",
-    label: "Network Cybersecurity",
-    desc: "SOC · SIEM · Incident response",
-    icon: ShieldCheck,
-    color: "#10b981",
-  },
-  {
-    href: "/solutions/cybercrime",
-    label: "Cybercrime Investigation",
-    desc: "Digital forensics · Attribution · Partner network",
-    icon: Fingerprint,
-    color: "#f43f5e",
-  },
+const SOLUTIONS_STATIC = [
+  { href: "/solutions/maritime",     key: "maritime",     icon: Waves,      color: "#3b82f6" },
+  { href: "/solutions/revenues",     key: "revenues",     icon: BarChart2,  color: "#f59e0b" },
+  { href: "/solutions/dpi",          key: "dpi",          icon: Filter,     color: "#6366f1" },
+  { href: "/solutions/cybersecurity",key: "cybersecurity",icon: ShieldCheck, color: "#10b981" },
+  { href: "/solutions/cybercrime",   key: "cybercrime",   icon: Fingerprint, color: "#f43f5e" },
 ];
 
 export default function PublicNavbar({
@@ -70,6 +40,12 @@ export default function PublicNavbar({
   const [location] = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { t, locale, setLocale } = useTranslation();
+
+  const SOLUTIONS = SOLUTIONS_STATIC.map((s) => ({
+    ...s,
+    label: t(`nav.sol.${s.key}.label`),
+    desc: t(`nav.sol.${s.key}.desc`),
+  }));
 
   // Scroll-aware background
   useEffect(() => {
@@ -321,7 +297,7 @@ export default function PublicNavbar({
                     isSolutionActive ? "text-navy-700 font-bold" : ""
                   }`}
                 >
-                  Solutions
+                  {t("nav.solutions")}
                   <ChevronDown
                     className={`w-3.5 h-3.5 ml-auto transition-transform ${mobileExpanded ? "rotate-180" : ""}`}
                   />
