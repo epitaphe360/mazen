@@ -110,7 +110,7 @@ export interface SectorChartData {
 export const KEY_STATS = [
   { value: "$15Mrd", label: "Supervises sur les reseaux operateurs", description: "De 2009 a ce jour" },
   { value: "13Mrd", label: "Transactions analysees / jour", description: "Traitement quotidien en temps reel" },
-  { value: "1986", label: "Fondee en", description: "Plus de 35 ans d expertise GovTech" },
+  { value: "2016", label: "Fondee en", description: "Plus de 10 ans d expertise GovTech" },
   { value: "+60%", label: "Hausse des recettes fiscales en RDC", description: "Accises & TVA apres 1 an de fonctionnement" },
 ] as const;
 
