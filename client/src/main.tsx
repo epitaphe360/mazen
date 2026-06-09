@@ -5,7 +5,7 @@ import "./index.css";
 import { I18nProvider } from "./lib/i18n";
 import Maintenance from "./pages/Maintenance";
 
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
