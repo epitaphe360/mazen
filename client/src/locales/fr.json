@@ -17,7 +17,26 @@
   },
   "footer": {
     "company": "Mazen GovTech Groupe",
-    "copy": "\u00a9 {{year}} \u2014 Sovereign Strategic Infrastructure Company"
+    "copy": "\u00a9 {{year}} \u2014 Sovereign Strategic Infrastructure Company",
+    "navigate": "Navigation",
+    "solutions": "Solutions",
+    "companySection": "Entreprise",
+    "description": "Depuis 2016, le Groupe Mazen GovTech \u00e9quipe les \u00e9tats souverains avec des plateformes certifi\u00e9es de supervision des flux fiscaux et d'intelligence maritime \u2014 con\u00e7ues pour une int\u00e9grit\u00e9 absolue des donn\u00e9es et une opposabilit\u00e9 juridique.",
+    "email": "contact@mazen-govtech.com",
+    "address": "1 Pope Hennessy Street, Suite 803, 8\u00e8me \u00e9tage, Hennessy Tower, Port Louis, 11328, Maurice",
+    "incorporation": "Certificat d'immatriculation N\u00b0 235486",
+    "reach": "4 nations \u00b7 15 Md$+ supervis\u00e9s",
+    "partnersTitle": "Partenaires strat\u00e9giques",
+    "partners": {
+      "c4isr": "C4ISR",
+      "ito": "ITO Concept",
+      "itoTagline": "Intelligence. Technology. Operations.",
+      "mssa": "MSSA"
+    },
+    "legalNotice": "Mentions l\u00e9gales",
+    "privacy": "Confidentialit\u00e9",
+    "terms": "Conditions",
+    "rights": "Tous droits r\u00e9serv\u00e9s."
   },
   "cta": {
     "contact": "Contactez-nous",
@@ -245,8 +264,23 @@
     },
     "channels": {
       "email": { "title": "Envoyez-nous un email", "desc": "Posez vos questions ou demandes d'information \u2014 notre \u00e9quipe r\u00e9pondra rapidement." },
+      "address": {
+        "title": "Si\u00e8ge social",
+        "value": "1 Pope Hennessy Street\nSuite 803, 8\u00e8me \u00e9tage\nHennessy Tower, Port Louis, 11328\nMaurice"
+      },
+      "incorporation": {
+        "title": "Immatriculation l\u00e9gale",
+        "value": "Certificat d'immatriculation N\u00b0 235486"
+      },
       "demo": { "title": "Planifier une d\u00e9mo", "desc": "D\u00e9couvrez nos solutions en action lors d'une session personnalis\u00e9e." },
       "solutions": { "title": "Explorer les solutions", "desc": "Les certifications ISO 9001 et ISO 27001 garantissent la plus haute qualit\u00e9 de service." }
+    },
+    "partners": {
+      "title": "Partenaires strat\u00e9giques",
+      "c4isr": "C4ISR",
+      "ito": "ITO Concept",
+      "itoTagline": "Intelligence. Technology. Operations.",
+      "mssa": "MSSA"
     },
     "security": { "title": "Confidentialit\u00e9 & S\u00e9curit\u00e9", "desc": "Donn\u00e9es trait\u00e9es selon les normes de s\u00e9curit\u00e9 align\u00e9es ISO 27001." },
     "form": {

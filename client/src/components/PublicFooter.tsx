@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { useTranslation } from "../lib/i18n";
-import { ShieldCheck, Globe, Mail, MapPin, Phone, ArrowUpRight, Linkedin, Twitter } from "lucide-react";
+import { ShieldCheck, Globe, Mail, MapPin, ArrowUpRight, Linkedin, Twitter, FileBadge } from "lucide-react";
 
 const FOOTER_COLUMNS = [
   {
@@ -26,7 +26,7 @@ const FOOTER_COLUMNS = [
     ],
   },
   {
-    titleKey: "footer.company",
+    titleKey: "footer.companySection",
     fallback: "Company",
     links: [
       { href: "/about#mission", labelKey: "", fallback: "Mission & Vision" },
@@ -59,12 +59,12 @@ export default function PublicFooter() {
             <Link href="/" className="flex items-center gap-3 mb-5">
                 <img
                   src="/mazen-logo.jpg?v=20260413"
-                  alt="Mazen GovTech Group"
+                  alt="MAZEN GovTech"
                   className="h-12 w-auto object-contain rounded-md ring-1 ring-white/10"
                 />
                 <div>
                   <div className="text-white font-bold text-base font-display tracking-tight">
-                    Mazen GovTech <span className="text-gold-400">Group</span>
+                    MAZEN GovTech
                   </div>
                   <div className="text-xs text-white/50 mt-0.5">
                     Sovereign Strategic Infrastructure Company
@@ -72,9 +72,7 @@ export default function PublicFooter() {
                 </div>
               </Link>
             <p className="text-sm text-white/65 leading-relaxed max-w-md mb-6">
-              Since 2016, Mazen GovTech Group has equipped sovereign states with certified
-              fiscal-flow supervision and maritime intelligence platforms — engineered for absolute
-              data integrity and legal enforceability.
+              {t("footer.description")}
             </p>
 
             {/* Certifications */}
@@ -93,23 +91,42 @@ export default function PublicFooter() {
             </div>
 
             {/* Contact details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-white/65">
-              <a href="mailto:contact@mazen.group" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
-                <Mail className="w-3.5 h-3.5 text-gold-400" />
-                contact@mazen.group
+            <div className="grid grid-cols-1 gap-3 text-sm text-white/65">
+              <a href={`mailto:${t("footer.email")}`} className="flex items-start gap-2 hover:text-gold-400 transition-colors">
+                <Mail className="w-3.5 h-3.5 text-gold-400 mt-0.5 flex-shrink-0" />
+                {t("footer.email")}
               </a>
-              <a href="tel:+33000000000" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
-                <Phone className="w-3.5 h-3.5 text-gold-400" />
-                +33 (0)1 00 00 00 00
-              </a>
-              <span className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-gold-400" />
-                Paris · Dakar · Kinshasa
+              <span className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-gold-400 mt-0.5 flex-shrink-0" />
+                {t("footer.address")}
+              </span>
+              <span className="flex items-start gap-2">
+                <FileBadge className="w-3.5 h-3.5 text-gold-400 mt-0.5 flex-shrink-0" />
+                {t("footer.incorporation")}
               </span>
               <span className="flex items-center gap-2">
                 <Globe className="w-3.5 h-3.5 text-gold-400" />
-                4 nations · $15B+ supervised
+                {t("footer.reach")}
               </span>
+            </div>
+
+            {/* Strategic partners */}
+            <div className="mt-6">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-gold-400 mb-3">
+                {t("footer.partnersTitle")}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white/80">
+                  {t("footer.partners.c4isr")}
+                </span>
+                <span className="inline-flex flex-col px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs text-white/80">
+                  <strong>{t("footer.partners.ito")}</strong>
+                  <span className="text-white/50">{t("footer.partners.itoTagline")}</span>
+                </span>
+                <span className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold text-white/80">
+                  {t("footer.partners.mssa")}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -141,13 +158,13 @@ export default function PublicFooter() {
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6 text-xs text-white/45">
           <div className="flex flex-wrap items-center gap-4">
-            <span>© {year} Mazen GovTech Group. All rights reserved.</span>
+            <span>© {year} MAZEN GovTech. {t("footer.rights")}</span>
             <span className="hidden md:inline text-white/20">·</span>
-            <Link href="/legal" className="hover:text-white transition-colors">Legal notice</Link>
+            <Link href="/legal" className="hover:text-white transition-colors">{t("footer.legalNotice")}</Link>
             <span className="text-white/20">·</span>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">{t("footer.privacy")}</Link>
             <span className="text-white/20">·</span>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">{t("footer.terms")}</Link>
           </div>
 
           <div className="flex items-center gap-3">

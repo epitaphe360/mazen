@@ -17,7 +17,26 @@
   },
   "footer": {
     "company": "Mazen GovTech Groupe",
-    "copy": "© {{year}} — Sovereign Strategic Infrastructure Company"
+    "copy": "© {{year}} — Sovereign Strategic Infrastructure Company",
+    "navigate": "Navigate",
+    "solutions": "Solutions",
+    "companySection": "Company",
+    "description": "Since 2016, Mazen GovTech Group has equipped sovereign states with certified fiscal-flow supervision and maritime intelligence platforms — engineered for absolute data integrity and legal enforceability.",
+    "email": "contact@mazen-govtech.com",
+    "address": "1 Pope Hennessy Street, Suite 803, 8th Floor, Hennessy Tower, Port Louis, 11328, Mauritius",
+    "incorporation": "Certificate of Incorporation N° 235486",
+    "reach": "4 nations · $15B+ supervised",
+    "partnersTitle": "Strategic partners",
+    "partners": {
+      "c4isr": "C4ISR",
+      "ito": "ITO Concept",
+      "itoTagline": "Intelligence. Technology. Operations.",
+      "mssa": "MSSA"
+    },
+    "legalNotice": "Legal notice",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "All rights reserved."
   },
   "cta": {
     "contact": "Contact us",
@@ -251,8 +270,23 @@
     },
     "channels": {
       "email": { "title": "Email us", "desc": "Send questions or information requests — our team will respond promptly." },
+      "address": {
+        "title": "Registered office",
+        "value": "1 Pope Hennessy Street\nSuite 803, 8th Floor\nHennessy Tower, Port Louis, 11328\nMauritius"
+      },
+      "incorporation": {
+        "title": "Legal registration",
+        "value": "Certificate of Incorporation N° 235486"
+      },
       "demo": { "title": "Schedule a demo", "desc": "See our solutions in action with a personalized session." },
       "solutions": { "title": "Explore solutions", "desc": "ISO 9001 and ISO 27001 certifications ensure highest service quality." }
+    },
+    "partners": {
+      "title": "Strategic partners",
+      "c4isr": "C4ISR",
+      "ito": "ITO Concept",
+      "itoTagline": "Intelligence. Technology. Operations.",
+      "mssa": "MSSA"
     },
     "security": { "title": "Privacy & Security", "desc": "Data processed according to ISO 27001-aligned security standards." },
     "form": {

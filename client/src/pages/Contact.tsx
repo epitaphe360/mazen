@@ -5,7 +5,7 @@ import { trpc } from "../lib/trpc";
 import { SECTORS_DATA } from "@shared/types";
 import PublicNavbar from "../components/PublicNavbar";
 import PublicFooter from "../components/PublicFooter";
-import { CalendarClock, Globe, Mail, ShieldCheck, ArrowRight } from "lucide-react";
+import { CalendarClock, Globe, Mail, ShieldCheck, ArrowRight, MapPin, FileBadge } from "lucide-react";
 import { useTranslation } from "../lib/i18n";
 import AuroraBackground from "../design-system/AuroraBackground";
 import { SpotlightCard } from "../design-system";
@@ -81,7 +81,9 @@ export default function Contact() {
             <p className="text-lg text-gray-700 mb-8">{t('contact.info.subtitle')}</p>
             <div className="space-y-4">
               {[
-                { icon: Mail, title: t('contact.channels.email.title'), desc: t('contact.channels.email.desc'), action: "contact@mazen-govtech.com" },
+                { icon: Mail, title: t('contact.channels.email.title'), desc: t('contact.channels.email.desc'), action: "contact@mazen-govtech.com", href: "mailto:contact@mazen-govtech.com" },
+                { icon: MapPin, title: t('contact.channels.address.title'), desc: t('contact.channels.address.value') },
+                { icon: FileBadge, title: t('contact.channels.incorporation.title'), desc: t('contact.channels.incorporation.value') },
                 { icon: CalendarClock, title: t('contact.channels.demo.title'), desc: t('contact.channels.demo.desc') },
                 { icon: Globe, title: t('contact.channels.solutions.title'), desc: t('contact.channels.solutions.desc') },
               ].map(item => (
@@ -92,12 +94,30 @@ export default function Contact() {
                   </span>
                   <div>
                     <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.desc}</p>
-                    {item.action && <a href={`mailto:${item.action}`} className="text-gold-600 text-sm font-medium hover:underline">{item.action}</a>}
+                    <p className="text-gray-600 text-sm whitespace-pre-line">{item.desc}</p>
+                    {item.action && item.href && (
+                      <a href={item.href} className="text-gold-600 text-sm font-medium hover:underline">{item.action}</a>
+                    )}
                   </div>
                   </div>
                 </SpotlightCard>
               ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-5">
+              <p className="text-sm font-semibold text-gray-900 mb-4">{t('contact.partners.title')}</p>
+              <div className="flex flex-wrap gap-3">
+                <span className="inline-flex items-center px-3 py-2 rounded-lg bg-navy-50 border border-navy-100 text-sm font-semibold text-navy-800">
+                  {t('contact.partners.c4isr')}
+                </span>
+                <span className="inline-flex flex-col px-3 py-2 rounded-lg bg-navy-50 border border-navy-100 text-sm text-navy-800">
+                  <strong className="font-semibold">{t('contact.partners.ito')}</strong>
+                  <span className="text-xs text-navy-600">{t('contact.partners.itoTagline')}</span>
+                </span>
+                <span className="inline-flex items-center px-3 py-2 rounded-lg bg-navy-50 border border-navy-100 text-sm font-semibold text-navy-800">
+                  {t('contact.partners.mssa')}
+                </span>
+              </div>
             </div>
 
             <div className="mt-6 rounded-2xl bg-navy-900 text-white border border-navy-700 p-5">
